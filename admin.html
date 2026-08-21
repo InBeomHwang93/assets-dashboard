@@ -185,6 +185,15 @@
   <section class="card hide" id="pubCard">
     <h2><span class="step">6</span>확인 후 반영</h2>
     <div class="kv" id="summary" style="margin-bottom:12px"></div>
+    <div class="warnbox">
+      <label class="row" style="gap:7px;align-items:flex-start">
+        <input type="checkbox" id="maskSensitive" style="width:auto;margin-top:3px" checked>
+        <span><b>계좌·카드번호 가리기 (권장)</b><br>
+        비고 열에 <code>국민 431401 04 071100</code> 처럼 거래처 <b>계좌번호</b>가 적혀 있는 경우가 있습니다.
+        이 항목을 켜두면 6자리 이상 이어지는 숫자를 <code>●●●●</code> 로 바꿔서 저장합니다.
+        <code>세운재정비 6-3-4 구역</code> 같은 짧은 숫자는 그대로 둡니다.</span>
+      </label>
+    </div>
     <div class="scroll" style="max-height:260px"><table><thead><tr><th>일자</th><th>현장</th><th>거래처</th><th>품목/비고</th><th class="num">합계</th><th class="num">공급가액</th></tr></thead><tbody id="prevBody"></tbody></table></div>
     <div class="row" style="margin-top:14px">
       <button class="btn" id="publishBtn" type="button">대시보드에 반영 (GitHub 저장)</button>
@@ -806,9 +815,15 @@
   }
 
   /* ============ 발행 ============ */
+  // 계좌·카드번호처럼 6자리 이상 이어지는 숫자를 가린다 ("6-3-4" 같은 짧은 건 유지)
+  function safeNote(s) {
+    if (!($("maskSensitive") || {}).checked) return s || "";
+    return String(s || "").replace(/\d[\d\-\s]{4,}\d/g, "●●●●");
+  }
+
   function finalRows() {
     var out = rawRows.map(function (r) {
-      return { date: r.date, vendor: r.vendor, item: r.item, note: r.note, doc: r.doc,
+      return { date: r.date, vendor: r.vendor, item: r.item, note: safeNote(r.note), doc: r.doc,
                amount: Math.round(r.amount), supply: r.supply === "" ? "" : Math.round(r.supply),
                siteRaw: r.siteRaw || "", site: r.site };
     });
