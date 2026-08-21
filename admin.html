@@ -71,6 +71,16 @@
   .kv{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-2)}
   .kv b{color:var(--ink-1)}
   .hide{display:none!important}
+  .mergebar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--page);border:1px solid var(--border);border-radius:9px;padding:9px 11px}
+  .flabel{font-size:12px;color:var(--ink-3)}
+  input[type=checkbox]{width:auto;accent-color:var(--s1)}
+  td.sel{width:34px}
+  tbody tr.picked{background:color-mix(in srgb,var(--s1) 9%,transparent)}
+  tbody tr{cursor:pointer}
+  .aliasrow{display:flex;gap:8px;align-items:center;font-size:12.5px;padding:4px 0;border-bottom:1px solid var(--grid)}
+  .aliasrow .from{color:var(--ink-2)}
+  .aliasrow .arrow{color:var(--ink-3)}
+  .aliasrow button{background:none;border:0;color:var(--crit);cursor:pointer;font-size:12px;padding:2px 6px}
 </style>
 </head>
 <body>
@@ -129,18 +139,38 @@
     <div class="msg info" id="mapMsg"></div>
   </section>
 
-  <!-- STEP 4 : 현장 규칙 -->
+  <!-- STEP 4 : 현장 정리 -->
   <section class="card hide" id="siteCard">
-    <h2><span class="step">4</span>현장 분류 규칙</h2>
-    <p class="cdesc">현장 이름과, 엑셀 비고·품목에 나타나는 키워드를 적어주세요. 키워드는 쉼표로 여러 개 가능합니다. 위에 있는 규칙이 먼저 적용됩니다.</p>
-    <div id="siteList"></div>
-    <div class="row" style="margin-top:8px">
-      <button class="btn ghost sm" id="addSite" type="button">+ 현장 추가</button>
-      <button class="btn ghost sm" id="suggestSite" type="button">자동 후보 찾기</button>
-      <button class="btn ghost sm" id="applyRules" type="button">규칙 적용</button>
+    <h2><span class="step">4</span>현장 정리</h2>
+    <p class="cdesc">같은 현장이 여러 이름으로 적혀 있으면, <b>체크해서 고르고 아래 버튼으로 합치면</b> 됩니다. 이름만 바꾸려면 하나만 골라도 됩니다.</p>
+
+    <div class="mergebar">
+      <div class="row" style="gap:8px;flex:1 1 auto">
+        <span class="flabel" id="mergeCount" style="min-width:88px">고른 항목 없음</span>
+        <input type="text" id="mergeName" placeholder="합친 뒤 쓸 이름" style="flex:1 1 220px;max-width:340px" disabled>
+        <button class="btn sm" id="mergeBtn" type="button" disabled>합치기</button>
+      </div>
+      <div class="row" style="gap:8px">
+        <button class="btn ghost sm" id="selAll" type="button">전체 선택</button>
+        <button class="btn ghost sm" id="selNone" type="button">선택 해제</button>
+      </div>
     </div>
+
+    <div id="siteDist" style="margin-top:12px"></div>
     <div class="msg" id="siteMsg"></div>
-    <div id="siteDist" style="margin-top:14px"></div>
+
+    <div id="aliasBox" style="margin-top:14px"></div>
+
+    <details id="advBox" style="margin-top:16px">
+      <summary style="cursor:pointer;font-size:12.5px;color:var(--ink-2)">현장 열이 없을 때 — 키워드로 찾기 (고급)</summary>
+      <p class="cdesc" style="margin-top:10px">3번에서 <b>현장 열</b>을 지정하지 못한 경우에만 씁니다. 품목·비고 글자 안에서 키워드를 찾아 현장을 정합니다. 위에 있는 규칙이 먼저 적용됩니다.</p>
+      <div id="siteList"></div>
+      <div class="row" style="margin-top:8px">
+        <button class="btn ghost sm" id="addSite" type="button">+ 현장 추가</button>
+        <button class="btn ghost sm" id="suggestSite" type="button">자동 후보 찾기</button>
+        <button class="btn ghost sm" id="applyRules" type="button">규칙 적용</button>
+      </div>
+    </details>
   </section>
 
   <!-- STEP 5 : 미지정 처리 -->
@@ -181,7 +211,8 @@
   var columns = [];       // 통합 컬럼 후보 이름
   var mapping = {};       // field -> column name
   var rawRows = [];       // 정규화된 원본 행
-  var sitesCfg = { sites: [], overrides: {} };
+  var sitesCfg = { sites: [], aliases: {}, overrides: {} };
+  var picked = {};   // 현장 정리에서 체크한 이름
   var existing = null;    // 기존 data.json
 
 
@@ -386,6 +417,8 @@
     $("useItemForSite").checked = !mapping.site;
     $("useNoteForSite").checked = !mapping.site;
     $("useVendorForSite").checked = false;
+    // 현장 열을 못 찾았을 때만 키워드(고급) 영역을 펼쳐 보여준다
+    if ($("advBox")) $("advBox").open = !mapping.site;
     if (miss.length) { show("mapMsg", "err", "<b>" + miss.join(", ") + "</b> 열을 직접 골라주세요."); return; }
     show("mapMsg", "info", mapping.site
       ? "필수 열을 모두 찾았습니다. 현장은 <b>" + esc(mapping.site) + "</b> 열의 값을 그대로 사용합니다."
@@ -468,6 +501,7 @@
         try {
           var j = JSON.parse(f.text);
           sitesCfg.sites = Array.isArray(j.sites) ? j.sites : [];
+          sitesCfg.aliases = j.aliases || {};
           sitesCfg.overrides = j.overrides || {};
           return;
         } catch (e) {}
@@ -478,7 +512,7 @@
   function restoreLocalSites() {
     try {
       var j = JSON.parse(localStorage.getItem("sites-cfg") || "null");
-      if (j) { sitesCfg.sites = j.sites || []; sitesCfg.overrides = j.overrides || {}; }
+      if (j) { sitesCfg.sites = j.sites || []; sitesCfg.aliases = j.aliases || {}; sitesCfg.overrides = j.overrides || {}; }
     } catch (e) {}
   }
   function persistLocalSites() {
@@ -510,29 +544,44 @@
     });
   }
 
+  // 별칭을 따라가 대표 이름을 찾는다 (A→B→C 도 처리, 순환은 끊음)
+  function canonical(name) {
+    var seen = {}, cur = name, guard = 0;
+    while (cur && sitesCfg.aliases[cur] && !seen[cur] && guard++ < 20) {
+      seen[cur] = true;
+      cur = sitesCfg.aliases[cur];
+    }
+    return cur;
+  }
+
   function matchSite(r) {
     var k = keyOf(r);
-    if (sitesCfg.overrides[k]) return sitesCfg.overrides[k];
-    var parts = [r.siteRaw || ""];
+    if (sitesCfg.overrides[k]) return canonical(sitesCfg.overrides[k]);
+
+    // 1) 현장 열 값이 있으면 그게 기준 (별칭으로 통합)
+    if (r.siteRaw) return canonical(r.siteRaw);
+
+    // 2) 현장 열이 비어 있으면 비고 열에서 찾기 (카드·계좌번호처럼 숫자가 긴 값은 제외)
+    if (($("useNoteFallback") || {}).checked && r.note && !/\d{6,}/.test(r.note)) {
+      return canonical(cleanSiteName(r.note));
+    }
+
+    // 3) 그래도 없으면 키워드 규칙(고급)으로 글자 안에서 찾기
+    var parts = [];
     if (($("useItemForSite") || {}).checked) parts.push(r.item);
     if (($("useNoteForSite") || {}).checked) parts.push(r.note);
     if (($("useVendorForSite") || {}).checked) parts.push(r.vendor);
     var hay = parts.join(" ").toLowerCase();
-    // 1) 별칭 통합 규칙이 걸리면 대표 이름으로
-    for (var i = 0; i < sitesCfg.sites.length; i++) {
-      var s = sitesCfg.sites[i];
-      if (!s.name) continue;
-      var kws = (s.keywords && s.keywords.length) ? s.keywords : [s.name];
-      for (var j = 0; j < kws.length; j++) {
-        var kw = String(kws[j]).trim().toLowerCase();
-        if (kw && hay.indexOf(kw) !== -1) return s.name;
+    if (hay.trim()) {
+      for (var i = 0; i < sitesCfg.sites.length; i++) {
+        var s = sitesCfg.sites[i];
+        if (!s.name) continue;
+        var kws = (s.keywords && s.keywords.length) ? s.keywords : [s.name];
+        for (var j = 0; j < kws.length; j++) {
+          var kw = String(kws[j]).trim().toLowerCase();
+          if (kw && hay.indexOf(kw) !== -1) return canonical(s.name);
+        }
       }
-    }
-    // 2) 규칙에 없으면 현장 열 값을 그대로 사용
-    if (r.siteRaw) return r.siteRaw;
-    // 3) 현장 열이 비어 있으면 비고 열에서 찾기 (카드·계좌번호처럼 숫자가 긴 값은 제외)
-    if (($("useNoteFallback") || {}).checked && r.note && !/\d{6,}/.test(r.note)) {
-      return cleanSiteName(r.note);
     }
     return "";
   }
@@ -544,22 +593,7 @@
   }
 
   function suggestSites() {
-    // 현장 전용 열이 있으면 그 열의 실제 값을 후보로 (가장 정확)
-    var vals = {};
-    rawRows.forEach(function (r) { if (r.site) vals[r.site] = (vals[r.site] || 0) + 1; });
-    var names = Object.keys(vals).sort(function (a, b) { return vals[b] - vals[a]; });
-    if (names.length) {
-      var exist0 = sitesCfg.sites.map(function (s) { return s.name; });
-      var n0 = 0;
-      names.forEach(function (v) {
-        if (exist0.indexOf(v) === -1) { sitesCfg.sites.push({ name: v, keywords: [v] }); n0++; }
-      });
-      sitesCfg.sites = sitesCfg.sites.filter(function (s) { return s.name; });
-      persistLocalSites(); renderSites(); rebuild();
-      show("siteMsg", "ok", "현장 열에서 " + n0 + "개를 가져왔습니다. 같은 현장이 여러 이름으로 적혀 있으면, 대표 이름 한 줄만 남기고 <b>키워드 칸에 다른 표기를 쉼표로 추가</b>하세요. (예: 이름 <code>창원 사파 현장</code> / 키워드 <code>창원 사파, 창원사파, 사파동</code>)");
-      return;
-    }
-    // 현장 열이 없으면 비고·품목에서 '○○현장' 형태를 추출
+    // 비고·품목 글자에서 '○○현장' 형태를 찾아 키워드 규칙 후보를 만든다
     var counts = {};
     rawRows.forEach(function (r) {
       var text = (r.note + " " + r.item);
@@ -601,26 +635,120 @@
     rawRows = buildRows();
     rawRows.forEach(function (r) { r.site = matchSite(r); });
     renderDist();
+    renderAliases();
     renderUnassigned();
     renderPreview();
   }
 
-  function renderDist() {
+  function siteAgg() {
     var agg = {};
     rawRows.forEach(function (r) {
       var s = r.site || UNASSIGNED;
       if (!agg[s]) agg[s] = { n: 0, sum: 0 };
       agg[s].n++; agg[s].sum += r.amount;
     });
-    var keys = Object.keys(agg).sort(function (a, b) { return agg[b].sum - agg[a].sum; });
-    if (!keys.length) { $("siteDist").innerHTML = ""; return; }
-    $("siteDist").innerHTML = '<div class="note" style="margin:0 0 6px">현재 분류 결과 — 같은 현장이 두 줄로 나뉘어 있으면 위에서 키워드로 합치세요.</div>'
-      + '<div class="scroll" style="max-height:220px"><table><thead><tr><th>현장</th><th class="num">건수</th><th class="num">합계금액</th></tr></thead><tbody>'
+    return agg;
+  }
+
+  function renderDist() {
+    var agg = siteAgg();
+    var keys = Object.keys(agg).sort(function (a, b) {
+      if (a === UNASSIGNED) return 1; if (b === UNASSIGNED) return -1;
+      return agg[b].sum - agg[a].sum;
+    });
+    // 사라진 이름은 선택 목록에서 제거
+    Object.keys(picked).forEach(function (k) { if (keys.indexOf(k) === -1) delete picked[k]; });
+    if (!keys.length) { $("siteDist").innerHTML = ""; updateMergeBar(); return; }
+
+    $("siteDist").innerHTML = '<div class="note" style="margin:0 0 6px">현재 분류 결과 · 현장 ' + (keys.length - (agg[UNASSIGNED] ? 1 : 0)) + '곳</div>'
+      + '<div class="scroll" style="max-height:300px"><table><thead><tr>'
+      + '<th class="sel"></th><th>현장</th><th class="num">건수</th><th class="num">합계금액</th></tr></thead><tbody>'
       + keys.map(function (k) {
-        return '<tr><td><span class="pill' + (k === UNASSIGNED ? " un" : "") + '">' + esc(k) + "</span></td>"
+        var dis = k === UNASSIGNED;
+        return '<tr data-name="' + esc(k) + '"' + (picked[k] ? ' class="picked"' : "") + '>'
+          + '<td class="sel">' + (dis ? "" : '<input type="checkbox" data-cb="' + esc(k) + '"' + (picked[k] ? " checked" : "") + ">") + "</td>"
+          + '<td><span class="pill' + (dis ? " un" : "") + '">' + esc(k) + "</span></td>"
           + '<td class="num">' + agg[k].n + "</td>"
           + '<td class="num">' + Math.round(agg[k].sum).toLocaleString("ko-KR") + "</td></tr>";
       }).join("") + "</tbody></table></div>";
+
+    Array.prototype.forEach.call($("siteDist").querySelectorAll("tbody tr"), function (tr) {
+      var name = tr.getAttribute("data-name");
+      if (name === UNASSIGNED) return;
+      tr.addEventListener("click", function (e) {
+        if (e.target.tagName !== "INPUT") {
+          var cb = tr.querySelector("input");
+          if (cb) cb.checked = !cb.checked;
+        }
+        var on = tr.querySelector("input").checked;
+        if (on) picked[name] = true; else delete picked[name];
+        tr.classList.toggle("picked", on);
+        updateMergeBar();
+      });
+    });
+    updateMergeBar();
+  }
+
+  function pickedList() { return Object.keys(picked); }
+
+  function updateMergeBar() {
+    var sel = pickedList(), agg = siteAgg();
+    $("mergeCount").textContent = sel.length ? sel.length + "개 골랐습니다" : "고른 항목 없음";
+    $("mergeBtn").disabled = sel.length === 0;
+    $("mergeName").disabled = sel.length === 0;
+    $("mergeBtn").textContent = sel.length > 1 ? "합치기" : (sel.length === 1 ? "이름 바꾸기" : "합치기");
+    if (!sel.length) { $("mergeName").value = ""; return; }
+    if (!$("mergeName").dataset.touched) {
+      // 건수가 가장 많은(같으면 가장 긴) 이름을 기본값으로
+      var best = sel.slice().sort(function (a, b) {
+        var na = (agg[a] || {}).n || 0, nb = (agg[b] || {}).n || 0;
+        if (nb !== na) return nb - na;
+        return b.length - a.length;
+      })[0];
+      $("mergeName").value = best;
+    }
+  }
+
+  function doMerge() {
+    var sel = pickedList();
+    var target = $("mergeName").value.trim();
+    if (!sel.length) return;
+    if (!target) { show("siteMsg", "err", "합친 뒤 쓸 이름을 입력해 주세요."); return; }
+    var n = 0;
+    sel.forEach(function (name) {
+      if (name === target) return;
+      sitesCfg.aliases[name] = target;
+      n++;
+    });
+    // target 자신이 다른 곳으로 연결돼 있으면 끊는다 (순환 방지)
+    delete sitesCfg.aliases[target];
+    picked = {};
+    $("mergeName").value = "";
+    delete $("mergeName").dataset.touched;
+    persistLocalSites();
+    rebuild();
+    show("siteMsg", "ok", n
+      ? n + "개를 <b>" + esc(target) + "</b> 로 합쳤습니다. 이 설정은 다음 업로드에도 그대로 적용됩니다."
+      : "바뀐 것이 없습니다. 고른 이름이 이미 그 이름입니다.");
+  }
+
+  function renderAliases() {
+    var keys = Object.keys(sitesCfg.aliases);
+    if (!keys.length) { $("aliasBox").innerHTML = ""; return; }
+    keys.sort(function (a, b) { return a.localeCompare(b, "ko"); });
+    $("aliasBox").innerHTML = '<div class="note" style="margin:0 0 6px">합친 이력 ' + keys.length + '건 — 되돌리려면 ✕ 를 누르세요.</div>'
+      + keys.map(function (k) {
+        return '<div class="aliasrow"><span class="from">' + esc(k) + '</span>'
+          + '<span class="arrow">→</span><b>' + esc(sitesCfg.aliases[k]) + "</b>"
+          + '<span style="flex:1"></span><button type="button" data-unalias="' + esc(k) + '">✕ 되돌리기</button></div>';
+      }).join("");
+    Array.prototype.forEach.call($("aliasBox").querySelectorAll("[data-unalias]"), function (b) {
+      b.addEventListener("click", function () {
+        delete sitesCfg.aliases[b.getAttribute("data-unalias")];
+        persistLocalSites(); rebuild();
+        show("siteMsg", "info", "되돌렸습니다.");
+      });
+    });
   }
 
   function renderUnassigned() {
@@ -630,8 +758,14 @@
     // 금액 큰 순 상위 120건
     un.sort(function (a, b) { return b.amount - a.amount; });
     var list = un.slice(0, 120);
-    var opts = '<option value="">— 선택 —</option>' + sitesCfg.sites.filter(function (s) { return s.name; })
-      .map(function (s) { return '<option value="' + esc(s.name) + '">' + esc(s.name) + "</option>"; }).join("");
+    // 지금 분류된 현장 이름 + 규칙에 적어둔 이름을 모두 후보로
+    var names = {};
+    rawRows.forEach(function (r) { if (r.site) names[r.site] = true; });
+    Object.keys(sitesCfg.aliases).forEach(function (k) { names[sitesCfg.aliases[k]] = true; });
+    sitesCfg.sites.forEach(function (s) { if (s.name) names[s.name] = true; });
+    var opts = '<option value="">— 선택 —</option>' + Object.keys(names)
+      .sort(function (a, b) { return a.localeCompare(b, "ko"); })
+      .map(function (n) { return '<option value="' + esc(n) + '">' + esc(n) + "</option>"; }).join("");
     $("unBody").innerHTML = list.map(function (r) {
       return "<tr><td>" + esc(r.date) + "</td><td>" + esc(r.vendor) + "</td>"
         + '<td style="white-space:normal;max-width:320px">' + esc((r.item + " " + r.note).trim()) + "</td>"
@@ -698,6 +832,7 @@
   function sitesJson() {
     return JSON.stringify({
       sites: sitesCfg.sites.filter(function (s) { return s.name; }),
+      aliases: sitesCfg.aliases,
       overrides: sitesCfg.overrides
     }, null, 1);
   }
@@ -759,6 +894,18 @@
     if (e.dataTransfer && e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
   });
 
+  $("mergeBtn").addEventListener("click", doMerge);
+  $("mergeName").addEventListener("input", function () { this.dataset.touched = "1"; });
+  $("mergeName").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); doMerge(); } });
+  $("selAll").addEventListener("click", function () {
+    var agg = siteAgg();
+    Object.keys(agg).forEach(function (k) { if (k !== UNASSIGNED) picked[k] = true; });
+    delete $("mergeName").dataset.touched;
+    renderDist();
+  });
+  $("selNone").addEventListener("click", function () {
+    picked = {}; delete $("mergeName").dataset.touched; renderDist();
+  });
   $("addSite").addEventListener("click", function () {
     sitesCfg.sites.push({ name: "", keywords: [] }); renderSites();
   });
