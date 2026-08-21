@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-08-21T05:12:00.000Z",
+ "updatedAt": "2026-08-21T05:40:42.036Z",
  "updatedBy": "InBeomHwang93",
  "rows": [
   {
@@ -58,7 +58,7 @@
    "doc": "세금계산서",
    "amount": 1914000,
    "supply": 1740000,
-   "siteRaw": "",
+   "siteRaw": "경기 광주 쌍령공원 민간공원특례사업 2단지",
    "site": "경기 광주 쌍령공원 민간공원특례사업 2단지",
    "settled": false
   },
@@ -70,7 +70,7 @@
    "doc": "세금계산서",
    "amount": 118800,
    "supply": 108000,
-   "siteRaw": "",
+   "siteRaw": "목동8단지아파트 재건축정비사업",
    "site": "목동8단지아파트 재건축정비사업",
    "settled": false
   },
@@ -82,7 +82,7 @@
    "doc": "세금계산서",
    "amount": 419893,
    "supply": 381720,
-   "siteRaw": "",
+   "siteRaw": "도청이전신도시 RH12BL 아파트 건설공사 5공구",
    "site": "도청이전신도시 RH12BL 아파트 건설공사 5공구",
    "settled": false
   },
@@ -94,7 +94,7 @@
    "doc": "세금계산서",
    "amount": 3349583,
    "supply": 3045074,
-   "siteRaw": "",
+   "siteRaw": "경상북도 농업기술원건립공사 2차",
    "site": "경상북도 농업기술원건립공사 2차",
    "settled": false
   },
@@ -106,7 +106,7 @@
    "doc": "세금계산서",
    "amount": 426997,
    "supply": 388177,
-   "siteRaw": "",
+   "siteRaw": "양산사송 A-6BL 및 B-1BL 민간참여 아파트",
    "site": "양산사송 A-6BL 및 B-1BL 민간참여 아파트",
    "settled": false
   },
@@ -118,7 +118,7 @@
    "doc": "세금계산서",
    "amount": 2142094,
    "supply": 1947357,
-   "siteRaw": "",
+   "siteRaw": "성남복정2 A-1BL 아파트 건설공사 1공구",
    "site": "성남복정2 A-1BL 아파트 건설공사 1공구",
    "settled": false
   },
@@ -130,7 +130,7 @@
    "doc": "세금계산서",
    "amount": 81202,
    "supply": 73820,
-   "siteRaw": "",
+   "siteRaw": "경상북도 농업기술원건립공사 2차",
    "site": "경상북도 농업기술원건립공사 2차",
    "settled": false
   },
@@ -142,7 +142,7 @@
    "doc": "세금계산서",
    "amount": 2131390,
    "supply": 1937625,
-   "siteRaw": "",
+   "siteRaw": "배곧서울대학교병원 건립공사",
    "site": "배곧서울대학교병원 건립공사",
    "settled": false
   },
@@ -154,7 +154,7 @@
    "doc": "세금계산서",
    "amount": 7344400,
    "supply": 6676726,
-   "siteRaw": "",
+   "siteRaw": "충남도청이전도시 RH15BL 아파트 건설공사",
    "site": "충남도청이전도시 RH15BL 아파트 건설공사",
    "settled": false
   },
@@ -166,7 +166,7 @@
    "doc": "세금계산서",
    "amount": 198000,
    "supply": 180000,
-   "siteRaw": "",
+   "siteRaw": "신대방역세권 재개발정비사업(추가",
    "site": "신대방역세권 재개발정비사업(추가",
    "settled": false
   },
@@ -178,7 +178,7 @@
    "doc": "세금계산서",
    "amount": 2309908,
    "supply": 2099916,
-   "siteRaw": "",
+   "siteRaw": "성남복정2 A-1BL 아파트 건설공사 1공구",
    "site": "성남복정2 A-1BL 아파트 건설공사 1공구",
    "settled": false
   },
@@ -190,7 +190,7 @@
    "doc": "세금계산서",
    "amount": 616000,
    "supply": 560000,
-   "siteRaw": "",
+   "siteRaw": "신대방역세권 재개발정비사업",
    "site": "신대방역세권 재개발정비사업",
    "settled": false
   },
@@ -202,7 +202,7 @@
    "doc": "세금계산서",
    "amount": 167750,
    "supply": 152500,
-   "siteRaw": "",
+   "siteRaw": "서남병원 증축 및 리모델링 공사 건설용역",
    "site": "서남병원 증축 및 리모델링 공사 건설용역",
    "settled": false
   },
@@ -214,7 +214,7 @@
    "doc": "세금계산서",
    "amount": 66000,
    "supply": 60000,
-   "siteRaw": "",
+   "siteRaw": "국립암센터 독립형 양성자치료기 도입 건축사업",
    "site": "국립암센터 독립형 양성자치료기 도입 건축사업",
    "settled": false
   },
@@ -226,7 +226,7 @@
    "doc": "세금계산서",
    "amount": 869000,
    "supply": 790000,
-   "siteRaw": "",
+   "siteRaw": "선사현대 아파트 리모델링 현장",
    "site": "선사현대 아파트 리모델링 현장",
    "settled": false
   },
@@ -238,7 +238,7 @@
    "doc": "세금계산서",
    "amount": 1344530,
    "supply": 1222300,
-   "siteRaw": "",
+   "siteRaw": "정관 에듀파크 현장",
    "site": "정관 에듀파크 현장",
    "settled": false
   },
@@ -250,7 +250,7 @@
    "doc": "세금계산서",
    "amount": 21296,
    "supply": 19360,
-   "siteRaw": "",
+   "siteRaw": "충남도청 현장",
    "site": "충남도청 현장",
    "settled": false
   },
@@ -262,7 +262,7 @@
    "doc": "세금계산서",
    "amount": 1173369,
    "supply": 1066699,
-   "siteRaw": "",
+   "siteRaw": "경상북도 농업기술원건립공사",
    "site": "경상북도 농업기술원건립공사",
    "settled": false
   },
@@ -274,7 +274,7 @@
    "doc": "세금계산서",
    "amount": 1690931,
    "supply": 1537210,
-   "siteRaw": "",
+   "siteRaw": "영등포구 통합 신청사 건립사업",
    "site": "영등포구 통합 신청사 건립사업",
    "settled": false
   },
@@ -286,7 +286,7 @@
    "doc": "세금계산서",
    "amount": 2376000,
    "supply": 2160000,
-   "siteRaw": "",
+   "siteRaw": "파주 선유리 공동주택 현장",
    "site": "파주 선유리 공동주택 현장",
    "settled": false
   },
@@ -298,7 +298,7 @@
    "doc": "세금계산서",
    "amount": 9240000,
    "supply": 8400000,
-   "siteRaw": "",
+   "siteRaw": "25-A-00시설공사(A414, 가평",
    "site": "25-A-00시설공사(A414, 가평",
    "settled": false
   },
@@ -310,7 +310,7 @@
    "doc": "세금계산서",
    "amount": 149600,
    "supply": 136000,
-   "siteRaw": "",
+   "siteRaw": "일산병원 건강 통합관리센터 건립공사",
    "site": "일산병원 건강 통합관리센터 건립공사",
    "settled": false
   },
@@ -322,7 +322,7 @@
    "doc": "세금계산서",
    "amount": 770000,
    "supply": 700000,
-   "siteRaw": "",
+   "siteRaw": "산본 개나리13단지아파트 리모델링",
    "site": "산본 개나리13단지아파트 리모델링",
    "settled": false
   },
@@ -334,7 +334,7 @@
    "doc": "세금계산서",
    "amount": 1735800,
    "supply": 1578000,
-   "siteRaw": "",
+   "siteRaw": "여주시민회관 건립공사",
    "site": "여주시민회관 건립공사",
    "settled": false
   },
@@ -346,7 +346,7 @@
    "doc": "세금계산서",
    "amount": 1134100,
    "supply": 1031000,
-   "siteRaw": "",
+   "siteRaw": "광명제5R구역 주택재개발정비사업 현장",
    "site": "광명제5R구역 주택재개발정비사업 현장",
    "settled": false
   },
@@ -358,7 +358,7 @@
    "doc": "세금계산서",
    "amount": 1660701,
    "supply": 1509728,
-   "siteRaw": "",
+   "siteRaw": "충남도청이전도시 RH15BL 아파트 건설공사",
    "site": "충남도청이전도시 RH15BL 아파트 건설공사",
    "settled": false
   },
@@ -370,7 +370,7 @@
    "doc": "세금계산서",
    "amount": 1976513,
    "supply": 1796830,
-   "siteRaw": "",
+   "siteRaw": "루원복합청사 건립사업 현장",
    "site": "루원복합청사 건립사업 현장",
    "settled": false
   },
@@ -382,7 +382,7 @@
    "doc": "세금계산서",
    "amount": 6600000,
    "supply": 6000000,
-   "siteRaw": "",
+   "siteRaw": "25-A-00시설공사(A210",
    "site": "25-A-00시설공사(A210",
    "settled": false
   },
@@ -394,7 +394,7 @@
    "doc": "세금계산서",
    "amount": 275000,
    "supply": 250000,
-   "siteRaw": "",
+   "siteRaw": "서울대학교병원 기장암센터 증축/리모델링",
    "site": "서울대학교병원 기장암센터 증축/리모델링",
    "settled": false
   },
@@ -406,7 +406,7 @@
    "doc": "세금계산서",
    "amount": 949242,
    "supply": 862947,
-   "siteRaw": "",
+   "siteRaw": "의정부여고 그린스마트 미래학교 개축/리모델링",
    "site": "의정부여고 그린스마트 미래학교 개축/리모델링",
    "settled": false
   },
@@ -418,7 +418,7 @@
    "doc": "세금계산서",
    "amount": 715000,
    "supply": 650000,
-   "siteRaw": "",
+   "siteRaw": "목동6단지아파트 재건축정비사업 현장",
    "site": "목동6단지아파트 재건축정비사업 현장",
    "settled": false
   },
@@ -430,7 +430,7 @@
    "doc": "세금계산서",
    "amount": 412500,
    "supply": 375000,
-   "siteRaw": "",
+   "siteRaw": "청담고등학교 이전 신축공사",
    "site": "청담고등학교 이전 신축공사",
    "settled": false
   },
@@ -634,7 +634,7 @@
    "doc": "수정세금계산서",
    "amount": 1012000,
    "supply": 920000,
-   "siteRaw": "",
+   "siteRaw": "상봉동 109-28일원 청년주택/기재사항 착오.정정",
    "site": "상봉동 109-28일원 청년주택/기재사항 착오.정정",
    "settled": false
   },
@@ -647,7 +647,7 @@
    "amount": -1012000,
    "supply": -920000,
    "siteRaw": "",
-   "site": "",
+   "site": "당초 승인번호 (●●●●usn9in)/기재사항 착오.정정",
    "settled": false
   },
   {
@@ -683,7 +683,7 @@
    "amount": 1012000,
    "supply": 920000,
    "siteRaw": "",
-   "site": "",
+   "site": "국민 ●●●● (주)리마켓",
    "settled": false
   },
   {
@@ -766,7 +766,7 @@
    "doc": "수정세금계산서",
    "amount": 1012000,
    "supply": 920000,
-   "siteRaw": "",
+   "siteRaw": "상봉어린이집 렌탈 연장건/기재사항 착오.정정",
    "site": "상봉어린이집 렌탈 연장건/기재사항 착오.정정",
    "settled": false
   },
@@ -779,7 +779,7 @@
    "amount": -1012000,
    "supply": -920000,
    "siteRaw": "",
-   "site": "",
+   "site": "당초 승인번호 (●●●●udew)/기재사항 착오.정정",
    "settled": false
   },
   {
@@ -1198,7 +1198,7 @@
    "doc": "세금계산서",
    "amount": 753830,
    "supply": 685300,
-   "siteRaw": "",
+   "siteRaw": "서운면 행정복지센터 건립공사(냉난방기 이전설치",
    "site": "서운면 행정복지센터 건립공사(냉난방기 이전설치",
    "settled": false
   },
@@ -1210,7 +1210,7 @@
    "doc": "세금계산서",
    "amount": 1035937,
    "supply": 941760,
-   "siteRaw": "",
+   "siteRaw": "판교 제2테크노밸리 (3차",
    "site": "판교 제2테크노밸리 (3차",
    "settled": false
   },
@@ -1222,7 +1222,7 @@
    "doc": "세금계산서",
    "amount": 2106225,
    "supply": 1914750,
-   "siteRaw": "",
+   "siteRaw": "나리벡시티 공동주택 신축공사",
    "site": "나리벡시티 공동주택 신축공사",
    "settled": false
   },
@@ -1234,7 +1234,7 @@
    "doc": "세금계산서",
    "amount": 3566200,
    "supply": 3242000,
-   "siteRaw": "",
+   "siteRaw": "24-A-00부대 건설사업관리용역 (A157",
    "site": "24-A-00부대 건설사업관리용역 (A157",
    "settled": false
   },
@@ -1246,7 +1246,7 @@
    "doc": "세금계산서",
    "amount": 130350,
    "supply": 118500,
-   "siteRaw": "",
+   "siteRaw": "광명제5R구역 주택재개발정비사업 (5차",
    "site": "광명제5R구역 주택재개발정비사업 (5차",
    "settled": false
   },
@@ -1258,7 +1258,7 @@
    "doc": "세금계산서",
    "amount": 187572,
    "supply": 170520,
-   "siteRaw": "",
+   "siteRaw": "루원복합청사 건립사업 (5차",
    "site": "루원복합청사 건립사업 (5차",
    "settled": false
   },
@@ -1270,7 +1270,7 @@
    "doc": "세금계산서",
    "amount": 6479000,
    "supply": 5890000,
-   "siteRaw": "",
+   "siteRaw": "청담고등학교 이전 신축공사",
    "site": "청담고등학교 이전 신축공사",
    "settled": false
   },
@@ -1282,7 +1282,7 @@
    "doc": "세금계산서",
    "amount": 442542,
    "supply": 402311,
-   "siteRaw": "",
+   "siteRaw": "판교 제2테크노밸리 (2차",
    "site": "판교 제2테크노밸리 (2차",
    "settled": false
   },
@@ -1294,7 +1294,7 @@
    "doc": "세금계산서",
    "amount": 3960000,
    "supply": 3600000,
-   "siteRaw": "",
+   "siteRaw": "24-A-00부대 건설사업관리용역 A164 (2차",
    "site": "24-A-00부대 건설사업관리용역 A164 (2차",
    "settled": false
   },
@@ -2782,7 +2782,7 @@
    "doc": "세금계산서",
    "amount": 332200,
    "supply": 302000,
-   "siteRaw": "",
+   "siteRaw": "인천영종 A33,37,60BL 아파트 건설공사 (2차",
    "site": "인천영종 A33,37,60BL 아파트 건설공사 (2차",
    "settled": false
   },
@@ -2794,7 +2794,7 @@
    "doc": "세금계산서",
    "amount": 25465000,
    "supply": 23150000,
-   "siteRaw": "",
+   "siteRaw": "인천영종 A-33,37,60BL 아파트 건설공사 (1차",
    "site": "인천영종 A-33,37,60BL 아파트 건설공사 (1차",
    "settled": false
   },
@@ -2806,7 +2806,7 @@
    "doc": "세금계산서",
    "amount": 5676000,
    "supply": 5160000,
-   "siteRaw": "",
+   "siteRaw": "경기지사 현장",
    "site": "경기지사 현장",
    "settled": false
   },
@@ -2818,7 +2818,7 @@
    "doc": "세금계산서",
    "amount": 1177000,
    "supply": 1070000,
-   "siteRaw": "",
+   "siteRaw": "나리벡시티 도시개발사업(2차",
    "site": "나리벡시티 도시개발사업(2차",
    "settled": false
   },
@@ -2830,7 +2830,7 @@
    "doc": "세금계산서",
    "amount": 1432200,
    "supply": 1302000,
-   "siteRaw": "",
+   "siteRaw": "나리벡시티 도시개발사업(1차",
    "site": "나리벡시티 도시개발사업(1차",
    "settled": false
   },
@@ -2842,7 +2842,7 @@
    "doc": "세금계산서",
    "amount": 4180000,
    "supply": 3800000,
-   "siteRaw": "",
+   "siteRaw": "베이스볼 드림파크 건립공사(3차",
    "site": "베이스볼 드림파크 건립공사(3차",
    "settled": false
   },
@@ -2854,7 +2854,7 @@
    "doc": "세금계산서",
    "amount": 8030000,
    "supply": 7300000,
-   "siteRaw": "",
+   "siteRaw": "연천 전곡 공동주택 신축공사(2차",
    "site": "연천 전곡 공동주택 신축공사(2차",
    "settled": false
   },
@@ -2866,7 +2866,7 @@
    "doc": "세금계산서",
    "amount": 138600,
    "supply": 126000,
-   "siteRaw": "",
+   "siteRaw": "서울본사",
    "site": "서울본사",
    "settled": false
   },
@@ -2878,7 +2878,7 @@
    "doc": "세금계산서",
    "amount": 770000,
    "supply": 700000,
-   "siteRaw": "",
+   "siteRaw": "이촌동 현대아파트 리모델링주택조합사업",
    "site": "이촌동 현대아파트 리모델링주택조합사업",
    "settled": false
   },
@@ -2890,7 +2890,7 @@
    "doc": "수정세금계산서",
    "amount": -138600,
    "supply": -126000,
-   "siteRaw": "",
+   "siteRaw": "서울본사/기재사항 착오.정정",
    "site": "서울본사/기재사항 착오.정정",
    "settled": false
   },
@@ -2902,7 +2902,7 @@
    "doc": "세금계산서",
    "amount": 5665000,
    "supply": 5150000,
-   "siteRaw": "",
+   "siteRaw": "광주 신창 지역주택조합 공동주택 신축공사",
    "site": "광주 신창 지역주택조합 공동주택 신축공사",
    "settled": false
   },
@@ -2914,7 +2914,7 @@
    "doc": "세금계산서",
    "amount": 231000,
    "supply": 210000,
-   "siteRaw": "",
+   "siteRaw": "서울본사",
    "site": "서울본사",
    "settled": false
   },
@@ -2926,7 +2926,7 @@
    "doc": "세금계산서",
    "amount": 242000,
    "supply": 220000,
-   "siteRaw": "",
+   "siteRaw": "한국은행 건축공사",
    "site": "한국은행 건축공사",
    "settled": false
   },
@@ -2938,7 +2938,7 @@
    "doc": "세금계산서",
    "amount": 704000,
    "supply": 640000,
-   "siteRaw": "",
+   "siteRaw": "연천 전곡 공동주택 신축공사 (1차",
    "site": "연천 전곡 공동주택 신축공사 (1차",
    "settled": false
   },
@@ -2950,7 +2950,7 @@
    "doc": "세금계산서",
    "amount": 525800,
    "supply": 478000,
-   "siteRaw": "",
+   "siteRaw": "베이스볼 드림파크 건립공사 (2차",
    "site": "베이스볼 드림파크 건립공사 (2차",
    "settled": false
   },
@@ -2962,7 +2962,7 @@
    "doc": "세금계산서",
    "amount": 940500,
    "supply": 855000,
-   "siteRaw": "",
+   "siteRaw": "시흥 복합물류센터",
    "site": "시흥 복합물류센터",
    "settled": false
   },
@@ -2974,7 +2974,7 @@
    "doc": "세금계산서",
    "amount": 818400,
    "supply": 744000,
-   "siteRaw": "",
+   "siteRaw": "대구공항 여객터미널 리모델링현장 (2차",
    "site": "대구공항 여객터미널 리모델링현장 (2차",
    "settled": false
   },
@@ -2986,7 +2986,7 @@
    "doc": "세금계산서",
    "amount": 375100,
    "supply": 341000,
-   "siteRaw": "",
+   "siteRaw": "고양 장항 A-5BL",
    "site": "고양 장항 A-5BL",
    "settled": false
   },
@@ -2998,7 +2998,7 @@
    "doc": "세금계산서",
    "amount": 1727000,
    "supply": 1570000,
-   "siteRaw": "",
+   "siteRaw": "파주운정3지구 A38블럭 디에트르현장",
    "site": "파주운정3지구 A38블럭 디에트르현장",
    "settled": false
   },
@@ -3010,7 +3010,7 @@
    "doc": "세금계산서",
    "amount": 1980000,
    "supply": 1800000,
-   "siteRaw": "",
+   "siteRaw": "베이스볼 드림파크 건립공사 (1차",
    "site": "베이스볼 드림파크 건립공사 (1차",
    "settled": false
   },
@@ -3022,7 +3022,7 @@
    "doc": "세금계산서",
    "amount": 5773900,
    "supply": 5249000,
-   "siteRaw": "",
+   "siteRaw": "대구공항 여객터미널 리모델링현장 (3차",
    "site": "대구공항 여객터미널 리모델링현장 (3차",
    "settled": false
   },
@@ -3034,7 +3034,7 @@
    "doc": "세금계산서",
    "amount": 473000,
    "supply": 430000,
-   "siteRaw": "",
+   "siteRaw": "시흥장현 영무 예다음",
    "site": "시흥장현 영무 예다음",
    "settled": false
   },
@@ -3046,7 +3046,7 @@
    "doc": "세금계산서",
    "amount": 374000,
    "supply": 340000,
-   "siteRaw": "",
+   "siteRaw": "시흥장현 B-10BL",
    "site": "시흥장현 B-10BL",
    "settled": false
   },
@@ -3058,7 +3058,7 @@
    "doc": "세금계산서",
    "amount": 560142,
    "supply": 509220,
-   "siteRaw": "",
+   "siteRaw": "용인 에코타운 조성 민간투자사업 현장",
    "site": "용인 에코타운 조성 민간투자사업 현장",
    "settled": false
   },
@@ -3070,7 +3070,7 @@
    "doc": "수정세금계산서",
    "amount": -560142,
    "supply": -509220,
-   "siteRaw": "",
+   "siteRaw": "용인 에코타운 조성 민간투자사업 현장/공급가액 변동",
    "site": "용인 에코타운 조성 민간투자사업 현장/공급가액 변동",
    "settled": false
   },
@@ -3082,7 +3082,7 @@
    "doc": "세금계산서",
    "amount": 726000,
    "supply": 660000,
-   "siteRaw": "",
+   "siteRaw": "용인 에코타운 조성 민간투자사업 현장",
    "site": "용인 에코타운 조성 민간투자사업 현장",
    "settled": false
   },
@@ -3094,7 +3094,7 @@
    "doc": "세금계산서",
    "amount": 11789800,
    "supply": 10718000,
-   "siteRaw": "",
+   "siteRaw": "세종행복도시 4-1MBL",
    "site": "세종행복도시 4-1MBL",
    "settled": false
   },
@@ -3106,7 +3106,7 @@
    "doc": "세금계산서",
    "amount": 3687200,
    "supply": 3352000,
-   "siteRaw": "",
+   "siteRaw": "인천공항 제 2합동청사 (1차",
    "site": "인천공항 제 2합동청사 (1차",
    "settled": false
   },
@@ -3118,7 +3118,7 @@
    "doc": "세금계산서",
    "amount": 218900,
    "supply": 199000,
-   "siteRaw": "",
+   "siteRaw": "인천공항 제 2합동청사(2차",
    "site": "인천공항 제 2합동청사(2차",
    "settled": false
   },
@@ -3130,7 +3130,7 @@
    "doc": "세금계산서",
    "amount": 1210000,
    "supply": 1100000,
-   "siteRaw": "",
+   "siteRaw": "나라키움 부산 온타워(남구복합청사",
    "site": "나라키움 부산 온타워(남구복합청사",
    "settled": false
   },
@@ -3142,7 +3142,7 @@
    "doc": "세금계산서",
    "amount": 2750000,
    "supply": 2500000,
-   "siteRaw": "",
+   "siteRaw": "대구공항 여객터미널 리모델링 현장 1차",
    "site": "대구공항 여객터미널 리모델링 현장 1차",
    "settled": false
   },
@@ -3238,7 +3238,7 @@
    "doc": "세금계산서",
    "amount": 12540000,
    "supply": 11400000,
-   "siteRaw": "",
+   "siteRaw": "고창,황산,무장 및 율계 공공주택 공사",
    "site": "고창,황산,무장 및 율계 공공주택 공사",
    "settled": false
   },
@@ -3250,7 +3250,7 @@
    "doc": "세금계산서",
    "amount": 3025000,
    "supply": 2750000,
-   "siteRaw": "",
+   "siteRaw": "경기 신용보증재단 ) 1차",
    "site": "경기 신용보증재단 ) 1차",
    "settled": false
   },
@@ -3262,7 +3262,7 @@
    "doc": "세금계산서",
    "amount": 1705000,
    "supply": 1550000,
-   "siteRaw": "",
+   "siteRaw": "세종행복도시 4-1M4BL",
    "site": "세종행복도시 4-1M4BL",
    "settled": false
   },
@@ -3274,7 +3274,7 @@
    "doc": "세금계산서",
    "amount": 572000,
    "supply": 520000,
-   "siteRaw": "",
+   "siteRaw": "충남권 공공어린이재활병원 건립사업현장",
    "site": "충남권 공공어린이재활병원 건립사업현장",
    "settled": false
   },
@@ -3286,7 +3286,7 @@
    "doc": "세금계산서",
    "amount": 7389800,
    "supply": 6718000,
-   "siteRaw": "",
+   "siteRaw": "경기 신용보증재단",
    "site": "경기 신용보증재단",
    "settled": false
   },
@@ -3298,7 +3298,7 @@
    "doc": "세금계산서",
    "amount": 8800000,
    "supply": 8000000,
-   "siteRaw": "",
+   "siteRaw": "대전광역시 동두 정동1-1일원",
    "site": "대전광역시 동두 정동1-1일원",
    "settled": false
   },
@@ -3310,7 +3310,7 @@
    "doc": "세금계산서",
    "amount": 495000,
    "supply": 450000,
-   "siteRaw": "",
+   "siteRaw": "서울산림 지식산업센터 현장",
    "site": "서울산림 지식산업센터 현장",
    "settled": false
   },
@@ -3322,7 +3322,7 @@
    "doc": "세금계산서",
    "amount": 8525000,
    "supply": 7750000,
-   "siteRaw": "",
+   "siteRaw": "파주 문산 공동주택 신축공사",
    "site": "파주 문산 공동주택 신축공사",
    "settled": false
   },
@@ -3334,7 +3334,7 @@
    "doc": "세금계산서",
    "amount": 297000,
    "supply": 270000,
-   "siteRaw": "",
+   "siteRaw": "평택고덕지구 9-1 / 2-1BL",
    "site": "평택고덕지구 9-1 / 2-1BL",
    "settled": false
   },
@@ -3346,9 +3346,9 @@
    "doc": "세금계산서",
    "amount": 7480000,
    "supply": 6800000,
-   "siteRaw": "",
+   "siteRaw": "가락동2층?",
    "site": "가락동2층?",
-   "settled": false
+   "settled": true
   },
   {
    "date": "2022-04-13",
@@ -3358,7 +3358,7 @@
    "doc": "세금계산서",
    "amount": 1276000,
    "supply": 1160000,
-   "siteRaw": "",
+   "siteRaw": "장위10구역 재개발 정비사업",
    "site": "장위10구역 재개발 정비사업",
    "settled": false
   },
@@ -3370,7 +3370,7 @@
    "doc": "세금계산서",
    "amount": 4845500,
    "supply": 4405000,
-   "siteRaw": "",
+   "siteRaw": "둔촌동 주공아파트 재건축",
    "site": "둔촌동 주공아파트 재건축",
    "settled": false
   },
@@ -3382,7 +3382,7 @@
    "doc": "세금계산서",
    "amount": 715000,
    "supply": 650000,
-   "siteRaw": "",
+   "siteRaw": "파주 운정 A17BL, 파주교하 A16BL ) 2차",
    "site": "파주 운정 A17BL, 파주교하 A16BL ) 2차",
    "settled": false
   },
@@ -3394,7 +3394,7 @@
    "doc": "세금계산서",
    "amount": 3080000,
    "supply": 2800000,
-   "siteRaw": "",
+   "siteRaw": "상봉동 ●●●●일원 청년주택",
    "site": "상봉동 ●●●●일원 청년주택",
    "settled": false
   },
@@ -3406,7 +3406,7 @@
    "doc": "세금계산서",
    "amount": 8140000,
    "supply": 7400000,
-   "siteRaw": "",
+   "siteRaw": "김해국제공항 국제선 건설사업관리용역",
    "site": "김해국제공항 국제선 건설사업관리용역",
    "settled": false
   },
@@ -3418,7 +3418,7 @@
    "doc": "세금계산서",
    "amount": 1903000,
    "supply": 1730000,
-   "siteRaw": "",
+   "siteRaw": "집현유초 외 1교 신축공사 ) 냉난방기 이전설치",
    "site": "집현유초 외 1교 신축공사 ) 냉난방기 이전설치",
    "settled": false
   },
@@ -3430,7 +3430,7 @@
    "doc": "세금계산서",
    "amount": 11550000,
    "supply": 10500000,
-   "siteRaw": "",
+   "siteRaw": "수서역세권 택지개발지구내 A-2BL",
    "site": "수서역세권 택지개발지구내 A-2BL",
    "settled": false
   },
@@ -3442,7 +3442,7 @@
    "doc": "세금계산서",
    "amount": 376200,
    "supply": 342000,
-   "siteRaw": "",
+   "siteRaw": "수서역세권 택지개발지구내 A-2BL",
    "site": "수서역세권 택지개발지구내 A-2BL",
    "settled": false
   },
@@ -3454,7 +3454,7 @@
    "doc": "세금계산서",
    "amount": 12320000,
    "supply": 11200000,
-   "siteRaw": "",
+   "siteRaw": "수원당수 A-2BL 아파트 건설공사 4공구",
    "site": "수원당수 A-2BL 아파트 건설공사 4공구",
    "settled": false
   },
@@ -3466,7 +3466,7 @@
    "doc": "세금계산서",
    "amount": 3432000,
    "supply": 3120000,
-   "siteRaw": "",
+   "siteRaw": "인천공사 제2합동청사",
    "site": "인천공사 제2합동청사",
    "settled": false
   },
@@ -3478,7 +3478,7 @@
    "doc": "세금계산서",
    "amount": 585200,
    "supply": 532000,
-   "siteRaw": "",
+   "siteRaw": "인천남동물류시설 신축공사 현장",
    "site": "인천남동물류시설 신축공사 현장",
    "settled": false
   },
@@ -3490,7 +3490,7 @@
    "doc": "세금계산서",
    "amount": 4032600,
    "supply": 3666000,
-   "siteRaw": "",
+   "siteRaw": "천안 문성원성 주택재개발정비사업감리단",
    "site": "천안 문성원성 주택재개발정비사업감리단",
    "settled": false
   },
@@ -3502,7 +3502,7 @@
    "doc": "세금계산서",
    "amount": 215600,
    "supply": 196000,
-   "siteRaw": "",
+   "siteRaw": "서울 산림지식산업센터",
    "site": "서울 산림지식산업센터",
    "settled": false
   },
@@ -3514,7 +3514,7 @@
    "doc": "세금계산서",
    "amount": 239800,
    "supply": 218000,
-   "siteRaw": "",
+   "siteRaw": "서초 스튜디오 아인스",
    "site": "서초 스튜디오 아인스",
    "settled": false
   },
@@ -3526,7 +3526,7 @@
    "doc": "세금계산서",
    "amount": 605000,
    "supply": 550000,
-   "siteRaw": "",
+   "siteRaw": "인천공사 제2합동청사",
    "site": "인천공사 제2합동청사",
    "settled": false
   },
@@ -3538,7 +3538,7 @@
    "doc": "세금계산서",
    "amount": 2035000,
    "supply": 1850000,
-   "siteRaw": "",
+   "siteRaw": "김해국제공항 국제선 건설사업관리용역",
    "site": "김해국제공항 국제선 건설사업관리용역",
    "settled": false
   },
@@ -3550,7 +3550,7 @@
    "doc": "세금계산서",
    "amount": 517000,
    "supply": 470000,
-   "siteRaw": "",
+   "siteRaw": "수서역세권 택지개발지구내 A-2BL",
    "site": "수서역세권 택지개발지구내 A-2BL",
    "settled": false
   },
@@ -3562,7 +3562,7 @@
    "doc": "세금계산서",
    "amount": 1870000,
    "supply": 1700000,
-   "siteRaw": "",
+   "siteRaw": "강릉 내곡동 102 공동주택 신축공사",
    "site": "강릉 내곡동 102 공동주택 신축공사",
    "settled": false
   },
@@ -3574,7 +3574,7 @@
    "doc": "세금계산서",
    "amount": 7425000,
    "supply": 6750000,
-   "siteRaw": "",
+   "siteRaw": "대구 상인 푸르지오 센터파크 신축공사",
    "site": "대구 상인 푸르지오 센터파크 신축공사",
    "settled": false
   },
@@ -3586,7 +3586,7 @@
    "doc": "세금계산서",
    "amount": 1903000,
    "supply": 1730000,
-   "siteRaw": "",
+   "siteRaw": "파주 내포리 오피스텔 신축공사",
    "site": "파주 내포리 오피스텔 신축공사",
    "settled": false
   },
@@ -3598,7 +3598,7 @@
    "doc": "세금계산서",
    "amount": 3520000,
    "supply": 3200000,
-   "siteRaw": "",
+   "siteRaw": "평택고덕지구 9-1/2-1 BL",
    "site": "평택고덕지구 9-1/2-1 BL",
    "settled": false
   },
@@ -3610,7 +3610,7 @@
    "doc": "세금계산서",
    "amount": 1883200,
    "supply": 1712000,
-   "siteRaw": "",
+   "siteRaw": "인천 상상플랫폼 사적공간 개발사업",
    "site": "인천 상상플랫폼 사적공간 개발사업",
    "settled": false
   },
@@ -3622,7 +3622,7 @@
    "doc": "세금계산서",
    "amount": 1610272,
    "supply": 1463884,
-   "siteRaw": "",
+   "siteRaw": "서울 산림지식산업센터",
    "site": "서울 산림지식산업센터",
    "settled": false
   },
