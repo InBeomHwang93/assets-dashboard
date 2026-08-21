@@ -1,7 +1,391 @@
 {
- "updatedAt": "2026-08-21T00:49:10.986Z",
+ "updatedAt": "2026-08-21T02:29:39.597Z",
  "updatedBy": "InBeomHwang93",
  "rows": [
+  {
+   "date": "2021-06-24",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "국민 ●●●● (주) 리마켓",
+   "doc": "세금계산서",
+   "amount": 440000,
+   "supply": 400000,
+   "siteRaw": "서울본사",
+   "site": "서울본사",
+   "settled": false
+  },
+  {
+   "date": "2021-06-16",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "",
+   "doc": "세금계산서",
+   "amount": -533500,
+   "supply": -485000,
+   "siteRaw": "서울본사",
+   "site": "서울본사",
+   "settled": false
+  },
+  {
+   "date": "2021-05-31",
+   "vendor": "(주)리마켓",
+   "item": "설치비",
+   "note": "창원 사파지구 공1블럭(냉난방기 이전설치)",
+   "doc": "세금계산서",
+   "amount": 198000,
+   "supply": 180000,
+   "siteRaw": "",
+   "site": "창원 사파지구 공1블럭(냉난방기 이전설치",
+   "settled": false
+  },
+  {
+   "date": "2021-05-31",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "양산사송 A-4BL 아파트건설공사 5공구",
+   "doc": "세금계산서",
+   "amount": 13123000,
+   "supply": 11930000,
+   "siteRaw": "",
+   "site": "양산사송 A-4BL 아파트건설공사 5공구",
+   "settled": false
+  },
+  {
+   "date": "2021-05-31",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "충남공공어린이 재활병원 현장",
+   "doc": "세금계산서",
+   "amount": 2414500,
+   "supply": 2195000,
+   "siteRaw": "",
+   "site": "충남공공어린이 재활병원 현장",
+   "settled": false
+  },
+  {
+   "date": "2021-05-31",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "경찰대학 청사 증축사업 현장",
+   "doc": "세금계산서",
+   "amount": 7054300,
+   "supply": 6413000,
+   "siteRaw": "",
+   "site": "경찰대학 청사 증축사업 현장",
+   "settled": false
+  },
+  {
+   "date": "2021-05-31",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "국민 ●●●● (주) 리마켓",
+   "doc": "세금계산서",
+   "amount": 533500,
+   "supply": 485000,
+   "siteRaw": "서울본사",
+   "site": "서울본사",
+   "settled": false
+  },
+  {
+   "date": "2021-04-30",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "서울 강동 치과병원 증축공사",
+   "doc": "세금계산서",
+   "amount": 6820000,
+   "supply": 6200000,
+   "siteRaw": "",
+   "site": "서울 강동 치과병원 증축공사",
+   "settled": false
+  },
+  {
+   "date": "2021-04-30",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "치료감호소 중증환자 집중치로병동 현장",
+   "doc": "세금계산서",
+   "amount": 771100,
+   "supply": 701000,
+   "siteRaw": "",
+   "site": "치료감호소 중증환자 집중치로병동 현장",
+   "settled": false
+  },
+  {
+   "date": "2021-04-30",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "고양 장항 A-5BL",
+   "doc": "세금계산서",
+   "amount": 11440000,
+   "supply": 10400000,
+   "siteRaw": "",
+   "site": "고양 장항 A-5BL",
+   "settled": false
+  },
+  {
+   "date": "2021-04-30",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "양산사송 A-4BL 아파트건설공사 5공구",
+   "doc": "세금계산서",
+   "amount": 1089000,
+   "supply": 990000,
+   "siteRaw": "",
+   "site": "양산사송 A-4BL 아파트건설공사 5공구",
+   "settled": false
+  },
+  {
+   "date": "2021-04-30",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "서울 시립대현장",
+   "doc": "세금계산서",
+   "amount": 2750000,
+   "supply": 2500000,
+   "siteRaw": "",
+   "site": "서울 시립대현장",
+   "settled": false
+  },
+  {
+   "date": "2021-04-30",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "파주운정 A-17BL/파주교하 A-16BL",
+   "doc": "세금계산서",
+   "amount": 13420000,
+   "supply": 12200000,
+   "siteRaw": "",
+   "site": "파주운정 A-17BL/파주교하 A-16BL",
+   "settled": false
+  },
+  {
+   "date": "2021-04-30",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "나라키움 영등포 복합청사",
+   "doc": "세금계산서",
+   "amount": 198000,
+   "supply": 180000,
+   "siteRaw": "",
+   "site": "나라키움 영등포 복합청사",
+   "settled": false
+  },
+  {
+   "date": "2021-04-30",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "양주옥정 A-1BL",
+   "doc": "세금계산서",
+   "amount": 16863000,
+   "supply": 15330000,
+   "siteRaw": "",
+   "site": "양주옥정 A-1BL",
+   "settled": false
+  },
+  {
+   "date": "2021-04-30",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "기초과학원 POSTECH 건립공사",
+   "doc": "세금계산서",
+   "amount": 2165900,
+   "supply": 1969000,
+   "siteRaw": "",
+   "site": "기초과학원 POSTECH 건립공사",
+   "settled": false
+  },
+  {
+   "date": "2021-04-30",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "SK하이닉스 통합자재창고 현장",
+   "doc": "세금계산서",
+   "amount": 250800,
+   "supply": 228000,
+   "siteRaw": "",
+   "site": "SK하이닉스 통합자재창고 현장",
+   "settled": false
+  },
+  {
+   "date": "2021-04-30",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "신반포 21차",
+   "doc": "세금계산서",
+   "amount": 198000,
+   "supply": 180000,
+   "siteRaw": "",
+   "site": "신반포 21차",
+   "settled": false
+  },
+  {
+   "date": "2021-03-30",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "국민 ●●●● (주) 리마켓",
+   "doc": "세금계산서",
+   "amount": 660000,
+   "supply": 600000,
+   "siteRaw": "송파구 중대로",
+   "site": "송파구 중대로",
+   "settled": false
+  },
+  {
+   "date": "2021-03-30",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "국민 ●●●● (주) 리마켓",
+   "doc": "세금계산서",
+   "amount": 5940000,
+   "supply": 5400000,
+   "siteRaw": "송파구 중대로",
+   "site": "송파구 중대로",
+   "settled": false
+  },
+  {
+   "date": "2021-03-29",
+   "vendor": "(주)리마켓",
+   "item": "사무집기",
+   "note": "국민 ●●●● (주) 리마켓",
+   "doc": "세금계산서",
+   "amount": 297000,
+   "supply": 270000,
+   "siteRaw": "신반포로",
+   "site": "신반포로",
+   "settled": false
+  },
+  {
+   "date": "2021-03-16",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "집현유초 외 1교",
+   "doc": "세금계산서",
+   "amount": 8000000,
+   "supply": 7272727,
+   "siteRaw": "",
+   "site": "집현유초 외 1교",
+   "settled": false
+  },
+  {
+   "date": "2021-03-16",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "치료감호소 중증환자 집중치료병동",
+   "doc": "세금계산서",
+   "amount": 4730000,
+   "supply": 4300000,
+   "siteRaw": "",
+   "site": "치료감호소 중증환자 집중치료병동",
+   "settled": false
+  },
+  {
+   "date": "2021-03-16",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "서초진흥아파트",
+   "doc": "세금계산서",
+   "amount": 575300,
+   "supply": 523000,
+   "siteRaw": "",
+   "site": "서초진흥아파트",
+   "settled": false
+  },
+  {
+   "date": "2021-03-16",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "창원의창구청",
+   "doc": "세금계산서",
+   "amount": 1199000,
+   "supply": 1090000,
+   "siteRaw": "",
+   "site": "창원의창구청",
+   "settled": false
+  },
+  {
+   "date": "2021-03-16",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "고양장항 A-5BL",
+   "doc": "세금계산서",
+   "amount": 1309000,
+   "supply": 1190000,
+   "siteRaw": "",
+   "site": "고양장항 A-5BL",
+   "settled": false
+  },
+  {
+   "date": "2021-03-16",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "개포4지구",
+   "doc": "세금계산서",
+   "amount": 352000,
+   "supply": 320000,
+   "siteRaw": "",
+   "site": "개포4지구",
+   "settled": false
+  },
+  {
+   "date": "2021-03-16",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "강동 치과병원",
+   "doc": "세금계산서",
+   "amount": 396000,
+   "supply": 360000,
+   "siteRaw": "",
+   "site": "강동 치과병원",
+   "settled": false
+  },
+  {
+   "date": "2021-03-16",
+   "vendor": "(주)리마켓",
+   "item": "렌탈",
+   "note": "강릉 내곡동 102공동주택",
+   "doc": "세금계산서",
+   "amount": 4895000,
+   "supply": 4450000,
+   "siteRaw": "",
+   "site": "강릉 내곡동 102공동주택",
+   "settled": false
+  },
+  {
+   "date": "2021-01-12",
+   "vendor": "(주)리마켓",
+   "item": "사무집기",
+   "note": "국민 ●●●● (주) 리마켓",
+   "doc": "세금계산서",
+   "amount": 6072000,
+   "supply": 5520000,
+   "siteRaw": "인천",
+   "site": "인천",
+   "settled": false
+  },
+  {
+   "date": "2021-01-12",
+   "vendor": "(주)리마켓",
+   "item": "사무집기",
+   "note": "국민 ●●●● (주) 리마켓",
+   "doc": "세금계산서",
+   "amount": 6039000,
+   "supply": 5490000,
+   "siteRaw": "인천",
+   "site": "인천",
+   "settled": false
+  },
+  {
+   "date": "2021-01-12",
+   "vendor": "(주)리마켓",
+   "item": "사무집기",
+   "note": "공급가액 변동",
+   "doc": "수정세금계산서",
+   "amount": -6072000,
+   "supply": -5520000,
+   "siteRaw": "인천",
+   "site": "인천",
+   "settled": false
+  },
   {
    "date": "2020-12-31",
    "vendor": "(주)리마켓",
@@ -11,7 +395,8 @@
    "amount": 8580000,
    "supply": 7800000,
    "siteRaw": "부산",
-   "site": "부산"
+   "site": "부산",
+   "settled": false
   },
   {
    "date": "2020-12-31",
@@ -22,7 +407,8 @@
    "amount": 6270000,
    "supply": 5700000,
    "siteRaw": "포항",
-   "site": "포항"
+   "site": "포항",
+   "settled": false
   },
   {
    "date": "2020-12-31",
@@ -33,7 +419,8 @@
    "amount": 5830000,
    "supply": 5300000,
    "siteRaw": "포항",
-   "site": "포항"
+   "site": "포항",
+   "settled": false
   },
   {
    "date": "2020-12-31",
@@ -44,7 +431,8 @@
    "amount": -6270000,
    "supply": -5700000,
    "siteRaw": "포항",
-   "site": "포항"
+   "site": "포항",
+   "settled": false
   },
   {
    "date": "2020-12-04",
@@ -55,7 +443,8 @@
    "amount": 5170000,
    "supply": 4700000,
    "siteRaw": "",
-   "site": "순천 가곡동 대광아파트"
+   "site": "순천 가곡동 대광아파트",
+   "settled": false
   },
   {
    "date": "2020-12-04",
@@ -66,7 +455,8 @@
    "amount": 13970000,
    "supply": 12700000,
    "siteRaw": "",
-   "site": "인천검단 AAA34BL"
+   "site": "인천검단 AAA34BL",
+   "settled": false
   },
   {
    "date": "2020-12-04",
@@ -77,7 +467,8 @@
    "amount": 781000,
    "supply": 710000,
    "siteRaw": "",
-   "site": "충남 공공어린이재활병원"
+   "site": "충남 공공어린이재활병원",
+   "settled": false
   },
   {
    "date": "2020-12-04",
@@ -88,7 +479,8 @@
    "amount": 3190000,
    "supply": 2900000,
    "siteRaw": "",
-   "site": "대전 용산지구 3BL"
+   "site": "대전 용산지구 3BL",
+   "settled": false
   },
   {
    "date": "2020-12-04",
@@ -99,7 +491,8 @@
    "amount": 359700,
    "supply": 327000,
    "siteRaw": "",
-   "site": "안양 덕현지구"
+   "site": "안양 덕현지구",
+   "settled": false
   },
   {
    "date": "2020-10-31",
@@ -110,7 +503,8 @@
    "amount": 1826000,
    "supply": 1660000,
    "siteRaw": "",
-   "site": "창원의창구청현장"
+   "site": "창원의창구청현장",
+   "settled": false
   },
   {
    "date": "2020-10-31",
@@ -121,7 +515,8 @@
    "amount": 4950000,
    "supply": 4500000,
    "siteRaw": "",
-   "site": "곡성인재개발원"
+   "site": "곡성인재개발원",
+   "settled": false
   },
   {
    "date": "2020-10-31",
@@ -132,7 +527,8 @@
    "amount": 1100000,
    "supply": 1000000,
    "siteRaw": "",
-   "site": "대구공항"
+   "site": "대구공항",
+   "settled": false
   },
   {
    "date": "2020-10-31",
@@ -143,7 +539,8 @@
    "amount": 2255000,
    "supply": 2050000,
    "siteRaw": "",
-   "site": "나라키움"
+   "site": "나라키움",
+   "settled": false
   },
   {
    "date": "2020-10-31",
@@ -154,7 +551,8 @@
    "amount": 724900,
    "supply": 659000,
    "siteRaw": "",
-   "site": "경기신용보증재단"
+   "site": "경기신용보증재단",
+   "settled": false
   },
   {
    "date": "2020-10-31",
@@ -165,7 +563,8 @@
    "amount": 973500,
    "supply": 885000,
    "siteRaw": "",
-   "site": "영무예다음"
+   "site": "영무예다음",
+   "settled": false
   },
   {
    "date": "2020-10-31",
@@ -176,7 +575,8 @@
    "amount": 495000,
    "supply": 450000,
    "siteRaw": "",
-   "site": "곡성인재개발원"
+   "site": "곡성인재개발원",
+   "settled": false
   },
   {
    "date": "2020-10-31",
@@ -187,7 +587,8 @@
    "amount": 1870000,
    "supply": 1700000,
    "siteRaw": "부산",
-   "site": "부산"
+   "site": "부산",
+   "settled": false
   },
   {
    "date": "2020-09-29",
@@ -198,7 +599,8 @@
    "amount": 3245000,
    "supply": 2950000,
    "siteRaw": "울산",
-   "site": "울산"
+   "site": "울산",
+   "settled": false
   },
   {
    "date": "2020-07-31",
@@ -209,7 +611,8 @@
    "amount": 122100,
    "supply": 111000,
    "siteRaw": "",
-   "site": "세곡복합문화센터"
+   "site": "세곡복합문화센터",
+   "settled": false
   },
   {
    "date": "2020-07-31",
@@ -220,7 +623,8 @@
    "amount": 5097400,
    "supply": 4634000,
    "siteRaw": "",
-   "site": "인천미추홀구주상복합"
+   "site": "인천미추홀구주상복합",
+   "settled": false
   },
   {
    "date": "2020-07-31",
@@ -231,7 +635,8 @@
    "amount": 239800,
    "supply": 218000,
    "siteRaw": "",
-   "site": "경기신용보증재단"
+   "site": "경기신용보증재단",
+   "settled": false
   },
   {
    "date": "2020-07-31",
@@ -242,7 +647,8 @@
    "amount": 495000,
    "supply": 450000,
    "siteRaw": "",
-   "site": "김해국제공항"
+   "site": "김해국제공항",
+   "settled": false
   },
   {
    "date": "2020-07-31",
@@ -253,7 +659,8 @@
    "amount": 915200,
    "supply": 832000,
    "siteRaw": "",
-   "site": "힐스테이트 도원센트럴"
+   "site": "힐스테이트 도원센트럴",
+   "settled": false
   },
   {
    "date": "2020-06-30",
@@ -264,7 +671,8 @@
    "amount": 7293000,
    "supply": 6630000,
    "siteRaw": "세종",
-   "site": "세종"
+   "site": "세종",
+   "settled": false
   },
   {
    "date": "2020-05-31",
@@ -275,7 +683,8 @@
    "amount": 4944500,
    "supply": 4495000,
    "siteRaw": "창원 의창 구청현장",
-   "site": "창원 의창 구청현장"
+   "site": "창원 의창 구청현장",
+   "settled": false
   },
   {
    "date": "2020-05-31",
@@ -286,7 +695,8 @@
    "amount": 2200000,
    "supply": 2000000,
    "siteRaw": "서초 양재역역세권 청년주택 신축공사현장",
-   "site": "서초 양재역역세권 청년주택 신축공사현장"
+   "site": "서초 양재역역세권 청년주택 신축공사현장",
+   "settled": false
   },
   {
    "date": "2020-05-31",
@@ -297,7 +707,8 @@
    "amount": 2029500,
    "supply": 1845000,
    "siteRaw": "대전과학벨트현장",
-   "site": "대전과학벨트현장"
+   "site": "대전과학벨트현장",
+   "settled": false
   },
   {
    "date": "2020-05-31",
@@ -308,7 +719,8 @@
    "amount": 330000,
    "supply": 300000,
    "siteRaw": "시흥장현 영무 예다음",
-   "site": "시흥장현 영무 예다음"
+   "site": "시흥장현 영무 예다음",
+   "settled": false
   },
   {
    "date": "2020-04-30",
@@ -319,7 +731,8 @@
    "amount": 663490,
    "supply": 603171,
    "siteRaw": "수원 경기신용보증재단",
-   "site": "경기신용보증재단"
+   "site": "경기신용보증재단",
+   "settled": false
   },
   {
    "date": "2020-03-31",
@@ -330,7 +743,8 @@
    "amount": 2048200,
    "supply": 1862000,
    "siteRaw": "대구 도원동",
-   "site": "대구 도원동"
+   "site": "대구 도원동",
+   "settled": false
   },
   {
    "date": "2020-03-31",
@@ -341,7 +755,8 @@
    "amount": 6116000,
    "supply": 5560000,
    "siteRaw": "은평 대조동",
-   "site": "은평 대조동"
+   "site": "은평 대조동",
+   "settled": false
   },
   {
    "date": "2020-03-31",
@@ -352,7 +767,8 @@
    "amount": 6552700,
    "supply": 5957000,
    "siteRaw": "창원 사파",
-   "site": "창원 사파"
+   "site": "창원 사파",
+   "settled": false
   },
   {
    "date": "2020-03-31",
@@ -363,7 +779,8 @@
    "amount": 7517400,
    "supply": 6834000,
    "siteRaw": "천안역세권",
-   "site": "천안역세권"
+   "site": "천안역세권",
+   "settled": false
   },
   {
    "date": "2020-02-29",
@@ -374,7 +791,8 @@
    "amount": 5174400,
    "supply": 4704000,
    "siteRaw": "인천",
-   "site": "인천"
+   "site": "인천",
+   "settled": false
   },
   {
    "date": "2020-01-31",
@@ -385,7 +803,8 @@
    "amount": 1265000,
    "supply": 1150000,
    "siteRaw": "",
-   "site": "세운재정비 6-3-4 구역"
+   "site": "세운재정비 6-3-4 구역",
+   "settled": false
   },
   {
    "date": "2020-01-31",
@@ -396,7 +815,8 @@
    "amount": 1123100,
    "supply": 1021000,
    "siteRaw": "",
-   "site": "김해국제공항 국제선 시설확충공사"
+   "site": "김해국제공항 국제선 시설확충공사",
+   "settled": false
   },
   {
    "date": "2020-01-31",
@@ -407,7 +827,8 @@
    "amount": 3419170,
    "supply": 3108336,
    "siteRaw": "",
-   "site": "감일고등학교신축공사현장"
+   "site": "감일고등학교신축공사현장",
+   "settled": false
   }
  ]
 }
