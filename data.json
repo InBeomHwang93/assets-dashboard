@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-08-21T02:29:39.597Z",
+ "updatedAt": "2026-08-21T02:31:05.370Z",
  "updatedBy": "InBeomHwang93",
  "rows": [
   {
@@ -34,7 +34,7 @@
    "doc": "세금계산서",
    "amount": 198000,
    "supply": 180000,
-   "siteRaw": "",
+   "siteRaw": "창원 사파지구 공1블럭(냉난방기 이전설치",
    "site": "창원 사파지구 공1블럭(냉난방기 이전설치",
    "settled": false
   },
@@ -46,7 +46,7 @@
    "doc": "세금계산서",
    "amount": 13123000,
    "supply": 11930000,
-   "siteRaw": "",
+   "siteRaw": "양산사송 A-4BL 아파트건설공사 5공구",
    "site": "양산사송 A-4BL 아파트건설공사 5공구",
    "settled": false
   },
@@ -58,7 +58,7 @@
    "doc": "세금계산서",
    "amount": 2414500,
    "supply": 2195000,
-   "siteRaw": "",
+   "siteRaw": "충남공공어린이 재활병원 현장",
    "site": "충남공공어린이 재활병원 현장",
    "settled": false
   },
@@ -70,7 +70,7 @@
    "doc": "세금계산서",
    "amount": 7054300,
    "supply": 6413000,
-   "siteRaw": "",
+   "siteRaw": "경찰대학 청사 증축사업 현장",
    "site": "경찰대학 청사 증축사업 현장",
    "settled": false
   },
@@ -94,7 +94,7 @@
    "doc": "세금계산서",
    "amount": 6820000,
    "supply": 6200000,
-   "siteRaw": "",
+   "siteRaw": "서울 강동 치과병원 증축공사",
    "site": "서울 강동 치과병원 증축공사",
    "settled": false
   },
@@ -106,7 +106,7 @@
    "doc": "세금계산서",
    "amount": 771100,
    "supply": 701000,
-   "siteRaw": "",
+   "siteRaw": "치료감호소 중증환자 집중치로병동 현장",
    "site": "치료감호소 중증환자 집중치로병동 현장",
    "settled": false
   },
@@ -118,7 +118,7 @@
    "doc": "세금계산서",
    "amount": 11440000,
    "supply": 10400000,
-   "siteRaw": "",
+   "siteRaw": "고양 장항 A-5BL",
    "site": "고양 장항 A-5BL",
    "settled": false
   },
@@ -130,7 +130,7 @@
    "doc": "세금계산서",
    "amount": 1089000,
    "supply": 990000,
-   "siteRaw": "",
+   "siteRaw": "양산사송 A-4BL 아파트건설공사 5공구",
    "site": "양산사송 A-4BL 아파트건설공사 5공구",
    "settled": false
   },
@@ -142,7 +142,7 @@
    "doc": "세금계산서",
    "amount": 2750000,
    "supply": 2500000,
-   "siteRaw": "",
+   "siteRaw": "서울 시립대현장",
    "site": "서울 시립대현장",
    "settled": false
   },
@@ -154,7 +154,7 @@
    "doc": "세금계산서",
    "amount": 13420000,
    "supply": 12200000,
-   "siteRaw": "",
+   "siteRaw": "파주운정 A-17BL/파주교하 A-16BL",
    "site": "파주운정 A-17BL/파주교하 A-16BL",
    "settled": false
   },
@@ -166,7 +166,7 @@
    "doc": "세금계산서",
    "amount": 198000,
    "supply": 180000,
-   "siteRaw": "",
+   "siteRaw": "나라키움 영등포 복합청사",
    "site": "나라키움 영등포 복합청사",
    "settled": false
   },
@@ -178,7 +178,7 @@
    "doc": "세금계산서",
    "amount": 16863000,
    "supply": 15330000,
-   "siteRaw": "",
+   "siteRaw": "양주옥정 A-1BL",
    "site": "양주옥정 A-1BL",
    "settled": false
   },
@@ -190,7 +190,7 @@
    "doc": "세금계산서",
    "amount": 2165900,
    "supply": 1969000,
-   "siteRaw": "",
+   "siteRaw": "기초과학원 POSTECH 건립공사",
    "site": "기초과학원 POSTECH 건립공사",
    "settled": false
   },
@@ -202,7 +202,7 @@
    "doc": "세금계산서",
    "amount": 250800,
    "supply": 228000,
-   "siteRaw": "",
+   "siteRaw": "SK하이닉스 통합자재창고 현장",
    "site": "SK하이닉스 통합자재창고 현장",
    "settled": false
   },
@@ -214,7 +214,7 @@
    "doc": "세금계산서",
    "amount": 198000,
    "supply": 180000,
-   "siteRaw": "",
+   "siteRaw": "신반포 21차",
    "site": "신반포 21차",
    "settled": false
   },
@@ -262,7 +262,7 @@
    "doc": "세금계산서",
    "amount": 8000000,
    "supply": 7272727,
-   "siteRaw": "",
+   "siteRaw": "집현유초 외 1교",
    "site": "집현유초 외 1교",
    "settled": false
   },
@@ -274,7 +274,7 @@
    "doc": "세금계산서",
    "amount": 4730000,
    "supply": 4300000,
-   "siteRaw": "",
+   "siteRaw": "치료감호소 중증환자 집중치료병동",
    "site": "치료감호소 중증환자 집중치료병동",
    "settled": false
   },
@@ -286,7 +286,7 @@
    "doc": "세금계산서",
    "amount": 575300,
    "supply": 523000,
-   "siteRaw": "",
+   "siteRaw": "서초진흥아파트",
    "site": "서초진흥아파트",
    "settled": false
   },
@@ -298,7 +298,7 @@
    "doc": "세금계산서",
    "amount": 1199000,
    "supply": 1090000,
-   "siteRaw": "",
+   "siteRaw": "창원의창구청",
    "site": "창원의창구청",
    "settled": false
   },
@@ -310,7 +310,7 @@
    "doc": "세금계산서",
    "amount": 1309000,
    "supply": 1190000,
-   "siteRaw": "",
+   "siteRaw": "고양장항 A-5BL",
    "site": "고양장항 A-5BL",
    "settled": false
   },
@@ -322,7 +322,7 @@
    "doc": "세금계산서",
    "amount": 352000,
    "supply": 320000,
-   "siteRaw": "",
+   "siteRaw": "개포4지구",
    "site": "개포4지구",
    "settled": false
   },
@@ -334,7 +334,7 @@
    "doc": "세금계산서",
    "amount": 396000,
    "supply": 360000,
-   "siteRaw": "",
+   "siteRaw": "강동 치과병원",
    "site": "강동 치과병원",
    "settled": false
   },
@@ -346,7 +346,7 @@
    "doc": "세금계산서",
    "amount": 4895000,
    "supply": 4450000,
-   "siteRaw": "",
+   "siteRaw": "강릉 내곡동 102공동주택",
    "site": "강릉 내곡동 102공동주택",
    "settled": false
   },
@@ -442,7 +442,7 @@
    "doc": "세금계산서",
    "amount": 5170000,
    "supply": 4700000,
-   "siteRaw": "",
+   "siteRaw": "순천 가곡동 대광아파트",
    "site": "순천 가곡동 대광아파트",
    "settled": false
   },
@@ -454,7 +454,7 @@
    "doc": "세금계산서",
    "amount": 13970000,
    "supply": 12700000,
-   "siteRaw": "",
+   "siteRaw": "인천검단 AAA34BL",
    "site": "인천검단 AAA34BL",
    "settled": false
   },
@@ -466,7 +466,7 @@
    "doc": "세금계산서",
    "amount": 781000,
    "supply": 710000,
-   "siteRaw": "",
+   "siteRaw": "충남 공공어린이재활병원",
    "site": "충남 공공어린이재활병원",
    "settled": false
   },
@@ -478,7 +478,7 @@
    "doc": "세금계산서",
    "amount": 3190000,
    "supply": 2900000,
-   "siteRaw": "",
+   "siteRaw": "대전 용산지구 3BL",
    "site": "대전 용산지구 3BL",
    "settled": false
   },
@@ -490,7 +490,7 @@
    "doc": "세금계산서",
    "amount": 359700,
    "supply": 327000,
-   "siteRaw": "",
+   "siteRaw": "안양 덕현지구",
    "site": "안양 덕현지구",
    "settled": false
   },
@@ -502,7 +502,7 @@
    "doc": "세금계산서",
    "amount": 1826000,
    "supply": 1660000,
-   "siteRaw": "",
+   "siteRaw": "창원의창구청현장",
    "site": "창원의창구청현장",
    "settled": false
   },
@@ -514,7 +514,7 @@
    "doc": "세금계산서",
    "amount": 4950000,
    "supply": 4500000,
-   "siteRaw": "",
+   "siteRaw": "곡성인재개발원",
    "site": "곡성인재개발원",
    "settled": false
   },
@@ -526,7 +526,7 @@
    "doc": "세금계산서",
    "amount": 1100000,
    "supply": 1000000,
-   "siteRaw": "",
+   "siteRaw": "대구공항",
    "site": "대구공항",
    "settled": false
   },
@@ -538,7 +538,7 @@
    "doc": "세금계산서",
    "amount": 2255000,
    "supply": 2050000,
-   "siteRaw": "",
+   "siteRaw": "나라키움",
    "site": "나라키움",
    "settled": false
   },
@@ -550,7 +550,7 @@
    "doc": "세금계산서",
    "amount": 724900,
    "supply": 659000,
-   "siteRaw": "",
+   "siteRaw": "경기신용보증재단",
    "site": "경기신용보증재단",
    "settled": false
   },
@@ -562,7 +562,7 @@
    "doc": "세금계산서",
    "amount": 973500,
    "supply": 885000,
-   "siteRaw": "",
+   "siteRaw": "영무예다음",
    "site": "영무예다음",
    "settled": false
   },
@@ -574,7 +574,7 @@
    "doc": "세금계산서",
    "amount": 495000,
    "supply": 450000,
-   "siteRaw": "",
+   "siteRaw": "곡성인재개발원",
    "site": "곡성인재개발원",
    "settled": false
   },
@@ -610,7 +610,7 @@
    "doc": "세금계산서",
    "amount": 122100,
    "supply": 111000,
-   "siteRaw": "",
+   "siteRaw": "세곡복합문화센터",
    "site": "세곡복합문화센터",
    "settled": false
   },
@@ -622,7 +622,7 @@
    "doc": "세금계산서",
    "amount": 5097400,
    "supply": 4634000,
-   "siteRaw": "",
+   "siteRaw": "인천미추홀구주상복합",
    "site": "인천미추홀구주상복합",
    "settled": false
   },
@@ -634,7 +634,7 @@
    "doc": "세금계산서",
    "amount": 239800,
    "supply": 218000,
-   "siteRaw": "",
+   "siteRaw": "경기신용보증재단",
    "site": "경기신용보증재단",
    "settled": false
   },
@@ -646,7 +646,7 @@
    "doc": "세금계산서",
    "amount": 495000,
    "supply": 450000,
-   "siteRaw": "",
+   "siteRaw": "김해국제공항",
    "site": "김해국제공항",
    "settled": false
   },
@@ -658,7 +658,7 @@
    "doc": "세금계산서",
    "amount": 915200,
    "supply": 832000,
-   "siteRaw": "",
+   "siteRaw": "힐스테이트 도원센트럴",
    "site": "힐스테이트 도원센트럴",
    "settled": false
   },
@@ -802,7 +802,7 @@
    "doc": "세금계산서",
    "amount": 1265000,
    "supply": 1150000,
-   "siteRaw": "",
+   "siteRaw": "세운재정비 6-3-4 구역",
    "site": "세운재정비 6-3-4 구역",
    "settled": false
   },
@@ -814,7 +814,7 @@
    "doc": "세금계산서",
    "amount": 1123100,
    "supply": 1021000,
-   "siteRaw": "",
+   "siteRaw": "김해국제공항 국제선 시설확충공사",
    "site": "김해국제공항 국제선 시설확충공사",
    "settled": false
   },
@@ -826,7 +826,7 @@
    "doc": "세금계산서",
    "amount": 3419170,
    "supply": 3108336,
-   "siteRaw": "",
+   "siteRaw": "감일고등학교신축공사현장",
    "site": "감일고등학교신축공사현장",
    "settled": false
   }
