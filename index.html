@@ -138,6 +138,15 @@
   .hrow.unassigned .hbar { background: var(--crit); }
   .hval { font-size: 12.5px; font-variant-numeric: tabular-nums; color: var(--ink-1); font-weight: 560; white-space: nowrap; }
   .hpct { font-size: 11px; color: var(--ink-3); font-variant-numeric: tabular-nums; margin-left: 6px; }
+  .restline { font-size: 12px; color: var(--ink-3); padding: 8px 6px 0; border-top: 1px dashed var(--grid); margin-top: 6px; }
+  .restline b { color: var(--ink-2); }
+  .morebtn {
+    margin-top: 8px; width: 100%; font-family: inherit; font-size: 12.5px; font-weight: 550;
+    color: var(--s1); background: color-mix(in srgb, var(--s1) 7%, transparent);
+    border: 1px solid color-mix(in srgb, var(--s1) 25%, transparent);
+    border-radius: 8px; padding: 9px 12px; cursor: pointer;
+  }
+  .morebtn:hover { background: color-mix(in srgb, var(--s1) 13%, transparent); }
 
   /* monthly chart */
   .chart { position: relative; padding: 16px 0 0 62px; }
@@ -267,7 +276,7 @@
     <div class="chead">
       <div>
         <h2>현장별 총 집행액</h2>
-        <p class="cdesc">막대를 클릭하면 아래 상세 내역이 그 현장으로 좁혀집니다.</p>
+        <p class="cdesc">금액이 큰 상위 5곳만 먼저 보여줍니다. 막대를 클릭하면 화면 전체가 그 현장으로 좁혀집니다.</p>
       </div>
     </div>
     <div id="siteChart"></div>
@@ -330,8 +339,10 @@
   var state = {
     period: "all", from: null, to: null,
     site: "", query: "", year: "", settle: "",
-    basis: "amount", sortKey: "date", sortDir: -1, limit: 200
+    basis: "amount", sortKey: "date", sortDir: -1, limit: 200,
+    siteOpen: false      // 현장별 목록 펼침 여부 (기본은 상위 5곳만)
   };
+  var SITE_TOP = 5;
   var $ = function (id) { return document.getElementById(id); };
   var UNASSIGNED = "미지정";
 
@@ -585,6 +596,15 @@
     list.sort(function (a, b) { return b.sum - a.sum; });
     if (!list.length) { $("siteChart").innerHTML = '<div class="empty">표시할 데이터가 없습니다.</div>'; return; }
     var max = list[0].sum || 1, grand = list.reduce(function (s, x) { return s + x.sum; }, 0);
+
+    // 기본은 상위 5곳만, 나머지는 접어둔다
+    var full = list;
+    var collapsed = !state.siteOpen && full.length > SITE_TOP;
+    list = collapsed ? full.slice(0, SITE_TOP) : full;
+    var hidden = full.slice(list.length);
+    var hiddenSum = hidden.reduce(function (s, x) { return s + x.sum; }, 0);
+    var hiddenCnt = hidden.reduce(function (s, x) { return s + x.cnt; }, 0);
+
     var html = '<div class="hbars">';
     list.forEach(function (x) {
       var pct = grand ? (x.sum / grand * 100) : 0;
@@ -597,7 +617,21 @@
         + '<span class="hval">' + won(x.sum) + '<span class="hpct">' + pct.toFixed(1) + "%</span></span>"
         + "</button>";
     });
-    $("siteChart").innerHTML = html + "</div>";
+    html += "</div>";
+
+    if (full.length > SITE_TOP) {
+      if (collapsed) {
+        html += '<div class="restline">나머지 <b>' + hidden.length.toLocaleString("ko-KR") + "곳</b> 합계 "
+          + won(hiddenSum) + "원 · " + hiddenCnt.toLocaleString("ko-KR") + "건</div>"
+          + '<button class="morebtn" id="siteToggle" type="button">▾ 나머지 '
+          + hidden.length.toLocaleString("ko-KR") + "곳 펼쳐보기</button>";
+      } else {
+        html += '<button class="morebtn" id="siteToggle" type="button">▴ 상위 ' + SITE_TOP + "곳만 보기 (전체 "
+          + full.length.toLocaleString("ko-KR") + "곳)</button>";
+      }
+    }
+
+    $("siteChart").innerHTML = html;
     Array.prototype.forEach.call($("siteChart").querySelectorAll(".hrow"), function (el) {
       el.addEventListener("click", function () {
         var s = el.getAttribute("data-site");
@@ -605,6 +639,11 @@
         $("fSite").value = state.site; state.limit = 200; render();
       });
       bindTip(el);
+    });
+    var tg = $("siteToggle");
+    if (tg) tg.addEventListener("click", function () {
+      state.siteOpen = !state.siteOpen;
+      renderSiteChart(filtered());
     });
   }
 
@@ -810,6 +849,7 @@
     state.period = "all"; state.from = state.to = null;
     state.site = ""; state.query = ""; state.year = ""; state.settle = "";
     state.basis = "amount"; state.sortKey = "date"; state.sortDir = -1; state.limit = 200;
+    state.siteOpen = false;
     $("fPeriod").value = "all"; $("fSite").value = ""; $("fQuery").value = "";
     $("fFrom").hidden = true; $("fTo").hidden = true;
     setBasis("amount"); setSettle("");
