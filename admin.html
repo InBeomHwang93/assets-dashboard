@@ -81,6 +81,12 @@
   .aliasrow .from{color:var(--ink-2)}
   .aliasrow .arrow{color:var(--ink-3)}
   .aliasrow button{background:none;border:0;color:var(--crit);cursor:pointer;font-size:12px;padding:2px 6px}
+  .seg{display:inline-flex;background:var(--surface-1);border:1px solid var(--border);border-radius:7px;overflow:hidden}
+  .seg .segbtn{font-family:inherit;font-size:12.5px;border:0;background:transparent;color:var(--ink-2);height:28px;padding:0 11px;cursor:pointer}
+  .seg .segbtn[aria-pressed="true"]{background:var(--s1);color:#fff;font-weight:600}
+  .spacer{flex:1 1 auto}
+  #unBody input[type=text]{font-size:12.5px;height:28px;padding:0 7px}
+  #unBody input[type=checkbox]{transform:scale(1.15)}
 </style>
 </head>
 <body>
@@ -115,6 +121,10 @@
       파일을 여기에 끌어다 놓거나<br>
       <button class="btn sm" id="pickBtn" type="button" style="margin-top:9px">파일 선택</button>
       <input type="file" id="file" accept=".xlsx,.xls,.csv" multiple hidden>
+    </div>
+    <div class="row" style="margin-top:11px">
+      <button class="btn ghost sm" id="loadExisting" type="button">엑셀 없이 — 이미 올린 데이터 불러와 수정하기</button>
+      <span class="note" style="margin:0">현장명이나 정산 상태만 고칠 때 쓰세요. 새 엑셀을 올릴 필요가 없습니다.</span>
     </div>
     <div class="msg" id="upMsg"></div>
   </section>
@@ -173,11 +183,33 @@
     </details>
   </section>
 
-  <!-- STEP 5 : 미지정 처리 -->
+  <!-- STEP 5 : 건별 현장 수정 · 정산 -->
   <section class="card hide" id="unCard">
-    <h2><span class="step">5</span>현장 미지정 건 직접 지정</h2>
-    <p class="cdesc">규칙으로 못 잡은 건입니다. 여기서 지정한 내용은 다음 업로드에도 그대로 유지됩니다.</p>
-    <div class="scroll"><table><thead><tr><th>일자</th><th>거래처</th><th>품목/비고</th><th class="num">금액</th><th>현장 지정</th></tr></thead><tbody id="unBody"></tbody></table></div>
+    <h2><span class="step">5</span>건별 현장 수정 · 정산 체크</h2>
+    <p class="cdesc">현장명을 직접 고치거나 정산 완료를 체크합니다. 여기서 지정한 내용은 <b>다음 업로드에도 그대로 유지</b>됩니다.</p>
+
+    <div class="mergebar" style="margin-bottom:12px">
+      <div class="row" style="gap:6px">
+        <span class="flabel">보기</span>
+        <div class="seg" role="group">
+          <button type="button" class="segbtn" data-rowview="all" aria-pressed="true">전체</button>
+          <button type="button" class="segbtn" data-rowview="un" aria-pressed="false">현장 미지정</button>
+          <button type="button" class="segbtn" data-rowview="open" aria-pressed="false">미정산</button>
+        </div>
+      </div>
+      <input type="text" id="rowQuery" placeholder="거래처·품목·현장 검색" style="flex:1 1 200px;max-width:280px">
+      <div class="spacer" style="flex:1 1 auto"></div>
+      <div class="row" style="gap:8px">
+        <button class="btn ghost sm" id="settleAll" type="button">보이는 건 전부 정산 완료</button>
+        <button class="btn ghost sm" id="unsettleAll" type="button">전부 해제</button>
+      </div>
+    </div>
+
+    <div class="scroll" style="max-height:420px"><table><thead><tr>
+      <th>일자</th><th>거래처</th><th>품목/비고</th><th class="num">금액</th>
+      <th style="min-width:190px">현장</th><th style="width:88px">정산 완료</th>
+    </tr></thead><tbody id="unBody"></tbody></table></div>
+    <datalist id="siteNames"></datalist>
     <div class="note" id="unNote"></div>
   </section>
 
@@ -220,8 +252,11 @@
   var columns = [];       // 통합 컬럼 후보 이름
   var mapping = {};       // field -> column name
   var rawRows = [];       // 정규화된 원본 행
-  var sitesCfg = { sites: [], aliases: {}, overrides: {} };
-  var picked = {};   // 현장 정리에서 체크한 이름
+  var sitesCfg = { sites: [], aliases: {}, overrides: {}, settled: {} };
+  var picked = {};          // 현장 정리에서 체크한 이름
+  var rowView = "all";      // 5번 목록 보기 모드
+  var rowQuery = "";
+  var loadedFromData = false;  // 엑셀 없이 기존 data.json 을 불러온 상태
   var existing = null;    // 기존 data.json
 
 
@@ -357,6 +392,83 @@
       $("siteCard").classList.remove("hide");
       $("pubCard").classList.remove("hide");
     }).catch(function (e) { show("upMsg", "err", String(e.message || e)); });
+  }
+
+  /* ============ 엑셀 없이 기존 data.json 불러오기 ============ */
+  // 사내망에서 GitHub 이 막혀 있으면 무한 대기하지 않도록 시간 제한을 둔다
+  function withTimeout(promise, ms, label) {
+    return Promise.race([
+      promise,
+      new Promise(function (_, rej) {
+        setTimeout(function () { rej(new Error((label || "요청") + " 응답 없음 (" + (ms / 1000) + "초 초과)")); }, ms);
+      })
+    ]);
+  }
+
+  // API → raw 순서로 읽고, 실패 원인을 구분해서 돌려준다
+  function readJsonFile(name) {
+    return withTimeout(getFile(name), 12000, "GitHub API")
+      .then(function (f) {
+        if (f) { try { return { json: JSON.parse(f.text) }; } catch (e) { return { error: name + " 형식이 깨졌습니다" }; } }
+        throw new Error("api");
+      })
+      .catch(function () {
+        var url = "https://raw.githubusercontent.com/" + cfg.owner + "/" + cfg.repo + "/" + cfg.branch + "/" + name + "?t=" + Date.now();
+        return withTimeout(fetch(url, { cache: "no-store" }).then(function (r) {
+          if (r.status === 404) return { json: null };
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          return r.json().then(function (j) { return { json: j }; });
+        }), 12000, "저장소 직접 읽기").catch(function (e) { return { error: String(e.message || e) }; });
+      });
+  }
+
+  function loadExistingRows() {
+    readCfg();
+    if (!cfg.owner || !cfg.repo) {
+      show("upMsg", "err", "1번 칸의 GitHub 아이디와 저장소 이름을 먼저 입력해 주세요.");
+      return;
+    }
+    show("upMsg", "info", "이미 올린 데이터를 불러오는 중…");
+    readJsonFile("data.json").then(function (r) {
+      if (r.error) {
+        show("upMsg", "err", "불러오지 못했습니다: " + esc(r.error)
+          + "<br><span style='color:var(--ink-3)'>아이디·저장소 이름을 확인하고, 사내망에서 GitHub 접속이 막혀 있지 않은지 보세요.</span>");
+        return;
+      }
+      var j = r.json;
+      if (!j || !Array.isArray(j.rows) || !j.rows.length) {
+        show("upMsg", "err", "저장소에 아직 데이터가 없습니다. 엑셀을 먼저 한 번 올려주세요.");
+        return;
+      }
+      existing = j;
+      loadedFromData = true;
+      parsed = []; columns = []; mapping = {};
+
+      return loadSitesCfg().then(function () {
+        // 저장된 정산 상태를 sites.json 과 data.json 양쪽에서 복원
+        j.rows.forEach(function (r) {
+          if (r.settled === true) sitesCfg.settled[keyOf(r)] = true;
+        });
+        rawRows = j.rows.map(function (r) {
+          return {
+            date: r.date || "", vendor: r.vendor || "", item: r.item || "", note: r.note || "",
+            doc: r.doc || "", amount: Number(r.amount) || 0,
+            supply: (r.supply === "" || r.supply == null) ? "" : Number(r.supply),
+            siteRaw: r.siteRaw || r.site || "", site: ""
+          };
+        });
+        rawRows.forEach(function (r) { r.site = matchSite(r); });
+
+        $("mapCard").classList.add("hide");   // 엑셀을 안 올렸으므로 열 매핑은 숨김
+        $("siteCard").classList.remove("hide");
+        $("pubCard").classList.remove("hide");
+        renderSites(); renderDist(); renderAliases(); renderUnassigned(); renderPreview();
+        show("upMsg", "ok", "기존 데이터 " + rawRows.length.toLocaleString("ko-KR")
+          + "건을 불러왔습니다. 아래 <b>4번·5번</b>에서 현장명과 정산 상태를 고친 뒤 <b>6번</b>에서 반영하세요.");
+      });
+    }).catch(function (e) {
+      show("upMsg", "err", "불러오기 실패: " + esc(e.message));
+    });
   }
 
   function norm(s) { return String(s || "").replace(/[\s()\[\]·.]/g, "").toLowerCase(); }
@@ -512,6 +624,7 @@
           sitesCfg.sites = Array.isArray(j.sites) ? j.sites : [];
           sitesCfg.aliases = j.aliases || {};
           sitesCfg.overrides = j.overrides || {};
+          sitesCfg.settled = j.settled || {};
           return;
         } catch (e) {}
       }
@@ -521,7 +634,10 @@
   function restoreLocalSites() {
     try {
       var j = JSON.parse(localStorage.getItem("sites-cfg") || "null");
-      if (j) { sitesCfg.sites = j.sites || []; sitesCfg.aliases = j.aliases || {}; sitesCfg.overrides = j.overrides || {}; }
+      if (j) {
+        sitesCfg.sites = j.sites || []; sitesCfg.aliases = j.aliases || {};
+        sitesCfg.overrides = j.overrides || {}; sitesCfg.settled = j.settled || {};
+      }
     } catch (e) {}
   }
   function persistLocalSites() {
@@ -760,49 +876,99 @@
     });
   }
 
-  function renderUnassigned() {
-    var un = rawRows.filter(function (r) { return !r.site; });
-    $("unCard").classList.toggle("hide", un.length === 0);
-    if (!un.length) return;
-    // 금액 큰 순 상위 120건
-    un.sort(function (a, b) { return b.amount - a.amount; });
-    var list = un.slice(0, 120);
-    // 지금 분류된 현장 이름 + 규칙에 적어둔 이름을 모두 후보로
+  function isSettled(r) { return sitesCfg.settled[keyOf(r)] === true; }
+
+  function knownSiteNames() {
     var names = {};
     rawRows.forEach(function (r) { if (r.site) names[r.site] = true; });
     Object.keys(sitesCfg.aliases).forEach(function (k) { names[sitesCfg.aliases[k]] = true; });
     sitesCfg.sites.forEach(function (s) { if (s.name) names[s.name] = true; });
-    var opts = '<option value="">— 선택 —</option>' + Object.keys(names)
-      .sort(function (a, b) { return a.localeCompare(b, "ko"); })
-      .map(function (n) { return '<option value="' + esc(n) + '">' + esc(n) + "</option>"; }).join("");
-    $("unBody").innerHTML = list.map(function (r) {
-      return "<tr><td>" + esc(r.date) + "</td><td>" + esc(r.vendor) + "</td>"
-        + '<td style="white-space:normal;max-width:320px">' + esc((r.item + " " + r.note).trim()) + "</td>"
-        + '<td class="num">' + Math.round(r.amount).toLocaleString("ko-KR") + "</td>"
-        + '<td><select data-key="' + esc(keyOf(r)) + '">' + opts + "</select></td></tr>";
-    }).join("");
-    Array.prototype.forEach.call($("unBody").querySelectorAll("select"), function (sel) {
-      sel.addEventListener("change", function () {
-        var k = sel.getAttribute("data-key");
-        if (sel.value) sitesCfg.overrides[k] = sel.value; else delete sitesCfg.overrides[k];
-        persistLocalSites(); rebuild();
-      });
+    return Object.keys(names).sort(function (a, b) { return a.localeCompare(b, "ko"); });
+  }
+
+  function visibleRows() {
+    var q = rowQuery.trim().toLowerCase();
+    return rawRows.filter(function (r) {
+      if (rowView === "un" && r.site) return false;
+      if (rowView === "open" && isSettled(r)) return false;
+      if (q) {
+        var hay = (r.vendor + " " + r.item + " " + r.note + " " + (r.site || "")).toLowerCase();
+        if (hay.indexOf(q) === -1) return false;
+      }
+      return true;
     });
-    var total = un.reduce(function (s, r) { return s + r.amount; }, 0);
-    $("unNote").innerHTML = "미지정 " + un.length.toLocaleString("ko-KR") + "건 · "
-      + Math.round(total).toLocaleString("ko-KR") + "원" + (un.length > list.length ? " (금액 큰 순 120건만 표시)" : "");
+  }
+
+  function renderUnassigned() {
+    $("unCard").classList.toggle("hide", rawRows.length === 0);
+    if (!rawRows.length) return;
+
+    $("siteNames").innerHTML = knownSiteNames().map(function (n) {
+      return '<option value="' + esc(n) + '"></option>';
+    }).join("");
+
+    var list = visibleRows().slice();
+    list.sort(function (a, b) {
+      if (!a.site !== !b.site) return a.site ? 1 : -1;   // 미지정 먼저
+      return b.amount - a.amount;
+    });
+    var shown = list.slice(0, 200);
+
+    if (!shown.length) {
+      $("unBody").innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--ink-3);padding:26px">조건에 맞는 건이 없습니다.</td></tr>';
+    } else {
+      $("unBody").innerHTML = shown.map(function (r) {
+        var k = keyOf(r);
+        return '<tr' + (r.site ? "" : ' style="background:color-mix(in srgb,var(--crit) 6%,transparent)"') + ">"
+          + "<td>" + esc(r.date) + "</td><td>" + esc(r.vendor) + "</td>"
+          + '<td style="white-space:normal;max-width:300px">' + esc((r.item + " " + r.note).trim()) + "</td>"
+          + '<td class="num">' + Math.round(r.amount).toLocaleString("ko-KR") + "</td>"
+          + '<td><input type="text" list="siteNames" data-site-key="' + esc(k) + '" value="' + esc(r.site || "")
+          + '" placeholder="현장명 입력" style="width:100%;min-width:0"></td>'
+          + '<td style="text-align:center"><input type="checkbox" data-settle-key="' + esc(k) + '"'
+          + (isSettled(r) ? " checked" : "") + "></td></tr>";
+      }).join("");
+
+      Array.prototype.forEach.call($("unBody").querySelectorAll("[data-site-key]"), function (inp) {
+        inp.addEventListener("change", function () {
+          var k = inp.getAttribute("data-site-key"), v = inp.value.trim();
+          if (v) sitesCfg.overrides[k] = v; else delete sitesCfg.overrides[k];
+          persistLocalSites(); rebuild();
+        });
+      });
+      Array.prototype.forEach.call($("unBody").querySelectorAll("[data-settle-key]"), function (cb) {
+        cb.addEventListener("change", function () {
+          var k = cb.getAttribute("data-settle-key");
+          if (cb.checked) sitesCfg.settled[k] = true; else delete sitesCfg.settled[k];
+          persistLocalSites();
+          renderPreview();
+          if (rowView === "open") rebuild();
+        });
+      });
+    }
+
+    var un = rawRows.filter(function (r) { return !r.site; });
+    var open = rawRows.filter(function (r) { return !isSettled(r); });
+    var unSum = un.reduce(function (s, r) { return s + r.amount; }, 0);
+    var openSum = open.reduce(function (s, r) { return s + r.amount; }, 0);
+    $("unNote").innerHTML = "전체 " + rawRows.length.toLocaleString("ko-KR") + "건"
+      + " · 현장 미지정 <b>" + un.length + "건</b> (" + Math.round(unSum).toLocaleString("ko-KR") + "원)"
+      + " · 미정산 <b>" + open.length + "건</b> (" + Math.round(openSum).toLocaleString("ko-KR") + "원)"
+      + (list.length > shown.length ? " · 화면에는 200건만 표시" : "");
   }
 
   function renderPreview() {
     var rows = rawRows;
-    var total = 0, un = 0, sites = {};
+    var total = 0, un = 0, open = 0, sites = {};
     rows.forEach(function (r) {
       total += r.amount;
       if (r.site) sites[r.site] = true; else un += r.amount;
+      if (!isSettled(r)) open += r.amount;
     });
     $("summary").innerHTML = "<span>행 <b>" + rows.length.toLocaleString("ko-KR") + "</b>건</span>"
       + "<span>총액 <b>" + Math.round(total).toLocaleString("ko-KR") + "</b>원</span>"
       + "<span>현장 <b>" + Object.keys(sites).length + "</b>곳</span>"
+      + '<span>미정산 <b style="color:var(--warn-ink,#8a5b00)">' + Math.round(open).toLocaleString("ko-KR") + "</b>원</span>"
       + '<span>미지정 <b style="color:var(--crit)">' + Math.round(un).toLocaleString("ko-KR") + "</b>원</span>";
     $("prevBody").innerHTML = rows.slice(0, 60).map(function (r) {
       return "<tr><td>" + esc(r.date) + "</td>"
@@ -825,13 +991,18 @@
     var out = rawRows.map(function (r) {
       return { date: r.date, vendor: r.vendor, item: r.item, note: safeNote(r.note), doc: r.doc,
                amount: Math.round(r.amount), supply: r.supply === "" ? "" : Math.round(r.supply),
-               siteRaw: r.siteRaw || "", site: r.site };
+               siteRaw: r.siteRaw || "", site: r.site, settled: isSettled(r) };
     });
-    if ($("mergeMode").checked && existing && Array.isArray(existing.rows)) {
+    // 기존 데이터를 불러와 수정한 경우에는 rawRows 가 이미 전체이므로 병합하지 않는다
+    if (!loadedFromData && $("mergeMode").checked && existing && Array.isArray(existing.rows)) {
       var seen = {};
       out.forEach(function (r) { seen[keyOf(r)] = true; });
       existing.rows.forEach(function (r) {
-        if (!seen[keyOf(r)]) { r.site = matchSite(r) || r.site || ""; out.push(r); seen[keyOf(r)] = true; }
+        if (!seen[keyOf(r)]) {
+          r.site = matchSite(r) || r.site || "";
+          r.settled = isSettled(r);
+          out.push(r); seen[keyOf(r)] = true;
+        }
       });
     }
     out.sort(function (a, b) { return (b.date || "").localeCompare(a.date || ""); });
@@ -848,7 +1019,8 @@
     return JSON.stringify({
       sites: sitesCfg.sites.filter(function (s) { return s.name; }),
       aliases: sitesCfg.aliases,
-      overrides: sitesCfg.overrides
+      overrides: sitesCfg.overrides,
+      settled: sitesCfg.settled
     }, null, 1);
   }
   function download(name, text) {
@@ -909,6 +1081,33 @@
     if (e.dataTransfer && e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
   });
 
+  $("loadExisting").addEventListener("click", loadExistingRows);
+  Array.prototype.forEach.call(document.querySelectorAll("[data-rowview]"), function (b) {
+    b.addEventListener("click", function () {
+      rowView = b.getAttribute("data-rowview");
+      Array.prototype.forEach.call(document.querySelectorAll("[data-rowview]"), function (x) {
+        x.setAttribute("aria-pressed", String(x === b));
+      });
+      renderUnassigned();
+    });
+  });
+  var rq;
+  $("rowQuery").addEventListener("input", function () {
+    var v = this.value; clearTimeout(rq);
+    rq = setTimeout(function () { rowQuery = v; renderUnassigned(); }, 180);
+  });
+  $("settleAll").addEventListener("click", function () {
+    var n = 0;
+    visibleRows().forEach(function (r) { if (!isSettled(r)) { sitesCfg.settled[keyOf(r)] = true; n++; } });
+    persistLocalSites(); renderUnassigned(); renderPreview();
+    $("unNote").innerHTML = n + "건을 정산 완료로 표시했습니다. " + $("unNote").innerHTML;
+  });
+  $("unsettleAll").addEventListener("click", function () {
+    var n = 0;
+    visibleRows().forEach(function (r) { var k = keyOf(r); if (sitesCfg.settled[k]) { delete sitesCfg.settled[k]; n++; } });
+    persistLocalSites(); renderUnassigned(); renderPreview();
+    $("unNote").innerHTML = n + "건의 정산 표시를 해제했습니다. " + $("unNote").innerHTML;
+  });
   $("mergeBtn").addEventListener("click", doMerge);
   $("mergeName").addEventListener("input", function () { this.dataset.touched = "1"; });
   $("mergeName").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); doMerge(); } });

@@ -17,10 +17,11 @@
     --border: rgba(11,11,11,0.10);
     --s1: #2a78d6;
     --s1-soft: #cde2fb;
-    --s2: #eb6834;
+    --good: #0ca30c;
+    --good-ink: #006300;
     --warn: #fab219;
+    --warn-ink: #8a5b00;
     --crit: #d03b3b;
-    --good: #006300;
     --shadow: 0 1px 2px rgba(11,11,11,.05), 0 4px 16px rgba(11,11,11,.04);
     color-scheme: light;
   }
@@ -29,20 +30,18 @@
       --surface-1: #1a1a19; --page: #0d0d0d; --ink-1: #ffffff; --ink-2: #c3c2b7;
       --ink-3: #898781; --grid: #2c2c2a; --axis: #383835;
       --border: rgba(255,255,255,0.10);
-      --s1: #3987e5; --s1-soft: #184f95; --s2: #d95926;
-      --good: #0ca30c;
-      --shadow: none;
-      color-scheme: dark;
+      --s1: #3987e5; --s1-soft: #184f95;
+      --good: #0ca30c; --good-ink: #0ca30c; --warn-ink: #fab219;
+      --shadow: none; color-scheme: dark;
     }
   }
   :root[data-theme="dark"] {
     --surface-1: #1a1a19; --page: #0d0d0d; --ink-1: #ffffff; --ink-2: #c3c2b7;
     --ink-3: #898781; --grid: #2c2c2a; --axis: #383835;
     --border: rgba(255,255,255,0.10);
-    --s1: #3987e5; --s1-soft: #184f95; --s2: #d95926;
-    --good: #0ca30c;
-    --shadow: none;
-    color-scheme: dark;
+    --s1: #3987e5; --s1-soft: #184f95;
+    --good: #0ca30c; --good-ink: #0ca30c; --warn-ink: #fab219;
+    --shadow: none; color-scheme: dark;
   }
 
   * { box-sizing: border-box; }
@@ -50,25 +49,39 @@
   body {
     background: var(--page); color: var(--ink-1);
     font-family: system-ui, -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
-    font-size: 14px; line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
+    font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased;
   }
   .wrap { max-width: 1180px; margin: 0 auto; padding: 20px 18px 64px; }
 
-  /* ---------- header ---------- */
-  header.top { display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
-  h1 { font-size: 19px; font-weight: 650; margin: 0 0 3px; letter-spacing: -.01em; }
+  /* header */
+  header.top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+  .homebtn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    width: 40px; height: 40px; flex: 0 0 auto;
+    background: var(--s1); color: #fff; border: 0; border-radius: 11px; cursor: pointer;
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--s1) 35%, transparent);
+  }
+  .homebtn:hover { filter: brightness(1.08); }
+  .homebtn svg { width: 19px; height: 19px; display: block; }
+  h1 { font-size: 19px; font-weight: 650; margin: 0 0 2px; letter-spacing: -.01em; }
   .sub { color: var(--ink-2); font-size: 12.5px; margin: 0; }
   .sub b { color: var(--ink-1); font-weight: 600; }
   .spacer { flex: 1 1 auto; }
   .iconbtn {
     background: var(--surface-1); border: 1px solid var(--border); color: var(--ink-2);
-    border-radius: 8px; height: 32px; padding: 0 11px; font-size: 12.5px; cursor: pointer;
-    font-family: inherit;
+    border-radius: 8px; height: 32px; padding: 0 11px; font-size: 12.5px; cursor: pointer; font-family: inherit;
   }
   .iconbtn:hover { color: var(--ink-1); border-color: var(--axis); }
 
-  /* ---------- filter bar ---------- */
+  .sync[hidden] { display: none; }
+  .sync { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--ink-3); height: 32px; padding: 0 4px; white-space: nowrap; }
+  .sync i { width: 7px; height: 7px; border-radius: 50%; background: var(--good); display: inline-block; }
+  .sync.busy i { background: var(--warn); animation: pulse 1s ease-in-out infinite; }
+  .sync.fail { color: var(--crit); }
+  .sync.fail i { background: var(--crit); }
+  @keyframes pulse { 0%,100% { opacity: .35 } 50% { opacity: 1 } }
+
+  /* filters */
   .filters {
     display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
     background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px;
@@ -91,34 +104,27 @@
   .seg button[aria-pressed="true"] { background: var(--s1); color: #fff; font-weight: 600; }
   .linkbtn { background: none; border: 0; color: var(--s1); font-family: inherit; font-size: 12.5px; cursor: pointer; padding: 4px; }
 
-  /* ---------- KPI ---------- */
-  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 16px; }
-  .kpi {
-    background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px;
-    padding: 14px 16px; box-shadow: var(--shadow);
-  }
-  .kpi .lab { font-size: 11.5px; color: var(--ink-3); margin-bottom: 6px; letter-spacing: .01em; }
-  .kpi .val { font-size: 25px; font-weight: 640; letter-spacing: -.02em; line-height: 1.15; }
-  .kpi .val small { font-size: 14px; font-weight: 500; color: var(--ink-2); margin-left: 1px; }
+  /* KPI */
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(172px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .kpi { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; box-shadow: var(--shadow); }
+  .kpi .lab { font-size: 11.5px; color: var(--ink-3); margin-bottom: 6px; }
+  .kpi .val { font-size: 24px; font-weight: 640; letter-spacing: -.02em; line-height: 1.15; }
+  .kpi .val small { font-size: 13.5px; font-weight: 500; color: var(--ink-2); margin-left: 1px; }
   .kpi .note { font-size: 11.5px; color: var(--ink-3); margin-top: 5px; }
+  .kpi.warn .val { color: var(--warn-ink); }
   .kpi.alert .val { color: var(--crit); }
 
-  /* ---------- cards ---------- */
-  .card {
-    background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px;
-    padding: 16px 18px 18px; margin-bottom: 16px; box-shadow: var(--shadow);
-  }
+  /* cards */
+  .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px 18px; margin-bottom: 16px; box-shadow: var(--shadow); }
   .card h2 { font-size: 14.5px; font-weight: 620; margin: 0 0 2px; letter-spacing: -.005em; }
   .card .cdesc { font-size: 12px; color: var(--ink-3); margin: 0 0 14px; }
-  .chead { display: flex; align-items: flex-start; gap: 12px; }
+  .chead { display: flex; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+  .subhead { font-size: 12px; color: var(--ink-2); font-weight: 600; margin: 4px 0 8px; }
 
-  /* ---------- horizontal bars ---------- */
+  /* horizontal bars */
   .hbars { display: flex; flex-direction: column; gap: 2px; }
-  .hrow {
-    display: grid; grid-template-columns: minmax(90px, 168px) 1fr auto;
-    align-items: center; gap: 10px; padding: 4px 6px; border-radius: 7px; cursor: pointer;
-    border: 0; background: none; font-family: inherit; text-align: left; width: 100%;
-  }
+  .hrow { display: grid; grid-template-columns: minmax(90px, 168px) 1fr auto; align-items: center; gap: 10px;
+    padding: 4px 6px; border-radius: 7px; cursor: pointer; border: 0; background: none; text-align: left; width: 100%; font-family: inherit; }
   .hrow:hover { background: color-mix(in srgb, var(--s1) 7%, transparent); }
   .hrow[aria-pressed="true"] { background: color-mix(in srgb, var(--s1) 12%, transparent); }
   .hname { font-size: 12.5px; color: var(--ink-1); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -128,14 +134,23 @@
   .hval { font-size: 12.5px; font-variant-numeric: tabular-nums; color: var(--ink-1); font-weight: 560; white-space: nowrap; }
   .hpct { font-size: 11px; color: var(--ink-3); font-variant-numeric: tabular-nums; margin-left: 6px; }
 
-  /* ---------- monthly bars ---------- */
-  .vbars { display: flex; align-items: flex-end; gap: 2px; height: 118px; padding-top: 6px; border-bottom: 1px solid var(--axis); }
-  .vcol { flex: 1 1 0; display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch; height: 100%; position: relative; min-width: 0; }
-  .vbar { background: var(--s1); border-radius: 4px 4px 0 0; min-height: 2px; margin: 0 auto; width: 100%; max-width: 34px; }
-  .vlabels { display: flex; gap: 2px; margin-top: 5px; }
-  .vlab { flex: 1 1 0; text-align: center; font-size: 10px; color: var(--ink-3); overflow: hidden; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  /* monthly chart */
+  .chart { position: relative; padding: 16px 0 0 62px; }
+  .plot { position: relative; height: 150px; border-bottom: 1px solid var(--axis); }
+  .gl { position: absolute; left: 0; right: 0; border-top: 1px dashed var(--grid); }
+  .gl span { position: absolute; left: -62px; top: -8px; width: 54px; text-align: right; font-size: 10.5px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .cols { position: absolute; inset: 0; display: flex; align-items: flex-end; gap: 2px; }
+  .vcol { flex: 1 1 0; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; min-width: 0; }
+  .vbar { background: var(--s1); border-radius: 4px 4px 0 0; min-height: 2px; margin: 0 auto; width: 100%; max-width: 30px; cursor: default; }
+  .vbar.zero { background: var(--grid); }
+  .vlabels { display: flex; gap: 2px; margin-top: 6px; }
+  .vlab { flex: 1 1 0; text-align: center; font-size: 10px; color: var(--ink-3); white-space: nowrap; overflow: hidden; font-variant-numeric: tabular-nums; }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 12px; }
+  .chip { font-family: inherit; font-size: 12px; border: 1px solid var(--border); background: var(--page); color: var(--ink-2);
+    border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+  .chip[aria-pressed="true"] { background: var(--s1); border-color: var(--s1); color: #fff; font-weight: 600; }
 
-  /* ---------- table ---------- */
+  /* table */
   .tablewrap { overflow: auto; max-height: 560px; margin: 0 -18px; border-top: 1px solid var(--grid); }
   table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
   th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
@@ -144,55 +159,48 @@
   th:last-child, td:last-child { padding-right: 18px; }
   th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
   tbody tr:hover { background: color-mix(in srgb, var(--s1) 5%, transparent); }
-  td.item { white-space: normal; min-width: 200px; max-width: 340px; }
+  td.item { white-space: normal; min-width: 190px; max-width: 320px; }
   .tag { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 20px; border: 1px solid var(--border); color: var(--ink-2); }
   .tag.un { color: var(--crit); border-color: color-mix(in srgb, var(--crit) 40%, transparent); }
+  .st { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; padding: 1px 8px; border-radius: 20px; border: 1px solid var(--border); }
+  .st.done { color: var(--good-ink); border-color: color-mix(in srgb, var(--good) 45%, transparent); }
+  .st.open { color: var(--warn-ink); border-color: color-mix(in srgb, var(--warn) 55%, transparent); }
   .tfoot { padding: 12px 0 0; font-size: 12px; color: var(--ink-3); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; border-top: 1px solid var(--grid); }
 
   .empty { padding: 40px 10px; text-align: center; color: var(--ink-3); font-size: 13px; }
-  .banner {
-    border: 1px solid color-mix(in srgb, var(--warn) 55%, transparent);
-    background: color-mix(in srgb, var(--warn) 12%, transparent);
-    color: var(--ink-1); border-radius: 10px; padding: 11px 14px; font-size: 12.5px; margin-bottom: 16px;
-  }
+  .banner { border: 1px solid color-mix(in srgb, var(--warn) 55%, transparent); background: color-mix(in srgb, var(--warn) 12%, transparent);
+    color: var(--ink-1); border-radius: 10px; padding: 11px 14px; font-size: 12.5px; margin-bottom: 16px; }
   footer.foot { color: var(--ink-3); font-size: 11.5px; text-align: center; margin-top: 26px; }
   footer.foot a { color: var(--ink-3); }
 
-  #tip {
-    position: fixed; z-index: 50; pointer-events: none; opacity: 0;
+  #tip { position: fixed; z-index: 50; pointer-events: none; opacity: 0;
     background: var(--surface-1); color: var(--ink-1); border: 1px solid var(--border);
     border-radius: 8px; padding: 8px 10px; font-size: 12px; box-shadow: 0 4px 20px rgba(0,0,0,.16);
-    transition: opacity .1s; max-width: 260px;
-  }
-  .sync[hidden] { display: none; }
-  .sync { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--ink-3); height: 32px; padding: 0 4px; white-space: nowrap; }
-  .sync i { width: 7px; height: 7px; border-radius: 50%; background: var(--good); display: inline-block; }
-  .sync.busy i { background: var(--warn); animation: pulse 1s ease-in-out infinite; }
-  .sync.fail { color: var(--crit); }
-  .sync.fail i { background: var(--crit); }
-  @keyframes pulse { 0%,100% { opacity: .35 } 50% { opacity: 1 } }
-
-  #toast {
-    position: fixed; z-index: 60; left: 50%; transform: translateX(-50%); bottom: 26px;
-    background: var(--ink-1); color: var(--surface-1); border-radius: 999px;
-    padding: 9px 18px; font-size: 12.5px; font-weight: 550;
-    box-shadow: 0 6px 24px rgba(0,0,0,.22); transition: opacity .3s;
-  }
-
+    transition: opacity .1s; max-width: 260px; }
   #tip b { font-weight: 600; }
   #tip .n { font-variant-numeric: tabular-nums; }
+  #toast { position: fixed; z-index: 60; left: 50%; transform: translateX(-50%); bottom: 26px;
+    background: var(--ink-1); color: var(--surface-1); border-radius: 999px; padding: 9px 18px;
+    font-size: 12.5px; font-weight: 550; box-shadow: 0 6px 24px rgba(0,0,0,.22); transition: opacity .3s; }
 
   @media (max-width: 640px) {
     .hrow { grid-template-columns: minmax(78px, 110px) 1fr auto; }
     .kpi .val { font-size: 21px; }
+    .chart { padding-left: 50px; }
+    .gl span { left: -50px; width: 44px; }
   }
-  @media print { .filters, .iconbtn, footer.foot { display: none; } body { background: #fff; } }
+  @media print { .filters, .iconbtn, .homebtn, footer.foot, .chips { display: none; } body { background: #fff; } }
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <header class="top">
+    <button class="homebtn" id="homeBtn" type="button" title="처음 화면으로 (필터 초기화)" aria-label="처음 화면으로">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.8V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.8"/>
+      </svg>
+    </button>
     <div>
       <h1>현장별 집기비품 비용 대시보드</h1>
       <p class="sub">기준 데이터: 홈택스 매입 내역 · 최종 업데이트 <b id="updatedAt">—</b></p>
@@ -222,6 +230,14 @@
       <select id="fSite"><option value="">전체</option></select>
     </div>
     <div class="fgroup">
+      <span class="flabel">정산</span>
+      <div class="seg" role="group">
+        <button type="button" data-settle="" aria-pressed="true">전체</button>
+        <button type="button" data-settle="open" aria-pressed="false">미정산</button>
+        <button type="button" data-settle="done" aria-pressed="false">완료</button>
+      </div>
+    </div>
+    <div class="fgroup">
       <span class="flabel">검색</span>
       <input type="text" id="fQuery" placeholder="거래처·품목·비고">
     </div>
@@ -248,11 +264,18 @@
     <div id="siteChart"></div>
   </section>
 
-  <section class="card" id="monthCard">
-    <h2>월별 집행 추이</h2>
-    <p class="cdesc">선택된 조건 기준 · 세로축은 월 집행액</p>
-    <div class="vbars" id="monthBars"></div>
-    <div class="vlabels" id="monthLabels"></div>
+  <section class="card" id="ymCard">
+    <div class="chead">
+      <div>
+        <h2>연도·월별 발생 비용</h2>
+        <p class="cdesc">연도를 누르면 전체 화면이 그 연도로 좁혀집니다.</p>
+      </div>
+    </div>
+    <div class="chips" id="yearChips"></div>
+    <div class="subhead">연도별 발생액</div>
+    <div id="yearChart"></div>
+    <div class="subhead" style="margin-top:18px">월별 지출 추이</div>
+    <div id="monthChart"></div>
   </section>
 
   <section class="card">
@@ -271,6 +294,7 @@
           <th data-sort="site">현장</th>
           <th data-sort="vendor">거래처</th>
           <th data-sort="item" class="item">품목 / 비고</th>
+          <th data-sort="settled">정산</th>
           <th data-sort="doc">증빙</th>
           <th data-sort="amount" class="num">금액(원)</th>
         </tr></thead>
@@ -292,23 +316,20 @@
 (function () {
   "use strict";
 
-  /* ================= 상태 ================= */
   var DATA = { rows: [], updatedAt: null, updatedBy: null };
   var SITES = { sites: [] };
   var state = {
     period: "all", from: null, to: null,
-    site: "", query: "",
-    basis: "amount",              // amount = 합계, supply = 공급가액
-    sortKey: "date", sortDir: -1,
-    limit: 200
+    site: "", query: "", year: "", settle: "",
+    basis: "amount", sortKey: "date", sortDir: -1, limit: 200
   };
   var $ = function (id) { return document.getElementById(id); };
+  var UNASSIGNED = "미지정";
 
-  /* ================= 유틸 ================= */
+  /* ---------- 유틸 ---------- */
   function won(n) { return (Math.round(n) || 0).toLocaleString("ko-KR"); }
   function shortWon(n) {
-    n = Math.round(n || 0);
-    var a = Math.abs(n);
+    n = Math.round(n || 0); var a = Math.abs(n);
     if (a >= 1e8) return (n / 1e8).toFixed(a >= 1e9 ? 0 : 1).replace(/\.0$/, "") + "<small>억원</small>";
     if (a >= 1e4) return Math.round(n / 1e4).toLocaleString("ko-KR") + "<small>만원</small>";
     return n.toLocaleString("ko-KR") + "<small>원</small>";
@@ -318,20 +339,19 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
-  function ymd(d) {
-    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  function ymd(d) { return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+  function amountOf(r) {
+    if (state.basis === "supply") return Number(r.supply != null && r.supply !== "" ? r.supply : (r.amount || 0)) || 0;
+    return Number(r.amount || 0) || 0;
   }
-  var UNASSIGNED = "미지정";
+  function siteOf(r) { return (r.site && String(r.site).trim()) || UNASSIGNED; }
+  function isDone(r) { return r.settled === true; }
 
-  /* ================= 데이터 위치 =================
-     저장소에 커밋되는 순간 raw.githubusercontent.com 이 바로 갱신되므로,
-     GitHub Pages 빌드(30초~1분)를 기다리지 않고 최신 데이터를 가져옵니다.
-     주소가 https://<아이디>.github.io/<저장소>/ 형태면 자동으로 알아냅니다.
-     다르게 쓰려면 저장소에 config.json 을 두세요:
-       { "owner": "hib1006", "repo": "assets-dashboard", "branch": "main" }
-  ================================================= */
-  var SRC = { owner: "", repo: "", branch: "main", ready: false };
-
+  /* ---------- 데이터 위치 ----------
+     저장소에 커밋되는 순간 raw.githubusercontent.com 이 갱신되므로
+     GitHub Pages 빌드를 기다리지 않고 최신 데이터를 가져옵니다.
+     다른 도메인에 올렸다면 config.json 에 owner/repo/branch 를 적으세요. */
+  var SRC = { owner: "", repo: "", branch: "main" };
   function detectSource() {
     var m = location.hostname.match(/^([^.]+)\.github\.io$/i);
     if (m) {
@@ -340,54 +360,39 @@
       SRC.repo = seg.length ? seg[0] : "";
     }
     return fetch("./config.json?t=" + Date.now(), { cache: "no-store" })
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .catch(function () { return null; })
+      .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
       .then(function (c) {
         if (c && c.owner) { SRC.owner = c.owner; SRC.repo = c.repo || SRC.repo; SRC.branch = c.branch || SRC.branch; }
-        SRC.ready = true;
       });
   }
-
-  function urlsFor(name) {
-    var t = "?t=" + Date.now();
-    var list = [];
-    if (SRC.owner && SRC.repo) {
-      list.push("https://raw.githubusercontent.com/" + SRC.owner + "/" + SRC.repo + "/" + SRC.branch + "/" + name + t);
-    }
-    list.push("./" + name + t);
-    return list;
-  }
   function fetchFirst(name) {
-    var urls = urlsFor(name), i = 0;
+    var t = "?t=" + Date.now(), urls = [];
+    if (SRC.owner && SRC.repo) urls.push("https://raw.githubusercontent.com/" + SRC.owner + "/" + SRC.repo + "/" + SRC.branch + "/" + name + t);
+    urls.push("./" + name + t);
+    var i = 0;
     function tryNext() {
       if (i >= urls.length) return Promise.reject(new Error(name + " 를 찾을 수 없습니다"));
       return fetch(urls[i++], { cache: "no-store" })
-        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-        .catch(tryNext);
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).catch(tryNext);
     }
     return tryNext();
   }
 
-  /* ================= 로드 & 자동 동기화 ================= */
-  var POLL_MS = 60000;
-  var lastStamp = null, pollTimer = null, checking = false;
+  /* ---------- 로드 & 자동 동기화 ---------- */
+  var POLL_MS = 60000, lastStamp = null, pollTimer = null, checking = false, syncAt = null;
 
   function load() {
     if (window.__DEMO__) {
       DATA = window.__DEMO__.data || { rows: [] };
       SITES = window.__DEMO__.sites || { sites: [] };
-      banner("<b>미리보기 화면입니다.</b> 아래 숫자는 예시 데이터이며, 실제 배포 후에는 업로드한 홈택스 자료로 채워집니다.");
-      $("sync").hidden = true;
-      boot();
-      return;
+      banner("<b>미리보기 화면입니다.</b> 실제 배포하면 이 자리에 매달 올리는 자료가 들어갑니다.");
+      $("sync").hidden = true; boot(); return;
     }
     detectSource().then(function () { return refresh(true); });
   }
-
   function refresh(first) {
     if (checking) return Promise.resolve();
-    checking = true;
-    setSync("checking");
+    checking = true; setSync("checking");
     return Promise.all([
       fetchFirst("data.json"),
       fetchFirst("sites.json").catch(function () { return { sites: [] }; })
@@ -396,12 +401,8 @@
       if (!Array.isArray(d.rows)) d.rows = [];
       var stamp = (d.updatedAt || "") + "|" + d.rows.length;
       var changed = lastStamp !== null && stamp !== lastStamp;
-      if (first || changed) {
-        DATA = d; SITES = res[1] || { sites: [] };
-        boot();
-      }
-      lastStamp = stamp;
-      setSync("ok");
+      if (first || changed) { DATA = d; SITES = res[1] || { sites: [] }; boot(); }
+      lastStamp = stamp; setSync("ok");
       if (changed) toast("새 데이터가 반영되었습니다 · " + d.rows.length.toLocaleString("ko-KR") + "건");
       if (first) $("banner").hidden = true;
     }).catch(function (e) {
@@ -412,64 +413,38 @@
       }
     }).then(function () { checking = false; });
   }
-
   function startPolling() {
     if (pollTimer) clearInterval(pollTimer);
-    pollTimer = setInterval(function () {
-      if (document.visibilityState === "visible") refresh(false);
-    }, POLL_MS);
-    document.addEventListener("visibilitychange", function () {
-      if (document.visibilityState === "visible") refresh(false);
-    });
+    pollTimer = setInterval(function () { if (document.visibilityState === "visible") refresh(false); }, POLL_MS);
+    document.addEventListener("visibilitychange", function () { if (document.visibilityState === "visible") refresh(false); });
     window.addEventListener("online", function () { refresh(false); });
   }
-
-  var syncAt = null;
   function setSync(kind) {
     var el = $("sync"); if (!el) return;
-    if (kind === "checking") { el.className = "sync busy"; el.innerHTML = '<i></i>확인 중…'; return; }
-    if (kind === "fail") { el.className = "sync fail"; el.innerHTML = '<i></i>연결 실패 · 잠시 후 재시도'; return; }
-    syncAt = Date.now();
-    el.className = "sync";
-    tickSync();
+    if (kind === "checking") { el.className = "sync busy"; el.innerHTML = "<i></i>확인 중…"; return; }
+    if (kind === "fail") { el.className = "sync fail"; el.innerHTML = "<i></i>연결 실패 · 잠시 후 재시도"; return; }
+    syncAt = Date.now(); el.className = "sync"; tickSync();
   }
   function tickSync() {
     var el = $("sync"); if (!el || !syncAt || el.className.indexOf("busy") !== -1) return;
     var s = Math.round((Date.now() - syncAt) / 1000);
-    var txt = s < 10 ? "방금 확인" : (s < 60 ? s + "초 전 확인" : Math.round(s / 60) + "분 전 확인");
-    el.innerHTML = '<i></i>자동 동기화 · ' + txt;
+    el.innerHTML = "<i></i>자동 동기화 · " + (s < 10 ? "방금 확인" : (s < 60 ? s + "초 전 확인" : Math.round(s / 60) + "분 전 확인"));
   }
-
   function toast(msg) {
-    var t = $("toast");
-    t.textContent = msg;
-    t.hidden = false;
-    t.style.opacity = "1";
-    clearTimeout(toast._t);
-    toast._t = setTimeout(function () { t.style.opacity = "0"; }, 4200);
+    var t = $("toast"); t.textContent = msg; t.hidden = false; t.style.opacity = "1";
+    clearTimeout(toast._t); toast._t = setTimeout(function () { t.style.opacity = "0"; }, 4200);
   }
-
   function banner(html) { var b = $("banner"); b.innerHTML = html; b.hidden = false; }
 
-  /* ================= 파생 ================= */
-  function amountOf(r) {
-    if (state.basis === "supply") {
-      return Number(r.supply != null && r.supply !== "" ? r.supply : (r.amount || 0)) || 0;
-    }
-    return Number(r.amount || 0) || 0;
-  }
-  function siteOf(r) { return (r.site && String(r.site).trim()) || UNASSIGNED; }
-
+  /* ---------- 필터 ---------- */
   function periodRange() {
     if (state.period === "custom") return [state.from || null, state.to || null];
     if (state.period === "all") return [null, null];
     var now = new Date();
     if (state.period === "ytd") return [now.getFullYear() + "-01-01", null];
-    var d = new Date(now.getTime());
-    d.setMonth(d.getMonth() - (state.period === "m3" ? 3 : 1));
+    var d = new Date(now.getTime()); d.setMonth(d.getMonth() - (state.period === "m3" ? 3 : 1));
     return [ymd(d), null];
   }
-
   function filtered() {
     var r = periodRange(), from = r[0], to = r[1];
     var q = state.query.trim().toLowerCase();
@@ -477,7 +452,10 @@
       var d = row.date || "";
       if (from && d && d < from) return false;
       if (to && d && d > to) return false;
+      if (state.year && d.slice(0, 4) !== state.year) return false;
       if (state.site && siteOf(row) !== state.site) return false;
+      if (state.settle === "done" && !isDone(row)) return false;
+      if (state.settle === "open" && isDone(row)) return false;
       if (q) {
         var hay = ((row.vendor || "") + " " + (row.item || "") + " " + (row.note || "") + " " + (row.site || "")).toLowerCase();
         if (hay.indexOf(q) === -1) return false;
@@ -486,110 +464,176 @@
     });
   }
 
-  /* ================= 렌더 ================= */
+  /* ---------- 렌더 ---------- */
   function render() {
     var rows = filtered();
     renderKpi(rows);
     renderSiteChart(rows);
-    renderMonths(rows);
+    renderYears();
+    renderYearChart(rows);
+    renderMonthChart(rows);
     renderTable(rows);
   }
 
   function renderKpi(rows) {
-    var total = 0, un = 0, sites = {}, cnt = rows.length;
+    var total = 0, un = 0, open = 0, openN = 0, sites = {}, cnt = rows.length;
     rows.forEach(function (r) {
       var a = amountOf(r); total += a;
       var s = siteOf(r);
       if (s === UNASSIGNED) un += a; else sites[s] = true;
+      if (!isDone(r)) { open += a; openN++; }
     });
     var nSites = Object.keys(sites).length;
-    var avg = nSites ? (total - un) / nSites : 0;
     var basisLab = state.basis === "supply" ? "공급가액 기준" : "VAT 포함";
+    var ds = rows.map(function (r) { return r.date || ""; }).filter(Boolean).sort();
 
     var html = "";
     html += kpiBox("총 집행액", shortWon(total), basisLab + " · " + won(total) + "원");
-    html += kpiBox("현장 수", nSites.toLocaleString("ko-KR") + "<small>곳</small>", "현장 평균 " + won(avg) + "원");
-    var ds = rows.map(function (r) { return r.date || ""; }).filter(Boolean).sort();
-    html += kpiBox("거래 건수", cnt.toLocaleString("ko-KR") + "<small>건</small>",
-      ds.length ? ds[0] + " ~ " + ds[ds.length - 1] : "해당 없음");
-    html += kpiBox("현장 미지정", shortWon(un), un > 0 ? "총액의 " + (total ? (un / total * 100).toFixed(1) : 0) + "% · 현장 확인 필요" : "모두 분류 완료", un > 0);
+    html += kpiBox("미정산", shortWon(open),
+      openN ? openN.toLocaleString("ko-KR") + "건 · 총액의 " + (total ? (open / total * 100).toFixed(1) : 0) + "%" : "모두 정산 완료",
+      openN ? "warn" : "");
+    html += kpiBox("현장 수", nSites.toLocaleString("ko-KR") + "<small>곳</small>", "현장 평균 " + won(nSites ? (total - un) / nSites : 0) + "원");
+    html += kpiBox("거래 건수", cnt.toLocaleString("ko-KR") + "<small>건</small>", ds.length ? ds[0] + " ~ " + ds[ds.length - 1] : "해당 없음");
+    html += kpiBox("현장 미지정", shortWon(un),
+      un > 0 ? "총액의 " + (total ? (un / total * 100).toFixed(1) : 0) + "% · 현장 확인 필요" : "모두 분류 완료",
+      un > 0 ? "alert" : "");
     $("kpis").innerHTML = html;
   }
-  function kpiBox(lab, val, note, alert) {
-    return '<div class="kpi' + (alert ? " alert" : "") + '"><div class="lab">' + esc(lab) + '</div>'
-      + '<div class="val">' + val + '</div><div class="note">' + esc(note) + '</div></div>';
+  function kpiBox(lab, val, note, cls) {
+    return '<div class="kpi ' + (cls || "") + '"><div class="lab">' + esc(lab) + "</div>"
+      + '<div class="val">' + val + '</div><div class="note">' + esc(note) + "</div></div>";
   }
 
   function renderSiteChart(rows) {
     var agg = {};
     rows.forEach(function (r) {
       var s = siteOf(r);
-      if (!agg[s]) agg[s] = { name: s, sum: 0, cnt: 0 };
+      if (!agg[s]) agg[s] = { name: s, sum: 0, cnt: 0, open: 0 };
       agg[s].sum += amountOf(r); agg[s].cnt++;
+      if (!isDone(r)) agg[s].open += amountOf(r);
     });
     var list = Object.keys(agg).map(function (k) { return agg[k]; });
     list.sort(function (a, b) { return b.sum - a.sum; });
     if (!list.length) { $("siteChart").innerHTML = '<div class="empty">표시할 데이터가 없습니다.</div>'; return; }
-
-    var max = list[0].sum || 1;
-    var grand = list.reduce(function (s, x) { return s + x.sum; }, 0);
+    var max = list[0].sum || 1, grand = list.reduce(function (s, x) { return s + x.sum; }, 0);
     var html = '<div class="hbars">';
     list.forEach(function (x) {
-      var w = Math.max(0.6, (x.sum / max) * 100);
       var pct = grand ? (x.sum / grand * 100) : 0;
       html += '<button type="button" class="hrow' + (x.name === UNASSIGNED ? " unassigned" : "") + '"'
         + ' aria-pressed="' + (state.site === x.name) + '" data-site="' + esc(x.name) + '"'
-        + ' data-tip="' + esc(x.name) + '|' + won(x.sum) + '원|' + x.cnt + '건 · 전체의 ' + pct.toFixed(1) + '%">'
-        + '<span class="hname" title="' + esc(x.name) + '">' + esc(x.name) + '</span>'
-        + '<span class="htrack"><span class="hbar" style="width:' + w.toFixed(2) + '%"></span></span>'
-        + '<span class="hval">' + won(x.sum) + '<span class="hpct">' + pct.toFixed(1) + '%</span></span>'
-        + '</button>';
+        + ' data-tip="' + esc(x.name) + '|' + won(x.sum) + "원|" + x.cnt + "건 · 전체의 " + pct.toFixed(1) + "%"
+        + (x.open ? " · 미정산 " + won(x.open) + "원" : " · 정산 완료") + '">'
+        + '<span class="hname" title="' + esc(x.name) + '">' + esc(x.name) + "</span>"
+        + '<span class="htrack"><span class="hbar" style="width:' + Math.max(0.6, (x.sum / max) * 100).toFixed(2) + '%"></span></span>'
+        + '<span class="hval">' + won(x.sum) + '<span class="hpct">' + pct.toFixed(1) + "%</span></span>"
+        + "</button>";
     });
-    html += '</div>';
-    $("siteChart").innerHTML = html;
-
-    Array.prototype.forEach.call(document.querySelectorAll(".hrow"), function (el) {
+    $("siteChart").innerHTML = html + "</div>";
+    Array.prototype.forEach.call($("siteChart").querySelectorAll(".hrow"), function (el) {
       el.addEventListener("click", function () {
         var s = el.getAttribute("data-site");
         state.site = (state.site === s) ? "" : s;
-        $("fSite").value = state.site;
-        render();
+        $("fSite").value = state.site; state.limit = 200; render();
       });
       bindTip(el);
     });
   }
 
-  function renderMonths(rows) {
+  /* 연도 칩 */
+  function renderYears() {
+    var years = {};
+    DATA.rows.forEach(function (r) { var y = (r.date || "").slice(0, 4); if (y) years[y] = true; });
+    var list = Object.keys(years).sort();
+    if (list.length < 2) { $("yearChips").innerHTML = ""; return; }
+    $("yearChips").innerHTML = '<button type="button" class="chip" data-year="" aria-pressed="' + (state.year === "") + '">전체</button>'
+      + list.map(function (y) {
+        return '<button type="button" class="chip" data-year="' + y + '" aria-pressed="' + (state.year === y) + '">' + y + "년</button>";
+      }).join("");
+    Array.prototype.forEach.call($("yearChips").querySelectorAll(".chip"), function (b) {
+      b.addEventListener("click", function () {
+        state.year = b.getAttribute("data-year"); state.limit = 200; render();
+      });
+    });
+  }
+
+  /* 연도별 막대 */
+  function renderYearChart(rows) {
     var agg = {};
     rows.forEach(function (r) {
-      var m = (r.date || "").slice(0, 7);
-      if (!m) return;
-      agg[m] = (agg[m] || 0) + amountOf(r);
+      var y = (r.date || "").slice(0, 4); if (!y) return;
+      if (!agg[y]) agg[y] = { sum: 0, cnt: 0, open: 0 };
+      agg[y].sum += amountOf(r); agg[y].cnt++;
+      if (!isDone(r)) agg[y].open += amountOf(r);
     });
     var keys = Object.keys(agg).sort();
-    if (keys.length < 2) { $("monthCard").hidden = true; return; }
-    $("monthCard").hidden = false;
-    // 빈 달 채우기
+    if (!keys.length) { $("yearChart").innerHTML = '<div class="empty">표시할 데이터가 없습니다.</div>'; return; }
+    var max = Math.max.apply(null, keys.map(function (k) { return agg[k].sum; })) || 1;
+    var html = '<div class="hbars">';
+    keys.forEach(function (y) {
+      html += '<button type="button" class="hrow" aria-pressed="' + (state.year === y) + '" data-year="' + y + '"'
+        + ' data-tip="' + y + "년|" + won(agg[y].sum) + "원|" + agg[y].cnt + "건"
+        + (agg[y].open ? " · 미정산 " + won(agg[y].open) + "원" : " · 정산 완료") + '">'
+        + '<span class="hname">' + y + "년</span>"
+        + '<span class="htrack"><span class="hbar" style="width:' + Math.max(0.6, (agg[y].sum / max) * 100).toFixed(2) + '%"></span></span>'
+        + '<span class="hval">' + won(agg[y].sum) + '<span class="hpct">' + agg[y].cnt + "건</span></span>"
+        + "</button>";
+    });
+    $("yearChart").innerHTML = html + "</div>";
+    Array.prototype.forEach.call($("yearChart").querySelectorAll(".hrow"), function (el) {
+      el.addEventListener("click", function () {
+        var y = el.getAttribute("data-year");
+        state.year = (state.year === y) ? "" : y; state.limit = 200; render();
+      });
+      bindTip(el);
+    });
+  }
+
+  /* 월별 추이 */
+  function niceMax(v) {
+    if (v <= 0) return 1;
+    var p = Math.pow(10, Math.floor(Math.log10(v)));
+    var s = [1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10];
+    for (var i = 0; i < s.length; i++) if (s[i] * p >= v) return s[i] * p;
+    return 10 * p;
+  }
+  function renderMonthChart(rows) {
+    var agg = {};
+    rows.forEach(function (r) {
+      var m = (r.date || "").slice(0, 7); if (!m) return;
+      if (!agg[m]) agg[m] = { sum: 0, cnt: 0 };
+      agg[m].sum += amountOf(r); agg[m].cnt++;
+    });
+    var keys = Object.keys(agg).sort();
+    if (!keys.length) { $("monthChart").innerHTML = '<div class="empty">표시할 데이터가 없습니다.</div>'; return; }
+
     var full = [], cur = keys[0], last = keys[keys.length - 1], guard = 0;
-    while (cur <= last && guard++ < 240) {
+    while (cur <= last && guard++ < 300) {
       full.push(cur);
       var y = +cur.slice(0, 4), mo = +cur.slice(5, 7) + 1;
       if (mo > 12) { y++; mo = 1; }
       cur = y + "-" + String(mo).padStart(2, "0");
     }
     if (full.length > 36) full = full.slice(full.length - 36);
-    var max = Math.max.apply(null, full.map(function (k) { return agg[k] || 0; })) || 1;
-    var bars = "", labs = "";
+
+    var rawMax = Math.max.apply(null, full.map(function (k) { return (agg[k] || {}).sum || 0; }));
+    var max = niceMax(rawMax);
+    var lines = "";
+    for (var t = 0; t <= 4; t++) {
+      var v = max * t / 4;
+      lines += '<div class="gl" style="bottom:' + (t * 25) + '%"><span>' + (v >= 1e8 ? (v / 1e8).toFixed(1) + "억" : Math.round(v / 1e4).toLocaleString("ko-KR") + "만") + "</span></div>";
+    }
+    var cols = "", labs = "";
+    var step = Math.ceil(full.length / 12);
     full.forEach(function (k, i) {
-      var v = agg[k] || 0;
-      bars += '<div class="vcol"><div class="vbar" style="height:' + Math.max(v ? 2 : 0, (v / max) * 100).toFixed(2)
-        + '%" data-tip="' + k + '|' + won(v) + '원|월 집행액"></div></div>';
-      var show = full.length <= 14 || i % Math.ceil(full.length / 12) === 0 || i === full.length - 1;
-      labs += '<div class="vlab">' + (show ? esc(k.slice(2).replace("-", ".")) : "") + '</div>';
+      var v = (agg[k] || {}).sum || 0, c = (agg[k] || {}).cnt || 0;
+      cols += '<div class="vcol"><div class="vbar' + (v ? "" : " zero") + '" style="height:' + (v ? Math.max(1.2, (v / max) * 100) : 0.8).toFixed(2) + '%"'
+        + ' data-tip="' + k.replace("-", "년 ") + '월|' + won(v) + "원|" + (c ? c + "건" : "발생 없음") + '"></div></div>';
+      var show = full.length <= 14 || i % step === 0 || i === full.length - 1;
+      labs += '<div class="vlab">' + (show ? esc(k.slice(2).replace("-", ".")) : "") + "</div>";
     });
-    $("monthBars").innerHTML = bars;
-    $("monthLabels").innerHTML = labs;
-    Array.prototype.forEach.call(document.querySelectorAll(".vbar"), bindTip);
+    $("monthChart").innerHTML = '<div class="chart"><div class="plot">' + lines + '<div class="cols">' + cols + "</div></div>"
+      + '<div class="vlabels">' + labs + "</div></div>";
+    Array.prototype.forEach.call($("monthChart").querySelectorAll(".vbar"), bindTip);
   }
 
   function renderTable(rows) {
@@ -598,6 +642,7 @@
       var va, vb;
       if (k === "amount") { va = amountOf(a); vb = amountOf(b); }
       else if (k === "site") { va = siteOf(a); vb = siteOf(b); }
+      else if (k === "settled") { va = isDone(a) ? 1 : 0; vb = isDone(b) ? 1 : 0; }
       else { va = a[k] || ""; vb = b[k] || ""; }
       if (va < vb) return -1 * dir;
       if (va > vb) return 1 * dir;
@@ -605,18 +650,18 @@
     });
     var shown = sorted.slice(0, state.limit);
     if (!shown.length) {
-      $("tbody").innerHTML = '<tr><td colspan="6"><div class="empty">조건에 맞는 내역이 없습니다.</div></td></tr>';
-      $("tfoot").textContent = "";
-      return;
+      $("tbody").innerHTML = '<tr><td colspan="7"><div class="empty">조건에 맞는 내역이 없습니다.</div></td></tr>';
+      $("tfoot").textContent = ""; return;
     }
     var html = "";
     shown.forEach(function (r) {
-      var s = siteOf(r);
+      var s = siteOf(r), done = isDone(r);
       html += "<tr>"
         + "<td>" + esc(r.date || "") + "</td>"
         + '<td><span class="tag' + (s === UNASSIGNED ? " un" : "") + '">' + esc(s) + "</span></td>"
         + "<td>" + esc(r.vendor || "") + "</td>"
         + '<td class="item">' + esc(r.item || "") + (r.note ? ' <span style="color:var(--ink-3)">· ' + esc(r.note) + "</span>" : "") + "</td>"
+        + '<td><span class="st ' + (done ? "done" : "open") + '">' + (done ? "✓ 완료" : "• 미정산") + "</span></td>"
         + "<td>" + esc(r.doc || "") + "</td>"
         + '<td class="num">' + won(amountOf(r)) + "</td>"
         + "</tr>";
@@ -624,20 +669,19 @@
     $("tbody").innerHTML = html;
 
     var sum = sorted.reduce(function (t, r) { return t + amountOf(r); }, 0);
-    var foot = "총 " + sorted.length.toLocaleString("ko-KR") + "건 · 합계 " + won(sum) + "원";
+    var openSum = sorted.reduce(function (t, r) { return t + (isDone(r) ? 0 : amountOf(r)); }, 0);
+    var foot = "총 " + sorted.length.toLocaleString("ko-KR") + "건 · 합계 " + won(sum) + "원 · 미정산 " + won(openSum) + "원";
     if (sorted.length > shown.length) {
-      foot += " · 화면에는 " + shown.length + "건만 표시 ";
-      $("tfoot").innerHTML = esc(foot) + '<button class="linkbtn" id="moreBtn" type="button">더 보기</button>';
+      $("tfoot").innerHTML = esc(foot + " · 화면에는 " + shown.length + "건만 표시 ")
+        + '<button class="linkbtn" id="moreBtn" type="button">더 보기</button>';
       $("moreBtn").addEventListener("click", function () { state.limit += 300; renderTable(filtered()); });
-    } else {
-      $("tfoot").textContent = foot;
-    }
+    } else $("tfoot").textContent = foot;
   }
 
-  /* ================= 툴팁 ================= */
+  /* ---------- 툴팁 ---------- */
   function bindTip(el) {
     el.addEventListener("mouseenter", function (e) { showTip(el, e); });
-    el.addEventListener("mousemove", function (e) { moveTip(e); });
+    el.addEventListener("mousemove", moveTip);
     el.addEventListener("mouseleave", hideTip);
     el.addEventListener("focus", function (e) { showTip(el, e); });
     el.addEventListener("blur", hideTip);
@@ -647,40 +691,37 @@
     var p = raw.split("|");
     $("tip").innerHTML = "<b>" + esc(p[0]) + '</b><br><span class="n">' + esc(p[1] || "") + "</span>"
       + (p[2] ? '<br><span style="color:var(--ink-3)">' + esc(p[2]) + "</span>" : "");
-    $("tip").style.opacity = "1";
-    moveTip(e);
+    $("tip").style.opacity = "1"; moveTip(e);
   }
   function moveTip(e) {
     var t = $("tip"), x = (e.clientX || 0) + 14, y = (e.clientY || 0) + 14;
-    var w = t.offsetWidth, h = t.offsetHeight;
-    if (x + w > window.innerWidth - 8) x = window.innerWidth - w - 8;
-    if (y + h > window.innerHeight - 8) y = (e.clientY || 0) - h - 12;
+    if (x + t.offsetWidth > window.innerWidth - 8) x = window.innerWidth - t.offsetWidth - 8;
+    if (y + t.offsetHeight > window.innerHeight - 8) y = (e.clientY || 0) - t.offsetHeight - 12;
     t.style.left = x + "px"; t.style.top = y + "px";
   }
   function hideTip() { $("tip").style.opacity = "0"; }
 
-  /* ================= CSV ================= */
+  /* ---------- CSV ---------- */
   function exportCsv() {
     var rows = filtered();
-    var head = ["일자", "현장", "거래처", "품목/비고", "증빙", state.basis === "supply" ? "공급가액" : "합계금액"];
+    var head = ["일자", "현장", "거래처", "품목/비고", "정산", "증빙", state.basis === "supply" ? "공급가액" : "합계금액"];
     var lines = [head.join(",")];
     rows.forEach(function (r) {
-      lines.push([r.date || "", siteOf(r), r.vendor || "", (r.item || "") + (r.note ? " / " + r.note : ""), r.doc || "", amountOf(r)]
+      lines.push([r.date || "", siteOf(r), r.vendor || "", (r.item || "") + (r.note ? " / " + r.note : ""),
+        isDone(r) ? "완료" : "미정산", r.doc || "", amountOf(r)]
         .map(function (v) { return '"' + String(v).replace(/"/g, '""') + '"'; }).join(","));
     });
-    var blob = new Blob(["﻿" + lines.join("\r\n")], { type: "text/csv;charset=utf-8;" });
     var a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
+    a.href = URL.createObjectURL(new Blob(["﻿" + lines.join("\r\n")], { type: "text/csv;charset=utf-8;" }));
     a.download = "집기비품_현장별내역_" + ymd(new Date()) + ".csv";
     a.click(); URL.revokeObjectURL(a.href);
   }
 
-  /* ================= 초기화 ================= */
+  /* ---------- 초기화 ---------- */
   function boot() {
     $("updatedAt").textContent = DATA.updatedAt
       ? new Date(DATA.updatedAt).toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" }) + (DATA.updatedBy ? " (" + DATA.updatedBy + ")" : "")
       : "데이터 없음";
-
     var names = {};
     DATA.rows.forEach(function (r) { names[siteOf(r)] = true; });
     (SITES.sites || []).forEach(function (s) { if (s && s.name) names[s.name] = true; });
@@ -691,49 +732,65 @@
     $("fSite").innerHTML = '<option value="">전체</option>' + opts.map(function (n) {
       return '<option value="' + esc(n) + '">' + esc(n) + "</option>";
     }).join("");
-    // 자동 갱신 시 사용자가 고른 현장 필터를 유지
     if (state.site && opts.indexOf(state.site) === -1) state.site = "";
     $("fSite").value = state.site;
     render();
   }
 
+  function resetAll() {
+    state.period = "all"; state.from = state.to = null;
+    state.site = ""; state.query = ""; state.year = ""; state.settle = "";
+    state.basis = "amount"; state.sortKey = "date"; state.sortDir = -1; state.limit = 200;
+    $("fPeriod").value = "all"; $("fSite").value = ""; $("fQuery").value = "";
+    $("fFrom").hidden = true; $("fTo").hidden = true;
+    setBasis("amount"); setSettle("");
+    render();
+  }
+  function setBasis(b) {
+    state.basis = b;
+    $("bTotal").setAttribute("aria-pressed", String(b === "amount"));
+    $("bSupply").setAttribute("aria-pressed", String(b === "supply"));
+  }
+  function setSettle(v) {
+    state.settle = v;
+    Array.prototype.forEach.call(document.querySelectorAll("[data-settle]"), function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-settle") === v));
+    });
+  }
+
   function wire() {
+    $("homeBtn").addEventListener("click", function () {
+      resetAll();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      toast("처음 화면으로 돌아왔습니다");
+    });
     $("fPeriod").addEventListener("change", function () {
       state.period = this.value;
       var c = state.period === "custom";
       $("fFrom").hidden = !c; $("fTo").hidden = !c;
-      render();
+      state.limit = 200; render();
     });
     $("fFrom").addEventListener("change", function () { state.from = this.value || null; render(); });
     $("fTo").addEventListener("change", function () { state.to = this.value || null; render(); });
-    $("fSite").addEventListener("change", function () { state.site = this.value; render(); });
+    $("fSite").addEventListener("change", function () { state.site = this.value; state.limit = 200; render(); });
     var t;
     $("fQuery").addEventListener("input", function () {
       var v = this.value; clearTimeout(t);
       t = setTimeout(function () { state.query = v; state.limit = 200; render(); }, 180);
     });
-    $("bTotal").addEventListener("click", function () { setBasis("amount"); });
-    $("bSupply").addEventListener("click", function () { setBasis("supply"); });
-    function setBasis(b) {
-      state.basis = b;
-      $("bTotal").setAttribute("aria-pressed", String(b === "amount"));
-      $("bSupply").setAttribute("aria-pressed", String(b === "supply"));
-      render();
-    }
-    $("resetBtn").addEventListener("click", function () {
-      state.period = "all"; state.from = state.to = null; state.site = ""; state.query = ""; state.limit = 200;
-      $("fPeriod").value = "all"; $("fSite").value = ""; $("fQuery").value = "";
-      $("fFrom").hidden = true; $("fTo").hidden = true;
-      render();
+    Array.prototype.forEach.call(document.querySelectorAll("[data-settle]"), function (b) {
+      b.addEventListener("click", function () { setSettle(b.getAttribute("data-settle")); state.limit = 200; render(); });
     });
+    $("bTotal").addEventListener("click", function () { setBasis("amount"); render(); });
+    $("bSupply").addEventListener("click", function () { setBasis("supply"); render(); });
+    $("resetBtn").addEventListener("click", resetAll);
     $("csvBtn").addEventListener("click", exportCsv);
     $("reloadBtn").addEventListener("click", function () {
       if (window.__DEMO__) { location.reload(); return; }
       refresh(false);
     });
     $("themeBtn").addEventListener("click", function () {
-      var cur = document.documentElement.getAttribute("data-theme");
-      var next = cur === "dark" ? "light" : "dark";
+      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
       document.documentElement.setAttribute("data-theme", next);
       try { localStorage.setItem("dash-theme", next); } catch (e) {}
     });
