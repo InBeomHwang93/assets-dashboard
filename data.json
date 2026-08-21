@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-08-21T06:15:02.691Z",
+ "updatedAt": "2026-08-21T07:30:49.474Z",
  "updatedBy": "InBeomHwang93",
  "rows": [
   {
@@ -646,7 +646,7 @@
    "doc": "수정세금계산서",
    "amount": -1012000,
    "supply": -920000,
-   "siteRaw": "",
+   "siteRaw": "당초 승인번호 (●●●●usn9in)/기재사항 착오.정정",
    "site": "당초 승인번호 (●●●●usn9in)/기재사항 착오.정정",
    "settled": false
   },
@@ -682,7 +682,7 @@
    "doc": "세금계산서",
    "amount": 1012000,
    "supply": 920000,
-   "siteRaw": "",
+   "siteRaw": "국민 ●●●● (주)리마켓",
    "site": "국민 ●●●● (주)리마켓",
    "settled": false
   },
@@ -778,7 +778,7 @@
    "doc": "수정세금계산서",
    "amount": -1012000,
    "supply": -920000,
-   "siteRaw": "",
+   "siteRaw": "당초 승인번호 (●●●●udew)/기재사항 착오.정정",
    "site": "당초 승인번호 (●●●●udew)/기재사항 착오.정정",
    "settled": false
   },
