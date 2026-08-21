@@ -368,11 +368,17 @@
       });
   }
 
+  // 어떤 요청도 멈춘 채로 남지 않게 시간 제한을 둔다
+  function withTimeout(p, ms) {
+    return Promise.race([p, new Promise(function (_, rej) {
+      setTimeout(function () { rej(new Error("응답 없음")); }, ms);
+    })]);
+  }
   // 같은 주소를 짧은 간격으로 두 번까지 다시 시도한다 (일시적 503·네트워크 끊김 대비)
   function fetchJson(url, tries) {
     tries = tries == null ? 2 : tries;
-    return fetch(url, { cache: "no-store" })
-      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+    return withTimeout(fetch(url, { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }), 10000)
       .catch(function (e) {
         if (tries <= 1) throw e;
         return new Promise(function (res) { setTimeout(res, 900); })
@@ -380,16 +386,31 @@
       });
   }
 
-  function fetchFirst(name) {
-    var t = "?t=" + Date.now(), urls = [];
+  function urlsFor(name) {
+    var t = "?t=" + Date.now() + "-" + Math.floor(Math.random() * 1e6), urls = [];
     if (SRC.owner && SRC.repo) urls.push("https://raw.githubusercontent.com/" + SRC.owner + "/" + SRC.repo + "/" + SRC.branch + "/" + name + t);
     urls.push("./" + name + t);
-    var i = 0;
-    function tryNext() {
-      if (i >= urls.length) return Promise.reject(new Error(name + " 를 읽지 못했습니다"));
-      return fetchJson(urls[i++]).catch(tryNext);
-    }
-    return tryNext();
+    return urls;
+  }
+
+  /* 두 경로(저장소 직접 읽기 · Pages)를 동시에 읽어 updatedAt 이 더 최신인 쪽을 쓴다.
+     CDN 엣지에 따라 한쪽이 몇 분간 예전 내용을 줄 수 있어서, 둘을 비교해야 확실하다. */
+  function stampOf(j) {
+    if (!j) return -1;
+    var t = Date.parse(j.updatedAt || "");
+    return isNaN(t) ? 0 : t;
+  }
+  function fetchLatest(name) {
+    var urls = urlsFor(name);
+    return Promise.all(urls.map(function (u) {
+      return fetchJson(u).then(function (j) { return { ok: true, j: j }; })
+        .catch(function (e) { return { ok: false, e: e }; });
+    })).then(function (res) {
+      var okRes = res.filter(function (x) { return x.ok; });
+      if (!okRes.length) throw new Error(name + " 를 읽지 못했습니다 (" + (res[0].e && res[0].e.message) + ")");
+      okRes.sort(function (a, b) { return stampOf(b.j) - stampOf(a.j); });
+      return okRes[0].j;
+    });
   }
 
   /* ---------- 로드 & 자동 동기화 ---------- */
@@ -405,23 +426,34 @@
     }
     detectSource().then(function () { return refresh(true); });
   }
-  function refresh(first) {
-    if (checking) return Promise.resolve();
+  function refresh(first, manual) {
+    if (checking) {
+      // 이전 확인이 어떤 이유로든 끝나지 않았으면 수동 클릭은 강제로 다시 시작한다
+      if (!manual) return Promise.resolve();
+      checking = false;
+    }
     checking = true; setSync("checking");
     return Promise.all([
-      fetchFirst("data.json"),
-      fetchFirst("sites.json").catch(function () { return { sites: [] }; })
+      fetchLatest("data.json"),
+      fetchLatest("sites.json").catch(function () { return { sites: [] }; })
     ]).then(function (res) {
       var d = res[0] || { rows: [] };
       if (!Array.isArray(d.rows)) d.rows = [];
+      retryIdx = 0;
+      if (retryTimer) { clearTimeout(retryTimer); retryTimer = null; }
+      $("banner").hidden = true;
+      setSync("ok");
+      // 예전 내용을 들고 있는 CDN 응답 때문에 화면이 거꾸로 돌아가지 않게 막는다
+      if (booted && stampOf(d) < stampOf(DATA) && d.rows.length <= DATA.rows.length) {
+        if (manual) toast("이미 최신 상태입니다 · " + DATA.rows.length.toLocaleString("ko-KR") + "건");
+        return;
+      }
       var stamp = (d.updatedAt || "") + "|" + d.rows.length;
       var changed = lastStamp !== null && stamp !== lastStamp;
       if (first || changed || !booted) { DATA = d; SITES = res[1] || { sites: [] }; boot(); booted = true; }
-      lastStamp = stamp; setSync("ok");
-      retryIdx = 0;
-      if (retryTimer) { clearTimeout(retryTimer); retryTimer = null; }
+      lastStamp = stamp;
       if (changed) toast("새 데이터가 반영되었습니다 · " + d.rows.length.toLocaleString("ko-KR") + "건");
-      $("banner").hidden = true;
+      else if (manual) toast("이미 최신 상태입니다 · " + d.rows.length.toLocaleString("ko-KR") + "건");
     }).catch(function (e) {
       setSync("fail");
       if (!first) return;                       // 자동 확인 중 실패는 조용히 다음 주기에 맡긴다
@@ -815,7 +847,7 @@
     $("csvBtn").addEventListener("click", exportCsv);
     $("reloadBtn").addEventListener("click", function () {
       if (window.__DEMO__) { location.reload(); return; }
-      refresh(false);
+      refresh(false, true);
     });
     $("themeBtn").addEventListener("click", function () {
       var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
