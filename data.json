@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-08-21T05:40:42.036Z",
+ "updatedAt": "2026-08-21T06:15:02.691Z",
  "updatedBy": "InBeomHwang93",
  "rows": [
   {
@@ -3348,7 +3348,7 @@
    "supply": 6800000,
    "siteRaw": "가락동2층?",
    "site": "가락동2층?",
-   "settled": true
+   "settled": false
   },
   {
    "date": "2022-04-13",
