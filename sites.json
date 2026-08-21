@@ -1,5 +1,7 @@
 {
  "sites": [],
- "aliases": {},
+ "aliases": {
+  "수원 경기신용보증재단": "경기신용보증재단"
+ },
  "overrides": {}
 }
