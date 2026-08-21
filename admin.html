@@ -91,6 +91,12 @@
   :root[data-theme="dark"] .logo{filter:brightness(1.5)}
   .vrule{width:1px;height:30px;background:var(--grid);flex:0 0 auto}
   @media (max-width:640px){ .logo{height:32px} .vrule{display:none} }
+  .simgroup{border:1px solid var(--border);border-radius:9px;padding:10px 12px;margin-bottom:8px;background:var(--surface-1)}
+  .simhead{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .simhead .simname{flex:1 1 240px;max-width:420px;font-size:13px;font-weight:560}
+  .simnote{font-size:11.5px;color:var(--ink-3);margin-top:6px}
+  .simlist{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+  .simlist span{font-size:11.5px;padding:2px 8px;border-radius:20px;border:1px solid var(--border);color:var(--ink-2);background:var(--page)}
 </style>
 </head>
 <body>
@@ -176,6 +182,23 @@
       </div>
     </div>
 
+    <div class="row" style="margin-top:10px;gap:8px">
+      <input type="text" id="distQuery" placeholder="현장명 검색 (예: 창원)" style="flex:1 1 200px;max-width:280px">
+      <span class="flabel">정렬</span>
+      <div class="seg" role="group">
+        <button type="button" class="segbtn" data-distsort="amount" aria-pressed="true">금액순</button>
+        <button type="button" class="segbtn" data-distsort="name" aria-pressed="false">이름순(가나다)</button>
+      </div>
+      <div class="seg" role="group">
+        <button type="button" class="segbtn" data-distview="all" aria-pressed="true">전체</button>
+        <button type="button" class="segbtn" data-distview="raw" aria-pressed="false">아직 안 묶은 것</button>
+      </div>
+      <div class="spacer" style="flex:1 1 auto"></div>
+      <button class="btn sm" id="findSimilar" type="button">🔎 비슷한 이름 찾기</button>
+    </div>
+    <p class="note" style="margin-top:6px">이름순으로 보면 <b>창원 의창 구청현장</b> / <b>창원의창구청현장</b> 처럼 갈라진 이름이 나란히 붙어 찾기 쉽습니다.</p>
+
+    <div id="similarBox" style="margin-top:12px"></div>
     <div id="siteDist" style="margin-top:12px"></div>
     <div class="msg" id="siteMsg"></div>
 
@@ -270,6 +293,8 @@
   var rawRows = [];       // 정규화된 원본 행
   var sitesCfg = { sites: [], aliases: {}, overrides: {}, settled: {} };
   var picked = {};          // 현장 정리에서 체크한 이름
+  var distSort = "amount";  // 4번 목록 정렬 (amount | name)
+  var distView = "all";     // 4번 목록 보기 (all | raw)
   var rowView = "all";      // 5번 목록 보기 모드
   var rowQuery = "";
   var loadedFromData = false;  // 엑셀 없이 기존 data.json 을 불러온 상태
@@ -773,7 +798,9 @@
 
   /* ============ 재계산 ============ */
   function rebuild() {
-    rawRows = buildRows();
+    // 엑셀 없이 기존 데이터를 불러온 상태라면 rawRows 를 다시 만들면 안 된다.
+    // (parsed 가 비어 있어서 전부 사라진다 — 예전에 데이터가 날아간 원인)
+    if (!loadedFromData) rawRows = buildRows();
     rawRows.forEach(function (r) { r.site = matchSite(r); });
     renderDist();
     renderAliases();
@@ -791,18 +818,44 @@
     return agg;
   }
 
+  // 아직 합치기(별칭)에 한 번도 손대지 않은 이름인지
+  function isUntouched(name) {
+    if (sitesCfg.aliases[name]) return false;
+    for (var k in sitesCfg.aliases) { if (sitesCfg.aliases[k] === name) return false; }
+    return true;
+  }
+
   function renderDist() {
     var agg = siteAgg();
-    var keys = Object.keys(agg).sort(function (a, b) {
+    var all = Object.keys(agg);
+    var total = all.filter(function (k) { return k !== UNASSIGNED; }).length;
+
+    var q = (($("distQuery") || {}).value || "").trim().toLowerCase();
+    var sortBy = distSort, view = distView;
+
+    var keys = all.filter(function (k) {
+      if (q && k.toLowerCase().indexOf(q) === -1) return false;
+      if (view === "raw" && k !== UNASSIGNED && !isUntouched(k)) return false;
+      return true;
+    });
+    keys.sort(function (a, b) {
       if (a === UNASSIGNED) return 1; if (b === UNASSIGNED) return -1;
+      if (sortBy === "name") return a.localeCompare(b, "ko");
       return agg[b].sum - agg[a].sum;
     });
     // 사라진 이름은 선택 목록에서 제거
-    Object.keys(picked).forEach(function (k) { if (keys.indexOf(k) === -1) delete picked[k]; });
-    if (!keys.length) { $("siteDist").innerHTML = ""; updateMergeBar(); return; }
+    Object.keys(picked).forEach(function (k) { if (all.indexOf(k) === -1) delete picked[k]; });
+    if (!keys.length) {
+      $("siteDist").innerHTML = '<div class="note">조건에 맞는 현장이 없습니다. (전체 ' + total + '곳)</div>';
+      updateMergeBar(); return;
+    }
 
-    $("siteDist").innerHTML = '<div class="note" style="margin:0 0 6px">현재 분류 결과 · 현장 ' + (keys.length - (agg[UNASSIGNED] ? 1 : 0)) + '곳</div>'
-      + '<div class="scroll" style="max-height:300px"><table><thead><tr>'
+    var shownN = keys.filter(function (k) { return k !== UNASSIGNED; }).length;
+    $("siteDist").innerHTML = '<div class="note" style="margin:0 0 6px">현재 분류 결과 · 전체 <b>' + total + '곳</b>'
+      + (shownN !== total ? " 중 <b>" + shownN + "곳</b> 표시" : "")
+      + (Object.keys(picked).length ? ' · 선택 <b style="color:var(--s1)">' + Object.keys(picked).length + "곳</b>" : "")
+      + "</div>"
+      + '<div class="scroll" style="max-height:340px"><table><thead><tr>'
       + '<th class="sel"></th><th>현장</th><th class="num">건수</th><th class="num">합계금액</th></tr></thead><tbody>'
       + keys.map(function (k) {
         var dis = k === UNASSIGNED;
@@ -828,6 +881,87 @@
       });
     });
     updateMergeBar();
+  }
+
+  /* ===== 비슷한 이름 자동 묶기 =====
+     공백·괄호·기호를 모두 없애고, 끝에 붙은 '1차/2차' 같은 차수를 떼어낸 뒤
+     같아지는 이름들을 한 묶음으로 제안한다. 실제 합치기는 사용자가 확인하고 누른다. */
+  function similarKey(name) {
+    return String(name || "")
+      .replace(/[\s()（）\[\]{}【】·.,/\\\-_~'"’”]/g, "")
+      .replace(/\d+차$/, "")
+      .replace(/차수$/, "")
+      .toLowerCase();
+  }
+  function similarGroups() {
+    var agg = siteAgg(), buckets = {};
+    Object.keys(agg).forEach(function (name) {
+      if (name === UNASSIGNED) return;
+      var k = similarKey(name);
+      if (!k) return;
+      (buckets[k] = buckets[k] || []).push(name);
+    });
+    var groups = [];
+    Object.keys(buckets).forEach(function (k) {
+      var names = buckets[k];
+      if (names.length < 2) return;
+      // 건수가 많고 긴 이름을 대표로
+      names.sort(function (a, b) {
+        var na = agg[a].n, nb = agg[b].n;
+        if (nb !== na) return nb - na;
+        return b.length - a.length;
+      });
+      groups.push({
+        target: names[0], names: names,
+        sum: names.reduce(function (s, n) { return s + agg[n].sum; }, 0),
+        cnt: names.reduce(function (s, n) { return s + agg[n].n; }, 0)
+      });
+    });
+    groups.sort(function (a, b) { return b.sum - a.sum; });
+    return groups;
+  }
+
+  function renderSimilar() {
+    var groups = similarGroups();
+    if (!groups.length) {
+      $("similarBox").innerHTML = '<div class="msg info" style="display:block;margin:0">'
+        + "표기만 다른 같은 이름은 찾지 못했습니다. 아래 목록을 <b>이름순</b>으로 보면서 직접 골라 합쳐주세요.</div>";
+      return;
+    }
+    $("similarBox").innerHTML = '<div class="warnbox" style="margin-bottom:10px">'
+      + "<b>표기만 다른 같은 현장으로 보이는 묶음 " + groups.length + "개</b>를 찾았습니다."
+      + " 각 묶음의 이름을 확인하고 <b>합치기</b>를 누르세요. 다른 현장이면 <b>넘기기</b>를 누르면 됩니다."
+      + '<div style="margin-top:6px"><button class="btn ghost sm" id="similarClose" type="button">닫기</button></div></div>'
+      + groups.map(function (g, i) {
+        return '<div class="simgroup" data-gi="' + i + '">'
+          + '<div class="simhead"><input type="text" class="simname" value="' + esc(g.target) + '">'
+          + '<button class="btn sm" data-simmerge="' + i + '" type="button">합치기</button>'
+          + '<button class="btn ghost sm" data-simskip="' + i + '" type="button">넘기기</button></div>'
+          + '<div class="simnote">' + g.names.length + "개 · 합계 " + Math.round(g.sum).toLocaleString("ko-KR") + "원 · " + g.cnt + "건</div>"
+          + '<div class="simlist">' + g.names.map(function (n) { return "<span>" + esc(n) + "</span>"; }).join("") + "</div>"
+          + "</div>";
+      }).join("");
+
+    var gs = groups;
+    Array.prototype.forEach.call($("similarBox").querySelectorAll("[data-simmerge]"), function (b) {
+      b.addEventListener("click", function () {
+        var g = gs[+b.getAttribute("data-simmerge")];
+        var box = b.closest(".simgroup");
+        var target = box.querySelector(".simname").value.trim() || g.target;
+        var n = 0;
+        g.names.forEach(function (name) { if (name !== target) { sitesCfg.aliases[name] = target; n++; } });
+        delete sitesCfg.aliases[target];
+        persistLocalSites();
+        box.remove();
+        rebuild();
+        show("siteMsg", "ok", n + "개를 <b>" + esc(target) + "</b> 로 합쳤습니다.");
+      });
+    });
+    Array.prototype.forEach.call($("similarBox").querySelectorAll("[data-simskip]"), function (b) {
+      b.addEventListener("click", function () { b.closest(".simgroup").remove(); });
+    });
+    var cl = $("similarClose");
+    if (cl) cl.addEventListener("click", function () { $("similarBox").innerHTML = ""; });
   }
 
   function pickedList() { return Object.keys(picked); }
@@ -1155,6 +1289,29 @@
     persistLocalSites(); renderUnassigned(); renderPreview();
     $("unNote").innerHTML = n + "건의 정산 표시를 해제했습니다. " + $("unNote").innerHTML;
   });
+  var dq;
+  $("distQuery").addEventListener("input", function () {
+    clearTimeout(dq); dq = setTimeout(renderDist, 180);
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-distsort]"), function (b) {
+    b.addEventListener("click", function () {
+      distSort = b.getAttribute("data-distsort");
+      Array.prototype.forEach.call(document.querySelectorAll("[data-distsort]"), function (x) {
+        x.setAttribute("aria-pressed", String(x === b));
+      });
+      renderDist();
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-distview]"), function (b) {
+    b.addEventListener("click", function () {
+      distView = b.getAttribute("data-distview");
+      Array.prototype.forEach.call(document.querySelectorAll("[data-distview]"), function (x) {
+        x.setAttribute("aria-pressed", String(x === b));
+      });
+      renderDist();
+    });
+  });
+  $("findSimilar").addEventListener("click", renderSimilar);
   $("mergeBtn").addEventListener("click", doMerge);
   $("mergeName").addEventListener("input", function () { this.dataset.touched = "1"; });
   $("mergeName").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); doMerge(); } });
