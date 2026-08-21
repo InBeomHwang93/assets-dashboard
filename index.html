@@ -359,27 +359,42 @@
       var seg = location.pathname.split("/").filter(Boolean);
       SRC.repo = seg.length ? seg[0] : "";
     }
+    // 주소에서 알아냈으면 config.json 은 읽지 않는다 (Pages 배포 직후 503 을 돌려주는 일이 있어 실패 지점만 늘어난다)
+    if (SRC.owner && SRC.repo) return Promise.resolve();
     return fetch("./config.json?t=" + Date.now(), { cache: "no-store" })
       .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
       .then(function (c) {
         if (c && c.owner) { SRC.owner = c.owner; SRC.repo = c.repo || SRC.repo; SRC.branch = c.branch || SRC.branch; }
       });
   }
+
+  // 같은 주소를 짧은 간격으로 두 번까지 다시 시도한다 (일시적 503·네트워크 끊김 대비)
+  function fetchJson(url, tries) {
+    tries = tries == null ? 2 : tries;
+    return fetch(url, { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .catch(function (e) {
+        if (tries <= 1) throw e;
+        return new Promise(function (res) { setTimeout(res, 900); })
+          .then(function () { return fetchJson(url, tries - 1); });
+      });
+  }
+
   function fetchFirst(name) {
     var t = "?t=" + Date.now(), urls = [];
     if (SRC.owner && SRC.repo) urls.push("https://raw.githubusercontent.com/" + SRC.owner + "/" + SRC.repo + "/" + SRC.branch + "/" + name + t);
     urls.push("./" + name + t);
     var i = 0;
     function tryNext() {
-      if (i >= urls.length) return Promise.reject(new Error(name + " 를 찾을 수 없습니다"));
-      return fetch(urls[i++], { cache: "no-store" })
-        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).catch(tryNext);
+      if (i >= urls.length) return Promise.reject(new Error(name + " 를 읽지 못했습니다"));
+      return fetchJson(urls[i++]).catch(tryNext);
     }
     return tryNext();
   }
 
   /* ---------- 로드 & 자동 동기화 ---------- */
   var POLL_MS = 60000, lastStamp = null, pollTimer = null, checking = false, syncAt = null;
+  var RETRY_PLAN = [3000, 8000, 20000, 45000], retryIdx = 0, retryTimer = null, booted = false;
 
   function load() {
     if (window.__DEMO__) {
@@ -401,15 +416,28 @@
       if (!Array.isArray(d.rows)) d.rows = [];
       var stamp = (d.updatedAt || "") + "|" + d.rows.length;
       var changed = lastStamp !== null && stamp !== lastStamp;
-      if (first || changed) { DATA = d; SITES = res[1] || { sites: [] }; boot(); }
+      if (first || changed || !booted) { DATA = d; SITES = res[1] || { sites: [] }; boot(); booted = true; }
       lastStamp = stamp; setSync("ok");
+      retryIdx = 0;
+      if (retryTimer) { clearTimeout(retryTimer); retryTimer = null; }
       if (changed) toast("새 데이터가 반영되었습니다 · " + d.rows.length.toLocaleString("ko-KR") + "건");
-      if (first) $("banner").hidden = true;
+      $("banner").hidden = true;
     }).catch(function (e) {
       setSync("fail");
-      if (first) {
-        banner("데이터를 아직 불러올 수 없습니다. 관리자가 <a href='./admin.html'>업데이트 페이지</a>에서 엑셀을 한 번 올리면 표시됩니다. <span style='color:var(--ink-3)'>(" + esc(e.message) + ")</span>");
-        DATA = { rows: [] }; boot();
+      if (!first) return;                       // 자동 확인 중 실패는 조용히 다음 주기에 맡긴다
+      if (!booted) { DATA = { rows: [] }; boot(); booted = true; }
+      if (retryIdx < RETRY_PLAN.length) {
+        var wait = RETRY_PLAN[retryIdx++];
+        banner("데이터를 불러오는 중입니다… <b>" + retryIdx + "차 재시도</b> (" + Math.round(wait / 1000) + "초 후)"
+          + "<br><span style='color:var(--ink-3)'>GitHub 배포 직후에는 잠깐 이렇게 보일 수 있습니다.</span>");
+        if (retryTimer) clearTimeout(retryTimer);
+        retryTimer = setTimeout(function () { refresh(true); }, wait);
+      } else {
+        banner("데이터를 불러오지 못했습니다. <span style='color:var(--ink-3)'>(" + esc(e.message) + ")</span>"
+          + ' <button class="linkbtn" id="retryBtn" type="button">다시 시도</button>'
+          + "<br><span style='color:var(--ink-3)'>계속 이러면 사내망에서 GitHub 접속이 막혀 있는지 확인해 주세요.</span>");
+        var rb = $("retryBtn");
+        if (rb) rb.addEventListener("click", function () { retryIdx = 0; refresh(true); });
       }
     }).then(function () { checking = false; });
   }
