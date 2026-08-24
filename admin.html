@@ -273,6 +273,17 @@
       </label>
     </div>
     <div class="msg" id="pubMsg"></div>
+
+    <details id="restoreBox" style="margin-top:18px">
+      <summary style="cursor:pointer;font-size:12.5px;color:var(--ink-2)"><b>이전 시점으로 되돌리기 (데이터 복구)</b></summary>
+      <p class="cdesc" style="margin-top:10px">저장할 때마다 이력이 남습니다. 잘못 저장했더라도 아래에서 원하는 시점을 골라 되돌릴 수 있습니다.</p>
+      <div class="row" style="margin-bottom:10px">
+        <button class="btn ghost sm" id="loadBackups" type="button">저장 이력 불러오기</button>
+        <span class="note" style="margin:0">최근 20개를 건수·금액과 함께 보여줍니다.</span>
+      </div>
+      <div id="backupList"></div>
+      <div class="msg" id="restoreMsg"></div>
+    </details>
   </section>
 
   <p class="note" style="text-align:center">
@@ -285,6 +296,9 @@
   "use strict";
   var $ = function (id) { return document.getElementById(id); };
   var UNASSIGNED = "미지정";
+  // 이 화면 파일의 판 번호. 저장 직전에 서버의 판 번호와 비교해서
+  // 오래 열어둔 탭(예전 코드)이 데이터를 덮어쓰는 것을 막는다.
+  var BUILD = "2026-08-24a";
 
   var cfg = { owner: "", repo: "", branch: "main", token: "" };
   var parsed = [];        // {sheetName, header:[], rows:[[]]}
@@ -1179,6 +1193,19 @@
     a.download = name; a.click(); URL.revokeObjectURL(a.href);
   }
 
+  /* 이 탭이 최신 화면 파일로 돌고 있는지 확인한다.
+     탭을 며칠씩 열어두면 예전 코드가 그대로 남아 안전장치 없이 저장될 수 있다. */
+  function checkFresh() {
+    return fetch("./admin.html?t=" + Date.now(), { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.text() : null; })
+      .then(function (t) {
+        if (!t) return true;                       // 확인 불가면 통과
+        var m = t.match(/var BUILD = "([^"]+)"/);
+        return !m || m[1] === BUILD;
+      })
+      .catch(function () { return true; });
+  }
+
   function publish() {
     readCfg();
     if (!cfg.owner || !cfg.repo || !cfg.token) {
@@ -1189,7 +1216,13 @@
     show("pubMsg", "info", "저장소의 현재 데이터를 확인하는 중…");
 
     // 항상 저장소의 최신 상태를 먼저 읽는다 (누적 계산과 안전장치가 이 값에 달려 있다)
-    readJsonFile("data.json").then(function (r) {
+    checkFresh().then(function (fresh) {
+      if (!fresh) {
+        throw new Error("SAFE|<b>이 화면은 예전 버전입니다.</b> 오래 열어둔 탭에서 저장하면 데이터가 잘못 덮어써질 수 있어 중단했습니다."
+          + "<br><b>Ctrl + Shift + R</b> 로 새로고침한 뒤 다시 진행해 주세요.");
+      }
+      return readJsonFile("data.json");
+    }).then(function (r) {
       if (r.error) throw new Error("현재 데이터를 확인할 수 없어 중단했습니다: " + r.error);
       if (r.json && Array.isArray(r.json.rows)) existing = r.json;
 
@@ -1226,6 +1259,87 @@
       if (m.indexOf("SAFE|") === 0) show("pubMsg", "err", m.slice(5));
       else show("pubMsg", "err", "실패: " + esc(m));
     }).then(function () { $("publishBtn").disabled = false; });
+  }
+
+  /* ============ 데이터 복구 ============ */
+  var backupCache = [];
+
+  function loadBackups() {
+    readCfg();
+    if (!cfg.owner || !cfg.repo) { show("restoreMsg", "err", "1번 칸의 아이디와 저장소 이름을 먼저 입력해 주세요."); return; }
+    show("restoreMsg", "info", "저장 이력을 불러오는 중…");
+    api("/commits?path=data.json&per_page=20").then(function (list) {
+      if (!list || !list.length) { show("restoreMsg", "err", "저장 이력이 없습니다."); return; }
+      // 각 시점의 내용을 sha 로 직접 읽는다 (sha 주소는 절대 바뀌지 않아 안전하다)
+      return Promise.all(list.map(function (c) {
+        var url = "https://raw.githubusercontent.com/" + cfg.owner + "/" + cfg.repo + "/" + c.sha + "/data.json";
+        return fetch(url).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
+          .then(function (j) {
+            var rows = (j && Array.isArray(j.rows)) ? j.rows : null;
+            return {
+              sha: c.sha,
+              when: (c.commit && c.commit.committer && c.commit.committer.date) || "",
+              n: rows ? rows.length : -1,
+              sum: rows ? rows.reduce(function (s, x) { return s + (x.amount || 0); }, 0) : 0,
+              sites: rows ? Object.keys(rows.reduce(function (m, x) { m[x.site || "미지정"] = 1; return m; }, {})).length : 0
+            };
+          });
+      })).then(function (rows) { backupCache = rows; renderBackups(); show("restoreMsg", "info", rows.length + "개 시점을 불러왔습니다."); });
+    }).catch(function (e) { show("restoreMsg", "err", "불러오기 실패: " + esc(e.message)); });
+  }
+
+  function renderBackups() {
+    var cur = backupCache.length ? backupCache[0] : null;
+    $("backupList").innerHTML = '<div class="scroll" style="max-height:320px"><table><thead><tr>'
+      + "<th>저장 시각</th><th class=num>건수</th><th class=num>총액</th><th class=num>현장</th><th></th></tr></thead><tbody>"
+      + backupCache.map(function (b, i) {
+        var t = b.when ? new Date(b.when).toLocaleString("ko-KR") : "-";
+        var bad = b.n === 0;
+        return "<tr" + (bad ? ' style="color:var(--crit)"' : "") + ">"
+          + "<td>" + esc(t) + (i === 0 ? " <b>(현재)</b>" : "") + "</td>"
+          + '<td class="num">' + (b.n < 0 ? "?" : b.n.toLocaleString("ko-KR")) + "</td>"
+          + '<td class="num">' + Math.round(b.sum).toLocaleString("ko-KR") + "</td>"
+          + '<td class="num">' + (b.n < 0 ? "-" : b.sites) + "</td>"
+          + "<td>" + (i === 0 || b.n <= 0 ? "" : '<button class="btn ghost sm" data-restore="' + b.sha + '" type="button">이 시점으로 되돌리기</button>') + "</td>"
+          + "</tr>";
+      }).join("") + "</tbody></table></div>";
+    Array.prototype.forEach.call($("backupList").querySelectorAll("[data-restore]"), function (btn) {
+      btn.addEventListener("click", function () { restoreBackup(btn.getAttribute("data-restore"), btn); });
+    });
+    if (cur && cur.n === 0) {
+      show("restoreMsg", "err", "<b>현재 데이터가 0건입니다.</b> 위 목록에서 건수가 있는 시점을 골라 <b>되돌리기</b>를 누르세요.");
+    }
+  }
+
+  function restoreBackup(sha, btn) {
+    readCfg();
+    if (!cfg.token) { show("restoreMsg", "err", "되돌리려면 1번 칸에 토큰이 필요합니다."); return; }
+    var b = backupCache.filter(function (x) { return x.sha === sha; })[0];
+    if (!b) return;
+    if (btn.dataset.armed !== "1") {
+      btn.dataset.armed = "1";
+      btn.textContent = "정말 되돌립니다 (다시 클릭)";
+      show("restoreMsg", "info", "<b>" + new Date(b.when).toLocaleString("ko-KR") + "</b> 시점의 <b>"
+        + b.n.toLocaleString("ko-KR") + "건 · " + Math.round(b.sum).toLocaleString("ko-KR") + "원</b> 으로 되돌립니다. 버튼을 한 번 더 누르세요.");
+      return;
+    }
+    btn.disabled = true;
+    show("restoreMsg", "info", "되돌리는 중…");
+    var url = "https://raw.githubusercontent.com/" + cfg.owner + "/" + cfg.repo + "/" + sha + "/data.json";
+    fetch(url).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function (j) {
+        if (!j || !Array.isArray(j.rows) || !j.rows.length) throw new Error("그 시점 데이터가 비어 있습니다");
+        j.updatedAt = new Date().toISOString();
+        j.updatedBy = cfg.owner || "관리자";
+        return putFile("data.json", JSON.stringify(j, null, 1),
+          "데이터 되돌리기 → " + new Date(b.when).toLocaleString("ko-KR") + " (" + j.rows.length + "건)");
+      })
+      .then(function () {
+        show("restoreMsg", "ok", "되돌렸습니다 · <b>" + b.n.toLocaleString("ko-KR") + "건 · "
+          + Math.round(b.sum).toLocaleString("ko-KR") + "원</b> · <a href='./index.html'>대시보드</a>에서 확인하세요.");
+        loadBackups();
+      })
+      .catch(function (e) { show("restoreMsg", "err", "실패: " + esc(e.message)); btn.disabled = false; });
   }
 
   /* ============ 이벤트 ============ */
@@ -1312,6 +1426,7 @@
     });
   });
   $("findSimilar").addEventListener("click", renderSimilar);
+  $("loadBackups").addEventListener("click", loadBackups);
   $("mergeBtn").addEventListener("click", doMerge);
   $("mergeName").addEventListener("input", function () { this.dataset.touched = "1"; });
   $("mergeName").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); doMerge(); } });
