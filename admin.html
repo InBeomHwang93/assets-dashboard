@@ -110,6 +110,16 @@
     </div>
   </div>
 
+  <section class="card" style="border-color:color-mix(in srgb,var(--s1) 35%,transparent)">
+    <h2>지금 작업할 자료 구분</h2>
+    <p class="cdesc">구분마다 데이터가 따로 저장됩니다. <b>먼저 여기서 고른 뒤</b> 아래 단계를 진행하세요.</p>
+    <div class="seg" role="group">
+      <button type="button" class="segbtn" data-cat="assets" aria-pressed="true">집기비품</button>
+      <button type="button" class="segbtn" data-cat="safety" aria-pressed="false">안전용품</button>
+    </div>
+    <div class="msg info" id="catMsg" style="display:block">현재 <b>집기비품</b> 자료를 다루고 있습니다. (data.json)</div>
+  </section>
+
   <!-- STEP 1 : 저장소 -->
   <section class="card">
     <h2><span class="step">1</span>저장 위치 (GitHub)</h2>
@@ -303,7 +313,15 @@
   var UNASSIGNED = "미지정";
   // 이 화면 파일의 판 번호. 저장 직전에 서버의 판 번호와 비교해서
   // 오래 열어둔 탭(예전 코드)이 데이터를 덮어쓰는 것을 막는다.
-  var BUILD = "2026-08-24a";
+  var BUILD = "2026-08-25a";
+
+  /* ---------- 자료 구분 ---------- */
+  var CATS = {
+    assets: { label: "집기비품", data: "data.json",        sites: "sites.json" },
+    safety: { label: "안전용품", data: "data-safety.json", sites: "sites-safety.json" }
+  };
+  var CAT = "assets";
+  function F(kind) { return CATS[CAT][kind]; }   // 지금 구분의 파일 이름
 
   var cfg = { owner: "", repo: "", branch: "main", token: "" };
   var parsed = [];        // {sheetName, header:[], rows:[[]]}
@@ -489,7 +507,7 @@
       return;
     }
     show("upMsg", "info", "이미 올린 데이터를 불러오는 중…");
-    readJsonFile("data.json").then(function (r) {
+    readJsonFile(F("data")).then(function (r) {
       if (r.error) {
         show("upMsg", "err", "불러오지 못했습니다: " + esc(r.error)
           + "<br><span style='color:var(--ink-3)'>아이디·저장소 이름을 확인하고, 사내망에서 GitHub 접속이 막혀 있지 않은지 보세요.</span>");
@@ -677,7 +695,7 @@
   /* ============ 현장 규칙 ============ */
   function loadSitesCfg() {
     if (!cfg.owner || !cfg.repo) { restoreLocalSites(); return Promise.resolve(); }
-    return getFile("sites.json").then(function (f) {
+    return getFile(F("sites")).then(function (f) {
       if (f) {
         try {
           var j = JSON.parse(f.text);
@@ -1226,7 +1244,7 @@
         throw new Error("SAFE|<b>이 화면은 예전 버전입니다.</b> 오래 열어둔 탭에서 저장하면 데이터가 잘못 덮어써질 수 있어 중단했습니다."
           + "<br><b>Ctrl + Shift + R</b> 로 새로고침한 뒤 다시 진행해 주세요.");
       }
-      return readJsonFile("data.json");
+      return readJsonFile(F("data"));
     }).then(function (r) {
       if (r.error) throw new Error("현재 데이터를 확인할 수 없어 중단했습니다: " + r.error);
       if (r.json && Array.isArray(r.json.rows)) existing = r.json;
@@ -1250,8 +1268,8 @@
 
       var stamp = new Date().toLocaleString("ko-KR");
       show("pubMsg", "info", "저장 중… (" + rowsNow.length.toLocaleString("ko-KR") + "건)");
-      return putFile("data.json", dataJson(), "집기비품 데이터 업데이트 " + stamp)
-        .then(function () { return putFile("sites.json", sitesJson(), "현장 분류 규칙 업데이트 " + stamp); })
+      return putFile(F("data"), dataJson(), CATS[CAT].label + " 데이터 업데이트 " + stamp)
+        .then(function () { return putFile(F("sites"), sitesJson(), CATS[CAT].label + " 현장 분류 규칙 업데이트 " + stamp); })
         .then(function () {
           $("shrinkBox").classList.add("hide");
           $("confirmShrink").checked = false;
@@ -1273,11 +1291,11 @@
     readCfg();
     if (!cfg.owner || !cfg.repo) { show("restoreMsg", "err", "1번 칸의 아이디와 저장소 이름을 먼저 입력해 주세요."); return; }
     show("restoreMsg", "info", "저장 이력을 불러오는 중…");
-    api("/commits?path=data.json&per_page=20").then(function (list) {
+    api("/commits?path=" + F("data") + "&per_page=20").then(function (list) {
       if (!list || !list.length) { show("restoreMsg", "err", "저장 이력이 없습니다."); return; }
       // 각 시점의 내용을 sha 로 직접 읽는다 (sha 주소는 절대 바뀌지 않아 안전하다)
       return Promise.all(list.map(function (c) {
-        var url = "https://raw.githubusercontent.com/" + cfg.owner + "/" + cfg.repo + "/" + c.sha + "/data.json";
+        var url = "https://raw.githubusercontent.com/" + cfg.owner + "/" + cfg.repo + "/" + c.sha + "/" + F("data");
         return fetch(url).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
           .then(function (j) {
             var rows = (j && Array.isArray(j.rows)) ? j.rows : null;
@@ -1330,13 +1348,13 @@
     }
     btn.disabled = true;
     show("restoreMsg", "info", "되돌리는 중…");
-    var url = "https://raw.githubusercontent.com/" + cfg.owner + "/" + cfg.repo + "/" + sha + "/data.json";
+    var url = "https://raw.githubusercontent.com/" + cfg.owner + "/" + cfg.repo + "/" + sha + "/" + F("data");
     fetch(url).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
       .then(function (j) {
         if (!j || !Array.isArray(j.rows) || !j.rows.length) throw new Error("그 시점 데이터가 비어 있습니다");
         j.updatedAt = new Date().toISOString();
         j.updatedBy = cfg.owner || "관리자";
-        return putFile("data.json", JSON.stringify(j, null, 1),
+        return putFile(F("data"), JSON.stringify(j, null, 1),
           "데이터 되돌리기 → " + new Date(b.when).toLocaleString("ko-KR") + " (" + j.rows.length + "건)");
       })
       .then(function () {
@@ -1359,7 +1377,7 @@
     if (!cfg.owner || !cfg.repo) { show("cfgMsg", "err", "아이디와 저장소 이름을 입력해 주세요."); return; }
     show("cfgMsg", "info", "확인 중…");
     api("").then(function (j) {
-      return getFile("data.json").then(function (f) {
+      return getFile(F("data")).then(function (f) {
         if (f) { try { existing = JSON.parse(f.text); } catch (e) { existing = null; } }
         show("cfgMsg", "ok", "연결 성공: <b>" + esc(j.full_name) + "</b>"
           + (cfg.token ? " · 쓰기 토큰 확인" : " · 토큰 없음(읽기만)")
@@ -1432,6 +1450,36 @@
   });
   $("findSimilar").addEventListener("click", renderSimilar);
   $("loadBackups").addEventListener("click", loadBackups);
+
+  /* 자료 구분 전환 — 고르면 작업 중이던 내용을 비우고 처음부터 시작한다 */
+  Array.prototype.forEach.call(document.querySelectorAll("[data-cat]"), function (b) {
+    b.addEventListener("click", function () {
+      var c = b.getAttribute("data-cat");
+      if (c === CAT) return;
+      CAT = c;
+      try { localStorage.setItem("admin-cat", c); } catch (e) {}
+      Array.prototype.forEach.call(document.querySelectorAll("[data-cat]"), function (x) {
+        x.setAttribute("aria-pressed", String(x.getAttribute("data-cat") === CAT));
+      });
+      // 이전 구분의 작업 내용이 섞이지 않게 완전히 초기화
+      parsed = []; columns = []; mapping = {}; rawRows = [];
+      existing = null; loadedFromData = false; picked = {};
+      sitesCfg = { sites: [], aliases: {}, overrides: {}, settled: {} };
+      ["mapCard", "siteCard", "unCard", "pubCard"].forEach(function (id) { $(id).classList.add("hide"); });
+      ["upMsg", "siteMsg", "pubMsg", "restoreMsg"].forEach(function (id) { $(id).className = "msg"; $(id).innerHTML = ""; });
+      $("similarBox").innerHTML = ""; $("backupList").innerHTML = "";
+      $("file").value = "";
+      show("catMsg", "info", "현재 <b>" + CATS[CAT].label + "</b> 자료를 다루고 있습니다. (" + F("data") + ")");
+      if (cfg.owner && cfg.repo) $("testCfg").click();
+    });
+  });
+  try {
+    var savedCat = localStorage.getItem("admin-cat");
+    if (savedCat && CATS[savedCat] && savedCat !== CAT) {
+      var tgt = document.querySelector('[data-cat="' + savedCat + '"]');
+      if (tgt) tgt.click();
+    }
+  } catch (e) {}
   $("mergeBtn").addEventListener("click", doMerge);
   $("mergeName").addEventListener("input", function () { this.dataset.touched = "1"; });
   $("mergeName").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); doMerge(); } });
@@ -1457,8 +1505,8 @@
   $("useNoteFallback").addEventListener("change", rebuild);
   $("mergeMode").addEventListener("change", renderPreview);
   $("publishBtn").addEventListener("click", publish);
-  $("dlData").addEventListener("click", function () { download("data.json", dataJson()); });
-  $("dlSites").addEventListener("click", function () { download("sites.json", sitesJson()); });
+  $("dlData").addEventListener("click", function () { download(F("data"), dataJson()); });
+  $("dlSites").addEventListener("click", function () { download(F("sites"), sitesJson()); });
   $("themeBtn").addEventListener("click", function () {
     var cur = document.documentElement.getAttribute("data-theme");
     document.documentElement.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
