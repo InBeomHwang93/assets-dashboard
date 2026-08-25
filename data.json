@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-08-25T07:16:21.663Z",
+ "updatedAt": "2026-08-25T07:23:04.579Z",
  "updatedBy": "InBeomHwang93",
  "rows": [
   {
@@ -2891,7 +2891,7 @@
    "amount": -138600,
    "supply": -126000,
    "siteRaw": "서울본사/기재사항 착오.정정",
-   "site": "서울본사/기재사항 착오.정정",
+   "site": "대동빌딩_본사",
    "settled": false
   },
   {
