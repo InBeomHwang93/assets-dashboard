@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-08-26T01:19:33.133Z",
+ "updatedAt": "2026-08-26T01:48:39.224Z",
  "updatedBy": "InBeomHwang93",
  "rows": [
   {
@@ -10,9 +10,10 @@
    "doc": "세금계산서",
    "amount": 1320000,
    "supply": 1200000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
-   "settled": false
+   "settled": false,
+   "hidden": true
   },
   {
    "date": "2026-08-07",
@@ -22,9 +23,10 @@
    "doc": "세금계산서",
    "amount": 2358400,
    "supply": 2144000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
-   "settled": false
+   "settled": false,
+   "hidden": true
   },
   {
    "date": "2026-07-27",
@@ -34,9 +36,10 @@
    "doc": "세금계산서",
    "amount": 3025000,
    "supply": 2750000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
-   "settled": false
+   "settled": false,
+   "hidden": true
   },
   {
    "date": "2026-07-27",
@@ -46,9 +49,10 @@
    "doc": "세금계산서",
    "amount": 2200000,
    "supply": 2000000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
-   "settled": false
+   "settled": false,
+   "hidden": true
   },
   {
    "date": "2026-07-24",
@@ -58,9 +62,10 @@
    "doc": "세금계산서",
    "amount": 1849100,
    "supply": 1681000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
-   "settled": false
+   "settled": false,
+   "hidden": true
   },
   {
    "date": "2026-07-20",
@@ -70,9 +75,10 @@
    "doc": "세금계산서",
    "amount": 86790000,
    "supply": 78900000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
-   "settled": false
+   "settled": false,
+   "hidden": true
   },
   {
    "date": "2026-07-09",
@@ -82,9 +88,10 @@
    "doc": "세금계산서",
    "amount": 148280,
    "supply": 134800,
-   "siteRaw": "",
+   "siteRaw": "LH_군포대야미 A-2BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_군포대야미 A-2BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -94,9 +101,10 @@
    "doc": "세금계산서",
    "amount": 124080,
    "supply": 112800,
-   "siteRaw": "",
+   "siteRaw": "LH_남양주왕숙 A-3,B-1,B-2BL(민간참여) 시공단계 감독권한대행 등 통합건설사업관리용역",
    "site": "LH_남양주왕숙 A-3,B-1,B-2BL(민간참여) 시공단계 감독권한대행 등 통합건설사업관리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -106,9 +114,10 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "경부선 밀양역 신축공사 감독 권한대행 등 건설사업관리용역",
    "site": "경부선 밀양역 신축공사 감독 권한대행 등 건설사업관리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -118,9 +127,10 @@
    "doc": "세금계산서",
    "amount": 204600,
    "supply": 186000,
-   "siteRaw": "",
+   "siteRaw": "LH_충남도청이전도시 RH15BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_충남도청이전도시 RH15BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -130,9 +140,10 @@
    "doc": "세금계산서",
    "amount": 27500,
    "supply": 25000,
-   "siteRaw": "",
+   "siteRaw": "배곧서울대학교병원 건립공사 설계 및 시공단계 감독권한대행 건설사업관리용역",
    "site": "배곧서울대학교병원 건립공사 설계 및 시공단계 감독권한대행 건설사업관리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -142,9 +153,10 @@
    "doc": "세금계산서",
    "amount": 154000,
    "supply": 140000,
-   "siteRaw": "",
+   "siteRaw": "고려대학교 안암병원 본관 1,2병동외벽 리모델링 및 수술부 증축공사 감리용역",
    "site": "고려대학교 안암병원 본관 1,2병동외벽 리모델링 및 수술부 증축공사 감리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -154,9 +166,10 @@
    "doc": "세금계산서",
    "amount": 88990,
    "supply": 80900,
-   "siteRaw": "",
+   "siteRaw": "SK하이닉스 M14 층간리프트(2호기) 설치 관련 종합감리용역",
    "site": "SK하이닉스 M14 층간리프트(2호기) 설치 관련 종합감리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -166,9 +179,10 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "우즈베키스탄 타슈켄트 종합병원 건립공사 컨설팅 용역(EDCF)",
    "site": "우즈베키스탄 타슈켄트 종합병원 건립공사 컨설팅 용역(EDCF)",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -178,9 +192,10 @@
    "doc": "세금계산서",
    "amount": 417670,
    "supply": 379700,
-   "siteRaw": "",
+   "siteRaw": "LH_성남복정2 A-1BL 아파트 건설공사 1공구 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_성남복정2 A-1BL 아파트 건설공사 1공구 시공단계 감독권한대행 등 건설사업관리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -190,9 +205,10 @@
    "doc": "세금계산서",
    "amount": 173580,
    "supply": 157800,
-   "siteRaw": "",
+   "siteRaw": "LH_ 인천계양 A6BL, A9BL, A10BL 아파트 건설공사 시공단계 감독권한대행 등 (통합)건설사업관리용역",
    "site": "LH_ 인천계양 A6BL, A9BL, A10BL 아파트 건설공사 시공단계 감독권한대행 등 (통합)건설사업관리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -202,9 +218,10 @@
    "doc": "세금계산서",
    "amount": 72490,
    "supply": 65900,
-   "siteRaw": "",
+   "siteRaw": "LH_고양장항 S-1BL 및 S-2BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_고양장항 S-1BL 및 S-2BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -214,9 +231,10 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "LH_울산다운2 A-1, 2, 10BL 아파트 시공단계 감독권한대행 등 (통합)건설사업관리용역",
    "site": "LH_울산다운2 A-1, 2, 10BL 아파트 시공단계 감독권한대행 등 (통합)건설사업관리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -226,9 +244,10 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "곤지암역세권 A1-1BL 공동주택 신축공사 감리용역",
    "site": "곤지암역세권 A1-1BL 공동주택 신축공사 감리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -238,9 +257,10 @@
    "doc": "세금계산서",
    "amount": 459800,
    "supply": 418000,
-   "siteRaw": "",
+   "siteRaw": "고려대학교 안암병원 본관 1,2병동외벽 리모델링 및 수술부 증축공사 감리용역",
    "site": "고려대학교 안암병원 본관 1,2병동외벽 리모델링 및 수술부 증축공사 감리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -250,9 +270,10 @@
    "doc": "세금계산서",
    "amount": 90090,
    "supply": 81900,
-   "siteRaw": "",
+   "siteRaw": "청주 사직1구역 재개발사업 공동주택 신축공사",
    "site": "청주 사직1구역 재개발사업 공동주택 신축공사",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -262,9 +283,10 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "방배삼호아파트12동13동가로주택정비사업",
    "site": "방배삼호아파트12동13동가로주택정비사업",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -274,9 +296,10 @@
    "doc": "세금계산서",
    "amount": 130900,
    "supply": 119000,
-   "siteRaw": "",
+   "siteRaw": "경부선 밀양역 신축공사 감독 권한대행 등 건설사업관리용역",
    "site": "경부선 밀양역 신축공사 감독 권한대행 등 건설사업관리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -286,9 +309,10 @@
    "doc": "세금계산서",
    "amount": 27500,
    "supply": 25000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -298,9 +322,10 @@
    "doc": "세금계산서",
    "amount": 25300,
    "supply": 23000,
-   "siteRaw": "",
+   "siteRaw": "LH_부천종합운동장역세권 A-1BL, A-2BL 아파트 건설공사 및 부천역곡 A-2BL 민간참여 아파트 건설공사 시공단계 감독권한대행 등 (통합)건설사업관리용역",
    "site": "LH_부천종합운동장역세권 A-1BL, A-2BL 아파트 건설공사 및 부천역곡 A-2BL 민간참여 아파트 건설공사 시공단계 감독권한대행 등 (통합)건설사업관리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -310,9 +335,10 @@
    "doc": "세금계산서",
    "amount": 166980,
    "supply": 151800,
-   "siteRaw": "",
+   "siteRaw": "광주시 쌍령공원 민간공원특례사업 2단지 공동주택 신축공사 감리용역",
    "site": "광주시 쌍령공원 민간공원특례사업 2단지 공동주택 신축공사 감리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -322,9 +348,10 @@
    "doc": "세금계산서",
    "amount": 68640,
    "supply": 62400,
-   "siteRaw": "",
+   "siteRaw": "LH_고양장항 S-1BL 및 S-2BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_고양장항 S-1BL 및 S-2BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -334,9 +361,10 @@
    "doc": "세금계산서",
    "amount": 79640,
    "supply": 72400,
-   "siteRaw": "",
+   "siteRaw": "LH_시흥하중 A-1BL 및 A-4BL 아파트 시공단계 감독권한대행 등 (통합)건설사업관리용역",
    "site": "LH_시흥하중 A-1BL 및 A-4BL 아파트 시공단계 감독권한대행 등 (통합)건설사업관리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -346,9 +374,10 @@
    "doc": "세금계산서",
    "amount": 148280,
    "supply": 134800,
-   "siteRaw": "",
+   "siteRaw": "LH_충남도청이전도시 RH15BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_충남도청이전도시 RH15BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -358,9 +387,10 @@
    "doc": "세금계산서",
    "amount": 256300,
    "supply": 233000,
-   "siteRaw": "",
+   "siteRaw": "LH_양산사송 A-6BL 및 B-1BL 민간참여 아파트 건설공사 시공단계 감독권한대행 등 (통합)건설사업관리용역",
    "site": "LH_양산사송 A-6BL 및 B-1BL 민간참여 아파트 건설공사 시공단계 감독권한대행 등 (통합)건설사업관리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -370,9 +400,10 @@
    "doc": "세금계산서",
    "amount": 79640,
    "supply": 72400,
-   "siteRaw": "",
+   "siteRaw": "LH_시흥하중 A-1BL 및 A-4BL 아파트 시공단계 감독권한대행 등 (통합)건설사업관리용역",
    "site": "LH_시흥하중 A-1BL 및 A-4BL 아파트 시공단계 감독권한대행 등 (통합)건설사업관리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -382,9 +413,10 @@
    "doc": "세금계산서",
    "amount": 217470,
    "supply": 197700,
-   "siteRaw": "",
+   "siteRaw": "LH_평택고덕국제화계획 Ab-31BL, Aa-34BL 및 Ab-35BL 민간참여 아파트 건설공사 시공단계 감독권한대행 등 (통합)건설사업관리용역",
    "site": "LH_평택고덕국제화계획 Ab-31BL, Aa-34BL 및 Ab-35BL 민간참여 아파트 건설공사 시공단계 감독권한대행 등 (통합)건설사업관리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -394,9 +426,10 @@
    "doc": "세금계산서",
    "amount": 124080,
    "supply": 112800,
-   "siteRaw": "",
+   "siteRaw": "해운대 舊한진CY부지 복합개발사업",
    "site": "해운대 舊한진CY부지 복합개발사업",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -406,9 +439,10 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "본사_공공주택본부",
    "site": "본사_공공주택본부",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -418,9 +452,10 @@
    "doc": "세금계산서",
    "amount": 112640,
    "supply": 102400,
-   "siteRaw": "",
+   "siteRaw": "시흥 거모지구 B-1블록 공동주택 신축공사 전기감리 용역",
    "site": "시흥 거모지구 B-1블록 공동주택 신축공사 전기감리 용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -430,9 +465,10 @@
    "doc": "세금계산서",
    "amount": 27500,
    "supply": 25000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -442,9 +478,10 @@
    "doc": "세금계산서",
    "amount": 7150,
    "supply": 6500,
-   "siteRaw": "",
+   "siteRaw": "LH_ 인천계양 A6BL, A9BL, A10BL 아파트 건설공사 시공단계 감독권한대행 등 (통합)건설사업관리용역",
    "site": "LH_ 인천계양 A6BL, A9BL, A10BL 아파트 건설공사 시공단계 감독권한대행 등 (통합)건설사업관리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -454,9 +491,10 @@
    "doc": "세금계산서",
    "amount": 79640,
    "supply": 72400,
-   "siteRaw": "",
+   "siteRaw": "SK하이닉스 M14 층간리프트(2호기) 설치 관련 종합감리용역",
    "site": "SK하이닉스 M14 층간리프트(2호기) 설치 관련 종합감리용역",
-   "settled": false
+   "settled": false,
+   "hidden": false
   },
   {
    "date": "2026-07-09",
@@ -466,9 +504,10 @@
    "doc": "세금계산서",
    "amount": 130680,
    "supply": 118800,
-   "siteRaw": "",
+   "siteRaw": "몽골 공공주택(솔롱고 1,2단지) 건설사업 컨설팅용역(EDCF)",
    "site": "몽골 공공주택(솔롱고 1,2단지) 건설사업 컨설팅용역(EDCF)",
-   "settled": false
+   "settled": false,
+   "hidden": false
   }
  ]
 }
