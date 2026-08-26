@@ -517,6 +517,8 @@
     ]).then(function (r) {
       var d = r[0] || { rows: [] };
       if (!Array.isArray(d.rows)) d.rows = [];
+      // 관리자가 숨김으로 지정한 건은 화면·집계·내려받기 어디에도 넣지 않는다
+      d.rows = d.rows.filter(function (row) { return row.hidden !== true; });
       d.rows.forEach(function (row) { row.cat = cat; });
       return [d, r[1] || { sites: [] }];
     });

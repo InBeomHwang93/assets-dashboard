@@ -244,7 +244,7 @@
   <!-- STEP 5 : 건별 현장 수정 · 정산 -->
   <section class="card hide" id="unCard">
     <h2><span class="step">5</span>건별 현장 수정 · 정산 체크</h2>
-    <p class="cdesc">현장명을 직접 고치거나 정산 완료를 체크합니다. 맨 오른쪽 <b>✕</b> 를 누르면 그 건을 삭제할 수 있습니다(<b>되돌리기</b> 로 취소). 여기서 지정한 내용은 <b>다음 업로드에도 그대로 유지</b>됩니다.</p>
+    <p class="cdesc">현장명을 직접 고치거나 정산 완료를 체크합니다. <b>🙈</b> 는 협업부서 대시보드에서만 가리는 표시이고(총액·건수에서도 빠집니다), <b>✕</b> 는 그 건을 아예 삭제합니다. 둘 다 <b>되돌리기</b> 가 됩니다. 여기서 지정한 내용은 <b>다음 업로드에도 그대로 유지</b>됩니다.</p>
 
     <div class="mergebar" style="margin-bottom:12px">
       <div class="row" style="gap:6px">
@@ -253,6 +253,7 @@
           <button type="button" class="segbtn" data-rowview="all" aria-pressed="true">전체</button>
           <button type="button" class="segbtn" data-rowview="un" aria-pressed="false">현장 미지정</button>
           <button type="button" class="segbtn" data-rowview="open" aria-pressed="false">미정산</button>
+          <button type="button" class="segbtn" data-rowview="hidden" aria-pressed="false">숨김</button>
         </div>
       </div>
       <input type="text" id="rowQuery" placeholder="거래처·품목·현장 검색" style="flex:1 1 200px;max-width:280px">
@@ -265,7 +266,8 @@
 
     <div class="scroll" style="max-height:420px"><table><thead><tr>
       <th>일자</th><th>거래처</th><th>품목/비고</th><th class="num">금액</th>
-      <th style="min-width:190px">현장</th><th style="width:88px">정산 완료</th><th style="width:64px">삭제</th>
+      <th style="min-width:190px">현장</th><th style="width:88px">정산 완료</th>
+      <th style="width:72px">숨김</th><th style="width:64px">삭제</th>
     </tr></thead><tbody id="unBody"></tbody></table></div>
     <datalist id="siteNames"></datalist>
     <div class="note" id="unNote"></div>
@@ -314,7 +316,7 @@
   var UNASSIGNED = "미지정";
   // 이 화면 파일의 판 번호. 저장 직전에 서버의 판 번호와 비교해서
   // 오래 열어둔 탭(예전 코드)이 데이터를 덮어쓰는 것을 막는다.
-  var BUILD = "2026-08-26b";
+  var BUILD = "2026-08-26c";
 
   /* ---------- 자료 구분 ---------- */
   var CATS = {
@@ -329,7 +331,7 @@
   var columns = [];       // 통합 컬럼 후보 이름
   var mapping = {};       // field -> column name
   var rawRows = [];       // 정규화된 원본 행
-  var sitesCfg = { sites: [], aliases: {}, overrides: {}, settled: {}, deleted: {} };
+  var sitesCfg = { sites: [], aliases: {}, overrides: {}, settled: {}, deleted: {}, hidden: {} };
   var picked = {};          // 현장 정리에서 체크한 이름
   var distSort = "amount";  // 4번 목록 정렬 (amount | name)
   var distView = "all";     // 4번 목록 보기 (all | raw)
@@ -743,6 +745,7 @@
           sitesCfg.overrides = j.overrides || {};
           sitesCfg.settled = j.settled || {};
           sitesCfg.deleted = j.deleted || {};
+          sitesCfg.hidden = j.hidden || {};
           return;
         } catch (e) {}
       }
@@ -758,6 +761,7 @@
         sitesCfg.sites = j.sites || []; sitesCfg.aliases = j.aliases || {};
         sitesCfg.overrides = j.overrides || {}; sitesCfg.settled = j.settled || {};
         sitesCfg.deleted = j.deleted || {};
+        sitesCfg.hidden = j.hidden || {};
       }
     } catch (e) {}
   }
@@ -1114,6 +1118,7 @@
 
   function isSettled(r) { return sitesCfg.settled[keyOf(r)] === true; }
   function isDeleted(r) { return sitesCfg.deleted[keyOf(r)] === true; }
+  function isHidden(r) { return sitesCfg.hidden[keyOf(r)] === true; }
 
   function knownSiteNames() {
     var names = {};
@@ -1128,6 +1133,7 @@
     return rawRows.filter(function (r) {
       if (rowView === "un" && r.site) return false;
       if (rowView === "open" && isSettled(r)) return false;
+      if (rowView === "hidden" && !isHidden(r)) return false;
       if (q) {
         var hay = (r.vendor + " " + r.item + " " + r.note + " " + (r.site || "")).toLowerCase();
         if (hay.indexOf(q) === -1) return false;
@@ -1152,11 +1158,12 @@
     var shown = list.slice(0, 200);
 
     if (!shown.length) {
-      $("unBody").innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--ink-3);padding:26px">조건에 맞는 건이 없습니다.</td></tr>';
+      $("unBody").innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--ink-3);padding:26px">조건에 맞는 건이 없습니다.</td></tr>';
     } else {
       $("unBody").innerHTML = shown.map(function (r) {
-        var k = keyOf(r), del = isDeleted(r);
+        var k = keyOf(r), del = isDeleted(r), hid = isHidden(r);
         var style = del ? ' style="background:color-mix(in srgb,var(--crit) 10%,transparent);opacity:.6"'
+                        : hid ? ' style="background:color-mix(in srgb,var(--s1) 8%,transparent)"'
                         : (r.site ? "" : ' style="background:color-mix(in srgb,var(--crit) 6%,transparent)"');
         var strike = del ? "text-decoration:line-through;" : "";
         return "<tr" + style + ">"
@@ -1169,11 +1176,23 @@
                 + '" placeholder="현장명 입력" style="width:100%;min-width:0"></td>'
                 + '<td style="text-align:center"><input type="checkbox" data-settle-key="' + esc(k) + '"'
                 + (isSettled(r) ? " checked" : "") + "></td>")
+          + '<td style="text-align:center"><button type="button" class="btn ghost sm" data-hide-key="' + esc(k) + '"'
+          + ' title="' + (hid ? "다시 보이게" : "협업부서 화면에서 숨기기") + '" style="padding:2px 8px;'
+          + (hid ? "color:var(--s1);font-weight:600" : "") + '">' + (hid ? "숨김" : "🙈") + "</button></td>"
           + '<td style="text-align:center"><button type="button" class="btn ghost sm" data-del-key="' + esc(k) + '"'
           + ' title="' + (del ? "삭제 취소" : "이 건 삭제") + '" style="padding:2px 8px">'
           + (del ? "되돌리기" : "✕") + "</button></td></tr>";
       }).join("");
 
+      Array.prototype.forEach.call($("unBody").querySelectorAll("[data-hide-key]"), function (b) {
+        b.addEventListener("click", function () {
+          var k = b.getAttribute("data-hide-key");
+          if (sitesCfg.hidden[k]) delete sitesCfg.hidden[k];
+          else sitesCfg.hidden[k] = true;
+          persistLocalSites();
+          renderUnassigned(); renderPreview();
+        });
+      });
       Array.prototype.forEach.call($("unBody").querySelectorAll("[data-del-key]"), function (b) {
         b.addEventListener("click", function () {
           var k = b.getAttribute("data-del-key");
@@ -1207,8 +1226,11 @@
     var open = live.filter(function (r) { return !isSettled(r); });
     var unSum = un.reduce(function (s, r) { return s + r.amount; }, 0);
     var openSum = open.reduce(function (s, r) { return s + r.amount; }, 0);
+    var hid = live.filter(function (r) { return isHidden(r); });
     $("unNote").innerHTML = "전체 " + live.length.toLocaleString("ko-KR") + "건"
       + (rawRows.length - live.length ? ' · <b style="color:var(--crit)">삭제 예정 ' + (rawRows.length - live.length) + "건</b>" : "")
+      + (hid.length ? ' · <b style="color:var(--s1)">숨김 ' + hid.length + "건</b> ("
+          + Math.round(hid.reduce(function (t, r) { return t + r.amount; }, 0)).toLocaleString("ko-KR") + "원)" : "")
       + " · 현장 미지정 <b>" + un.length + "건</b> (" + Math.round(unSum).toLocaleString("ko-KR") + "원)"
       + " · 미정산 <b>" + open.length + "건</b> (" + Math.round(openSum).toLocaleString("ko-KR") + "원)"
       + (list.length > shown.length ? " · 화면에는 200건만 표시" : "");
@@ -1217,6 +1239,7 @@
   function renderPreview() {
     var rows = rawRows.filter(function (r) { return !isDeleted(r); });
     var delN = rawRows.length - rows.length;
+    var hidN = rows.filter(function (r) { return isHidden(r); }).length;
     var total = 0, un = 0, open = 0, sites = {};
     rows.forEach(function (r) {
       total += r.amount;
@@ -1228,7 +1251,8 @@
       + "<span>현장 <b>" + Object.keys(sites).length + "</b>곳</span>"
       + '<span>미정산 <b style="color:var(--warn-ink,#8a5b00)">' + Math.round(open).toLocaleString("ko-KR") + "</b>원</span>"
       + '<span>미지정 <b style="color:var(--crit)">' + Math.round(un).toLocaleString("ko-KR") + "</b>원</span>"
-      + (delN ? '<span>삭제 예정 <b style="color:var(--crit)">' + delN + "</b>건</span>" : "");
+      + (delN ? '<span>삭제 예정 <b style="color:var(--crit)">' + delN + "</b>건</span>" : "")
+      + (hidN ? '<span>숨김 <b style="color:var(--s1)">' + hidN + "</b>건</span>" : "");
     $("prevBody").innerHTML = rows.slice(0, 60).map(function (r) {
       return "<tr><td>" + esc(r.date) + "</td>"
         + '<td><span class="pill' + (r.site ? "" : " un") + '">' + esc(r.site || UNASSIGNED) + "</span></td>"
@@ -1250,7 +1274,7 @@
     var out = rawRows.filter(function (r) { return !isDeleted(r); }).map(function (r) {
       return { date: r.date, vendor: r.vendor, item: r.item, note: safeNote(r.note), doc: r.doc,
                amount: Math.round(r.amount), supply: r.supply === "" ? "" : Math.round(r.supply),
-               siteRaw: r.siteRaw || "", site: r.site, settled: isSettled(r) };
+               siteRaw: r.siteRaw || "", site: r.site, settled: isSettled(r), hidden: isHidden(r) };
     });
     // 기존 데이터를 불러와 수정한 경우에는 rawRows 가 이미 전체이므로 병합하지 않는다
     if (!loadedFromData && $("mergeMode").checked && existing && Array.isArray(existing.rows)) {
@@ -1261,6 +1285,7 @@
         if (!seen[keyOf(r)]) {
           r.site = matchSite(r) || r.site || "";
           r.settled = isSettled(r);
+          r.hidden = isHidden(r);
           out.push(r); seen[keyOf(r)] = true;
         }
       });
@@ -1281,7 +1306,8 @@
       aliases: sitesCfg.aliases,
       overrides: sitesCfg.overrides,
       settled: sitesCfg.settled,
-      deleted: sitesCfg.deleted
+      deleted: sitesCfg.deleted,
+      hidden: sitesCfg.hidden
     }, null, 1);
   }
   function download(name, text) {
@@ -1589,7 +1615,7 @@
       // 이전 구분의 작업 내용이 섞이지 않게 완전히 초기화
       parsed = []; columns = []; mapping = {}; rawRows = [];
       existing = null; loadedFromData = false; picked = {};
-      sitesCfg = { sites: [], aliases: {}, overrides: {}, settled: {}, deleted: {} };
+      sitesCfg = { sites: [], aliases: {}, overrides: {}, settled: {}, deleted: {}, hidden: {} };
       ["mapCard", "siteCard", "unCard", "pubCard"].forEach(function (id) { $(id).classList.add("hide"); });
       ["upMsg", "siteMsg", "pubMsg", "restoreMsg"].forEach(function (id) { $(id).className = "msg"; $(id).innerHTML = ""; });
       $("similarBox").innerHTML = ""; $("backupList").innerHTML = "";
