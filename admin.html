@@ -244,7 +244,7 @@
   <!-- STEP 5 : 건별 현장 수정 · 정산 -->
   <section class="card hide" id="unCard">
     <h2><span class="step">5</span>건별 현장 수정 · 정산 체크</h2>
-    <p class="cdesc">현장명을 직접 고치거나 정산 완료를 체크합니다. 여기서 지정한 내용은 <b>다음 업로드에도 그대로 유지</b>됩니다.</p>
+    <p class="cdesc">현장명을 직접 고치거나 정산 완료를 체크합니다. 맨 오른쪽 <b>✕</b> 를 누르면 그 건을 삭제할 수 있습니다(<b>되돌리기</b> 로 취소). 여기서 지정한 내용은 <b>다음 업로드에도 그대로 유지</b>됩니다.</p>
 
     <div class="mergebar" style="margin-bottom:12px">
       <div class="row" style="gap:6px">
@@ -265,7 +265,7 @@
 
     <div class="scroll" style="max-height:420px"><table><thead><tr>
       <th>일자</th><th>거래처</th><th>품목/비고</th><th class="num">금액</th>
-      <th style="min-width:190px">현장</th><th style="width:88px">정산 완료</th>
+      <th style="min-width:190px">현장</th><th style="width:88px">정산 완료</th><th style="width:64px">삭제</th>
     </tr></thead><tbody id="unBody"></tbody></table></div>
     <datalist id="siteNames"></datalist>
     <div class="note" id="unNote"></div>
@@ -314,7 +314,7 @@
   var UNASSIGNED = "미지정";
   // 이 화면 파일의 판 번호. 저장 직전에 서버의 판 번호와 비교해서
   // 오래 열어둔 탭(예전 코드)이 데이터를 덮어쓰는 것을 막는다.
-  var BUILD = "2026-08-26a";
+  var BUILD = "2026-08-26b";
 
   /* ---------- 자료 구분 ---------- */
   var CATS = {
@@ -329,7 +329,7 @@
   var columns = [];       // 통합 컬럼 후보 이름
   var mapping = {};       // field -> column name
   var rawRows = [];       // 정규화된 원본 행
-  var sitesCfg = { sites: [], aliases: {}, overrides: {}, settled: {} };
+  var sitesCfg = { sites: [], aliases: {}, overrides: {}, settled: {}, deleted: {} };
   var picked = {};          // 현장 정리에서 체크한 이름
   var distSort = "amount";  // 4번 목록 정렬 (amount | name)
   var distView = "all";     // 4번 목록 보기 (all | raw)
@@ -386,8 +386,13 @@
     var h = { "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" };
     if (cfg.token) h.Authorization = "Bearer " + cfg.token;
     if (opts.body) h["Content-Type"] = "application/json";
-    return fetch("https://api.github.com/repos/" + cfg.owner + "/" + cfg.repo + path, {
-      method: opts.method || "GET", headers: h, body: opts.body ? JSON.stringify(opts.body) : undefined
+    // GitHub 응답은 60초 동안 브라우저에 캐시된다. 방금 저장한 내용을 바로 다시 읽을 때
+    // 예전 내용이 돌아오는 원인이라, 읽기에는 항상 캐시를 쓰지 않는다.
+    var url = "https://api.github.com/repos/" + cfg.owner + "/" + cfg.repo + path;
+    if (!opts.method || opts.method === "GET") url += (url.indexOf("?") >= 0 ? "&" : "?") + "_t=" + Date.now();
+    return fetch(url, {
+      method: opts.method || "GET", headers: h, cache: "no-store",
+      body: opts.body ? JSON.stringify(opts.body) : undefined
     }).then(function (r) {
       return r.text().then(function (t) {
         var j = null; try { j = t ? JSON.parse(t) : null; } catch (e) {}
@@ -573,7 +578,7 @@
     var n = 0;
     (rows || []).forEach(function (r) {
       var site = String(r.site || "").trim();
-      if (!site) return;
+      if (!site || isDeleted(r)) return;
       if (matchSite(r) === site) return;                 // 지금 규칙으로도 같은 결과 → 손댈 것 없음
       var raw = String(r.siteRaw || "").trim();
       if (raw && raw !== site && !sitesCfg.aliases[raw]) { sitesCfg.aliases[raw] = site; n++; }
@@ -737,6 +742,7 @@
           sitesCfg.aliases = j.aliases || {};
           sitesCfg.overrides = j.overrides || {};
           sitesCfg.settled = j.settled || {};
+          sitesCfg.deleted = j.deleted || {};
           return;
         } catch (e) {}
       }
@@ -751,6 +757,7 @@
       if (j) {
         sitesCfg.sites = j.sites || []; sitesCfg.aliases = j.aliases || {};
         sitesCfg.overrides = j.overrides || {}; sitesCfg.settled = j.settled || {};
+        sitesCfg.deleted = j.deleted || {};
       }
     } catch (e) {}
   }
@@ -884,6 +891,7 @@
   function siteAgg() {
     var agg = {};
     rawRows.forEach(function (r) {
+      if (isDeleted(r)) return;
       var s = r.site || UNASSIGNED;
       if (!agg[s]) agg[s] = { n: 0, sum: 0 };
       agg[s].n++; agg[s].sum += r.amount;
@@ -1105,6 +1113,7 @@
   }
 
   function isSettled(r) { return sitesCfg.settled[keyOf(r)] === true; }
+  function isDeleted(r) { return sitesCfg.deleted[keyOf(r)] === true; }
 
   function knownSiteNames() {
     var names = {};
@@ -1143,19 +1152,37 @@
     var shown = list.slice(0, 200);
 
     if (!shown.length) {
-      $("unBody").innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--ink-3);padding:26px">조건에 맞는 건이 없습니다.</td></tr>';
+      $("unBody").innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--ink-3);padding:26px">조건에 맞는 건이 없습니다.</td></tr>';
     } else {
       $("unBody").innerHTML = shown.map(function (r) {
-        var k = keyOf(r);
-        return '<tr' + (r.site ? "" : ' style="background:color-mix(in srgb,var(--crit) 6%,transparent)"') + ">"
-          + "<td>" + esc(r.date) + "</td><td>" + esc(r.vendor) + "</td>"
-          + '<td style="white-space:normal;max-width:300px">' + esc((r.item + " " + r.note).trim()) + "</td>"
-          + '<td class="num">' + Math.round(r.amount).toLocaleString("ko-KR") + "</td>"
-          + '<td><input type="text" list="siteNames" data-site-key="' + esc(k) + '" value="' + esc(r.site || "")
-          + '" placeholder="현장명 입력" style="width:100%;min-width:0"></td>'
-          + '<td style="text-align:center"><input type="checkbox" data-settle-key="' + esc(k) + '"'
-          + (isSettled(r) ? " checked" : "") + "></td></tr>";
+        var k = keyOf(r), del = isDeleted(r);
+        var style = del ? ' style="background:color-mix(in srgb,var(--crit) 10%,transparent);opacity:.6"'
+                        : (r.site ? "" : ' style="background:color-mix(in srgb,var(--crit) 6%,transparent)"');
+        var strike = del ? "text-decoration:line-through;" : "";
+        return "<tr" + style + ">"
+          + '<td style="' + strike + '">' + esc(r.date) + '</td><td style="' + strike + '">' + esc(r.vendor) + "</td>"
+          + '<td style="white-space:normal;max-width:300px;' + strike + '">' + esc((r.item + " " + r.note).trim()) + "</td>"
+          + '<td class="num" style="' + strike + '">' + Math.round(r.amount).toLocaleString("ko-KR") + "</td>"
+          + (del
+              ? '<td colspan="2" style="color:var(--crit);font-size:12.5px">삭제 예정 — 6번에서 반영하면 사라집니다</td>'
+              : '<td><input type="text" list="siteNames" data-site-key="' + esc(k) + '" value="' + esc(r.site || "")
+                + '" placeholder="현장명 입력" style="width:100%;min-width:0"></td>'
+                + '<td style="text-align:center"><input type="checkbox" data-settle-key="' + esc(k) + '"'
+                + (isSettled(r) ? " checked" : "") + "></td>")
+          + '<td style="text-align:center"><button type="button" class="btn ghost sm" data-del-key="' + esc(k) + '"'
+          + ' title="' + (del ? "삭제 취소" : "이 건 삭제") + '" style="padding:2px 8px">'
+          + (del ? "되돌리기" : "✕") + "</button></td></tr>";
       }).join("");
+
+      Array.prototype.forEach.call($("unBody").querySelectorAll("[data-del-key]"), function (b) {
+        b.addEventListener("click", function () {
+          var k = b.getAttribute("data-del-key");
+          if (sitesCfg.deleted[k]) delete sitesCfg.deleted[k];
+          else sitesCfg.deleted[k] = true;
+          persistLocalSites();
+          renderUnassigned(); renderPreview(); renderDist();
+        });
+      });
 
       Array.prototype.forEach.call($("unBody").querySelectorAll("[data-site-key]"), function (inp) {
         inp.addEventListener("change", function () {
@@ -1175,18 +1202,21 @@
       });
     }
 
-    var un = rawRows.filter(function (r) { return !r.site; });
-    var open = rawRows.filter(function (r) { return !isSettled(r); });
+    var live = rawRows.filter(function (r) { return !isDeleted(r); });
+    var un = live.filter(function (r) { return !r.site; });
+    var open = live.filter(function (r) { return !isSettled(r); });
     var unSum = un.reduce(function (s, r) { return s + r.amount; }, 0);
     var openSum = open.reduce(function (s, r) { return s + r.amount; }, 0);
-    $("unNote").innerHTML = "전체 " + rawRows.length.toLocaleString("ko-KR") + "건"
+    $("unNote").innerHTML = "전체 " + live.length.toLocaleString("ko-KR") + "건"
+      + (rawRows.length - live.length ? ' · <b style="color:var(--crit)">삭제 예정 ' + (rawRows.length - live.length) + "건</b>" : "")
       + " · 현장 미지정 <b>" + un.length + "건</b> (" + Math.round(unSum).toLocaleString("ko-KR") + "원)"
       + " · 미정산 <b>" + open.length + "건</b> (" + Math.round(openSum).toLocaleString("ko-KR") + "원)"
       + (list.length > shown.length ? " · 화면에는 200건만 표시" : "");
   }
 
   function renderPreview() {
-    var rows = rawRows;
+    var rows = rawRows.filter(function (r) { return !isDeleted(r); });
+    var delN = rawRows.length - rows.length;
     var total = 0, un = 0, open = 0, sites = {};
     rows.forEach(function (r) {
       total += r.amount;
@@ -1197,7 +1227,8 @@
       + "<span>총액 <b>" + Math.round(total).toLocaleString("ko-KR") + "</b>원</span>"
       + "<span>현장 <b>" + Object.keys(sites).length + "</b>곳</span>"
       + '<span>미정산 <b style="color:var(--warn-ink,#8a5b00)">' + Math.round(open).toLocaleString("ko-KR") + "</b>원</span>"
-      + '<span>미지정 <b style="color:var(--crit)">' + Math.round(un).toLocaleString("ko-KR") + "</b>원</span>";
+      + '<span>미지정 <b style="color:var(--crit)">' + Math.round(un).toLocaleString("ko-KR") + "</b>원</span>"
+      + (delN ? '<span>삭제 예정 <b style="color:var(--crit)">' + delN + "</b>건</span>" : "");
     $("prevBody").innerHTML = rows.slice(0, 60).map(function (r) {
       return "<tr><td>" + esc(r.date) + "</td>"
         + '<td><span class="pill' + (r.site ? "" : " un") + '">' + esc(r.site || UNASSIGNED) + "</span></td>"
@@ -1216,7 +1247,7 @@
   }
 
   function finalRows() {
-    var out = rawRows.map(function (r) {
+    var out = rawRows.filter(function (r) { return !isDeleted(r); }).map(function (r) {
       return { date: r.date, vendor: r.vendor, item: r.item, note: safeNote(r.note), doc: r.doc,
                amount: Math.round(r.amount), supply: r.supply === "" ? "" : Math.round(r.supply),
                siteRaw: r.siteRaw || "", site: r.site, settled: isSettled(r) };
@@ -1226,6 +1257,7 @@
       var seen = {};
       out.forEach(function (r) { seen[keyOf(r)] = true; });
       existing.rows.forEach(function (r) {
+        if (isDeleted(r)) { seen[keyOf(r)] = true; return; }   // 삭제하기로 한 건은 되살리지 않는다
         if (!seen[keyOf(r)]) {
           r.site = matchSite(r) || r.site || "";
           r.settled = isSettled(r);
@@ -1248,7 +1280,8 @@
       sites: sitesCfg.sites.filter(function (s) { return s.name; }),
       aliases: sitesCfg.aliases,
       overrides: sitesCfg.overrides,
-      settled: sitesCfg.settled
+      settled: sitesCfg.settled,
+      deleted: sitesCfg.deleted
     }, null, 1);
   }
   function download(name, text) {
@@ -1311,7 +1344,12 @@
           + "<br>2번에서 엑셀을 올리거나 <b>‘엑셀 없이 — 이미 올린 데이터 불러와 수정하기’</b> 를 먼저 눌러 주세요.");
       }
       // ── 안전장치 2: 건수가 줄어들면 한 번 더 확인받는다 ──
-      if (prevN && rowsNow.length < prevN && !$("confirmShrink").checked) {
+      // 단, 5번에서 직접 ✕ 로 지운 건수만큼 줄어든 것은 의도한 일이므로 그냥 진행한다.
+      var delN = 0;
+      if (existing && Array.isArray(existing.rows)) {
+        existing.rows.forEach(function (r) { if (isDeleted(r)) delN++; });
+      }
+      if (prevN && rowsNow.length < prevN - delN && !$("confirmShrink").checked) {
         $("shrinkBox").classList.remove("hide");
         $("shrinkMsg").innerHTML = "지금 반영하면 <b>" + prevN.toLocaleString("ko-KR") + "건 → "
           + rowsNow.length.toLocaleString("ko-KR") + "건</b> 으로 "
@@ -1328,6 +1366,7 @@
           $("confirmShrink").checked = false;
           show("pubMsg", "ok", "반영 완료 · <b>" + rowsNow.length.toLocaleString("ko-KR") + "건</b>"
             + (prevN ? " (이전 " + prevN.toLocaleString("ko-KR") + "건)" : "")
+            + (delN ? " · <b>" + delN + "건 삭제</b>" : "")
             + " · <a href='./index.html'>대시보드</a>에서 확인하세요.");
         });
     }).catch(function (e) {
@@ -1550,7 +1589,7 @@
       // 이전 구분의 작업 내용이 섞이지 않게 완전히 초기화
       parsed = []; columns = []; mapping = {}; rawRows = [];
       existing = null; loadedFromData = false; picked = {};
-      sitesCfg = { sites: [], aliases: {}, overrides: {}, settled: {} };
+      sitesCfg = { sites: [], aliases: {}, overrides: {}, settled: {}, deleted: {} };
       ["mapCard", "siteCard", "unCard", "pubCard"].forEach(function (id) { $(id).classList.add("hide"); });
       ["upMsg", "siteMsg", "pubMsg", "restoreMsg"].forEach(function (id) { $(id).className = "msg"; $(id).innerHTML = ""; });
       $("similarBox").innerHTML = ""; $("backupList").innerHTML = "";
