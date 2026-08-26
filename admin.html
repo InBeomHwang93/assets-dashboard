@@ -219,6 +219,7 @@
       </div>
       <div class="spacer" style="flex:1 1 auto"></div>
       <button class="btn sm" id="findSimilar" type="button">🔎 비슷한 이름 찾기</button>
+      <button class="btn sm hide" id="importRules" type="button">↧ 다른 구분의 현장 정리 가져오기</button>
     </div>
     <p class="note" style="margin-top:6px">이름순으로 보면 <b>창원 의창 구청현장</b> / <b>창원의창구청현장</b> 처럼 갈라진 이름이 나란히 붙어 찾기 쉽습니다.</p>
 
@@ -313,7 +314,7 @@
   var UNASSIGNED = "미지정";
   // 이 화면 파일의 판 번호. 저장 직전에 서버의 판 번호와 비교해서
   // 오래 열어둔 탭(예전 코드)이 데이터를 덮어쓰는 것을 막는다.
-  var BUILD = "2026-08-25a";
+  var BUILD = "2026-08-26a";
 
   /* ---------- 자료 구분 ---------- */
   var CATS = {
@@ -390,7 +391,7 @@
     }).then(function (r) {
       return r.text().then(function (t) {
         var j = null; try { j = t ? JSON.parse(t) : null; } catch (e) {}
-        if (!r.ok) throw new Error((j && j.message) || (r.status + " " + r.statusText));
+        if (!r.ok) { var err = new Error((j && j.message) || (r.status + " " + r.statusText)); err.status = r.status; throw err; }
         return j;
       });
     });
@@ -408,7 +409,7 @@
   function getFile(path) {
     return api("/contents/" + path + "?ref=" + encodeURIComponent(cfg.branch))
       .then(function (j) { return { sha: j.sha, text: fromB64(j.content) }; })
-      .catch(function () { return null; });
+      .catch(function (e) { return (e && e.status === 404) ? { missing: true } : null; });
   }
   function putFile(path, text, message) {
     return getFile(path).then(function (cur) {
@@ -426,7 +427,15 @@
         fr.onerror = function () { rej(new Error(f.name + " 읽기 실패")); };
         fr.onload = function () {
           try {
-            var wb = XLSX.read(fr.result, { type: "array", cellDates: true, raw: false });
+            // .csv 는 한글이 깨지지 않게 UTF-8 로 직접 읽어서 넘긴다 (엑셀에서 저장한 CSV 대비)
+            var wb;
+            if (/\.csv$/i.test(f.name)) {
+              var txt = new TextDecoder("utf-8").decode(new Uint8Array(fr.result)).replace(/^﻿/, "");
+              if (/�/.test(txt)) txt = new TextDecoder("euc-kr").decode(new Uint8Array(fr.result));
+              wb = XLSX.read(txt, { type: "string", cellDates: true, raw: false });
+            } else {
+              wb = XLSX.read(fr.result, { type: "array", cellDates: true, raw: false });
+            }
             var out = [];
             wb.SheetNames.forEach(function (sn) {
               var aoa = XLSX.utils.sheet_to_json(wb.Sheets[sn], { header: 1, defval: "", raw: false, blankrows: false });
@@ -487,15 +496,18 @@
   function readJsonFile(name) {
     return withTimeout(getFile(name), 12000, "GitHub API")
       .then(function (f) {
-        if (f) { try { return { json: JSON.parse(f.text) }; } catch (e) { return { error: name + " 형식이 깨졌습니다" }; } }
+        if (f && f.missing) return { json: null, src: "api" };   // 아직 없는 파일 (정상)
+        if (f) { try { return { json: JSON.parse(f.text), src: "api" }; } catch (e) { return { error: name + " 형식이 깨졌습니다" }; } }
         throw new Error("api");
       })
       .catch(function () {
+        // API 로 못 읽으면 저장소를 직접 읽는다. 다만 이쪽은 몇 분 늦은 내용이 올 수 있으므로
+        // src 를 "raw" 로 표시해 두고, 덮어쓰기(반영) 단계에서는 이 값을 신뢰하지 않는다.
         var url = "https://raw.githubusercontent.com/" + cfg.owner + "/" + cfg.repo + "/" + cfg.branch + "/" + name + "?t=" + Date.now();
         return withTimeout(fetch(url, { cache: "no-store" }).then(function (r) {
-          if (r.status === 404) return { json: null };
+          if (r.status === 404) return { json: null, src: "raw" };
           if (!r.ok) throw new Error("HTTP " + r.status);
-          return r.json().then(function (j) { return { json: j }; });
+          return r.json().then(function (j) { return { json: j, src: "raw" }; });
         }), 12000, "저장소 직접 읽기").catch(function (e) { return { error: String(e.message || e) }; });
       });
   }
@@ -535,6 +547,9 @@
             siteRaw: r.siteRaw || r.site || "", site: ""
           };
         });
+        // 저장돼 있던 현장 이름이 지금 규칙으로 재현되지 않으면 규칙을 되살려 둔다.
+        // (이 과정이 없으면 예전에 합쳐 둔 이름이 조용히 도로 갈라진다)
+        var restored = backfillRules(j.rows);
         rawRows.forEach(function (r) { r.site = matchSite(r); });
 
         $("mapCard").classList.add("hide");   // 엑셀을 안 올렸으므로 열 매핑은 숨김
@@ -542,11 +557,29 @@
         $("pubCard").classList.remove("hide");
         renderSites(); renderDist(); renderAliases(); renderUnassigned(); renderPreview();
         show("upMsg", "ok", "기존 데이터 " + rawRows.length.toLocaleString("ko-KR")
-          + "건을 불러왔습니다. 아래 <b>4번·5번</b>에서 현장명과 정산 상태를 고친 뒤 <b>6번</b>에서 반영하세요.");
+          + "건을 불러왔습니다. 아래 <b>4번·5번</b>에서 현장명과 정산 상태를 고친 뒤 <b>6번</b>에서 반영하세요."
+          + (restored ? "<br><span style='color:var(--ink-3)'>이전에 정리해 둔 현장 이름 " + restored
+              + "건의 규칙이 빠져 있어 자동으로 되살렸습니다.</span>" : ""));
       });
     }).catch(function (e) {
       show("upMsg", "err", "불러오기 실패: " + esc(e.message));
     });
+  }
+
+  /* 이미 저장된 데이터의 현장 이름을 지금 규칙이 재현하지 못하면, 그 이름을 규칙으로 되살린다.
+     sites.json 과 data.json 이 어긋난 상태(복구·중단 등)에서 다시 저장할 때
+     정리해 둔 현장이 통째로 갈라지는 것을 막는다. */
+  function backfillRules(rows) {
+    var n = 0;
+    (rows || []).forEach(function (r) {
+      var site = String(r.site || "").trim();
+      if (!site) return;
+      if (matchSite(r) === site) return;                 // 지금 규칙으로도 같은 결과 → 손댈 것 없음
+      var raw = String(r.siteRaw || "").trim();
+      if (raw && raw !== site && !sitesCfg.aliases[raw]) { sitesCfg.aliases[raw] = site; n++; }
+      else if (!sitesCfg.overrides[keyOf(r)]) { sitesCfg.overrides[keyOf(r)] = site; n++; }
+    });
+    return n;
   }
 
   function norm(s) { return String(s || "").replace(/[\s()\[\]·.]/g, "").toLowerCase(); }
@@ -696,6 +729,7 @@
   function loadSitesCfg() {
     if (!cfg.owner || !cfg.repo) { restoreLocalSites(); return Promise.resolve(); }
     return getFile(F("sites")).then(function (f) {
+      if (f && f.missing) { restoreLocalSites(); return; }   // 아직 없는 구분 — 이 구분의 임시 저장분만 되살린다
       if (f) {
         try {
           var j = JSON.parse(f.text);
@@ -709,9 +743,11 @@
       restoreLocalSites();
     }).catch(function () { restoreLocalSites(); });
   }
+  // 임시 저장 키는 구분마다 따로 쓴다. (하나로 쓰면 안전용품 작업이 집기비품 규칙을 덮어쓴다)
+  function sitesKey() { return CAT === "assets" ? "sites-cfg" : "sites-cfg-" + CAT; }
   function restoreLocalSites() {
     try {
-      var j = JSON.parse(localStorage.getItem("sites-cfg") || "null");
+      var j = JSON.parse(localStorage.getItem(sitesKey()) || "null");
       if (j) {
         sitesCfg.sites = j.sites || []; sitesCfg.aliases = j.aliases || {};
         sitesCfg.overrides = j.overrides || {}; sitesCfg.settled = j.settled || {};
@@ -719,7 +755,7 @@
     } catch (e) {}
   }
   function persistLocalSites() {
-    try { localStorage.setItem("sites-cfg", JSON.stringify(sitesCfg)); } catch (e) {}
+    try { localStorage.setItem(sitesKey(), JSON.stringify(sitesCfg)); } catch (e) {}
   }
 
   function renderSites() {
@@ -863,6 +899,11 @@
   }
 
   function renderDist() {
+    var ir = $("importRules");
+    if (ir) {
+      ir.classList.remove("hide");
+      ir.textContent = "↧ " + CATS[CAT === "assets" ? "safety" : "assets"].label + " 의 현장 정리 가져오기";
+    }
     var agg = siteAgg();
     var all = Object.keys(agg);
     var total = all.filter(function (k) { return k !== UNASSIGNED; }).length;
@@ -1247,13 +1288,25 @@
       return readJsonFile(F("data"));
     }).then(function (r) {
       if (r.error) throw new Error("현재 데이터를 확인할 수 없어 중단했습니다: " + r.error);
-      if (r.json && Array.isArray(r.json.rows)) existing = r.json;
+      // ── 안전장치 0: 저장소의 "지금" 상태를 정확히 읽었을 때만 덮어쓴다 ──
+      // 직접 읽기(raw)는 몇 분 늦은 내용이 올 수 있어, 그걸 기준으로 누적하면 최근 건이 지워질 수 있다.
+      if (r.src !== "api") {
+        throw new Error("SAFE|<b>저장소의 현재 상태를 정확히 읽지 못했습니다.</b> 이대로 저장하면 최근에 올린 자료가 지워질 수 있어 중단했습니다."
+          + "<br>1번의 <b>연결 확인</b> 을 눌러 초록불이 뜨는지 보고, 잠시 뒤 다시 <b>반영</b> 을 눌러 주세요.");
+      }
+      if (r.json && Array.isArray(r.json.rows)) {
+        existing = r.json;
+        // 누적 저장 시, 이번에 올리지 않은 예전 건들의 현장 이름도 그대로 지켜지도록 규칙을 보강한다
+        if (!loadedFromData) backfillRules(existing.rows);
+      }
 
       var rowsNow = finalRows();
       var prevN = (existing && Array.isArray(existing.rows)) ? existing.rows.length : 0;
 
-      // ── 안전장치 1: 빈 데이터로 덮어쓰지 않는다 ──
-      if (!rowsNow.length) {
+      // ── 안전장치 1: 아무것도 불러오지 않은 채로는 저장하지 않는다 ──
+      // (엑셀도 없고 불러오기도 안 한 상태에서 '누적'만 켜져 있으면, 정리해 둔 현장 이름이
+      //  규칙 없이 다시 계산되어 통째로 풀려 버린다. 건수는 그대로라 눈치채기도 어렵다.)
+      if (!rawRows.length || !rowsNow.length) {
         throw new Error("SAFE|<b>올릴 데이터가 없습니다.</b> 빈 상태로는 반영하지 않습니다."
           + "<br>2번에서 엑셀을 올리거나 <b>‘엑셀 없이 — 이미 올린 데이터 불러와 수정하기’</b> 를 먼저 눌러 주세요.");
       }
@@ -1449,6 +1502,34 @@
     });
   });
   $("findSimilar").addEventListener("click", renderSimilar);
+
+  /* 다른 구분에서 이미 정리해 둔 현장 이름 규칙을 그대로 가져온다.
+     안전용품을 처음 올릴 때 200곳 넘는 현장을 다시 묶지 않아도 되게 하는 장치. */
+  function otherCat() { return CAT === "assets" ? "safety" : "assets"; }
+  function importRules() {
+    var from = otherCat();
+    show("siteMsg", "info", CATS[from].label + " 의 현장 정리 내용을 불러오는 중…");
+    readJsonFile(CATS[from].sites).then(function (r) {
+      if (r.error || !r.json) { show("siteMsg", "err", CATS[from].label + " 의 현장 정리 내용을 불러오지 못했습니다."); return; }
+      var j = r.json, addA = 0, addK = 0;
+      // 이름 합치기(별칭)만 가져온다. 건별 수정·정산 이력은 구분마다 달라서 가져오지 않는다.
+      Object.keys(j.aliases || {}).forEach(function (k) {
+        if (!sitesCfg.aliases[k]) { sitesCfg.aliases[k] = j.aliases[k]; addA++; }
+      });
+      var have = {};
+      sitesCfg.sites.forEach(function (s) { have[s.name] = s; });
+      (j.sites || []).forEach(function (s) {
+        if (!s.name) return;
+        if (!have[s.name]) { sitesCfg.sites.push({ name: s.name, keywords: (s.keywords || []).slice() }); addK++; }
+      });
+      if (!addA && !addK) { show("siteMsg", "info", "이미 " + CATS[from].label + " 의 정리 내용이 모두 반영되어 있습니다."); return; }
+      persistLocalSites(); rebuild();
+      show("siteMsg", "ok", CATS[from].label + " 에서 <b>이름 합치기 " + addA + "건</b>"
+        + (addK ? " · <b>키워드 규칙 " + addK + "건</b>" : "") + " 을 가져왔습니다."
+        + "<br><span style='color:var(--ink-3)'>가져온 규칙은 아래 목록에서 ✕ 로 하나씩 되돌릴 수 있습니다. 6번에서 반영해야 저장됩니다.</span>");
+    });
+  }
+  $("importRules").addEventListener("click", importRules);
   $("loadBackups").addEventListener("click", loadBackups);
 
   /* 자료 구분 전환 — 고르면 작업 중이던 내용을 비우고 처음부터 시작한다 */
@@ -1456,6 +1537,11 @@
     b.addEventListener("click", function () {
       var c = b.getAttribute("data-cat");
       if (c === CAT) return;
+      // 작업하던 내용이 있으면 한 번 물어본다 (구분을 바꾸면 처음부터 다시 시작한다)
+      if (rawRows.length && !b.dataset.silent) {
+        if (!confirm("지금 작업 중인 " + CATS[CAT].label + " 내용(" + rawRows.length.toLocaleString("ko-KR")
+          + "건)이 화면에서 사라집니다.\n아직 반영하지 않았다면 저장되지 않습니다.\n\n" + CATS[c].label + " 으로 바꿀까요?")) return;
+      }
       CAT = c;
       try { localStorage.setItem("admin-cat", c); } catch (e) {}
       Array.prototype.forEach.call(document.querySelectorAll("[data-cat]"), function (x) {
@@ -1470,14 +1556,22 @@
       $("similarBox").innerHTML = ""; $("backupList").innerHTML = "";
       $("file").value = "";
       show("catMsg", "info", "현재 <b>" + CATS[CAT].label + "</b> 자료를 다루고 있습니다. (" + F("data") + ")");
+      document.title = "데이터 업데이트 (관리자) · " + CATS[CAT].label;
       if (cfg.owner && cfg.repo) $("testCfg").click();
     });
   });
+  // 이미 열려 있는 화면에서 주소만 #safety 로 바뀌어도 따라간다
+  window.addEventListener("hashchange", function () {
+    var h = (location.hash || "").slice(1);
+    if (CATS[h] && h !== CAT) { var t = document.querySelector('[data-cat="' + h + '"]'); if (t) t.click(); }
+  });
+  // 처음 열릴 때 어떤 구분으로 시작할지: 주소 뒤 #safety 가 먼저, 그 다음이 지난번 선택
   try {
-    var savedCat = localStorage.getItem("admin-cat");
-    if (savedCat && CATS[savedCat] && savedCat !== CAT) {
-      var tgt = document.querySelector('[data-cat="' + savedCat + '"]');
-      if (tgt) tgt.click();
+    var wantCat = (location.hash || "").slice(1);
+    if (!CATS[wantCat]) wantCat = localStorage.getItem("admin-cat");
+    if (CATS[wantCat] && wantCat !== CAT) {
+      var tgt = document.querySelector('[data-cat="' + wantCat + '"]');
+      if (tgt) { tgt.dataset.silent = "1"; tgt.click(); delete tgt.dataset.silent; }
     }
   } catch (e) {}
   $("mergeBtn").addEventListener("click", doMerge);

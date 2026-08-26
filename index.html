@@ -576,7 +576,7 @@
       if (!d.rows.length) {
         banner("<b>" + esc(catLabel()) + "</b> 자료가 아직 없습니다."
           + " 관리자 화면에서 <b>" + esc(catLabel()) + "</b> 을(를) 고르고 계산서 엑셀을 올리면 여기에 표시됩니다."
-          + " <a href='./admin.html'>업데이트 페이지 열기</a>");
+          + " <a href='./admin.html#" + (state.cat === "all" ? "" : state.cat) + "'>업데이트 페이지 열기</a>");
       }
       if (changed) toast("새 데이터가 반영되었습니다 · " + d.rows.length.toLocaleString("ko-KR") + "건");
       else if (manual) toast("이미 최신 상태입니다 · " + d.rows.length.toLocaleString("ko-KR") + "건");
@@ -919,16 +919,19 @@
   /* ---------- CSV ---------- */
   function exportCsv() {
     var rows = filtered();
-    var head = ["일자", "현장", "거래처", "품목/비고", "정산", "증빙", state.basis === "supply" ? "공급가액" : "합계금액"];
+    var all = state.cat === "all";
+    var head = (all ? ["구분"] : []).concat(
+      ["일자", "현장", "거래처", "품목/비고", "정산", "증빙", state.basis === "supply" ? "공급가액" : "합계금액"]);
     var lines = [head.join(",")];
     rows.forEach(function (r) {
-      lines.push([r.date || "", siteOf(r), r.vendor || "", (r.item || "") + (r.note ? " / " + r.note : ""),
-        isDone(r) ? "완료" : "미정산", r.doc || "", amountOf(r)]
+      lines.push((all ? [(CATS[r.cat] || {}).label || ""] : []).concat(
+        [r.date || "", siteOf(r), r.vendor || "", (r.item || "") + (r.note ? " / " + r.note : ""),
+         isDone(r) ? "완료" : "미정산", r.doc || "", amountOf(r)])
         .map(function (v) { return '"' + String(v).replace(/"/g, '""') + '"'; }).join(","));
     });
     var a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob(["﻿" + lines.join("\r\n")], { type: "text/csv;charset=utf-8;" }));
-    a.download = "집기비품_현장별내역_" + ymd(new Date()) + ".csv";
+    a.download = catLabel().replace(/\s/g, "") + "_현장별내역_" + ymd(new Date()) + ".csv";
     a.click(); URL.revokeObjectURL(a.href);
   }
 
