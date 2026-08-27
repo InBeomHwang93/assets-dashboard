@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-08-27T04:37:34.742Z",
+ "updatedAt": "2026-08-27T04:43:52.702Z",
  "updatedBy": "InBeomHwang93",
  "rows": [
   {
@@ -1885,7 +1885,7 @@
    "siteRaw": "",
    "site": "본사",
    "settled": false,
-   "hidden": false
+   "hidden": true
   },
   {
    "date": "2025-06-25",
