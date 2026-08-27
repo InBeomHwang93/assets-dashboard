@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-08-27T05:10:29.762Z",
+ "updatedAt": "2026-08-27T05:14:28.552Z",
  "updatedBy": "InBeomHwang93",
  "rows": [
   {
@@ -2912,7 +2912,7 @@
    "siteRaw": "",
    "site": "본사",
    "settled": false,
-   "hidden": false
+   "hidden": true
   },
   {
    "date": "2024-09-30",
@@ -2925,7 +2925,7 @@
    "siteRaw": "",
    "site": "본사",
    "settled": false,
-   "hidden": false
+   "hidden": true
   },
   {
    "date": "2024-09-30",
@@ -2938,7 +2938,7 @@
    "siteRaw": "",
    "site": "본사",
    "settled": false,
-   "hidden": false
+   "hidden": true
   },
   {
    "date": "2024-09-04",
@@ -2951,7 +2951,7 @@
    "siteRaw": "",
    "site": "본사",
    "settled": false,
-   "hidden": false
+   "hidden": true
   },
   {
    "date": "2024-08-20",
@@ -3380,7 +3380,7 @@
    "siteRaw": "",
    "site": "본사",
    "settled": false,
-   "hidden": false
+   "hidden": true
   },
   {
    "date": "2024-07-17",
@@ -3393,7 +3393,7 @@
    "siteRaw": "",
    "site": "본사",
    "settled": false,
-   "hidden": false
+   "hidden": true
   },
   {
    "date": "2024-07-09",
@@ -3406,7 +3406,7 @@
    "siteRaw": "",
    "site": "본사",
    "settled": false,
-   "hidden": false
+   "hidden": true
   },
   {
    "date": "2024-07-08",
@@ -3419,7 +3419,7 @@
    "siteRaw": "",
    "site": "본사",
    "settled": false,
-   "hidden": false
+   "hidden": true
   }
  ]
 }
