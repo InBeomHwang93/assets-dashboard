@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-08-27T01:58:27.893Z",
+ "updatedAt": "2026-08-27T01:59:25.323Z",
  "updatedBy": "InBeomHwang93",
  "rows": [
   {
@@ -1038,9 +1038,9 @@
    "amount": 3025000,
    "supply": 2750000,
    "siteRaw": "",
-   "site": "",
+   "site": "본사",
    "settled": false,
-   "hidden": false
+   "hidden": true
   },
   {
    "date": "2025-12-16",
@@ -1051,9 +1051,9 @@
    "amount": 2134000,
    "supply": 1940000,
    "siteRaw": "",
-   "site": "",
+   "site": "본사",
    "settled": false,
-   "hidden": false
+   "hidden": true
   },
   {
    "date": "2025-11-11",
