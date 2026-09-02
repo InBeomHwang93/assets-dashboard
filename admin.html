@@ -116,6 +116,7 @@
     <div class="seg" role="group">
       <button type="button" class="segbtn" data-cat="assets" aria-pressed="true">집기비품</button>
       <button type="button" class="segbtn" data-cat="safety" aria-pressed="false">안전용품</button>
+      <button type="button" class="segbtn" data-cat="telecom" aria-pressed="false">통신공사</button>
     </div>
     <div class="msg info" id="catMsg" style="display:block">현재 <b>집기비품</b> 자료를 다루고 있습니다. (data.json)</div>
   </section>
@@ -316,13 +317,15 @@
   var UNASSIGNED = "미지정";
   // 이 화면 파일의 판 번호. 저장 직전에 서버의 판 번호와 비교해서
   // 오래 열어둔 탭(예전 코드)이 데이터를 덮어쓰는 것을 막는다.
-  var BUILD = "2026-08-26c";
+  var BUILD = "2026-09-02a";
 
   /* ---------- 자료 구분 ---------- */
   var CATS = {
     assets: { label: "집기비품", data: "data.json",        sites: "sites.json" },
-    safety: { label: "안전용품", data: "data-safety.json", sites: "sites-safety.json" }
+    safety:  { label: "안전용품", data: "data-safety.json",  sites: "sites-safety.json" },
+    telecom: { label: "통신공사", data: "data-telecom.json", sites: "sites-telecom.json" }
   };
+  var CAT_ORDER = ["assets", "safety", "telecom"];
   var CAT = "assets";
   function F(kind) { return CATS[CAT][kind]; }   // 지금 구분의 파일 이름
 
@@ -445,7 +448,8 @@
             }
             var out = [];
             wb.SheetNames.forEach(function (sn) {
-              var aoa = XLSX.utils.sheet_to_json(wb.Sheets[sn], { header: 1, defval: "", raw: false, blankrows: false });
+              var aoa = XLSX.utils.sheet_to_json(wb.Sheets[sn], { header: 1, defval: "", raw: false,
+                blankrows: false, dateNF: "yyyy-mm-dd" });
               if (aoa.length) out.push({ file: f.name, sheet: sn, aoa: aoa });
             });
             res(out);
@@ -689,6 +693,13 @@
     if (m) return m[1] + "-" + String(m[2]).padStart(2, "0") + "-" + String(m[3]).padStart(2, "0");
     m = s.match(/^(\d{4})(\d{2})(\d{2})$/);
     if (m) return m[1] + "-" + m[2] + "-" + m[3];
+    // 엑셀이 날짜로 인식해 9/1/26 처럼 바꿔 놓은 경우 (월/일/연 순서)
+    m = s.match(/^(\d{1,2})[.\-\/](\d{1,2})[.\-\/](\d{2,4})$/);
+    if (m) {
+      var yy = Number(m[3]);
+      if (yy < 100) yy += yy < 70 ? 2000 : 1900;
+      return yy + "-" + String(m[1]).padStart(2, "0") + "-" + String(m[2]).padStart(2, "0");
+    }
     return "";
   }
   function fmt(d) {
@@ -914,7 +925,7 @@
     var ir = $("importRules");
     if (ir) {
       ir.classList.remove("hide");
-      ir.textContent = "↧ " + CATS[CAT === "assets" ? "safety" : "assets"].label + " 의 현장 정리 가져오기";
+      ir.textContent = "↧ 다른 구분의 현장 정리 가져오기";
     }
     var agg = siteAgg();
     var all = Object.keys(agg);
@@ -1570,28 +1581,46 @@
 
   /* 다른 구분에서 이미 정리해 둔 현장 이름 규칙을 그대로 가져온다.
      안전용품을 처음 올릴 때 200곳 넘는 현장을 다시 묶지 않아도 되게 하는 장치. */
-  function otherCat() { return CAT === "assets" ? "safety" : "assets"; }
+  function otherCats() {
+    return CAT_ORDER.filter(function (c) { return c !== CAT && CATS[c]; });
+  }
   function importRules() {
-    var from = otherCat();
-    show("siteMsg", "info", CATS[from].label + " 의 현장 정리 내용을 불러오는 중…");
-    readJsonFile(CATS[from].sites).then(function (r) {
-      if (r.error || !r.json) { show("siteMsg", "err", CATS[from].label + " 의 현장 정리 내용을 불러오지 못했습니다."); return; }
-      var j = r.json, addA = 0, addK = 0;
-      // 이름 합치기(별칭)만 가져온다. 건별 수정·정산 이력은 구분마다 달라서 가져오지 않는다.
-      Object.keys(j.aliases || {}).forEach(function (k) {
-        if (!sitesCfg.aliases[k]) { sitesCfg.aliases[k] = j.aliases[k]; addA++; }
-      });
+    var from = otherCats();
+    if (!from.length) { show("siteMsg", "info", "가져올 다른 구분이 없습니다."); return; }
+    show("siteMsg", "info", from.map(function (c) { return CATS[c].label; }).join(" · ") + " 의 현장 정리 내용을 불러오는 중…");
+    Promise.all(from.map(function (c) {
+      return readJsonFile(CATS[c].sites).then(function (r) { return { cat: c, json: (r && !r.error) ? r.json : null }; })
+                                        .catch(function () { return { cat: c, json: null }; });
+    })).then(function (list) {
+      var addA = 0, addK = 0, fails = [], per = [];
       var have = {};
-      sitesCfg.sites.forEach(function (s) { have[s.name] = s; });
-      (j.sites || []).forEach(function (s) {
-        if (!s.name) return;
-        if (!have[s.name]) { sitesCfg.sites.push({ name: s.name, keywords: (s.keywords || []).slice() }); addK++; }
+      sitesCfg.sites.forEach(function (s) { have[s.name] = true; });
+      list.forEach(function (it) {
+        if (!it.json) { fails.push(CATS[it.cat].label); return; }
+        var a = 0, k = 0;
+        // 이름 합치기(별칭)만 가져온다. 건별 수정·정산·숨김 이력은 구분마다 달라서 가져오지 않는다.
+        Object.keys(it.json.aliases || {}).forEach(function (key) {
+          if (!sitesCfg.aliases[key]) { sitesCfg.aliases[key] = it.json.aliases[key]; a++; }
+        });
+        (it.json.sites || []).forEach(function (site) {
+          if (!site.name || have[site.name]) return;
+          sitesCfg.sites.push({ name: site.name, keywords: (site.keywords || []).slice() });
+          have[site.name] = true; k++;
+        });
+        addA += a; addK += k;
+        if (a || k) per.push(CATS[it.cat].label + " " + a + "건" + (k ? "(+규칙 " + k + ")" : ""));
       });
-      if (!addA && !addK) { show("siteMsg", "info", "이미 " + CATS[from].label + " 의 정리 내용이 모두 반영되어 있습니다."); return; }
+      var tail = fails.length ? "<br><span style='color:var(--crit)'>" + fails.join(" · ") + " 은(는) 불러오지 못했습니다.</span>" : "";
+      if (!addA && !addK) {
+        show("siteMsg", fails.length ? "err" : "info",
+          fails.length ? "현장 정리 내용을 불러오지 못했습니다: " + fails.join(" · ")
+                       : "이미 다른 구분의 정리 내용이 모두 반영되어 있습니다." + tail);
+        return;
+      }
       persistLocalSites(); rebuild();
-      show("siteMsg", "ok", CATS[from].label + " 에서 <b>이름 합치기 " + addA + "건</b>"
-        + (addK ? " · <b>키워드 규칙 " + addK + "건</b>" : "") + " 을 가져왔습니다."
-        + "<br><span style='color:var(--ink-3)'>가져온 규칙은 아래 목록에서 ✕ 로 하나씩 되돌릴 수 있습니다. 6번에서 반영해야 저장됩니다.</span>");
+      show("siteMsg", "ok", "<b>이름 합치기 " + addA + "건</b>"
+        + (addK ? " · <b>키워드 규칙 " + addK + "건</b>" : "") + " 을 가져왔습니다. (" + per.join(", ") + ")"
+        + "<br><span style='color:var(--ink-3)'>가져온 규칙은 아래 목록에서 ✕ 로 하나씩 되돌릴 수 있습니다. 6번에서 반영해야 저장됩니다.</span>" + tail);
     });
   }
   $("importRules").addEventListener("click", importRules);

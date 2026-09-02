@@ -262,6 +262,9 @@
       <button class="navitem" type="button" data-cat="safety" aria-pressed="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14a8 8 0 0 1 16 0"/><path d="M2.5 14h19"/><path d="M12 6.2V5"/><path d="M9 14a3 3 0 0 1 6 0"/></svg>
         <span>안전용품</span></button>
+      <button class="navitem" type="button" data-cat="telecom" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V9"/><path d="M7.5 20 12 4l4.5 16"/><path d="M9 14h6"/><path d="M5 20h14"/></svg>
+        <span>통신공사</span></button>
       <button class="navitem" type="button" data-cat="all" aria-pressed="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 5H6l6 7-6 7h12"/></svg>
         <span>전체 합계</span></button>
@@ -410,9 +413,10 @@
      구분마다 파일이 따로 있습니다. 새 구분을 추가하려면 여기에 한 줄만 더 쓰면 됩니다. */
   var CATS = {
     assets: { label: "집기비품", data: "data.json",        sites: "sites.json" },
-    safety: { label: "안전용품", data: "data-safety.json", sites: "sites-safety.json" }
+    safety:  { label: "안전용품", data: "data-safety.json",  sites: "sites-safety.json" },
+    telecom: { label: "통신공사", data: "data-telecom.json", sites: "sites-telecom.json" }
   };
-  var CAT_ORDER = ["assets", "safety"];
+  var CAT_ORDER = ["assets", "safety", "telecom"];
   state.cat = "assets";
 
   /* ---------- 유틸 ---------- */
