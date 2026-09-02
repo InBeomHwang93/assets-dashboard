@@ -76,7 +76,69 @@
   .navitem svg { width: 19px; height: 19px; flex: 0 0 auto; }
   .navitem:hover { background: color-mix(in srgb, var(--s1) 8%, transparent); color: var(--ink-1); }
   .navitem[aria-pressed="true"] { background: var(--s1); color: #fff; }
+  .navsep { height: 1px; background: var(--border); margin: 6px 2px; }
   .sidefoot { margin-top: auto; font-size: 12px; color: var(--ink-3); line-height: 1.6; }
+
+  /* ── 잠깐 쉬어가기 ── */
+  body[data-cat="game"] .filters,
+  body[data-cat="game"] #kpis,
+  body[data-cat="game"] #banner,
+  body[data-cat="game"] #sync,
+  body[data-cat="game"] #reloadBtn,
+  body[data-cat="game"] .wrap > section.card { display: none !important; }
+  body:not([data-cat="game"]) #gameView { display: none; }
+  .gstage { display: grid; grid-template-columns: minmax(0,1fr) 262px; gap: 14px; align-items: start; }
+  @media (max-width: 940px) { .gstage { grid-template-columns: 1fr; } }
+  .gtabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .gtab { font-family: inherit; font-size: 13.5px; font-weight: 600; padding: 9px 15px; border-radius: 999px;
+    border: 1px solid var(--border); background: var(--surface-1); color: var(--ink-2); cursor: pointer; }
+  .gtab[aria-pressed="true"] { background: var(--s1); border-color: var(--s1); color: #fff; }
+  .ghud { display: flex; gap: 18px; align-items: baseline; flex-wrap: wrap; margin-bottom: 12px; }
+  .ghud b { font-size: 26px; letter-spacing: -1px; font-variant-numeric: tabular-nums; }
+  .ghud .lab { display: block; font-size: 11.5px; color: var(--ink-3); }
+  .gbar { height: 6px; border-radius: 999px; background: var(--grid); overflow: hidden; margin-bottom: 14px; }
+  .gbar i { display: block; height: 100%; background: var(--s1); border-radius: 999px; transition: width .1s linear; }
+  #g2light { height: 190px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    font: 700 21px/1.35 inherit; color: #fff; cursor: pointer; user-select: none; text-align: center;
+    padding: 12px; background: var(--ink-3); transition: background .06s; }
+  #g2light.wait { background: #b3392c; } #g2light.go { background: #12a150; }
+  #g3grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; max-width: 340px; }
+  #g3grid button { aspect-ratio: 1; font-size: 26px; border: 1px solid var(--border); border-radius: 10px;
+    background: var(--s1); cursor: pointer; color: transparent; }
+  #g3grid button.open { background: var(--surface-1); color: inherit; }
+  #g3grid button.done { background: color-mix(in srgb, var(--good) 16%, var(--surface-1));
+    border-color: transparent; color: inherit; cursor: default; }
+  #g4q { font: 700 32px/1 inherit; letter-spacing: -1px; margin: 6px 0 14px; font-variant-numeric: tabular-nums; }
+  #g4opts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; max-width: 330px; }
+  #g4opts button { font: 700 18px/1 inherit; padding: 15px 0; border: 1px solid var(--border);
+    border-radius: 10px; background: var(--surface-1); color: var(--ink-1); cursor: pointer;
+    font-variant-numeric: tabular-nums; }
+  #g4opts button:hover { background: var(--s1-soft); }
+  .gname { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .gname input { font-family: inherit; font-size: 13.5px; padding: 8px 11px; border-radius: 9px;
+    border: 1px solid var(--border); background: var(--surface-1); color: var(--ink-1); width: 150px; }
+  .grank { display: inline-flex; width: 20px; justify-content: center; font-weight: 700; color: var(--ink-3); }
+  .grank.m1 { color: #c08a00; } .grank.m2 { color: #8d949c; } .grank.m3 { color: #a9714b; }
+  tr.gnew td { background: var(--s1-soft); font-weight: 700; }
+  #gameView .btn { font-family: inherit; font-size: 13px; font-weight: 600; padding: 9px 16px;
+    border-radius: 9px; border: 1px solid var(--border); background: var(--surface-1);
+    color: var(--ink-1); cursor: pointer; }
+  #gameView .btn:hover { background: color-mix(in srgb, var(--s1) 7%, var(--surface-1)); }
+  #gameView .btn.primary { background: var(--s1); border-color: var(--s1); color: #fff; }
+  #gameView .btn.primary:hover { filter: brightness(1.06); background: var(--s1); }
+  #gameView .btn.sm { font-size: 12px; padding: 7px 12px; }
+  #gameView .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  #gameView h2 { font-size: 15px; margin: 0 0 3px; letter-spacing: -.3px; }
+  #gameView .cdesc { color: var(--ink-2); font-size: 12.5px; margin: 0 0 12px; }
+  #gameView table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  #gameView th, #gameView td { padding: 7px 6px; border-bottom: 1px solid var(--border);
+    text-align: left; white-space: nowrap; }
+  #gameView th { color: var(--ink-3); font-weight: 600; font-size: 11.5px; }
+  #gameView td.num, #gameView th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  /* 게임 화면에서는 자료 기준일 문구도 감춘다 */
+  body[data-cat="game"] .top .sub { display: none; }
+  .gmsg { font-size: 13px; margin-top: 12px; padding: 10px 12px; border-radius: 9px; font-weight: 600;
+    background: color-mix(in srgb, var(--good) 10%, var(--surface-1)); color: var(--good-ink); }
   .sidefoot a { color: var(--ink-3); }
   .catbadge {
     display: inline-block; vertical-align: 3px; margin-left: 6px;
@@ -321,6 +383,10 @@
       <button class="navitem" type="button" data-cat="all" aria-pressed="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 5H6l6 7-6 7h12"/></svg>
         <span>전체 합계</span></button>
+      <div class="navsep"></div>
+      <button class="navitem" type="button" data-cat="game" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="11" rx="4"/><path d="M7 11v3M5.5 12.5h3"/><circle cx="15.5" cy="12" r="1"/><circle cx="18" cy="14" r="1"/></svg>
+        <span>잠깐 쉬어가기</span></button>
     </nav>
     <div class="sidefoot">사내 참고용 · 문의 총무팀<br><a href="./admin.html">데이터 업데이트(관리자)</a></div>
   </aside>
@@ -385,6 +451,82 @@
   </div>
 
   <div class="kpis" id="kpis"></div>
+
+  <!-- ══ 잠깐 쉬어가기 ══ -->
+  <section id="gameView">
+    <div class="card" style="margin-bottom:14px">
+      <div class="gname">
+        <span class="flabel" style="font-weight:600">이름</span>
+        <input type="text" id="gName" maxlength="12" placeholder="예: 황인범" autocomplete="off">
+        <span id="gNameMsg" style="font-size:12px;color:var(--ink-3)"></span>
+      </div>
+      <p class="sub" style="margin:10px 0 0">
+        한 판에 1분이 넘지 않습니다. 기록은 <b>이 컴퓨터의 브라우저에만</b> 저장되고, 대시보드 자료와는 아무 관계가 없습니다.
+      </p>
+    </div>
+
+    <div class="gtabs" id="gTabs">
+      <button class="gtab" type="button" data-g="2" aria-pressed="true">반응 속도</button>
+      <button class="gtab" type="button" data-g="3" aria-pressed="false">짝 맞추기</button>
+      <button class="gtab" type="button" data-g="4" aria-pressed="false">30초 암산</button>
+    </div>
+
+    <div class="gstage">
+      <div>
+        <section class="card" id="game2">
+          <h2>반응 속도 — 5번 평균</h2>
+          <p class="cdesc">빨간색이 초록색으로 바뀌는 순간 누르세요. 5번의 평균이 기록입니다. 미리 누르면 그 판은 다시 합니다.</p>
+          <div class="ghud">
+            <span><span class="lab">진행</span><b id="g2n">0</b>/5</span>
+            <span><span class="lab">직전</span><b id="g2last">—</b></span>
+            <span><span class="lab">평균</span><b id="g2avg">—</b>ms</span>
+          </div>
+          <div id="g2light">시작을 누르세요</div>
+          <div class="row" style="margin-top:14px"><button class="btn primary" id="g2start" type="button">시작</button></div>
+          <div id="g2msg"></div>
+        </section>
+
+        <section class="card" id="game3" hidden>
+          <h2>짝 맞추기 — 사무용품 8쌍</h2>
+          <p class="cdesc">같은 그림 두 장을 찾아 8쌍을 모두 맞추면 끝입니다. 뒤집은 횟수가 적을수록 좋은 기록입니다.</p>
+          <div class="ghud">
+            <span><span class="lab">경과</span><b id="g3t">0.0</b>초</span>
+            <span><span class="lab">맞춘 쌍</span><b id="g3p">0</b>/8</span>
+            <span><span class="lab">뒤집기</span><b id="g3f">0</b>회</span>
+          </div>
+          <div id="g3grid"></div>
+          <div class="row" style="margin-top:14px"><button class="btn primary" id="g3start" type="button">시작</button></div>
+          <div id="g3msg"></div>
+        </section>
+
+        <section class="card" id="game4" hidden>
+          <h2>30초 암산</h2>
+          <p class="cdesc">30초 동안 몇 문제를 맞히는지 봅니다. 틀리면 1문제 깎입니다.</p>
+          <div class="ghud">
+            <span><span class="lab">남은 시간</span><b id="g4t">30.0</b>초</span>
+            <span><span class="lab">맞힘</span><b id="g4s">0</b>문제</span>
+            <span><span class="lab">연속</span><b id="g4c">0</b></span>
+          </div>
+          <div class="gbar"><i id="g4bar" style="width:100%"></i></div>
+          <div id="g4q">시작을 누르세요</div>
+          <div id="g4opts"></div>
+          <div class="row" style="margin-top:14px"><button class="btn primary" id="g4start" type="button">시작</button></div>
+          <div id="g4msg"></div>
+        </section>
+      </div>
+
+      <aside class="card" id="gBoard" style="position:sticky;top:14px">
+        <h2 id="gbTitle">내 기록</h2>
+        <p class="cdesc" id="gbDesc">아직 기록이 없습니다</p>
+        <table><thead><tr><th>#</th><th>이름</th><th class="num" id="gbUnit">기록</th><th class="num">날짜</th></tr></thead>
+        <tbody id="gbBody"></tbody></table>
+        <div class="row" style="margin-top:12px">
+          <button class="btn sm" id="gbClear" type="button">이 게임 기록 지우기</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
 
   <section class="card">
     <div class="chead">
@@ -495,6 +637,7 @@
   function catLabel(c) {
     c = c || state.cat;
     if (c === "all") return "전체 합계";
+    if (c === "game") return "잠깐 쉬어가기";
     return (CATS[c] && CATS[c].label) || c;
   }
 
@@ -1045,11 +1188,13 @@
     });
   }
   function switchCat(cat, skipHash) {
-    if (cat !== "all" && !CATS[cat]) cat = "assets";
+    if (cat !== "all" && cat !== "game" && !CATS[cat]) cat = "assets";
     state.cat = cat;
-    try { localStorage.setItem("dash-cat", cat); } catch (e) {}
+    // 게임 화면은 '지난번에 보던 구분' 으로 기억하지 않는다 (다시 열면 자료 화면으로)
+    if (cat !== "game") { try { localStorage.setItem("dash-cat", cat); } catch (e) {} }
     if (!skipHash && location.hash.slice(1) !== cat) location.hash = cat;
     applyCatUI();
+    if (cat === "game") { stopGames(); gBoard(); return; }   // 자료를 다시 읽지 않는다
     // 구분이 바뀌면 화면 상태를 처음으로 되돌린다
     lastStamp = null; booted = false;
     DATA = { rows: [] }; SITES = { sites: [] };
@@ -1061,9 +1206,251 @@
     if (window.__DEMO__) { boot(); return; }
     refresh(true);
   }
+  /* ══════════ 잠깐 쉬어가기 ══════════
+     기록은 이 브라우저에만 저장됩니다. 대시보드 자료(data*.json)와는 무관합니다. */
+  var GKEY = "dash-game-v1";
+  var GAMES = {
+    2: { name: "반응 속도",  unit: "평균(ms)",  lower: true,
+         fmt: function (v) { return Math.round(v).toLocaleString("ko-KR") + "ms"; } },
+    3: { name: "짝 맞추기",  unit: "뒤집기(회)", lower: true,
+         fmt: function (v) { return Math.round(v) + "회"; } },
+    4: { name: "30초 암산",  unit: "맞힘(문제)", lower: false,
+         fmt: function (v) { return Math.round(v) + "문제"; } }
+  };
+  var GST = { name: "", rec: { 2: [], 3: [], 4: [] }, plays: { 2: 0, 3: 0, 4: 0 } };
+  var gCur = 2, gJustAdded = -1;
+
+  function gLoad() {
+    try {
+      var j = JSON.parse(localStorage.getItem(GKEY) || "null");
+      if (j && typeof j === "object") {
+        GST.name = String(j.name || "").slice(0, 12);
+        [2, 3, 4].forEach(function (g) {
+          GST.rec[g] = Array.isArray(j.rec && j.rec[g]) ? j.rec[g].slice(0, 20) : [];
+          GST.plays[g] = Number(j.plays && j.plays[g]) || 0;
+        });
+      }
+    } catch (e) {}
+  }
+  function gSave() { try { localStorage.setItem(GKEY, JSON.stringify(GST)); } catch (e) {} }
+
+  function gAdd(g, v) {
+    var d = new Date();
+    var day = (d.getMonth() + 1) + "/" + d.getDate();
+    GST.plays[g]++;
+    GST.rec[g].push({ v: v, d: day, n: GST.name || "이름 없음" });
+    GST.rec[g].sort(function (a, b) { return GAMES[g].lower ? a.v - b.v : b.v - a.v; });
+    GST.rec[g] = GST.rec[g].slice(0, 10);
+    gSave();
+    var idx = GST.rec[g].findIndex(function (r) { return r.v === v && r.d === day; });
+    gJustAdded = idx;
+    gBoard();
+    return idx;   // -1 이면 상위 10위 밖
+  }
+  function gBoard() {
+    var G = GAMES[gCur], list = GST.rec[gCur] || [];
+    $("gbTitle").textContent = G.name + " — 내 기록";
+    $("gbUnit").textContent = G.unit;
+    $("gbDesc").textContent = list.length
+      ? "최고 " + G.fmt(list[0].v) + " · 지금까지 " + GST.plays[gCur].toLocaleString("ko-KR") + "판"
+      : "한 판 해보시면 기록이 쌓입니다";
+    $("gbBody").innerHTML = list.length
+      ? list.map(function (r, i) {
+          var cls = i < 3 ? " m" + (i + 1) : "";
+          return "<tr" + (i === gJustAdded ? ' class="gnew"' : "") + '><td><span class="grank' + cls + '">'
+            + (i + 1) + "</span></td><td>" + esc(r.n) + '</td><td class="num">' + G.fmt(r.v)
+            + '</td><td class="num" style="color:var(--ink-3)">' + esc(r.d) + "</td></tr>";
+        }).join("")
+      : '<tr><td colspan="4" style="text-align:center;color:var(--ink-3);padding:22px">기록 없음</td></tr>';
+  }
+  function gMsg(id, html) { var e = $(id); e.className = "gmsg"; e.innerHTML = html; }
+  function gResult(g, v, extra) {
+    var idx = gAdd(g, v);
+    var G = GAMES[g];
+    gMsg("g" + g + "msg", (extra || "") + "<b>" + G.fmt(v) + "</b> — "
+      + (idx === 0 ? "내 최고 기록입니다 🎉"
+        : idx > 0 ? "내 기록 " + (idx + 1) + "등입니다"
+        : "상위 10위 안에는 못 들었습니다"));
+  }
+  function stopGames() {
+    clearTimeout(G2.timer); clearInterval(G3.timer); clearInterval(G4.timer);
+    G2.armed = false; G3.on = false; G4.on = false;
+  }
+
+  /* ── 반응 속도 ── */
+  var G2 = { n: 0, list: [], timer: null, go: 0, armed: false };
+  function g2Round() {
+    if (G2.n >= 5) {
+      var avg = G2.list.reduce(function (a, b) { return a + b; }, 0) / G2.list.length;
+      $("g2light").className = ""; $("g2light").textContent = "끝! 평균 " + Math.round(avg) + "ms";
+      gResult(2, avg, "5번 평균 ");
+      return;
+    }
+    $("g2light").className = "wait"; $("g2light").textContent = "초록색이 되면 누르세요";
+    G2.armed = false;
+    G2.timer = setTimeout(function () {
+      $("g2light").className = "go"; $("g2light").textContent = "지금!";
+      G2.go = Date.now(); G2.armed = true;
+    }, 900 + Math.random() * 2600);
+  }
+
+  /* ── 짝 맞추기 ── */
+  var GICONS = ["🪑", "🗄️", "🖥️", "🖨️", "📞", "⛑️", "🧰", "📡"];
+  var G3 = { open: [], pairs: 0, flips: 0, t0: 0, timer: null, on: false, lock: false };
+  function g3Build() {
+    var deck = GICONS.concat(GICONS);
+    for (var j = deck.length - 1; j > 0; j--) {
+      var k = Math.floor(Math.random() * (j + 1)); var t = deck[j]; deck[j] = deck[k]; deck[k] = t;
+    }
+    $("g3grid").innerHTML = deck.map(function (c) {
+      return '<button type="button" data-c="' + c + '">' + c + "</button>";
+    }).join("");
+    Array.prototype.forEach.call($("g3grid").children, function (btn) {
+      btn.addEventListener("click", function () {
+        if (!G3.on || G3.lock || btn.classList.contains("done") || btn.classList.contains("open")) return;
+        btn.classList.add("open"); G3.open.push(btn);
+        G3.flips++; $("g3f").textContent = G3.flips;
+        if (G3.open.length === 2) {
+          var a = G3.open[0], b = G3.open[1];
+          if (a.getAttribute("data-c") === b.getAttribute("data-c")) {
+            a.classList.add("done"); b.classList.add("done");
+            a.classList.remove("open"); b.classList.remove("open");
+            G3.open = []; G3.pairs++; $("g3p").textContent = G3.pairs;
+            if (G3.pairs === 8) {
+              G3.on = false; clearInterval(G3.timer);
+              gResult(3, G3.flips, "8쌍 완료 · " + ((Date.now() - G3.t0) / 1000).toFixed(1) + "초 · ");
+            }
+          } else {
+            G3.lock = true;
+            setTimeout(function () {
+              a.classList.remove("open"); b.classList.remove("open");
+              G3.open = []; G3.lock = false;
+            }, 520);
+          }
+        }
+      });
+    });
+  }
+
+  /* ── 30초 암산 ── */
+  var G4 = { score: 0, combo: 0, ans: 0, end: 0, timer: null, on: false };
+  function g4Q() {
+    var a, b, op, v, r = Math.random();
+    if (r < 0.45) { a = 11 + Math.floor(Math.random() * 78); b = 11 + Math.floor(Math.random() * 78); op = "+"; v = a + b; }
+    else if (r < 0.8) { a = 30 + Math.floor(Math.random() * 70); b = 11 + Math.floor(Math.random() * (a - 10)); op = "−"; v = a - b; }
+    else { a = 3 + Math.floor(Math.random() * 10); b = 3 + Math.floor(Math.random() * 10); op = "×"; v = a * b; }
+    G4.ans = v;
+    $("g4q").textContent = a + " " + op + " " + b + " = ?";
+    var opts = [v];
+    while (opts.length < 4) {
+      var d = v + (Math.floor(Math.random() * 19) - 9);
+      if (d !== v && d >= 0 && opts.indexOf(d) === -1) opts.push(d);
+    }
+    for (var j = opts.length - 1; j > 0; j--) {
+      var k = Math.floor(Math.random() * (j + 1)); var t = opts[j]; opts[j] = opts[k]; opts[k] = t;
+    }
+    $("g4opts").innerHTML = opts.map(function (o) {
+      return '<button type="button" data-v="' + o + '">' + o + "</button>";
+    }).join("");
+    Array.prototype.forEach.call($("g4opts").children, function (btn) {
+      btn.addEventListener("click", function () {
+        if (!G4.on) return;
+        if (+btn.getAttribute("data-v") === G4.ans) {
+          G4.score++; G4.combo++;
+          btn.style.background = "color-mix(in srgb, var(--good) 22%, var(--surface-1))";
+        } else {
+          G4.score = Math.max(0, G4.score - 1); G4.combo = 0;
+          btn.style.background = "color-mix(in srgb, var(--crit) 20%, var(--surface-1))";
+        }
+        $("g4s").textContent = G4.score; $("g4c").textContent = G4.combo;
+        setTimeout(g4Q, 110);
+      });
+    });
+  }
+
+  function gameInit() {
+    gLoad();
+    $("gName").value = GST.name;
+    $("gNameMsg").textContent = GST.name ? "" : "이름을 넣으면 기록에 함께 남습니다";
+    $("gName").addEventListener("input", function () {
+      GST.name = this.value.trim().slice(0, 12); gSave();
+      $("gNameMsg").textContent = GST.name ? "저장했습니다" : "이름을 넣으면 기록에 함께 남습니다";
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll("#gTabs .gtab"), function (t) {
+      t.addEventListener("click", function () {
+        gCur = +t.getAttribute("data-g"); gJustAdded = -1;
+        Array.prototype.forEach.call(document.querySelectorAll("#gTabs .gtab"), function (x) {
+          x.setAttribute("aria-pressed", String(x === t));
+        });
+        [2, 3, 4].forEach(function (n) { $("game" + n).hidden = (n !== gCur); });
+        stopGames(); gBoard();
+      });
+    });
+
+    $("gbClear").addEventListener("click", function () {
+      if (!confirm(GAMES[gCur].name + " 기록을 지울까요? 되돌릴 수 없습니다.")) return;
+      GST.rec[gCur] = []; GST.plays[gCur] = 0; gJustAdded = -1; gSave(); gBoard();
+    });
+
+    $("g2light").addEventListener("click", function () {
+      if (!G2.armed) {
+        if ($("g2light").className === "wait") {
+          clearTimeout(G2.timer);
+          $("g2light").className = ""; $("g2light").textContent = "너무 일찍 눌렀습니다 — 이 판은 다시";
+          setTimeout(g2Round, 900);
+        }
+        return;
+      }
+      var ms = Date.now() - G2.go;
+      G2.armed = false; G2.list.push(ms); G2.n++;
+      $("g2n").textContent = G2.n; $("g2last").textContent = ms;
+      $("g2avg").textContent = Math.round(G2.list.reduce(function (a, b) { return a + b; }, 0) / G2.list.length);
+      $("g2light").className = ""; $("g2light").textContent = ms + "ms";
+      setTimeout(g2Round, 650);
+    });
+    $("g2start").addEventListener("click", function () {
+      stopGames(); gJustAdded = -1;
+      G2.n = 0; G2.list = [];
+      $("g2n").textContent = "0"; $("g2last").textContent = "—"; $("g2avg").textContent = "—";
+      $("g2msg").className = ""; $("g2msg").innerHTML = ""; g2Round();
+    });
+
+    $("g3start").addEventListener("click", function () {
+      stopGames(); gJustAdded = -1; g3Build();
+      G3.open = []; G3.pairs = 0; G3.flips = 0; G3.on = true; G3.lock = false; G3.t0 = Date.now();
+      $("g3p").textContent = "0"; $("g3f").textContent = "0";
+      $("g3msg").className = ""; $("g3msg").innerHTML = "";
+      G3.timer = setInterval(function () {
+        $("g3t").textContent = ((Date.now() - G3.t0) / 1000).toFixed(1);
+      }, 100);
+    });
+    g3Build();
+
+    $("g4start").addEventListener("click", function () {
+      stopGames(); gJustAdded = -1;
+      G4.score = 0; G4.combo = 0; G4.on = true; G4.end = Date.now() + 30000;
+      $("g4s").textContent = "0"; $("g4c").textContent = "0";
+      $("g4msg").className = ""; $("g4msg").innerHTML = "";
+      g4Q();
+      G4.timer = setInterval(function () {
+        var left = Math.max(0, G4.end - Date.now());
+        $("g4t").textContent = (left / 1000).toFixed(1);
+        $("g4bar").style.width = (left / 30000 * 100) + "%";
+        if (left <= 0) {
+          clearInterval(G4.timer); G4.on = false;
+          $("g4q").textContent = "끝!"; $("g4opts").innerHTML = "";
+          gResult(4, G4.score, "30초 동안 ");
+        }
+      }, 100);
+    });
+
+    gBoard();
+  }
+
   function initialCat() {
     var h = (location.hash || "").slice(1);
-    if (h === "all" || CATS[h]) return h;
+    if (h === "all" || h === "game" || CATS[h]) return h;
     try { var v = localStorage.getItem("dash-cat"); if (v === "all" || CATS[v]) return v; } catch (e) {}
     return "assets";
   }
@@ -1127,9 +1514,10 @@
   }
 
   wire();
+  gameInit();
   state.cat = initialCat();
   applyCatUI();
-  load();
+  if (state.cat === "game") gBoard(); else load();
   if (!window.__DEMO__) { startPolling(); setInterval(tickSync, 10000); }
 })();
 </script>
