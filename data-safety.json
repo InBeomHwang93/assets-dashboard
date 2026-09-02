@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-09-02T05:21:28.364Z",
+ "updatedAt": "2026-09-02T05:31:24.670Z",
  "updatedBy": "InBeomHwang93",
  "rows": [
   {
@@ -141,7 +141,7 @@
    "amount": 27500,
    "supply": 25000,
    "siteRaw": "배곧서울대학교병원 건립공사 설계 및 시공단계 감독권한대행 건설사업관리용역",
-   "site": "배곧서울대학교병원 건립공사 설계 및 시공단계 감독권한대행 건설사업관리용역",
+   "site": "배곧서울대학교병원 건립공사 설계 및 시공단계 감독권한대행 건설사업관리용역서울대학교병원",
    "settled": false,
    "hidden": false
   },
@@ -1233,7 +1233,7 @@
    "amount": 202400,
    "supply": 184000,
    "siteRaw": "양산양산부산대학교병원 스마트 진료지원교육물류센터 감독권한대행 등 건설사업관리용역병원 스마트",
-   "site": "양산양산부산대학교병원 스마트 진료지원교육물류센터 감독권한대행 등 건설사업관리용역병원 스마트",
+   "site": "양산부산대학교병원 스마트 진료지원교육물류센터 감독권한대행 등 건설사업관리용역학교병원",
    "settled": false,
    "hidden": false
   },
@@ -1311,7 +1311,7 @@
    "amount": 25300,
    "supply": 23000,
    "siteRaw": "양산양산부산대학교병원 스마트 진료지원교육물류센터 감독권한대행 등 건설사업관리용역학교병원",
-   "site": "양산양산부산대학교병원 스마트 진료지원교육물류센터 감독권한대행 등 건설사업관리용역학교병원",
+   "site": "양산부산대학교병원 스마트 진료지원교육물류센터 감독권한대행 등 건설사업관리용역학교병원",
    "settled": false,
    "hidden": false
   },
@@ -1597,7 +1597,7 @@
    "amount": 95040,
    "supply": 86400,
    "siteRaw": "수원시수원시 공공업무시설 1단계 건립사업(시의회) 건설사업관리용역청사",
-   "site": "수원시수원시 공공업무시설 1단계 건립사업(시의회) 건설사업관리용역청사",
+   "site": "수원시수원시 공공업무시설 1단계 건립사업(시의회) 건설사업관리용역 청사 건립사업",
    "settled": false,
    "hidden": false
   },
@@ -1688,7 +1688,7 @@
    "amount": 124080,
    "supply": 112800,
    "siteRaw": "노원구 중계문화보건센터 위탁개발사업 건설사업관리용역",
-   "site": "노원구 중계문화보건센터 위탁개발사업 건설사업관리용역",
+   "site": "노원구 중계문화보건센터 위탁개발사업 건설사업관리용역 중계문화보건센터",
    "settled": false,
    "hidden": false
   },
@@ -1766,7 +1766,7 @@
    "amount": 85250,
    "supply": 77500,
    "siteRaw": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역",
-   "site": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역",
+   "site": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역복합청사",
    "settled": false,
    "hidden": false
   },
@@ -1882,7 +1882,7 @@
    "doc": "수정세금계산서",
    "amount": -43065000,
    "supply": -39150000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -1895,7 +1895,7 @@
    "doc": "세금계산서",
    "amount": 3025000,
    "supply": 2750000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -1908,7 +1908,7 @@
    "doc": "세금계산서",
    "amount": 40040000,
    "supply": 36400000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -1921,7 +1921,7 @@
    "doc": "세금계산서",
    "amount": 43065000,
    "supply": 39150000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -1934,7 +1934,7 @@
    "doc": "세금계산서",
    "amount": 1023000,
    "supply": 930000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -1947,7 +1947,7 @@
    "doc": "세금계산서",
    "amount": 527670,
    "supply": 479700,
-   "siteRaw": "",
+   "siteRaw": "LH_도청이전신도시 RH12BL 건설공사 5공구 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_도청이전신도시 RH12BL 건설공사 5공구 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -1960,7 +1960,7 @@
    "doc": "세금계산서",
    "amount": 77440,
    "supply": 70400,
-   "siteRaw": "",
+   "siteRaw": "정관에듀파크 조성공사 감독권한대행 등 건설사업관리용역에듀파크 조성공사 감독권한대행 등",
    "site": "정관에듀파크 조성공사 감독권한대행 등 건설사업관리용역에듀파크 조성공사 감독권한대행 등",
    "settled": false,
    "hidden": false
@@ -1973,7 +1973,7 @@
    "doc": "세금계산서",
    "amount": 206030,
    "supply": 187300,
-   "siteRaw": "",
+   "siteRaw": "24-A-00부대 건설사업관리용역(A137",
    "site": "24-A-00부대 건설사업관리용역(A137",
    "settled": false,
    "hidden": false
@@ -1986,7 +1986,7 @@
    "doc": "세금계산서",
    "amount": 79200,
    "supply": 72000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": false
@@ -1999,8 +1999,8 @@
    "doc": "세금계산서",
    "amount": 84590,
    "supply": 76900,
-   "siteRaw": "",
-   "site": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역",
+   "siteRaw": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역",
+   "site": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역복합청사",
    "settled": false,
    "hidden": false
   },
@@ -2012,7 +2012,7 @@
    "doc": "세금계산서",
    "amount": 77440,
    "supply": 70400,
-   "siteRaw": "",
+   "siteRaw": "제주공항 관제동 신축사업 건설사업관리용역",
    "site": "제주공항 관제동 신축사업 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2025,8 +2025,8 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
-   "site": "곤지암역세권 A1-1BL 공동주택 신축공사 감리용역역세권 A1-1BL",
+   "siteRaw": "곤지암역세권 A1-1BL 공동주택 신축공사 감리용역역세권 A1-1BL",
+   "site": "곤지암역세권 A1-1BL 공동주택 신축공사 감리용역",
    "settled": false,
    "hidden": false
   },
@@ -2038,7 +2038,7 @@
    "doc": "세금계산서",
    "amount": 148280,
    "supply": 134800,
-   "siteRaw": "",
+   "siteRaw": "LH_남양주왕숙 A-3,B-1,B-2BL(민간참여) 시공단계 감독권한대행 등 통합건설사업관리용역",
    "site": "LH_남양주왕숙 A-3,B-1,B-2BL(민간참여) 시공단계 감독권한대행 등 통합건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2051,7 +2051,7 @@
    "doc": "세금계산서",
    "amount": 145750,
    "supply": 132500,
-   "siteRaw": "",
+   "siteRaw": "일산병원 건강 통합관리센터 건립공사 감독권한대행 등 건설사업관리용역",
    "site": "일산병원 건강 통합관리센터 건립공사 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2064,7 +2064,7 @@
    "doc": "세금계산서",
    "amount": 88550,
    "supply": 80500,
-   "siteRaw": "",
+   "siteRaw": "아이센스 마곡 R&D센터 신축공사 건설사업관리 및 감리용역",
    "site": "아이센스 마곡 R&D센터 신축공사 건설사업관리 및 감리용역",
    "settled": false,
    "hidden": false
@@ -2077,8 +2077,8 @@
    "doc": "세금계산서",
    "amount": 79640,
    "supply": 72400,
-   "siteRaw": "",
-   "site": "광명제광명제5R구역 주택재개발정비사업구역",
+   "siteRaw": "광명제광명제5R구역 주택재개발정비사업구역",
+   "site": "광명제5R구역 주택재개발정비사업",
    "settled": false,
    "hidden": false
   },
@@ -2090,7 +2090,7 @@
    "doc": "세금계산서",
    "amount": 18700,
    "supply": 17000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": false
@@ -2103,7 +2103,7 @@
    "doc": "세금계산서",
    "amount": 301950,
    "supply": 274500,
-   "siteRaw": "",
+   "siteRaw": "일산병원 건강 통합관리센터 건립공사 감독권한대행 등 건설사업관리용역",
    "site": "일산병원 건강 통합관리센터 건립공사 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2116,7 +2116,7 @@
    "doc": "세금계산서",
    "amount": 124080,
    "supply": 112800,
-   "siteRaw": "",
+   "siteRaw": "24-A-00부대 건설사업관리용역(A164)",
    "site": "24-A-00부대 건설사업관리용역(A164)",
    "settled": false,
    "hidden": false
@@ -2129,7 +2129,7 @@
    "doc": "세금계산서",
    "amount": 532510,
    "supply": 484100,
-   "siteRaw": "",
+   "siteRaw": "서남병원 증축 및 리모델링공사 설사업관리용역(감독권한대행)(장기계속-1차",
    "site": "서남병원 증축 및 리모델링공사 설사업관리용역(감독권한대행)(장기계속-1차",
    "settled": false,
    "hidden": false
@@ -2142,7 +2142,7 @@
    "doc": "세금계산서",
    "amount": 87890,
    "supply": 79900,
-   "siteRaw": "",
+   "siteRaw": "서운면 행정복지센터 건립공사 감독권한 대행 등 건설사업관리 용역",
    "site": "서운면 행정복지센터 건립공사 감독권한 대행 등 건설사업관리 용역",
    "settled": false,
    "hidden": false
@@ -2155,7 +2155,7 @@
    "doc": "세금계산서",
    "amount": 72490,
    "supply": 65900,
-   "siteRaw": "",
+   "siteRaw": "LH_도청이전신도시 RH12BL 건설공사 5공구 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_도청이전신도시 RH12BL 건설공사 5공구 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2168,7 +2168,7 @@
    "doc": "세금계산서",
    "amount": 76450,
    "supply": 69500,
-   "siteRaw": "",
+   "siteRaw": "모래내공원 및 상도근린공원 지하공영주차장 건립공사 통합건설사업관리용역(감독권한대행",
    "site": "모래내공원 및 상도근린공원 지하공영주차장 건립공사 통합건설사업관리용역(감독권한대행",
    "settled": false,
    "hidden": false
@@ -2181,7 +2181,7 @@
    "doc": "세금계산서",
    "amount": 12650,
    "supply": 11500,
-   "siteRaw": "",
+   "siteRaw": "LH_하남교산 A-2BL 민간참여 공공주택 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_하남교산 A-2BL 민간참여 공공주택 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2194,7 +2194,7 @@
    "doc": "세금계산서",
    "amount": 770000,
    "supply": 700000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -2207,7 +2207,7 @@
    "doc": "세금계산서",
    "amount": 79640,
    "supply": 72400,
-   "siteRaw": "",
+   "siteRaw": "충남형 도시리브투게더 첫사업 감독권한대행 등 건설사업관리용역",
    "site": "충남형 도시리브투게더 첫사업 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2220,8 +2220,8 @@
    "doc": "세금계산서",
    "amount": 183480,
    "supply": 166800,
-   "siteRaw": "",
-   "site": "곤지암역세권 A1-1BL 공동주택 신축공사 감리용역역세권 A1-1BL",
+   "siteRaw": "곤지암역세권 A1-1BL 공동주택 신축공사 감리용역역세권 A1-1BL",
+   "site": "곤지암역세권 A1-1BL 공동주택 신축공사 감리용역",
    "settled": false,
    "hidden": false
   },
@@ -2233,7 +2233,7 @@
    "doc": "세금계산서",
    "amount": 77440,
    "supply": 70400,
-   "siteRaw": "",
+   "siteRaw": "춘천소년원 재건축공사 건설사업관리용역",
    "site": "춘천소년원 재건축공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2246,7 +2246,7 @@
    "doc": "세금계산서",
    "amount": 438240,
    "supply": 398400,
-   "siteRaw": "",
+   "siteRaw": "판교 제2테크노밸리 스마트모빌리티 실증허브 조성사업 감독권한대행 등 건설사업관리용역",
    "site": "판교 제2테크노밸리 스마트모빌리티 실증허브 조성사업 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2259,7 +2259,7 @@
    "doc": "세금계산서",
    "amount": 313170,
    "supply": 284700,
-   "siteRaw": "",
+   "siteRaw": "대구국가LH_대구국가산단 A7-1BL 1공구 시공단계 감독권한대행 등 건설사업관리용역 A7-1BL",
    "site": "대구국가LH_대구국가산단 A7-1BL 1공구 시공단계 감독권한대행 등 건설사업관리용역 A7-1BL",
    "settled": false,
    "hidden": false
@@ -2272,7 +2272,7 @@
    "doc": "세금계산서",
    "amount": 165000,
    "supply": 150000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": false
@@ -2285,7 +2285,7 @@
    "doc": "세금계산서",
    "amount": 143880,
    "supply": 130800,
-   "siteRaw": "",
+   "siteRaw": "LH_화성태안3 B3BL 아파트 건설공사(공분 688호) 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_화성태안3 B3BL 아파트 건설공사(공분 688호) 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2298,8 +2298,8 @@
    "doc": "세금계산서",
    "amount": 20900,
    "supply": 19000,
-   "siteRaw": "",
-   "site": "곤지암역세권 A1-1BL 공동주택 신축공사 감리용역역세권",
+   "siteRaw": "곤지암역세권 A1-1BL 공동주택 신축공사 감리용역역세권",
+   "site": "곤지암역세권 A1-1BL 공동주택 신축공사 감리용역",
    "settled": false,
    "hidden": false
   },
@@ -2311,8 +2311,8 @@
    "doc": "세금계산서",
    "amount": 117700,
    "supply": 107000,
-   "siteRaw": "",
-   "site": "곤지암역세권 A1-1BL 공동주택 신축공사 감리용역역세권 A1-1BL",
+   "siteRaw": "곤지암역세권 A1-1BL 공동주택 신축공사 감리용역역세권 A1-1BL",
+   "site": "곤지암역세권 A1-1BL 공동주택 신축공사 감리용역",
    "settled": false,
    "hidden": false
   },
@@ -2324,7 +2324,7 @@
    "doc": "세금계산서",
    "amount": 31900,
    "supply": 29000,
-   "siteRaw": "",
+   "siteRaw": "대구국가LH_대구국가산단 A7-1BL 1공구 시공단계 감독권한대행 등 건설사업관리용역 A7-1BL",
    "site": "대구국가LH_대구국가산단 A7-1BL 1공구 시공단계 감독권한대행 등 건설사업관리용역 A7-1BL",
    "settled": false,
    "hidden": false
@@ -2337,7 +2337,7 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "이천시 청소년 생활문화센터 건립 건설사업관리용역",
    "site": "이천시 청소년 생활문화센터 건립 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2350,7 +2350,7 @@
    "doc": "세금계산서",
    "amount": 36300,
    "supply": 33000,
-   "siteRaw": "",
+   "siteRaw": "인천지방검찰청 북부지청 신축공사 건설사업관리용역",
    "site": "인천지방검찰청 북부지청 신축공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2363,7 +2363,7 @@
    "doc": "세금계산서",
    "amount": 388740,
    "supply": 353400,
-   "siteRaw": "",
+   "siteRaw": "충남 국제전시컨벤션센터 건립공사 감독권한대행등 통합건설사업관리 용역",
    "site": "충남 국제전시컨벤션센터 건립공사 감독권한대행등 통합건설사업관리 용역",
    "settled": false,
    "hidden": false
@@ -2376,8 +2376,8 @@
    "doc": "세금계산서",
    "amount": 88990,
    "supply": 80900,
-   "siteRaw": "",
-   "site": "광명제광명제5R구역 주택재개발정비사업구역",
+   "siteRaw": "광명제광명제5R구역 주택재개발정비사업구역",
+   "site": "광명제5R구역 주택재개발정비사업",
    "settled": false,
    "hidden": false
   },
@@ -2389,7 +2389,7 @@
    "doc": "세금계산서",
    "amount": 220990,
    "supply": 200900,
-   "siteRaw": "",
+   "siteRaw": "청담고등학교 이전 신축공사 감리용역",
    "site": "청담고등학교 이전 신축공사 감리용역",
    "settled": false,
    "hidden": false
@@ -2402,7 +2402,7 @@
    "doc": "세금계산서",
    "amount": 260370,
    "supply": 236700,
-   "siteRaw": "",
+   "siteRaw": "인천지방검찰청 북부지청 신축공사 건설사업관리용역",
    "site": "인천지방검찰청 북부지청 신축공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2415,7 +2415,7 @@
    "doc": "세금계산서",
    "amount": 539110,
    "supply": 490100,
-   "siteRaw": "",
+   "siteRaw": "해운대 舊한진CY부지 복합개발사업",
    "site": "해운대 舊한진CY부지 복합개발사업",
    "settled": false,
    "hidden": false
@@ -2428,7 +2428,7 @@
    "doc": "세금계산서",
    "amount": 72490,
    "supply": 65900,
-   "siteRaw": "",
+   "siteRaw": "24-A-00부대 건설사업관리용역(A157)",
    "site": "24-A-00부대 건설사업관리용역(A157)",
    "settled": false,
    "hidden": false
@@ -2441,7 +2441,7 @@
    "doc": "세금계산서",
    "amount": 212740,
    "supply": 193400,
-   "siteRaw": "",
+   "siteRaw": "인천지방검찰청 북부지청 신축공사 건설사업관리용역",
    "site": "인천지방검찰청 북부지청 신축공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2454,7 +2454,7 @@
    "doc": "세금계산서",
    "amount": 5588000,
    "supply": 5080000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -2467,7 +2467,7 @@
    "doc": "세금계산서",
    "amount": 1958000,
    "supply": 1780000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -2480,7 +2480,7 @@
    "doc": "세금계산서",
    "amount": 3025000,
    "supply": 2750000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -2493,7 +2493,7 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "춘천소년원 재건축공사 건설사업관리용역소년원 재건축공사",
    "site": "춘천소년원 재건축공사 건설사업관리용역소년원 재건축공사",
    "settled": false,
    "hidden": false
@@ -2506,7 +2506,7 @@
    "doc": "세금계산서",
    "amount": 124080,
    "supply": 112800,
-   "siteRaw": "",
+   "siteRaw": "24-N-24-N-숙소 리모델링 등 2건 건설사업관리용역(C037)",
    "site": "24-N-24-N-숙소 리모델링 등 2건 건설사업관리용역(C037)",
    "settled": false,
    "hidden": false
@@ -2519,8 +2519,8 @@
    "doc": "세금계산서",
    "amount": 124080,
    "supply": 112800,
-   "siteRaw": "",
-   "site": "판교 제2테크노밸리 스마트모빌리티 실증허브 조성사업 감독권한대행 등 건설사업관리용역 제2테크노밸리",
+   "siteRaw": "판교 제2테크노밸리 스마트모빌리티 실증허브 조성사업 감독권한대행 등 건설사업관리용역 제2테크노밸리",
+   "site": "24-N-24-N-숙소 리모델링 등 2건 건설사업관리용역(C037)",
    "settled": false,
    "hidden": false
   },
@@ -2532,7 +2532,7 @@
    "doc": "세금계산서",
    "amount": 95700,
    "supply": 87000,
-   "siteRaw": "",
+   "siteRaw": "24-A-00부대 건설사업관리용역(A164)",
    "site": "24-A-00부대 건설사업관리용역(A164)",
    "settled": false,
    "hidden": false
@@ -2545,8 +2545,8 @@
    "doc": "세금계산서",
    "amount": 124080,
    "supply": 112800,
-   "siteRaw": "",
-   "site": "인천국제공항 제2합동청사 확장사업 건설사업관리 용역",
+   "siteRaw": "인천국제공항 제2합동청사 확장사업 건설사업관리 용역",
+   "site": "24-N-24-N-숙소 리모델링 등 2건 건설사업관리용역(C037)",
    "settled": false,
    "hidden": false
   },
@@ -2558,7 +2558,7 @@
    "doc": "세금계산서",
    "amount": 262020,
    "supply": 238200,
-   "siteRaw": "",
+   "siteRaw": "24-A-00부대 건설사업관리용역(A157)",
    "site": "24-A-00부대 건설사업관리용역(A157)",
    "settled": false,
    "hidden": false
@@ -2571,8 +2571,8 @@
    "doc": "세금계산서",
    "amount": 301950,
    "supply": 274500,
-   "siteRaw": "",
-   "site": "서울서울아레나 복합문화시설 민간투자사업 건설사업관리용역 복합문화시설 민간투자사업",
+   "siteRaw": "서울서울아레나 복합문화시설 민간투자사업 건설사업관리용역 복합문화시설 민간투자사업",
+   "site": "서울아레나 복합문화시설 민간투자사업 건설사업관리용역",
    "settled": false,
    "hidden": false
   },
@@ -2584,7 +2584,7 @@
    "doc": "세금계산서",
    "amount": 33550,
    "supply": 30500,
-   "siteRaw": "",
+   "siteRaw": "SK하이닉스이천 M10C물류엘레베이터증설",
    "site": "SK하이닉스이천 M10C물류엘레베이터증설",
    "settled": false,
    "hidden": false
@@ -2597,8 +2597,8 @@
    "doc": "세금계산서",
    "amount": 165330,
    "supply": 150300,
-   "siteRaw": "",
-   "site": "여수 여수 죽림1지구 A2,A4BL 공동주택사업 감독권한대행 등 건설사업관리용역1지구 A2,A4B",
+   "siteRaw": "여수 여수 죽림1지구 A2,A4BL 공동주택사업 감독권한대행 등 건설사업관리용역1지구 A2,A4B",
+   "site": "여수 여수 죽림1지구 A2,A4BL 공동주택사업 감독권한대행 등 건설사업관리용역1지구 A2,A4BL",
    "settled": false,
    "hidden": false
   },
@@ -2610,7 +2610,7 @@
    "doc": "세금계산서",
    "amount": 112640,
    "supply": 102400,
-   "siteRaw": "",
+   "siteRaw": "나리벡시티 도시개발사업 건설사업관리 용역",
    "site": "나리벡시티 도시개발사업 건설사업관리 용역",
    "settled": false,
    "hidden": false
@@ -2623,7 +2623,7 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "LH_화성태안3 B3BL 아파트 건설공사(공분 688호) 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_화성태안3 B3BL 아파트 건설공사(공분 688호) 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2636,7 +2636,7 @@
    "doc": "세금계산서",
    "amount": 14300,
    "supply": 13000,
-   "siteRaw": "",
+   "siteRaw": "몽골 공공주택(솔롱고 1,2단지) 건설사업 컨설팅용역(EDCF)",
    "site": "몽골 공공주택(솔롱고 1,2단지) 건설사업 컨설팅용역(EDCF)",
    "settled": false,
    "hidden": false
@@ -2649,7 +2649,7 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "강원도 삼척의료원 이전신축 임대형민간투자사업(BTL) 건설사업관리용역",
    "site": "강원도 삼척의료원 이전신축 임대형민간투자사업(BTL) 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2662,7 +2662,7 @@
    "doc": "세금계산서",
    "amount": 27500,
    "supply": 25000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -2675,7 +2675,7 @@
    "doc": "세금계산서",
    "amount": 64900,
    "supply": 59000,
-   "siteRaw": "",
+   "siteRaw": "세교동 행정복지센터 건립 건설사업관리 용역동 행정복지센터",
    "site": "세교동 행정복지센터 건립 건설사업관리 용역동 행정복지센터",
    "settled": false,
    "hidden": false
@@ -2688,7 +2688,7 @@
    "doc": "세금계산서",
    "amount": 228690,
    "supply": 207900,
-   "siteRaw": "",
+   "siteRaw": "독립형 양성자치료기 건축사업 건설사업관리용역",
    "site": "독립형 양성자치료기 건축사업 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2701,7 +2701,7 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "여수 여수 죽림1지구 A2,A4BL 공동주택사업 감독권한대행 등 건설사업관리용역1지구 A2,A4BL",
    "site": "여수 여수 죽림1지구 A2,A4BL 공동주택사업 감독권한대행 등 건설사업관리용역1지구 A2,A4BL",
    "settled": false,
    "hidden": false
@@ -2714,8 +2714,8 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
-   "site": "서울서울아레나 복합문화시설 민간투자사업 건설사업관리용역 복합문화시설",
+   "siteRaw": "서울서울아레나 복합문화시설 민간투자사업 건설사업관리용역 복합문화시설",
+   "site": "서울아레나 복합문화시설 민간투자사업 건설사업관리용역",
    "settled": false,
    "hidden": false
   },
@@ -2727,7 +2727,7 @@
    "doc": "세금계산서",
    "amount": 92290,
    "supply": 83900,
-   "siteRaw": "",
+   "siteRaw": "나라키움 부산 온타워 개발사업 건설사업관리용역",
    "site": "나라키움 부산 온타워 개발사업 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2740,7 +2740,7 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "충남형 충남형 도시리브투게더 첫사업 감독권한대행 등 건설사업관리용역브투게더",
    "site": "충남형 충남형 도시리브투게더 첫사업 감독권한대행 등 건설사업관리용역브투게더",
    "settled": false,
    "hidden": false
@@ -2753,7 +2753,7 @@
    "doc": "세금계산서",
    "amount": 33550,
    "supply": 30500,
-   "siteRaw": "",
+   "siteRaw": "평택 브레인시티 공동5BL 공동주택 신축공사 브레인시티 공동5BL",
    "site": "평택 브레인시티 공동5BL 공동주택 신축공사 브레인시티 공동5BL",
    "settled": false,
    "hidden": false
@@ -2766,8 +2766,8 @@
    "doc": "세금계산서",
    "amount": 124080,
    "supply": 112800,
-   "siteRaw": "",
-   "site": "대구차량사업소 정비시설 공용화 개량사업 신축공사 건설기술용역",
+   "siteRaw": "대구차량사업소 정비시설 공용화 개량사업 신축공사 건설기술용역",
+   "site": "24-N-24-N-숙소 리모델링 등 2건 건설사업관리용역(C037)",
    "settled": false,
    "hidden": false
   },
@@ -2779,7 +2779,7 @@
    "doc": "세금계산서",
    "amount": 231990,
    "supply": 210900,
-   "siteRaw": "",
+   "siteRaw": "조선대학교병원 호남권 감염병전문병원 구축공사 감독 권한대행 등 건설사업관리용역학교병원 호남권",
    "site": "조선대학교병원 호남권 감염병전문병원 구축공사 감독 권한대행 등 건설사업관리용역학교병원 호남권",
    "settled": false,
    "hidden": false
@@ -2792,7 +2792,7 @@
    "doc": "세금계산서",
    "amount": 292270,
    "supply": 265700,
-   "siteRaw": "",
+   "siteRaw": "24-N-24-N-숙소 리모델링 등 2건 건설사업관리용역(C037)",
    "site": "24-N-24-N-숙소 리모델링 등 2건 건설사업관리용역(C037)",
    "settled": false,
    "hidden": false
@@ -2805,7 +2805,7 @@
    "doc": "세금계산서",
    "amount": 17050,
    "supply": 15500,
-   "siteRaw": "",
+   "siteRaw": "그린바이오 벤처 캠퍼스 조성 건설사업관리용역(감독권한대행)",
    "site": "그린바이오 벤처 캠퍼스 조성 건설사업관리용역(감독권한대행)",
    "settled": false,
    "hidden": false
@@ -2818,8 +2818,8 @@
    "doc": "세금계산서",
    "amount": 77440,
    "supply": 70400,
-   "siteRaw": "",
-   "site": "경기경기도서관 및 광장∙보행몰 건립공사 감독권한대행 등 건설사업관리용역",
+   "siteRaw": "경기경기도서관 및 광장∙보행몰 건립공사 감독권한대행 등 건설사업관리용역",
+   "site": "경기도서관 및 광장∙보행몰 건립공사 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
   },
@@ -2831,7 +2831,7 @@
    "doc": "세금계산서",
    "amount": 112750,
    "supply": 102500,
-   "siteRaw": "",
+   "siteRaw": "서울출입국·외국인청 신축공사 건설사업관리용역",
    "site": "서울출입국·외국인청 신축공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2844,7 +2844,7 @@
    "doc": "세금계산서",
    "amount": 201080,
    "supply": 182800,
-   "siteRaw": "",
+   "siteRaw": "국립암센터 본관동 리모델링공사 건설사업관리용역",
    "site": "국립암센터 본관동 리모델링공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2857,7 +2857,7 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "서울대학교병원 기장암센터 증축 및 리모델링공사 건설사업관리용역",
    "site": "서울대학교병원 기장암센터 증축 및 리모델링공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2870,7 +2870,7 @@
    "doc": "세금계산서",
    "amount": 34100,
    "supply": 31000,
-   "siteRaw": "",
+   "siteRaw": "23~25년 삼성생명 보수공사 건설사업관리용역",
    "site": "23~25년 삼성생명 보수공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -2883,7 +2883,7 @@
    "doc": "세금계산서",
    "amount": 148280,
    "supply": 134800,
-   "siteRaw": "",
+   "siteRaw": "24-A-00부대 건설사업관리용역(A042)",
    "site": "24-A-00부대 건설사업관리용역(A042)",
    "settled": false,
    "hidden": false
@@ -2896,7 +2896,7 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "평택 브레인시티 공동5BL 공동주택 신축공사 브레인시티 공동5BL",
    "site": "평택 브레인시티 공동5BL 공동주택 신축공사 브레인시티 공동5BL",
    "settled": false,
    "hidden": false
@@ -2909,7 +2909,7 @@
    "doc": "세금계산서",
    "amount": 510400,
    "supply": 464000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -2922,7 +2922,7 @@
    "doc": "세금계산서",
    "amount": 90200,
    "supply": 82000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -2935,7 +2935,7 @@
    "doc": "세금계산서",
    "amount": 660000,
    "supply": 600000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -2948,7 +2948,7 @@
    "doc": "세금계산서",
    "amount": 1644500,
    "supply": 1495000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -2961,7 +2961,7 @@
    "doc": "세금계산서",
    "amount": 165000,
    "supply": 150000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -2974,7 +2974,7 @@
    "doc": "세금계산서",
    "amount": 18700,
    "supply": 17000,
-   "siteRaw": "",
+   "siteRaw": "평택 브레인시티 공동5BL 공동주택 신축공사 브레인시티 일반산업단지 공동5BL",
    "site": "평택 브레인시티 공동5BL 공동주택 신축공사 브레인시티 일반산업단지 공동5BL",
    "settled": false,
    "hidden": false
@@ -2987,7 +2987,7 @@
    "doc": "세금계산서",
    "amount": 124080,
    "supply": 112800,
-   "siteRaw": "",
+   "siteRaw": "서운면 행정복지센터 건립공사 감독권한 대행 등 건설사업관리 용역",
    "site": "서운면 행정복지센터 건립공사 감독권한 대행 등 건설사업관리 용역",
    "settled": false,
    "hidden": false
@@ -3000,7 +3000,7 @@
    "doc": "세금계산서",
    "amount": 247830,
    "supply": 225300,
-   "siteRaw": "",
+   "siteRaw": "충남형 충남형 도시리브투게더 첫사업 감독권한대행 등 건설사업관리용역브투게더",
    "site": "충남형 충남형 도시리브투게더 첫사업 감독권한대행 등 건설사업관리용역브투게더",
    "settled": false,
    "hidden": false
@@ -3013,7 +3013,7 @@
    "doc": "세금계산서",
    "amount": 45100,
    "supply": 41000,
-   "siteRaw": "",
+   "siteRaw": "몽골 공공주택(솔롱고 1,2단지) 건설사업 컨설팅용역(EDCF)",
    "site": "몽골 공공주택(솔롱고 1,2단지) 건설사업 컨설팅용역(EDCF)",
    "settled": false,
    "hidden": false
@@ -3026,7 +3026,7 @@
    "doc": "세금계산서",
    "amount": 231770,
    "supply": 210700,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": false
@@ -3039,7 +3039,7 @@
    "doc": "세금계산서",
    "amount": 335280,
    "supply": 304800,
-   "siteRaw": "",
+   "siteRaw": "24-A-00부대 건설사업관리용역(A042)",
    "site": "24-A-00부대 건설사업관리용역(A042)",
    "settled": false,
    "hidden": false
@@ -3052,7 +3052,7 @@
    "doc": "세금계산서",
    "amount": 469150,
    "supply": 426500,
-   "siteRaw": "",
+   "siteRaw": "세교동 행정복지센터 건립 건설사업관리 용역동 행정복지센터",
    "site": "세교동 행정복지센터 건립 건설사업관리 용역동 행정복지센터",
    "settled": false,
    "hidden": false
@@ -3065,7 +3065,7 @@
    "doc": "세금계산서",
    "amount": 14850,
    "supply": 13500,
-   "siteRaw": "",
+   "siteRaw": "세교동 행정복지센터 건립 건설사업관리 용역동 행정복지센터",
    "site": "세교동 행정복지센터 건립 건설사업관리 용역동 행정복지센터",
    "settled": false,
    "hidden": false
@@ -3078,7 +3078,7 @@
    "doc": "세금계산서",
    "amount": 72490,
    "supply": 65900,
-   "siteRaw": "",
+   "siteRaw": "경기남부직업능력개발원 신축공사(감독 권한대행 등 건설사업관리용역",
    "site": "경기남부직업능력개발원 신축공사(감독 권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -3091,8 +3091,8 @@
    "doc": "세금계산서",
    "amount": 72490,
    "supply": 65900,
-   "siteRaw": "",
-   "site": "경기경기도서관 및 광장∙보행몰 건립공사 감독권한대행 등 건설사업관리용역 신축공사",
+   "siteRaw": "경기경기도서관 및 광장∙보행몰 건립공사 감독권한대행 등 건설사업관리용역 신축공사",
+   "site": "경기도서관 및 광장∙보행몰 건립공사 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
   },
@@ -3104,7 +3104,7 @@
    "doc": "세금계산서",
    "amount": 26950,
    "supply": 24500,
-   "siteRaw": "",
+   "siteRaw": "원주교도소 신축공사 건설사업관리용역",
    "site": "원주교도소 신축공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -3117,7 +3117,7 @@
    "doc": "세금계산서",
    "amount": 291720,
    "supply": 265200,
-   "siteRaw": "",
+   "siteRaw": "모래내공원 및 상도근린공원 지하공영주차장 건립공사 통합건설사업관리용역(감독권한대행",
    "site": "모래내공원 및 상도근린공원 지하공영주차장 건립공사 통합건설사업관리용역(감독권한대행",
    "settled": false,
    "hidden": false
@@ -3130,7 +3130,7 @@
    "doc": "세금계산서",
    "amount": 45100,
    "supply": 41000,
-   "siteRaw": "",
+   "siteRaw": "태백 직원숙소 신축공사 감독권한대행 건설사업관리 용역",
    "site": "태백 직원숙소 신축공사 감독권한대행 건설사업관리 용역",
    "settled": false,
    "hidden": false
@@ -3143,7 +3143,7 @@
    "doc": "세금계산서",
    "amount": 28600,
    "supply": 26000,
-   "siteRaw": "",
+   "siteRaw": "남도의병 역사박물관 건립공사 감독권한대행 등 건설사업관리용역(총괄,1차)",
    "site": "남도의병 역사박물관 건립공사 감독권한대행 등 건설사업관리용역(총괄,1차)",
    "settled": false,
    "hidden": false
@@ -3156,7 +3156,7 @@
    "doc": "세금계산서",
    "amount": 242660,
    "supply": 220600,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": false
@@ -3169,7 +3169,7 @@
    "doc": "세금계산서",
    "amount": 222530,
    "supply": 202300,
-   "siteRaw": "",
+   "siteRaw": "조선대학교병원 호남권 감염병전문병원 구축공사 감독 권한대행 등 건설사업관리용역학교병원",
    "site": "조선대학교병원 호남권 감염병전문병원 구축공사 감독 권한대행 등 건설사업관리용역학교병원",
    "settled": false,
    "hidden": false
@@ -3182,7 +3182,7 @@
    "doc": "세금계산서",
    "amount": 84590,
    "supply": 76900,
-   "siteRaw": "",
+   "siteRaw": "이촌동 현대아파트 리모델링주택조합사업 건설사업관리(CM) 용역",
    "site": "이촌동 현대아파트 리모델링주택조합사업 건설사업관리(CM) 용역",
    "settled": false,
    "hidden": false
@@ -3195,7 +3195,7 @@
    "doc": "세금계산서",
    "amount": 18700,
    "supply": 17000,
-   "siteRaw": "",
+   "siteRaw": "7여단 취사식당 신축 건설사업관리용역(23-신-6)",
    "site": "7여단 취사식당 신축 건설사업관리용역(23-신-6)",
    "settled": false,
    "hidden": false
@@ -3208,7 +3208,7 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "춘천소년원 재건축공사 건설사업관리용역소년원 재건축공사",
    "site": "춘천소년원 재건축공사 건설사업관리용역소년원 재건축공사",
    "settled": false,
    "hidden": false
@@ -3221,7 +3221,7 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "세교동 행정복지센터 건립 건설사업관리 용역동 행정복지센터",
    "site": "세교동 행정복지센터 건립 건설사업관리 용역동 행정복지센터",
    "settled": false,
    "hidden": false
@@ -3234,8 +3234,8 @@
    "doc": "세금계산서",
    "amount": 72490,
    "supply": 65900,
-   "siteRaw": "",
-   "site": "경기경기도서관 및 광장∙보행몰 건립공사 감독권한대행 등 건설사업관리용역 및 광장 보행몰",
+   "siteRaw": "경기경기도서관 및 광장∙보행몰 건립공사 감독권한대행 등 건설사업관리용역 및 광장 보행몰",
+   "site": "경기도서관 및 광장∙보행몰 건립공사 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
   },
@@ -3247,7 +3247,7 @@
    "doc": "세금계산서",
    "amount": 33000,
    "supply": 30000,
-   "siteRaw": "",
+   "siteRaw": "LH_인천영종 A-33BL, A-37BL, 및 A-60BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_인천영종 A-33BL, A-37BL, 및 A-60BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -3260,7 +3260,7 @@
    "doc": "세금계산서",
    "amount": 18700,
    "supply": 17000,
-   "siteRaw": "",
+   "siteRaw": "광명제5R구역 주택재개발정비사업",
    "site": "광명제5R구역 주택재개발정비사업",
    "settled": false,
    "hidden": false
@@ -3273,7 +3273,7 @@
    "doc": "세금계산서",
    "amount": 119790,
    "supply": 108900,
-   "siteRaw": "",
+   "siteRaw": "서운면 행정복지센터 건립공사 감독권한 대행 등 건설사업관리 용역",
    "site": "서운면 행정복지센터 건립공사 감독권한 대행 등 건설사업관리 용역",
    "settled": false,
    "hidden": false
@@ -3286,7 +3286,7 @@
    "doc": "세금계산서",
    "amount": 148280,
    "supply": 134800,
-   "siteRaw": "",
+   "siteRaw": "서초방배 제13구역 단독주택재건축 정비사업 건설사업관리(CM) 용역",
    "site": "서초방배 제13구역 단독주택재건축 정비사업 건설사업관리(CM) 용역",
    "settled": false,
    "hidden": false
@@ -3299,7 +3299,7 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "판교 제2테크노밸리 스마트모빌리티 실증허브 조성사업 감독권한대행 등 건설사업관리용역 제2테크노밸리",
    "site": "판교 제2테크노밸리 스마트모빌리티 실증허브 조성사업 감독권한대행 등 건설사업관리용역 제2테크노밸리",
    "settled": false,
    "hidden": false
@@ -3312,7 +3312,7 @@
    "doc": "세금계산서",
    "amount": 74690,
    "supply": 67900,
-   "siteRaw": "",
+   "siteRaw": "24-A-00부대 건설사업관리용역(A042)",
    "site": "24-A-00부대 건설사업관리용역(A042)",
    "settled": false,
    "hidden": false
@@ -3325,7 +3325,7 @@
    "doc": "세금계산서",
    "amount": 72490,
    "supply": 65900,
-   "siteRaw": "",
+   "siteRaw": "국립지덕권산림치유원 조성사업 건설사업관리용역",
    "site": "국립지덕권산림치유원 조성사업 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -3338,7 +3338,7 @@
    "doc": "세금계산서",
    "amount": 148280,
    "supply": 134800,
-   "siteRaw": "",
+   "siteRaw": "24-A-00부대 건설사업관리용역(A042)",
    "site": "24-A-00부대 건설사업관리용역(A042)",
    "settled": false,
    "hidden": false
@@ -3351,7 +3351,7 @@
    "doc": "세금계산서",
    "amount": 210320,
    "supply": 191200,
-   "siteRaw": "",
+   "siteRaw": "조선대학교병원 호남권 감염병전문병원 구축공사 감독 권한대행 등 건설사업관리용역학교병원",
    "site": "조선대학교병원 호남권 감염병전문병원 구축공사 감독 권한대행 등 건설사업관리용역학교병원",
    "settled": false,
    "hidden": false
@@ -3364,7 +3364,7 @@
    "doc": "세금계산서",
    "amount": 96360,
    "supply": 87600,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -3377,7 +3377,7 @@
    "doc": "세금계산서",
    "amount": 1485000,
    "supply": 1350000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -3390,7 +3390,7 @@
    "doc": "세금계산서",
    "amount": 1397000,
    "supply": 1270000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -3403,7 +3403,7 @@
    "doc": "세금계산서",
    "amount": 23391500,
    "supply": 21265000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -3416,7 +3416,7 @@
    "doc": "세금계산서",
    "amount": 658900,
    "supply": 599000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -3429,7 +3429,7 @@
    "doc": "세금계산서",
    "amount": 2255000,
    "supply": 2050000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -3442,7 +3442,7 @@
    "doc": "세금계산서",
    "amount": 1496000,
    "supply": 1360000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -3455,7 +3455,7 @@
    "doc": "세금계산서",
    "amount": 412500,
    "supply": 375000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -3468,7 +3468,7 @@
    "doc": "세금계산서",
    "amount": 1193500,
    "supply": 1085000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -3481,7 +3481,7 @@
    "doc": "세금계산서",
    "amount": 241450,
    "supply": 219500,
-   "siteRaw": "",
+   "siteRaw": "판교 제2테크노밸리 스마트모빌리티 실증허브 조성사업 감독권한대행 등 건설사업관리용역 제2테크노밸리",
    "site": "판교 제2테크노밸리 스마트모빌리티 실증허브 조성사업 감독권한대행 등 건설사업관리용역 제2테크노밸리",
    "settled": false,
    "hidden": false
@@ -3494,8 +3494,8 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
-   "site": "강원도 강원도 삼척의료원 이전신축 임대형민간투자사업(BTL) 건설사업관리용역의료원",
+   "siteRaw": "강원도 강원도 삼척의료원 이전신축 임대형민간투자사업(BTL) 건설사업관리용역의료원",
+   "site": "강원도 삼척의료원 이전신축 임대형민간투자사업(BTL) 건설사업관리용역",
    "settled": false,
    "hidden": false
   },
@@ -3507,7 +3507,7 @@
    "doc": "세금계산서",
    "amount": 446490,
    "supply": 405900,
-   "siteRaw": "",
+   "siteRaw": "평택 브레인시티 공동5BL 공동주택 신축공사",
    "site": "평택 브레인시티 공동5BL 공동주택 신축공사",
    "settled": false,
    "hidden": false
@@ -3520,7 +3520,7 @@
    "doc": "세금계산서",
    "amount": 98340,
    "supply": 89400,
-   "siteRaw": "",
+   "siteRaw": "국립소방박물관 건설사업관리(감독권한대행) 용역",
    "site": "국립소방박물관 건설사업관리(감독권한대행) 용역",
    "settled": false,
    "hidden": false
@@ -3533,7 +3533,7 @@
    "doc": "세금계산서",
    "amount": 145640,
    "supply": 132400,
-   "siteRaw": "",
+   "siteRaw": "그린바이오 벤처 캠퍼스 조성 건설사업관리용역(감독권한대행)",
    "site": "그린바이오 벤처 캠퍼스 조성 건설사업관리용역(감독권한대행)",
    "settled": false,
    "hidden": false
@@ -3546,8 +3546,8 @@
    "doc": "세금계산서",
    "amount": 124080,
    "supply": 112800,
-   "siteRaw": "",
-   "site": "강원도 강원도 삼척의료원 이전신축 임대형민간투자사업(BTL) 건설사업관리용역의료원",
+   "siteRaw": "강원도 강원도 삼척의료원 이전신축 임대형민간투자사업(BTL) 건설사업관리용역의료원",
+   "site": "강원도 삼척의료원 이전신축 임대형민간투자사업(BTL) 건설사업관리용역",
    "settled": false,
    "hidden": false
   },
@@ -3559,8 +3559,8 @@
    "doc": "세금계산서",
    "amount": 192500,
    "supply": 175000,
-   "siteRaw": "",
-   "site": "광명제광명제5R구역 주택재개발정비사업구역",
+   "siteRaw": "광명제광명제5R구역 주택재개발정비사업구역",
+   "site": "광명제5R구역 주택재개발정비사업",
    "settled": false,
    "hidden": false
   },
@@ -3572,8 +3572,8 @@
    "doc": "세금계산서",
    "amount": 107690,
    "supply": 97900,
-   "siteRaw": "",
-   "site": "서울서울출입국·외국인청 신축공사 건설사업관리용역·외국인청",
+   "siteRaw": "서울서울출입국·외국인청 신축공사 건설사업관리용역·외국인청",
+   "site": "서울출입국·외국인청 신축공사 건설사업관리용역",
    "settled": false,
    "hidden": false
   },
@@ -3585,7 +3585,7 @@
    "doc": "세금계산서",
    "amount": 544940,
    "supply": 495400,
-   "siteRaw": "",
+   "siteRaw": "의정부지방법원 고양지원 별관 증축 건설사업관리용역",
    "site": "의정부지방법원 고양지원 별관 증축 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -3598,7 +3598,7 @@
    "doc": "세금계산서",
    "amount": 41250,
    "supply": 37500,
-   "siteRaw": "",
+   "siteRaw": "LH_인천영종 A-33BL, A-37BL, 및 A-60BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_인천영종 A-33BL, A-37BL, 및 A-60BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -3611,7 +3611,7 @@
    "doc": "세금계산서",
    "amount": 535040,
    "supply": 486400,
-   "siteRaw": "",
+   "siteRaw": "서울대학교병원 기장암센터 증축 및 리모델링공사 건설사업관리용역",
    "site": "서울대학교병원 기장암센터 증축 및 리모델링공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -3624,7 +3624,7 @@
    "doc": "세금계산서",
    "amount": 12100,
    "supply": 11000,
-   "siteRaw": "",
+   "siteRaw": "0탄약창 이글루탄약고 2차 건설사업관리용역",
    "site": "0탄약창 이글루탄약고 2차 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -3637,8 +3637,8 @@
    "doc": "세금계산서",
    "amount": 18700,
    "supply": 17000,
-   "siteRaw": "",
-   "site": "서울서울출입국·외국인청 신축공사 건설사업관리용역·외국인청 신축공사",
+   "siteRaw": "서울서울출입국·외국인청 신축공사 건설사업관리용역·외국인청 신축공사",
+   "site": "서울출입국·외국인청 신축공사 건설사업관리용역",
    "settled": false,
    "hidden": false
   },
@@ -3650,7 +3650,7 @@
    "doc": "세금계산서",
    "amount": 183370,
    "supply": 166700,
-   "siteRaw": "",
+   "siteRaw": "잠실종합운동장 주경기장 리모델링공사 건설사업관리용역(감독권한대행",
    "site": "잠실종합운동장 주경기장 리모델링공사 건설사업관리용역(감독권한대행",
    "settled": false,
    "hidden": false
@@ -3663,7 +3663,7 @@
    "doc": "세금계산서",
    "amount": 72490,
    "supply": 65900,
-   "siteRaw": "",
+   "siteRaw": "남촌동 복합청사 건립공사 건설사업관리용역",
    "site": "남촌동 복합청사 건립공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -3676,7 +3676,7 @@
    "doc": "세금계산서",
    "amount": 301950,
    "supply": 274500,
-   "siteRaw": "",
+   "siteRaw": "판교 제2테크노밸리 스마트모빌리티 실증허브 조성사업 감독권한대행 등 건설사업관리용역 제2테크노밸리",
    "site": "판교 제2테크노밸리 스마트모빌리티 실증허브 조성사업 감독권한대행 등 건설사업관리용역 제2테크노밸리",
    "settled": false,
    "hidden": false
@@ -3689,8 +3689,8 @@
    "doc": "세금계산서",
    "amount": 441540,
    "supply": 401400,
-   "siteRaw": "",
-   "site": "서울 서울출입국·외국인청 신축공사 건설사업관리용역 ·외국인청 신축",
+   "siteRaw": "서울 서울출입국·외국인청 신축공사 건설사업관리용역 ·외국인청 신축",
+   "site": "서울출입국·외국인청 신축공사 건설사업관리용역",
    "settled": false,
    "hidden": false
   },
@@ -3702,7 +3702,7 @@
    "doc": "세금계산서",
    "amount": 77440,
    "supply": 70400,
-   "siteRaw": "",
+   "siteRaw": "23-A-00부대 건설사업관리용역(A465",
    "site": "23-A-00부대 건설사업관리용역(A465",
    "settled": false,
    "hidden": false
@@ -3715,7 +3715,7 @@
    "doc": "세금계산서",
    "amount": 338470,
    "supply": 307700,
-   "siteRaw": "",
+   "siteRaw": "서운면 행정복지센터 건립공사 감독권한 대행 등 건설사업관리 용역",
    "site": "서운면 행정복지센터 건립공사 감독권한 대행 등 건설사업관리 용역",
    "settled": false,
    "hidden": false
@@ -3728,7 +3728,7 @@
    "doc": "세금계산서",
    "amount": 276760,
    "supply": 251600,
-   "siteRaw": "",
+   "siteRaw": "23-A-00부대 건설사업관리용역(A465",
    "site": "23-A-00부대 건설사업관리용역(A465",
    "settled": false,
    "hidden": false
@@ -3741,7 +3741,7 @@
    "doc": "세금계산서",
    "amount": 335280,
    "supply": 304800,
-   "siteRaw": "",
+   "siteRaw": "23-A-00부대 건설사업관리용역(A369",
    "site": "23-A-00부대 건설사업관리용역(A369",
    "settled": false,
    "hidden": false
@@ -3754,7 +3754,7 @@
    "doc": "세금계산서",
    "amount": 369710,
    "supply": 336100,
-   "siteRaw": "",
+   "siteRaw": "태백 직원숙소 신축공사 감독권한대행 건설사업관리 용역",
    "site": "태백 직원숙소 신축공사 감독권한대행 건설사업관리 용역",
    "settled": false,
    "hidden": false
@@ -3767,7 +3767,7 @@
    "doc": "세금계산서",
    "amount": 105600,
    "supply": 96000,
-   "siteRaw": "",
+   "siteRaw": "남도의병 역사박물관 건립공사 감독권한대행 등 건설사업관리용역(총괄,1차)",
    "site": "남도의병 역사박물관 건립공사 감독권한대행 등 건설사업관리용역(총괄,1차)",
    "settled": false,
    "hidden": false
@@ -3780,8 +3780,8 @@
    "doc": "세금계산서",
    "amount": 95040,
    "supply": 86400,
-   "siteRaw": "",
-   "site": "광명제광명제5R구역 주택재개발정비사업구역 주택재개발정비사업",
+   "siteRaw": "광명제광명제5R구역 주택재개발정비사업구역 주택재개발정비사업",
+   "site": "광명제5R구역 주택재개발정비사업",
    "settled": false,
    "hidden": false
   },
@@ -3793,7 +3793,7 @@
    "doc": "세금계산서",
    "amount": 158180,
    "supply": 143800,
-   "siteRaw": "",
+   "siteRaw": "LH_인천영종 A-33BL, A-37BL, 및 A-60BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_인천영종 A-33BL, A-37BL, 및 A-60BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -3806,7 +3806,7 @@
    "doc": "세금계산서",
    "amount": 31900,
    "supply": 29000,
-   "siteRaw": "",
+   "siteRaw": "대림3유수지 종합체육시설 건립공사 건설사업관리용역",
    "site": "대림3유수지 종합체육시설 건립공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -3819,7 +3819,7 @@
    "doc": "세금계산서",
    "amount": 257290,
    "supply": 233900,
-   "siteRaw": "",
+   "siteRaw": "가칭)망포2중 신축공사 건설사업관리용역[장기계속계약]2중 신축공사",
    "site": "가칭)망포2중 신축공사 건설사업관리용역[장기계속계약]2중 신축공사",
    "settled": false,
    "hidden": false
@@ -3832,7 +3832,7 @@
    "doc": "세금계산서",
    "amount": 308220,
    "supply": 280200,
-   "siteRaw": "",
+   "siteRaw": "23-A-00부대 건설사업관리용역(A189",
    "site": "23-A-00부대 건설사업관리용역(A189",
    "settled": false,
    "hidden": false
@@ -3845,7 +3845,7 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "대전통합사무소 신축공사 감독 권한대행 등 건설사업관리용역사무소 신축공사",
    "site": "대전통합사무소 신축공사 감독 권한대행 등 건설사업관리용역사무소 신축공사",
    "settled": false,
    "hidden": false
@@ -3858,7 +3858,7 @@
    "doc": "세금계산서",
    "amount": 727430,
    "supply": 661300,
-   "siteRaw": "",
+   "siteRaw": "서울아레나 복합문화시설 민간투자사업 건설사업관리용역",
    "site": "서울아레나 복합문화시설 민간투자사업 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -3871,7 +3871,7 @@
    "doc": "세금계산서",
    "amount": 16500,
    "supply": 15000,
-   "siteRaw": "",
+   "siteRaw": "LH_인천영종 A-33BL, A-37BL, 및 A-60BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_인천영종 A-33BL, A-37BL, 및 A-60BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -3884,7 +3884,7 @@
    "doc": "세금계산서",
    "amount": 356400,
    "supply": 324000,
-   "siteRaw": "",
+   "siteRaw": "서울시 통합수장고 건립공사 건설사업관리용역",
    "site": "서울시 통합수장고 건립공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -3897,7 +3897,7 @@
    "doc": "세금계산서",
    "amount": 72490,
    "supply": 65900,
-   "siteRaw": "",
+   "siteRaw": "LH_양산사송 A-4BL 아파트 건설공사 5공구(국임1,156호) 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_양산사송 A-4BL 아파트 건설공사 5공구(국임1,156호) 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -3910,7 +3910,7 @@
    "doc": "세금계산서",
    "amount": 124080,
    "supply": 112800,
-   "siteRaw": "",
+   "siteRaw": "가칭)망포2중 신축공사 건설사업관리용역[장기계속계약]2중 신축공사",
    "site": "가칭)망포2중 신축공사 건설사업관리용역[장기계속계약]2중 신축공사",
    "settled": false,
    "hidden": false
@@ -3923,7 +3923,7 @@
    "doc": "세금계산서",
    "amount": 18700,
    "supply": 17000,
-   "siteRaw": "",
+   "siteRaw": "서울아레나 복합문화시설 민간투자사업 건설사업관리용역",
    "site": "서울아레나 복합문화시설 민간투자사업 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -3936,7 +3936,7 @@
    "doc": "세금계산서",
    "amount": 242660,
    "supply": 220600,
-   "siteRaw": "",
+   "siteRaw": "23-A-OO부대 건설사업관리용역(A032",
    "site": "23-A-OO부대 건설사업관리용역(A032",
    "settled": false,
    "hidden": false
@@ -3949,7 +3949,7 @@
    "doc": "세금계산서",
    "amount": 27500,
    "supply": 25000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -3962,7 +3962,7 @@
    "doc": "세금계산서",
    "amount": 74800,
    "supply": 68000,
-   "siteRaw": "",
+   "siteRaw": "춘천소년원 재건축공사 건설사업관리용역",
    "site": "춘천소년원 재건축공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -3975,8 +3975,8 @@
    "doc": "세금계산서",
    "amount": 61600,
    "supply": 56000,
-   "siteRaw": "",
-   "site": "강원도 강원도 삼척의료원 이전신축 임대형민간투자사업(BTL) 건설사업관리용역의료원",
+   "siteRaw": "강원도 강원도 삼척의료원 이전신축 임대형민간투자사업(BTL) 건설사업관리용역의료원",
+   "site": "강원도 삼척의료원 이전신축 임대형민간투자사업(BTL) 건설사업관리용역",
    "settled": false,
    "hidden": false
   },
@@ -3988,7 +3988,7 @@
    "doc": "세금계산서",
    "amount": 132440,
    "supply": 120400,
-   "siteRaw": "",
+   "siteRaw": "LH_대전천동3구역 민간참여 주거환경개선사업 4BL 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_대전천동3구역 민간참여 주거환경개선사업 4BL 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -4001,7 +4001,7 @@
    "doc": "세금계산서",
    "amount": 1867800,
    "supply": 1698000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -4014,7 +4014,7 @@
    "doc": "세금계산서",
    "amount": 444400,
    "supply": 404000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -4027,7 +4027,7 @@
    "doc": "세금계산서",
    "amount": 1364000,
    "supply": 1240000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -4040,7 +4040,7 @@
    "doc": "세금계산서",
    "amount": 814000,
    "supply": 740000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -4053,7 +4053,7 @@
    "doc": "세금계산서",
    "amount": 2288000,
    "supply": 2080000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -4066,7 +4066,7 @@
    "doc": "세금계산서",
    "amount": 1089000,
    "supply": 990000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -4079,7 +4079,7 @@
    "doc": "세금계산서",
    "amount": 124080,
    "supply": 112800,
-   "siteRaw": "",
+   "siteRaw": "인천 송도1공구 B2블록 주상복합 신축공사",
    "site": "인천 송도1공구 B2블록 주상복합 신축공사",
    "settled": false,
    "hidden": false
@@ -4092,7 +4092,7 @@
    "doc": "세금계산서",
    "amount": 16500,
    "supply": 15000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -4105,7 +4105,7 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "LH_관악LH_관악봉천 H-1,2,3BL 및 서울산림 지식산업센터 시공단계 감독권한대행 등 건설사업관리용역 H-1,2,3BL 및 서울산림 지식산업센터 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_관악LH_관악봉천 H-1,2,3BL 및 서울산림 지식산업센터 시공단계 감독권한대행 등 건설사업관리용역 H-1,2,3BL 및 서울산림 지식산업센터 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -4118,7 +4118,7 @@
    "doc": "세금계산서",
    "amount": 138380,
    "supply": 125800,
-   "siteRaw": "",
+   "siteRaw": "용인 에코타운 조성 민간투자사업(BTO-a)감독권한대행 등 건설사업관리용역",
    "site": "용인 에코타운 조성 민간투자사업(BTO-a)감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -4131,7 +4131,7 @@
    "doc": "세금계산서",
    "amount": 331650,
    "supply": 301500,
-   "siteRaw": "",
+   "siteRaw": "LH_수원당수 A-2BL 아파트 건설공사 4공구 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_수원당수 A-2BL 아파트 건설공사 4공구 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -4144,7 +4144,7 @@
    "doc": "세금계산서",
    "amount": 673420,
    "supply": 612200,
-   "siteRaw": "",
+   "siteRaw": "광명제5R구역 주택재개발정비사업",
    "site": "광명제5R구역 주택재개발정비사업",
    "settled": false,
    "hidden": false
@@ -4157,7 +4157,7 @@
    "doc": "세금계산서",
    "amount": 175450,
    "supply": 159500,
-   "siteRaw": "",
+   "siteRaw": "한울본부 복합문화센터 신축공사 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "한울본부 복합문화센터 신축공사 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -4170,7 +4170,7 @@
    "doc": "세금계산서",
    "amount": 37180,
    "supply": 33800,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -4183,8 +4183,8 @@
    "doc": "세금계산서",
    "amount": 34100,
    "supply": 31000,
-   "siteRaw": "",
-   "site": "경기경기도서관 및 광장∙보행몰 건립공사 감독권한대행 등 건설사업관리용역 및 광장?보행몰 건립공사",
+   "siteRaw": "경기경기도서관 및 광장∙보행몰 건립공사 감독권한대행 등 건설사업관리용역 및 광장?보행몰 건립공사",
+   "site": "경기도서관 및 광장∙보행몰 건립공사 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
   },
@@ -4196,7 +4196,7 @@
    "doc": "세금계산서",
    "amount": 18700,
    "supply": 17000,
-   "siteRaw": "",
+   "siteRaw": "화성LH_화성태안3 B3BL 아파트 건설공사(공분 688호) 시공단계 감독권한대행 등 건설사업관리용역 B3BL",
    "site": "화성LH_화성태안3 B3BL 아파트 건설공사(공분 688호) 시공단계 감독권한대행 등 건설사업관리용역 B3BL",
    "settled": false,
    "hidden": false
@@ -4209,7 +4209,7 @@
    "doc": "세금계산서",
    "amount": 256960,
    "supply": 233600,
-   "siteRaw": "",
+   "siteRaw": "인천항 스마트인천항 스마트물류센터 신축공사 건설사업관리용역센터 신축공사",
    "site": "인천항 스마트인천항 스마트물류센터 신축공사 건설사업관리용역센터 신축공사",
    "settled": false,
    "hidden": false
@@ -4222,7 +4222,7 @@
    "doc": "세금계산서",
    "amount": 181280,
    "supply": 164800,
-   "siteRaw": "",
+   "siteRaw": "대전 선화동 주상복합 신축공사",
    "site": "대전 선화동 주상복합 신축공사",
    "settled": false,
    "hidden": false
@@ -4235,7 +4235,7 @@
    "doc": "세금계산서",
    "amount": 33000,
    "supply": 30000,
-   "siteRaw": "",
+   "siteRaw": "관악LH_관악봉천 H-1,2,3BL 및 서울산림 지식산업센터 시공단계 감독권한대행 등 건설사업관리용역 H-1,2,3BL",
    "site": "관악LH_관악봉천 H-1,2,3BL 및 서울산림 지식산업센터 시공단계 감독권한대행 등 건설사업관리용역 H-1,2,3BL",
    "settled": false,
    "hidden": false
@@ -4248,7 +4248,7 @@
    "doc": "세금계산서",
    "amount": 72490,
    "supply": 65900,
-   "siteRaw": "",
+   "siteRaw": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역복합청사",
    "site": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역복합청사",
    "settled": false,
    "hidden": false
@@ -4261,7 +4261,7 @@
    "doc": "세금계산서",
    "amount": 41250,
    "supply": 37500,
-   "siteRaw": "",
+   "siteRaw": "LH_인천영종 A-33BL, A-37BL, 및 A-60BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_인천영종 A-33BL, A-37BL, 및 A-60BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -4274,7 +4274,7 @@
    "doc": "세금계산서",
    "amount": 361240,
    "supply": 328400,
-   "siteRaw": "",
+   "siteRaw": "화성LH_화성태안3 B3BL 아파트 건설공사(공분 688호) 시공단계 감독권한대행 등 건설사업관리용역 B3BL",
    "site": "화성LH_화성태안3 B3BL 아파트 건설공사(공분 688호) 시공단계 감독권한대행 등 건설사업관리용역 B3BL",
    "settled": false,
    "hidden": false
@@ -4287,8 +4287,8 @@
    "doc": "세금계산서",
    "amount": 79640,
    "supply": 72400,
-   "siteRaw": "",
-   "site": "경기경기도서관 및 광장∙보행몰 건립공사 감독권한대행 등 건설사업관리용역",
+   "siteRaw": "경기경기도서관 및 광장∙보행몰 건립공사 감독권한대행 등 건설사업관리용역",
+   "site": "경기도서관 및 광장∙보행몰 건립공사 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
   },
@@ -4300,7 +4300,7 @@
    "doc": "세금계산서",
    "amount": 108900,
    "supply": 99000,
-   "siteRaw": "",
+   "siteRaw": "팔탄초 그린스마트 미래학교 사업(BTL) 감독권한대행 등 건설사업관리용역초 그린스마트 미래학교",
    "site": "팔탄초 그린스마트 미래학교 사업(BTL) 감독권한대행 등 건설사업관리용역초 그린스마트 미래학교",
    "settled": false,
    "hidden": false
@@ -4313,7 +4313,7 @@
    "doc": "세금계산서",
    "amount": 88990,
    "supply": 80900,
-   "siteRaw": "",
+   "siteRaw": "한남동 90-4 복합시설 개발사업 CM형 감리 용역",
    "site": "한남동 90-4 복합시설 개발사업 CM형 감리 용역",
    "settled": false,
    "hidden": false
@@ -4326,7 +4326,7 @@
    "doc": "세금계산서",
    "amount": 142450,
    "supply": 129500,
-   "siteRaw": "",
+   "siteRaw": "23-A-OO부대 건설사업관리용역(A032",
    "site": "23-A-OO부대 건설사업관리용역(A032",
    "settled": false,
    "hidden": false
@@ -4339,7 +4339,7 @@
    "doc": "세금계산서",
    "amount": 225830,
    "supply": 205300,
-   "siteRaw": "",
+   "siteRaw": "일양약품 백신공장 완제관 건설사업관리(CM) 기술용역",
    "site": "일양약품 백신공장 완제관 건설사업관리(CM) 기술용역",
    "settled": false,
    "hidden": false
@@ -4352,7 +4352,7 @@
    "doc": "세금계산서",
    "amount": 77440,
    "supply": 70400,
-   "siteRaw": "",
+   "siteRaw": "춘천춘천소년원 재건축공사 건설사업관리용역원 재건축공사",
    "site": "춘천춘천소년원 재건축공사 건설사업관리용역원 재건축공사",
    "settled": false,
    "hidden": false
@@ -4365,7 +4365,7 @@
    "doc": "세금계산서",
    "amount": 42900,
    "supply": 39000,
-   "siteRaw": "",
+   "siteRaw": "KTL 바이오의료종합지원센터 신축공사 감독권한대행 등 건설사업관리용역",
    "site": "KTL 바이오의료종합지원센터 신축공사 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -4378,7 +4378,7 @@
    "doc": "세금계산서",
    "amount": 2728000,
    "supply": 2480000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -4391,7 +4391,7 @@
    "doc": "세금계산서",
    "amount": 107250,
    "supply": 97500,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": false
@@ -4404,7 +4404,7 @@
    "doc": "수정세금계산서",
    "amount": 902000,
    "supply": 820000,
-   "siteRaw": "",
+   "siteRaw": "본사2023-09-05",
    "site": "본사2023-09-05",
    "settled": false,
    "hidden": true
@@ -4417,7 +4417,7 @@
    "doc": "수정세금계산서",
    "amount": -451000,
    "supply": -410000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -4430,7 +4430,7 @@
    "doc": "세금계산서",
    "amount": 451000,
    "supply": 410000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -4443,7 +4443,7 @@
    "doc": "세금계산서",
    "amount": 357500,
    "supply": 325000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -4456,7 +4456,7 @@
    "doc": "세금계산서",
    "amount": 102190,
    "supply": 92900,
-   "siteRaw": "",
+   "siteRaw": "평택고덕 업무9-1-1,9-2-1블럭 업무복합 신축공사",
    "site": "평택고덕 업무9-1-1,9-2-1블럭 업무복합 신축공사",
    "settled": false,
    "hidden": false
@@ -4469,7 +4469,7 @@
    "doc": "세금계산서",
    "amount": 163240,
    "supply": 148400,
-   "siteRaw": "",
+   "siteRaw": "0탄약창 이글루탄약고 2차 건설사업관리용역",
    "site": "0탄약창 이글루탄약고 2차 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -4482,7 +4482,7 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "경부선 밀양역 신축공사 감독 권한대행 등 건설사업관리용역",
    "site": "경부선 밀양역 신축공사 감독 권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -4495,7 +4495,7 @@
    "doc": "세금계산서",
    "amount": 384010,
    "supply": 349100,
-   "siteRaw": "",
+   "siteRaw": "관악LH_관악봉천 H-1,2,3BL 및 서울산림 지식산업센터 시공단계 감독권한대행 등 건설사업관리용역 H-1,2,3BL",
    "site": "관악LH_관악봉천 H-1,2,3BL 및 서울산림 지식산업센터 시공단계 감독권한대행 등 건설사업관리용역 H-1,2,3BL",
    "settled": false,
    "hidden": false
@@ -4508,7 +4508,7 @@
    "doc": "세금계산서",
    "amount": 16500,
    "supply": 15000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -4521,7 +4521,7 @@
    "doc": "세금계산서",
    "amount": 77440,
    "supply": 70400,
-   "siteRaw": "",
+   "siteRaw": "LH_양주옥정 A-1BL 민간참여 공공주택 건설사업 시공단계 건설사업관리용역",
    "site": "LH_양주옥정 A-1BL 민간참여 공공주택 건설사업 시공단계 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -4534,7 +4534,7 @@
    "doc": "세금계산서",
    "amount": 66550,
    "supply": 60500,
-   "siteRaw": "",
+   "siteRaw": "삼성 SDS 수원 DC 리모델링 CM/감리용역",
    "site": "삼성 SDS 수원 DC 리모델링 CM/감리용역",
    "settled": false,
    "hidden": false
@@ -4547,7 +4547,7 @@
    "doc": "세금계산서",
    "amount": 212190,
    "supply": 192900,
-   "siteRaw": "",
+   "siteRaw": "정관에듀파크 조성공사 감독권한대행 등 건설사업관리용역",
    "site": "정관에듀파크 조성공사 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -4560,7 +4560,7 @@
    "doc": "세금계산서",
    "amount": 165330,
    "supply": 150300,
-   "siteRaw": "",
+   "siteRaw": "LH_수서역세권(A2BL) 아파트 건설공사 3공구(1,080호) 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_수서역세권(A2BL) 아파트 건설공사 3공구(1,080호) 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -4573,7 +4573,7 @@
    "doc": "세금계산서",
    "amount": 18700,
    "supply": 17000,
-   "siteRaw": "",
+   "siteRaw": "강원도 삼척의료원 이전신축 임대형민간투자사업(BTL) 건설사업관리용역",
    "site": "강원도 삼척의료원 이전신축 임대형민간투자사업(BTL) 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -4586,7 +4586,7 @@
    "doc": "세금계산서",
    "amount": 183370,
    "supply": 166700,
-   "siteRaw": "",
+   "siteRaw": "인천국제공항 제2합동청사 확장사업 건설사업관리 용역",
    "site": "인천국제공항 제2합동청사 확장사업 건설사업관리 용역",
    "settled": false,
    "hidden": false
@@ -4599,7 +4599,7 @@
    "doc": "세금계산서",
    "amount": 183480,
    "supply": 166800,
-   "siteRaw": "",
+   "siteRaw": "여의도동 14-23번지 오피스텔 신축공사 건설사업관리 용역",
    "site": "여의도동 14-23번지 오피스텔 신축공사 건설사업관리 용역",
    "settled": false,
    "hidden": false
@@ -4612,7 +4612,7 @@
    "doc": "세금계산서",
    "amount": 275000,
    "supply": 250000,
-   "siteRaw": "",
+   "siteRaw": "국립암센터 본관동 리모델링공사 건설사업관리용역",
    "site": "국립암센터 본관동 리모델링공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -4625,7 +4625,7 @@
    "doc": "세금계산서",
    "amount": 79640,
    "supply": 72400,
-   "siteRaw": "",
+   "siteRaw": "대구 도원동 힐스테이트 도원센트럴 주상복합 아파트 신축공사",
    "site": "대구 도원동 힐스테이트 도원센트럴 주상복합 아파트 신축공사",
    "settled": false,
    "hidden": false
@@ -4638,7 +4638,7 @@
    "doc": "세금계산서",
    "amount": 131780,
    "supply": 119800,
-   "siteRaw": "",
+   "siteRaw": "대구달성경찰서 신축공사 건설사업관리용역(감독권한대행",
    "site": "대구달성경찰서 신축공사 건설사업관리용역(감독권한대행",
    "settled": false,
    "hidden": false
@@ -4651,8 +4651,8 @@
    "doc": "세금계산서",
    "amount": 34100,
    "supply": 31000,
-   "siteRaw": "",
-   "site": "양산LH_양산사송 A-4BL 아파트 건설공사 5공구(국임1,156호) 시공단계 감독권한대행 등 건설사업관리용역 A-4B",
+   "siteRaw": "양산LH_양산사송 A-4BL 아파트 건설공사 5공구(국임1,156호) 시공단계 감독권한대행 등 건설사업관리용역 A-4B",
+   "site": "양산LH_양산사송 A-4BL 아파트 건설공사 5공구(국임1,156호) 시공단계 감독권한대행 등 건설사업관리용역 A-4BL",
    "settled": false,
    "hidden": false
   },
@@ -4664,7 +4664,7 @@
    "doc": "세금계산서",
    "amount": 824450,
    "supply": 749500,
-   "siteRaw": "",
+   "siteRaw": "화성LH_화성태안3 B3BL 아파트 건설공사(공분 688호) 시공단계 감독권한대행 등 건설사업관리용역 B3BL",
    "site": "화성LH_화성태안3 B3BL 아파트 건설공사(공분 688호) 시공단계 감독권한대행 등 건설사업관리용역 B3BL",
    "settled": false,
    "hidden": false
@@ -4677,7 +4677,7 @@
    "doc": "세금계산서",
    "amount": 349360,
    "supply": 317600,
-   "siteRaw": "",
+   "siteRaw": "강원도 삼척의료원 이전신축 임대형민간투자사업(BTL) 건설사업관리용역",
    "site": "강원도 삼척의료원 이전신축 임대형민간투자사업(BTL) 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -4690,7 +4690,7 @@
    "doc": "세금계산서",
    "amount": 147180,
    "supply": 133800,
-   "siteRaw": "",
+   "siteRaw": "양산LH_양산사송 A-4BL 아파트 건설공사 5공구(국임1,156호) 시공단계 감독권한대행 등 건설사업관리용역 A-4BL",
    "site": "양산LH_양산사송 A-4BL 아파트 건설공사 5공구(국임1,156호) 시공단계 감독권한대행 등 건설사업관리용역 A-4BL",
    "settled": false,
    "hidden": false
@@ -4703,7 +4703,7 @@
    "doc": "세금계산서",
    "amount": 79640,
    "supply": 72400,
-   "siteRaw": "",
+   "siteRaw": "팔탄초 그린스마트 미래학교 사업(BTL) 감독권한대행 등 건설사업관리용역초 그린스마트 미래학교",
    "site": "팔탄초 그린스마트 미래학교 사업(BTL) 감독권한대행 등 건설사업관리용역초 그린스마트 미래학교",
    "settled": false,
    "hidden": false
@@ -4716,7 +4716,7 @@
    "doc": "세금계산서",
    "amount": 518100,
    "supply": 471000,
-   "siteRaw": "",
+   "siteRaw": "인천항 스마트인천항 스마트물류센터 신축공사 건설사업관리용역센터",
    "site": "인천항 스마트인천항 스마트물류센터 신축공사 건설사업관리용역센터",
    "settled": false,
    "hidden": false
@@ -4729,7 +4729,7 @@
    "doc": "세금계산서",
    "amount": 226270,
    "supply": 205700,
-   "siteRaw": "",
+   "siteRaw": "SK Hynix 기술지원센터 2층 데이터센터 구축공사 종합감리용역",
    "site": "SK Hynix 기술지원센터 2층 데이터센터 구축공사 종합감리용역",
    "settled": false,
    "hidden": false
@@ -4742,7 +4742,7 @@
    "doc": "세금계산서",
    "amount": 260480,
    "supply": 236800,
-   "siteRaw": "",
+   "siteRaw": "구백성초 내 국민체육센터 건립사업 감독 권한대행 등 건설사업관리 용역",
    "site": "구백성초 내 국민체육센터 건립사업 감독 권한대행 등 건설사업관리 용역",
    "settled": false,
    "hidden": false
@@ -4755,7 +4755,7 @@
    "doc": "세금계산서",
    "amount": 18749500,
    "supply": 17045000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -4768,7 +4768,7 @@
    "doc": "세금계산서",
    "amount": 4719000,
    "supply": 4290000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -4781,7 +4781,7 @@
    "doc": "세금계산서",
    "amount": 1397000,
    "supply": 1270000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -4794,7 +4794,7 @@
    "doc": "세금계산서",
    "amount": 2189000,
    "supply": 1990000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -4807,7 +4807,7 @@
    "doc": "세금계산서",
    "amount": 77000,
    "supply": 70000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -4820,7 +4820,7 @@
    "doc": "세금계산서",
    "amount": 479820,
    "supply": 436200,
-   "siteRaw": "",
+   "siteRaw": "인천국제공항 제2합동청사 확장사업 건설사업관리 용역",
    "site": "인천국제공항 제2합동청사 확장사업 건설사업관리 용역",
    "settled": false,
    "hidden": false
@@ -4833,7 +4833,7 @@
    "doc": "세금계산서",
    "amount": 79640,
    "supply": 72400,
-   "siteRaw": "",
+   "siteRaw": "가산동 지식산업센터 신축공사 감리 용역 지식산업센터",
    "site": "가산동 지식산업센터 신축공사 감리 용역 지식산업센터",
    "settled": false,
    "hidden": false
@@ -4846,7 +4846,7 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "아이센스 송도 제2공장 증축공사 건설사업관리 및 감리 용역 제2공장 증축공사",
    "site": "아이센스 송도 제2공장 증축공사 건설사업관리 및 감리 용역 제2공장 증축공사",
    "settled": false,
    "hidden": false
@@ -4859,7 +4859,7 @@
    "doc": "세금계산서",
    "amount": 42900,
    "supply": 39000,
-   "siteRaw": "",
+   "siteRaw": "화순전남대학교병원 개방형의료혁신센터 건립공사 건설사업관리용역",
    "site": "화순전남대학교병원 개방형의료혁신센터 건립공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -4872,7 +4872,7 @@
    "doc": "세금계산서",
    "amount": 15400,
    "supply": 14000,
-   "siteRaw": "",
+   "siteRaw": "광주 마륵동 공동주택 감리용역",
    "site": "광주 마륵동 공동주택 감리용역",
    "settled": false,
    "hidden": false
@@ -4885,7 +4885,7 @@
    "doc": "세금계산서",
    "amount": 71390,
    "supply": 64900,
-   "siteRaw": "",
+   "siteRaw": "광주 광산구 신창동 지역주택조합 공동주택 신축공사",
    "site": "광주 광산구 신창동 지역주택조합 공동주택 신축공사",
    "settled": false,
    "hidden": false
@@ -4898,7 +4898,7 @@
    "doc": "세금계산서",
    "amount": 187880,
    "supply": 170800,
-   "siteRaw": "",
+   "siteRaw": "LH_대전천동3구역 민간참여 주거환경개선사업 4BL 시공단계 감독권한대행 등 건설사업관리용역3구역",
    "site": "LH_대전천동3구역 민간참여 주거환경개선사업 4BL 시공단계 감독권한대행 등 건설사업관리용역3구역",
    "settled": false,
    "hidden": false
@@ -4911,7 +4911,7 @@
    "doc": "세금계산서",
    "amount": 187330,
    "supply": 170300,
-   "siteRaw": "",
+   "siteRaw": "세종IT타워 신축공사 건설사업관리 용역",
    "site": "세종IT타워 신축공사 건설사업관리 용역",
    "settled": false,
    "hidden": false
@@ -4924,7 +4924,7 @@
    "doc": "세금계산서",
    "amount": 18700,
    "supply": 17000,
-   "siteRaw": "",
+   "siteRaw": "평화평택 아트센터 건립사업 건설사업관리 용역의 전당",
    "site": "평화평택 아트센터 건립사업 건설사업관리 용역의 전당",
    "settled": false,
    "hidden": false
@@ -4937,7 +4937,7 @@
    "doc": "세금계산서",
    "amount": 124080,
    "supply": 112800,
-   "siteRaw": "",
+   "siteRaw": "화성동탄2 93BL 주택건설사업 감독권한대행 등 건설사업관리용역",
    "site": "화성동탄2 93BL 주택건설사업 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -4950,7 +4950,7 @@
    "doc": "세금계산서",
    "amount": 321310,
    "supply": 292100,
-   "siteRaw": "",
+   "siteRaw": "국립암센터 본관동 리모델링공사 건설사업관리용역",
    "site": "국립암센터 본관동 리모델링공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -4963,7 +4963,7 @@
    "doc": "세금계산서",
    "amount": 133980,
    "supply": 121800,
-   "siteRaw": "",
+   "siteRaw": "제주공항 관제동 신축사업 건설사업관리용역",
    "site": "제주공항 관제동 신축사업 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -4976,7 +4976,7 @@
    "doc": "세금계산서",
    "amount": 361240,
    "supply": 328400,
-   "siteRaw": "",
+   "siteRaw": "연천 전곡 공동주택 신축공사",
    "site": "연천 전곡 공동주택 신축공사",
    "settled": false,
    "hidden": false
@@ -4989,8 +4989,8 @@
    "doc": "세금계산서",
    "amount": 77440,
    "supply": 70400,
-   "siteRaw": "",
-   "site": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역복합청사 건립사업",
+   "siteRaw": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역복합청사 건립사업",
+   "site": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역복합청사",
    "settled": false,
    "hidden": false
   },
@@ -5002,7 +5002,7 @@
    "doc": "세금계산서",
    "amount": 98450,
    "supply": 89500,
-   "siteRaw": "",
+   "siteRaw": "이천시 청소년 생활문화센터 건립 건설사업관리용역",
    "site": "이천시 청소년 생활문화센터 건립 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5015,7 +5015,7 @@
    "doc": "세금계산서",
    "amount": 219890,
    "supply": 199900,
-   "siteRaw": "",
+   "siteRaw": "춘천소년원 재건축공사 건설사업관리용역",
    "site": "춘천소년원 재건축공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5028,7 +5028,7 @@
    "doc": "세금계산서",
    "amount": 45100,
    "supply": 41000,
-   "siteRaw": "",
+   "siteRaw": "양산LH_양산사송 A-4BL 아파트 건설공사 5공구(국임1,156호) 시공단계 감독권한대행 등 건설사업관리용역 A-4BL",
    "site": "양산LH_양산사송 A-4BL 아파트 건설공사 5공구(국임1,156호) 시공단계 감독권한대행 등 건설사업관리용역 A-4BL",
    "settled": false,
    "hidden": false
@@ -5041,7 +5041,7 @@
    "doc": "세금계산서",
    "amount": 92840,
    "supply": 84400,
-   "siteRaw": "",
+   "siteRaw": "치과병원 증축공사 건설사업관리용역병원 증축공사",
    "site": "치과병원 증축공사 건설사업관리용역병원 증축공사",
    "settled": false,
    "hidden": false
@@ -5054,8 +5054,8 @@
    "doc": "세금계산서",
    "amount": 151690,
    "supply": 137900,
-   "siteRaw": "",
-   "site": "인천 인천 상상플랫폼 사적공간 개발사업 PM/CM(감리포함) 용역플랫폼",
+   "siteRaw": "인천 인천 상상플랫폼 사적공간 개발사업 PM/CM(감리포함) 용역플랫폼",
+   "site": "인천 인천 상상플랫폼 사적공간 개발사업 PM/CM(감리포함) 용역플랫폼 사적공간 개발",
    "settled": false,
    "hidden": false
   },
@@ -5067,7 +5067,7 @@
    "doc": "세금계산서",
    "amount": 195030,
    "supply": 177300,
-   "siteRaw": "",
+   "siteRaw": "대구달성경찰서 신축공사 건설사업관리용역(감독권한대행",
    "site": "대구달성경찰서 신축공사 건설사업관리용역(감독권한대행",
    "settled": false,
    "hidden": false
@@ -5080,7 +5080,7 @@
    "doc": "세금계산서",
    "amount": 142780,
    "supply": 129800,
-   "siteRaw": "",
+   "siteRaw": "인천 인천 상상플랫폼 사적공간 개발사업 PM/CM(감리포함) 용역플랫폼 사적공간 개발",
    "site": "인천 인천 상상플랫폼 사적공간 개발사업 PM/CM(감리포함) 용역플랫폼 사적공간 개발",
    "settled": false,
    "hidden": false
@@ -5093,7 +5093,7 @@
    "doc": "세금계산서",
    "amount": 19800,
    "supply": 18000,
-   "siteRaw": "",
+   "siteRaw": "베이스볼 드림파크 건립공사 감독 권한대행 등 건설사업관리용역",
    "site": "베이스볼 드림파크 건립공사 감독 권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5106,7 +5106,7 @@
    "doc": "세금계산서",
    "amount": 539110,
    "supply": 490100,
-   "siteRaw": "",
+   "siteRaw": "LH_수서역세권(A2BL) 아파트 건설공사 3공구(1,080호) 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_수서역세권(A2BL) 아파트 건설공사 3공구(1,080호) 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5119,7 +5119,7 @@
    "doc": "세금계산서",
    "amount": 14850,
    "supply": 13500,
-   "siteRaw": "",
+   "siteRaw": "LH_고창황산, 고창무장 및 고창율계 공공주택 건설공사 시공단계 감독권한대행 등 통합 건설사업관리용역",
    "site": "LH_고창황산, 고창무장 및 고창율계 공공주택 건설공사 시공단계 감독권한대행 등 통합 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5132,7 +5132,7 @@
    "doc": "세금계산서",
    "amount": 221320,
    "supply": 201200,
-   "siteRaw": "",
+   "siteRaw": "아이센스 송도 제2공장 증축공사 건설사업관리 및 감리 용역 제2공장 증축공사",
    "site": "아이센스 송도 제2공장 증축공사 건설사업관리 및 감리 용역 제2공장 증축공사",
    "settled": false,
    "hidden": false
@@ -5145,7 +5145,7 @@
    "doc": "세금계산서",
    "amount": 16500,
    "supply": 15000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -5158,7 +5158,7 @@
    "doc": "세금계산서",
    "amount": 77000,
    "supply": 70000,
-   "siteRaw": "",
+   "siteRaw": "LH_파주운정3 A23BL 아파트 건설공사 11공구(1,012호) 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_파주운정3 A23BL 아파트 건설공사 11공구(1,012호) 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5171,7 +5171,7 @@
    "doc": "세금계산서",
    "amount": 92840,
    "supply": 84400,
-   "siteRaw": "",
+   "siteRaw": "치과병원 증축공사 건설사업관리용역병원 증축공사",
    "site": "치과병원 증축공사 건설사업관리용역병원 증축공사",
    "settled": false,
    "hidden": false
@@ -5184,7 +5184,7 @@
    "doc": "세금계산서",
    "amount": 91300,
    "supply": 83000,
-   "siteRaw": "",
+   "siteRaw": "시흥장현 B10BL 민간참여 공공주택사업 감독권한대행 등 건설사업관리용역",
    "site": "시흥장현 B10BL 민간참여 공공주택사업 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5197,7 +5197,7 @@
    "doc": "세금계산서",
    "amount": 181280,
    "supply": 164800,
-   "siteRaw": "",
+   "siteRaw": "팔탄초 그린스마트 미래학교 사업(BTL) 감독권한대행 등 건설사업관리용역",
    "site": "팔탄초 그린스마트 미래학교 사업(BTL) 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5210,7 +5210,7 @@
    "doc": "세금계산서",
    "amount": 6380000,
    "supply": 5800000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -5223,7 +5223,7 @@
    "doc": "세금계산서",
    "amount": 8745000,
    "supply": 7950000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -5236,7 +5236,7 @@
    "doc": "세금계산서",
    "amount": 2250600,
    "supply": 2046000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -5249,7 +5249,7 @@
    "doc": "세금계산서",
    "amount": 119900,
    "supply": 109000,
-   "siteRaw": "",
+   "siteRaw": "대구공항 여객터미널 증축 및 리모델링 건설사업관리용역",
    "site": "대구공항 여객터미널 증축 및 리모델링 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5262,7 +5262,7 @@
    "doc": "세금계산서",
    "amount": 583000,
    "supply": 530000,
-   "siteRaw": "",
+   "siteRaw": "평택고덕 업무9-1-1,9-2-1블럭 업무복합 신축공사",
    "site": "평택고덕 업무9-1-1,9-2-1블럭 업무복합 신축공사",
    "settled": false,
    "hidden": false
@@ -5275,7 +5275,7 @@
    "doc": "세금계산서",
    "amount": 18700,
    "supply": 17000,
-   "siteRaw": "",
+   "siteRaw": "경기지사",
    "site": "경기지사",
    "settled": false,
    "hidden": false
@@ -5288,7 +5288,7 @@
    "doc": "세금계산서",
    "amount": 704000,
    "supply": 640000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -5301,7 +5301,7 @@
    "doc": "세금계산서",
    "amount": 48400,
    "supply": 44000,
-   "siteRaw": "",
+   "siteRaw": "파주 문산읍 선유리 878-1번지 일원 공동주택 신축공사 감리용역",
    "site": "파주 문산읍 선유리 878-1번지 일원 공동주택 신축공사 감리용역",
    "settled": false,
    "hidden": false
@@ -5314,7 +5314,7 @@
    "doc": "세금계산서",
    "amount": 26950,
    "supply": 24500,
-   "siteRaw": "",
+   "siteRaw": "가산동 지식산업센터 신축공사 감리 용역 지식산업센터",
    "site": "가산동 지식산업센터 신축공사 감리 용역 지식산업센터",
    "settled": false,
    "hidden": false
@@ -5327,7 +5327,7 @@
    "doc": "세금계산서",
    "amount": 62700,
    "supply": 57000,
-   "siteRaw": "",
+   "siteRaw": "이촌동 현대아파트 리모델링주택조합사업 건설사업관리(CM) 용역",
    "site": "이촌동 현대아파트 리모델링주택조합사업 건설사업관리(CM) 용역",
    "settled": false,
    "hidden": false
@@ -5340,7 +5340,7 @@
    "doc": "세금계산서",
    "amount": 641300,
    "supply": 583000,
-   "siteRaw": "",
+   "siteRaw": "평화평택 아트센터 건립사업 건설사업관리 용역의 전당 건립 건설사업관리 용역",
    "site": "평화평택 아트센터 건립사업 건설사업관리 용역의 전당 건립 건설사업관리 용역",
    "settled": false,
    "hidden": false
@@ -5353,7 +5353,7 @@
    "doc": "세금계산서",
    "amount": 75350,
    "supply": 68500,
-   "siteRaw": "",
+   "siteRaw": "치료감호소 중증환자 집중치료병동",
    "site": "치료감호소 중증환자 집중치료병동",
    "settled": false,
    "hidden": false
@@ -5366,7 +5366,7 @@
    "doc": "세금계산서",
    "amount": 70400,
    "supply": 64000,
-   "siteRaw": "",
+   "siteRaw": "경기도서관 및 광장∙보행몰 건립공사 감독권한대행 등 건설사업관리용역",
    "site": "경기도서관 및 광장∙보행몰 건립공사 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5379,7 +5379,7 @@
    "doc": "세금계산서",
    "amount": 348700,
    "supply": 317000,
-   "siteRaw": "",
+   "siteRaw": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역복합청사",
    "site": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역복합청사",
    "settled": false,
    "hidden": false
@@ -5392,7 +5392,7 @@
    "doc": "세금계산서",
    "amount": 62700,
    "supply": 57000,
-   "siteRaw": "",
+   "siteRaw": "LH_대전천동3구역 민간참여 주거환경개선사업 4BL 시공단계 감독권한대행 등 건설사업관리용역3구역",
    "site": "LH_대전천동3구역 민간참여 주거환경개선사업 4BL 시공단계 감독권한대행 등 건설사업관리용역3구역",
    "settled": false,
    "hidden": false
@@ -5405,7 +5405,7 @@
    "doc": "세금계산서",
    "amount": 337700,
    "supply": 307000,
-   "siteRaw": "",
+   "siteRaw": "경기도북부유아체험교육원 신축공사 건설사업관리용역",
    "site": "경기도북부유아체험교육원 신축공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5418,7 +5418,7 @@
    "doc": "세금계산서",
    "amount": 19800,
    "supply": 18000,
-   "siteRaw": "",
+   "siteRaw": "한국은행 별관 건축공사 감독 권한대행 등 건설사업관리용역",
    "site": "한국은행 별관 건축공사 감독 권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5431,7 +5431,7 @@
    "doc": "세금계산서",
    "amount": 49500,
    "supply": 45000,
-   "siteRaw": "",
+   "siteRaw": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역복합청사",
    "site": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역복합청사",
    "settled": false,
    "hidden": false
@@ -5444,7 +5444,7 @@
    "doc": "세금계산서",
    "amount": 64790,
    "supply": 58900,
-   "siteRaw": "",
+   "siteRaw": "가산동 지식산업센터 신축공사 감리 용역 지식산업센터",
    "site": "가산동 지식산업센터 신축공사 감리 용역 지식산업센터",
    "settled": false,
    "hidden": false
@@ -5457,7 +5457,7 @@
    "doc": "세금계산서",
    "amount": 59290,
    "supply": 53900,
-   "siteRaw": "",
+   "siteRaw": "서울시 통합수장고 건립공사 건설사업관리용역",
    "site": "서울시 통합수장고 건립공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5470,7 +5470,7 @@
    "doc": "세금계산서",
    "amount": 12650,
    "supply": 11500,
-   "siteRaw": "",
+   "siteRaw": "LH_관악봉천 H-1,2,3BL 및 서울산림 지식산업센터 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_관악봉천 H-1,2,3BL 및 서울산림 지식산업센터 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5483,7 +5483,7 @@
    "doc": "세금계산서",
    "amount": 92840,
    "supply": 84400,
-   "siteRaw": "",
+   "siteRaw": "치과병원 증축공사 건설사업관리용역병원 증축공사",
    "site": "치과병원 증축공사 건설사업관리용역병원 증축공사",
    "settled": false,
    "hidden": false
@@ -5496,7 +5496,7 @@
    "doc": "세금계산서",
    "amount": 314930,
    "supply": 286300,
-   "siteRaw": "",
+   "siteRaw": "춘천소년원 재건축공사 건설사업관리용역",
    "site": "춘천소년원 재건축공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5509,7 +5509,7 @@
    "doc": "세금계산서",
    "amount": 104500,
    "supply": 95000,
-   "siteRaw": "",
+   "siteRaw": "광도면 죽림리 263-1번지 공동주택 신축공사(전기",
    "site": "광도면 죽림리 263-1번지 공동주택 신축공사(전기",
    "settled": false,
    "hidden": false
@@ -5522,7 +5522,7 @@
    "doc": "세금계산서",
    "amount": 233200,
    "supply": 212000,
-   "siteRaw": "",
+   "siteRaw": "LH_대전천동3구역 민간참여 주거환경개선사업 4BL 시공단계 감독권한대행 등 건설사업관리용역3구역",
    "site": "LH_대전천동3구역 민간참여 주거환경개선사업 4BL 시공단계 감독권한대행 등 건설사업관리용역3구역",
    "settled": false,
    "hidden": false
@@ -5535,7 +5535,7 @@
    "doc": "세금계산서",
    "amount": 55550,
    "supply": 50500,
-   "siteRaw": "",
+   "siteRaw": "삼성 SDS 수원 DC 리모델링 CM/감리용역",
    "site": "삼성 SDS 수원 DC 리모델링 CM/감리용역",
    "settled": false,
    "hidden": false
@@ -5548,7 +5548,7 @@
    "doc": "세금계산서",
    "amount": 85800,
    "supply": 78000,
-   "siteRaw": "",
+   "siteRaw": "양산LH_양산사송 A-4BL 아파트 건설공사 5공구(국임1,156호) 시공단계 감독권한대행 등 건설사업관리용역 A-4BL",
    "site": "양산LH_양산사송 A-4BL 아파트 건설공사 5공구(국임1,156호) 시공단계 감독권한대행 등 건설사업관리용역 A-4BL",
    "settled": false,
    "hidden": false
@@ -5561,7 +5561,7 @@
    "doc": "세금계산서",
    "amount": 89650,
    "supply": 81500,
-   "siteRaw": "",
+   "siteRaw": "계수범박구역 재개발정비사업 주택건설공사",
    "site": "계수범박구역 재개발정비사업 주택건설공사",
    "settled": false,
    "hidden": false
@@ -5574,7 +5574,7 @@
    "doc": "세금계산서",
    "amount": 177100,
    "supply": 161000,
-   "siteRaw": "",
+   "siteRaw": "22년 전북지역 분산형 건설사업관리용역",
    "site": "22년 전북지역 분산형 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5587,7 +5587,7 @@
    "doc": "세금계산서",
    "amount": 27500,
    "supply": 25000,
-   "siteRaw": "",
+   "siteRaw": "수원지사",
    "site": "수원지사",
    "settled": false,
    "hidden": false
@@ -5600,7 +5600,7 @@
    "doc": "세금계산서",
    "amount": 2915000,
    "supply": 2650000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -5613,7 +5613,7 @@
    "doc": "세금계산서",
    "amount": 271150,
    "supply": 246500,
-   "siteRaw": "",
+   "siteRaw": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역복합청사",
    "site": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역복합청사",
    "settled": false,
    "hidden": false
@@ -5626,7 +5626,7 @@
    "doc": "세금계산서",
    "amount": 210650,
    "supply": 191500,
-   "siteRaw": "",
+   "siteRaw": "한남동 90-4 복합시설 개발사업 CM형 감리 용역동 90-4 복합시설",
    "site": "한남동 90-4 복합시설 개발사업 CM형 감리 용역동 90-4 복합시설",
    "settled": false,
    "hidden": false
@@ -5639,7 +5639,7 @@
    "doc": "세금계산서",
    "amount": 291500,
    "supply": 265000,
-   "siteRaw": "",
+   "siteRaw": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역복합청사",
    "site": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역복합청사",
    "settled": false,
    "hidden": false
@@ -5652,7 +5652,7 @@
    "doc": "세금계산서",
    "amount": 301950,
    "supply": 274500,
-   "siteRaw": "",
+   "siteRaw": "광주 광산구 신창동 지역주택조합 공동주택 신축공사",
    "site": "광주 광산구 신창동 지역주택조합 공동주택 신축공사",
    "settled": false,
    "hidden": false
@@ -5665,7 +5665,7 @@
    "doc": "세금계산서",
    "amount": 77550,
    "supply": 70500,
-   "siteRaw": "",
+   "siteRaw": "한남동 90-4 복합시설 개발사업 CM형 감리 용역동 90-4",
    "site": "한남동 90-4 복합시설 개발사업 CM형 감리 용역동 90-4",
    "settled": false,
    "hidden": false
@@ -5678,7 +5678,7 @@
    "doc": "세금계산서",
    "amount": 119900,
    "supply": 109000,
-   "siteRaw": "",
+   "siteRaw": "김해국제공항 국제선 시설확충 건설사업관리용역제공항",
    "site": "김해국제공항 국제선 시설확충 건설사업관리용역제공항",
    "settled": false,
    "hidden": false
@@ -5691,7 +5691,7 @@
    "doc": "세금계산서",
    "amount": 776050,
    "supply": 705500,
-   "siteRaw": "",
+   "siteRaw": "인천국제공항 제2합동청사 확장사업 건설사업관리 용역",
    "site": "인천국제공항 제2합동청사 확장사업 건설사업관리 용역",
    "settled": false,
    "hidden": false
@@ -5704,7 +5704,7 @@
    "doc": "세금계산서",
    "amount": 33550,
    "supply": 30500,
-   "siteRaw": "",
+   "siteRaw": "한국은행 별관 건축공사 감독 권한대행 등 건설사업관리용역",
    "site": "한국은행 별관 건축공사 감독 권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5717,7 +5717,7 @@
    "doc": "세금계산서",
    "amount": 62700,
    "supply": 57000,
-   "siteRaw": "",
+   "siteRaw": "광주 마륵동 공동주택 감리용역",
    "site": "광주 마륵동 공동주택 감리용역",
    "settled": false,
    "hidden": false
@@ -5730,7 +5730,7 @@
    "doc": "세금계산서",
    "amount": 69850,
    "supply": 63500,
-   "siteRaw": "",
+   "siteRaw": "개포주공4단지아파트 주택재건축정비사업 건설사업관리(CM",
    "site": "개포주공4단지아파트 주택재건축정비사업 건설사업관리(CM",
    "settled": false,
    "hidden": false
@@ -5743,7 +5743,7 @@
    "doc": "세금계산서",
    "amount": 77550,
    "supply": 70500,
-   "siteRaw": "",
+   "siteRaw": "LH_고창황산, 고창무장 및 고창율계 공공주택 건설공사 시공단계 감독권한대행 등 통합 건설사업관리용역",
    "site": "LH_고창황산, 고창무장 및 고창율계 공공주택 건설공사 시공단계 감독권한대행 등 통합 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5756,7 +5756,7 @@
    "doc": "세금계산서",
    "amount": 297550,
    "supply": 270500,
-   "siteRaw": "",
+   "siteRaw": "서울시 통합수장고 건립공사 건설사업관리용역",
    "site": "서울시 통합수장고 건립공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5769,7 +5769,7 @@
    "doc": "세금계산서",
    "amount": 22000,
    "supply": 20000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -5782,7 +5782,7 @@
    "doc": "세금계산서",
    "amount": 84700,
    "supply": 77000,
-   "siteRaw": "",
+   "siteRaw": "LH_파주운정3 A17BL 및 파주교하 A16BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_파주운정3 A17BL 및 파주교하 A16BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5795,7 +5795,7 @@
    "doc": "세금계산서",
    "amount": 89650,
    "supply": 81500,
-   "siteRaw": "",
+   "siteRaw": "아산탕정지구 2-A10BL 공공주택건설사업 감독권한대행 등 건설사업관리용역",
    "site": "아산탕정지구 2-A10BL 공공주택건설사업 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5808,7 +5808,7 @@
    "doc": "세금계산서",
    "amount": 204050,
    "supply": 185500,
-   "siteRaw": "",
+   "siteRaw": "LH_인천영종 A-33BL, A-37BL, 및 A-60BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_인천영종 A-33BL, A-37BL, 및 A-60BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5821,7 +5821,7 @@
    "doc": "세금계산서",
    "amount": 98450,
    "supply": 89500,
-   "siteRaw": "",
+   "siteRaw": "22년 전북지역 분산형 건설사업관리용역",
    "site": "22년 전북지역 분산형 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5834,8 +5834,8 @@
    "doc": "세금계산서",
    "amount": 348700,
    "supply": 317000,
-   "siteRaw": "",
-   "site": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역복합청사 건립사업",
+   "siteRaw": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역복합청사 건립사업",
+   "site": "루원복합청사 건립사업 감독권한 대행 등 건설사업관리용역복합청사",
    "settled": false,
    "hidden": false
   },
@@ -5847,7 +5847,7 @@
    "doc": "세금계산서",
    "amount": 464750,
    "supply": 422500,
-   "siteRaw": "",
+   "siteRaw": "LH_대전천동3구역 민간참여 주거환경개선사업 4BL 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_대전천동3구역 민간참여 주거환경개선사업 4BL 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5860,7 +5860,7 @@
    "doc": "세금계산서",
    "amount": 85800,
    "supply": 78000,
-   "siteRaw": "",
+   "siteRaw": "LH_수원당수 A-2BL 아파트 건설공사 4공구 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_수원당수 A-2BL 아파트 건설공사 4공구 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5873,7 +5873,7 @@
    "doc": "세금계산서",
    "amount": 139700,
    "supply": 127000,
-   "siteRaw": "",
+   "siteRaw": "LH_인천영종 A-33BL, A-37BL, 및 A-60BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_인천영종 A-33BL, A-37BL, 및 A-60BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5886,7 +5886,7 @@
    "doc": "세금계산서",
    "amount": 75350,
    "supply": 68500,
-   "siteRaw": "",
+   "siteRaw": "화순전남대학교병원 개방형의료혁신센터 건립공사 건설사업관리용역형의료혁신센터",
    "site": "화순전남대학교병원 개방형의료혁신센터 건립공사 건설사업관리용역형의료혁신센터",
    "settled": false,
    "hidden": false
@@ -5899,7 +5899,7 @@
    "doc": "세금계산서",
    "amount": 62700,
    "supply": 57000,
-   "siteRaw": "",
+   "siteRaw": "파주 문산읍 선유리 878-1번지 일원 공동주택 신축공사 감리용역",
    "site": "파주 문산읍 선유리 878-1번지 일원 공동주택 신축공사 감리용역",
    "settled": false,
    "hidden": false
@@ -5912,8 +5912,8 @@
    "doc": "세금계산서",
    "amount": 158400,
    "supply": 144000,
-   "siteRaw": "",
-   "site": "연천 연천 전곡 공동주택 신축공사 공동주택",
+   "siteRaw": "연천 연천 전곡 공동주택 신축공사 공동주택",
+   "site": "연천 전곡 공동주택 신축공사",
    "settled": false,
    "hidden": false
   },
@@ -5925,7 +5925,7 @@
    "doc": "세금계산서",
    "amount": 169400,
    "supply": 154000,
-   "siteRaw": "",
+   "siteRaw": "충남권 공공어린이재활병원 건립사업",
    "site": "충남권 공공어린이재활병원 건립사업",
    "settled": false,
    "hidden": false
@@ -5938,7 +5938,7 @@
    "doc": "세금계산서",
    "amount": 327800,
    "supply": 298000,
-   "siteRaw": "",
+   "siteRaw": "LH_인천영종 A-33BL, A-37BL, 및 A-60BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_인천영종 A-33BL, A-37BL, 및 A-60BL 아파트 건설공사 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5951,8 +5951,8 @@
    "doc": "세금계산서",
    "amount": 161700,
    "supply": 147000,
-   "siteRaw": "",
-   "site": "이촌동 이촌동 현대아파트 리모델링주택조합사업 건설사업관리(CM) 용역파트",
+   "siteRaw": "이촌동 이촌동 현대아파트 리모델링주택조합사업 건설사업관리(CM) 용역파트",
+   "site": "이촌동 현대아파트 리모델링주택조합사업 건설사업관리(CM) 용역",
    "settled": false,
    "hidden": false
   },
@@ -5964,8 +5964,8 @@
    "doc": "세금계산서",
    "amount": 18700,
    "supply": 17000,
-   "siteRaw": "",
-   "site": "연천 연천 전곡 공동주택 신축공사",
+   "siteRaw": "연천 연천 전곡 공동주택 신축공사",
+   "site": "연천 전곡 공동주택 신축공사",
    "settled": false,
    "hidden": false
   },
@@ -5977,7 +5977,7 @@
    "doc": "세금계산서",
    "amount": 70400,
    "supply": 64000,
-   "siteRaw": "",
+   "siteRaw": "인천국제공항 4단계 플랜트시설공사 건설사업관리용역",
    "site": "인천국제공항 4단계 플랜트시설공사 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -5990,7 +5990,7 @@
    "doc": "세금계산서",
    "amount": 85800,
    "supply": 78000,
-   "siteRaw": "",
+   "siteRaw": "LH_수원당수 A-2BL 아파트 건설공사 4공구 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_수원당수 A-2BL 아파트 건설공사 4공구 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -6003,7 +6003,7 @@
    "doc": "세금계산서",
    "amount": 77000,
    "supply": 70000,
-   "siteRaw": "",
+   "siteRaw": "김해국제공항 국제선 시설확충 건설사업관리용역제공항",
    "site": "김해국제공항 국제선 시설확충 건설사업관리용역제공항",
    "settled": false,
    "hidden": false
@@ -6016,7 +6016,7 @@
    "doc": "세금계산서",
    "amount": 26400,
    "supply": 24000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -6029,7 +6029,7 @@
    "doc": "세금계산서",
    "amount": 322300,
    "supply": 293000,
-   "siteRaw": "",
+   "siteRaw": "화순전남대병원 화순전남대학교병원 개방형의료혁신센터 건립공사 건설사업관리용역형의료혁신센터",
    "site": "화순전남대병원 화순전남대학교병원 개방형의료혁신센터 건립공사 건설사업관리용역형의료혁신센터",
    "settled": false,
    "hidden": false
@@ -6042,7 +6042,7 @@
    "doc": "세금계산서",
    "amount": 177100,
    "supply": 161000,
-   "siteRaw": "",
+   "siteRaw": "LH_파주운정3 A23BL 아파트 건설공사 11공구(1,012호) 시공단계 감독권한대행 등 건설사업관리용역",
    "site": "LH_파주운정3 A23BL 아파트 건설공사 11공구(1,012호) 시공단계 감독권한대행 등 건설사업관리용역",
    "settled": false,
    "hidden": false
@@ -6055,7 +6055,7 @@
    "doc": "세금계산서",
    "amount": 68200,
    "supply": 62000,
-   "siteRaw": "",
+   "siteRaw": "태안 해양치유센터 건립사업 건설사업관리용역(감독권한대행",
    "site": "태안 해양치유센터 건립사업 건설사업관리용역(감독권한대행",
    "settled": false,
    "hidden": false
@@ -6068,7 +6068,7 @@
    "doc": "세금계산서",
    "amount": 119900,
    "supply": 109000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": false
@@ -6081,7 +6081,7 @@
    "doc": "세금계산서",
    "amount": 45100,
    "supply": 41000,
-   "siteRaw": "",
+   "siteRaw": "태안 해양치유센터 건립사업 건설사업관리용역(감독권한대행",
    "site": "태안 해양치유센터 건립사업 건설사업관리용역(감독권한대행",
    "settled": false,
    "hidden": false
@@ -6094,7 +6094,7 @@
    "doc": "세금계산서",
    "amount": 75350,
    "supply": 68500,
-   "siteRaw": "",
+   "siteRaw": "대전대덕 공공지원 민간임대주택 공급촉진지구 3BL 공동주택 신축공사 감리용역",
    "site": "대전대덕 공공지원 민간임대주택 공급촉진지구 3BL 공동주택 신축공사 감리용역",
    "settled": false,
    "hidden": false
@@ -6107,7 +6107,7 @@
    "doc": "세금계산서",
    "amount": 90750,
    "supply": 82500,
-   "siteRaw": "",
+   "siteRaw": "대전대덕 공공지원 민간임대주택 공급촉진지구 3BL 공동주택 신축공사 감리용역",
    "site": "대전대덕 공공지원 민간임대주택 공급촉진지구 3BL 공동주택 신축공사 감리용역",
    "settled": false,
    "hidden": false
@@ -6120,8 +6120,8 @@
    "doc": "세금계산서",
    "amount": 31900,
    "supply": 29000,
-   "siteRaw": "",
-   "site": "김해국제공항 국제선 시설확충 건설사업관리용역제공항 국제선 시설확충",
+   "siteRaw": "김해국제공항 국제선 시설확충 건설사업관리용역제공항 국제선 시설확충",
+   "site": "김해국제공항 국제선 시설확충 건설사업관리용역제공항",
    "settled": false,
    "hidden": false
   },
@@ -6133,7 +6133,7 @@
    "doc": "세금계산서",
    "amount": 550000,
    "supply": 500000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
@@ -6146,7 +6146,7 @@
    "doc": "세금계산서",
    "amount": 23468500,
    "supply": 21335000,
-   "siteRaw": "",
+   "siteRaw": "본사",
    "site": "본사",
    "settled": false,
    "hidden": true
