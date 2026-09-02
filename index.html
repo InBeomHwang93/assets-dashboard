@@ -8,22 +8,22 @@
 <style>
   :root {
     --logo-navy: #1e2a7b; --logo-gray: #8b8d90; --logo-red: #d61d28;
-    --surface-1: #fcfcfb;
-    --page: #f9f9f7;
-    --ink-1: #0b0b0b;
-    --ink-2: #52514e;
-    --ink-3: #898781;
-    --grid: #e1e0d9;
-    --axis: #c3c2b7;
-    --border: rgba(11,11,11,0.10);
+    --surface-1: #ffffff;
+    --page: #e9edf3;
+    --ink-1: #101418;
+    --ink-2: #49525c;
+    --ink-3: #7d8894;
+    --grid: #dde3ea;
+    --axis: #b9c2cc;
+    --border: rgba(16,20,24,0.11);
     --s1: #2a78d6;
-    --s1-soft: #cde2fb;
+    --s1-soft: #d3e3f8;
     --good: #0ca30c;
     --good-ink: #006300;
-    --warn: #fab219;
-    --warn-ink: #8a5b00;
-    --crit: #d03b3b;
-    --shadow: 0 1px 2px rgba(11,11,11,.05), 0 4px 16px rgba(11,11,11,.04);
+    --warn: #e5a512;
+    --warn-ink: #7d5600;
+    --crit: #cf3f3f;
+    --shadow: 0 1px 2px rgba(16,20,24,.06), 0 6px 20px rgba(16,20,24,.07);
     color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
@@ -60,7 +60,7 @@
   /* 왼쪽 메뉴 */
   .side {
     position: sticky; top: 0; align-self: stretch;
-    flex: 0 0 196px; width: 196px; min-height: 100vh;
+    flex: 0 0 208px; width: 208px; min-height: 100vh;
     background: var(--surface-1); border-right: 1px solid var(--border);
     padding: 18px 14px 20px; display: flex; flex-direction: column; gap: 18px;
   }
@@ -68,14 +68,15 @@
   .nav { display: flex; flex-direction: column; gap: 4px; }
   .navitem {
     display: flex; align-items: center; gap: 9px; width: 100%;
-    font-family: inherit; font-size: 13.5px; font-weight: 550; text-align: left;
+    font-family: inherit; font-size: 15.5px; font-weight: 600; text-align: left;
+    letter-spacing: -0.2px;
     color: var(--ink-2); background: transparent; border: 0; border-radius: 9px;
-    padding: 10px 11px; cursor: pointer;
+    padding: 11px 12px; cursor: pointer;
   }
-  .navitem svg { width: 17px; height: 17px; flex: 0 0 auto; }
+  .navitem svg { width: 19px; height: 19px; flex: 0 0 auto; }
   .navitem:hover { background: color-mix(in srgb, var(--s1) 8%, transparent); color: var(--ink-1); }
   .navitem[aria-pressed="true"] { background: var(--s1); color: #fff; }
-  .sidefoot { margin-top: auto; font-size: 11px; color: var(--ink-3); line-height: 1.6; }
+  .sidefoot { margin-top: auto; font-size: 12px; color: var(--ink-3); line-height: 1.6; }
   .sidefoot a { color: var(--ink-3); }
   .catbadge {
     display: inline-block; vertical-align: 3px; margin-left: 6px;
@@ -93,7 +94,7 @@
     }
     .side .logo { height: 34px; margin: 0; }
     .nav { flex-direction: row; gap: 6px; }
-    .navitem { padding: 7px 12px; white-space: nowrap; }
+    .navitem { padding: 8px 13px; white-space: nowrap; font-size: 14.5px; }
     .sidefoot { display: none; }
   }
 
