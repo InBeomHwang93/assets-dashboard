@@ -127,6 +127,7 @@
   #gameView .btn.primary { background: var(--s1); border-color: var(--s1); color: #fff; }
   #gameView .btn.primary:hover { filter: brightness(1.06); background: var(--s1); }
   #gameView .btn.sm { font-size: 12px; padding: 7px 12px; }
+  #gameView .btn:disabled { opacity: .45; cursor: not-allowed; filter: none; }
   #gameView .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
   #gameView h2 { font-size: 15px; margin: 0 0 3px; letter-spacing: -.3px; }
   #gameView .cdesc { color: var(--ink-2); font-size: 12.5px; margin: 0 0 12px; }
@@ -458,10 +459,16 @@
       <div class="gname">
         <span class="flabel" style="font-weight:600">이름</span>
         <input type="text" id="gName" maxlength="12" placeholder="예: 황인범" autocomplete="off">
+        <span class="flabel" style="font-weight:600">부서</span>
+        <input type="text" id="gDept" maxlength="10" placeholder="예: 총무팀" autocomplete="off" list="gDeptList">
+        <datalist id="gDeptList">
+          <option value="총무팀"></option><option value="공무팀"></option><option value="설계팀"></option>
+          <option value="감리팀"></option><option value="현장"></option>
+        </datalist>
         <span id="gNameMsg" style="font-size:12px;color:var(--ink-3)"></span>
       </div>
-      <p class="sub" style="margin:10px 0 0">
-        한 판에 1분이 넘지 않습니다. 기록은 <b>이 컴퓨터의 브라우저에만</b> 저장되고, 대시보드 자료와는 아무 관계가 없습니다.
+      <p class="sub" id="gIntro" style="margin:10px 0 0">
+        한 판에 1분이 넘지 않습니다. <b>이름을 넣어야 시작할 수 있습니다.</b>
       </p>
     </div>
 
@@ -516,13 +523,15 @@
       </div>
 
       <aside class="card" id="gBoard" style="position:sticky;top:14px">
-        <h2 id="gbTitle">내 기록</h2>
+        <h2 id="gbTitle">등수표</h2>
         <p class="cdesc" id="gbDesc">아직 기록이 없습니다</p>
         <table><thead><tr><th>#</th><th>이름</th><th class="num" id="gbUnit">기록</th><th class="num">날짜</th></tr></thead>
         <tbody id="gbBody"></tbody></table>
         <div class="row" style="margin-top:12px">
-          <button class="btn sm" id="gbClear" type="button">이 게임 기록 지우기</button>
+          <button class="btn sm" id="gbReload" type="button" hidden>↻ 새로고침</button>
+          <button class="btn sm" id="gbClear" type="button">내 기록 지우기</button>
         </div>
+        <p class="note" id="gbNote" style="font-size:11.5px;color:var(--ink-3);margin:10px 0 0"></p>
       </aside>
     </div>
   </section>
@@ -753,6 +762,7 @@
     detectSource().then(function () { return refresh(true); });
   }
   function refresh(first, manual) {
+    if (state.cat === "game") return Promise.resolve();   // 게임 화면에서는 자료를 읽지 않는다
     if (checking) {
       // 이전 확인이 어떤 이유로든 끝나지 않았으면 수동 클릭은 강제로 다시 시작한다
       if (!manual) return Promise.resolve();
@@ -1194,7 +1204,7 @@
     if (cat !== "game") { try { localStorage.setItem("dash-cat", cat); } catch (e) {} }
     if (!skipHash && location.hash.slice(1) !== cat) location.hash = cat;
     applyCatUI();
-    if (cat === "game") { stopGames(); gBoard(); return; }   // 자료를 다시 읽지 않는다
+    if (cat === "game") { stopGames(); gGate(); gBoard(); if (GAME_API) gFetchBoard(); return; }
     // 구분이 바뀌면 화면 상태를 처음으로 되돌린다
     lastStamp = null; booted = false;
     DATA = { rows: [] }; SITES = { sites: [] };
@@ -1209,22 +1219,27 @@
   /* ══════════ 잠깐 쉬어가기 ══════════
      기록은 이 브라우저에만 저장됩니다. 대시보드 자료(data*.json)와는 무관합니다. */
   var GKEY = "dash-game-v1";
+  // 공용 등수표 주소. 비워 두면 내 브라우저에만 기록이 남습니다.
+  var GAME_API = "https://dashboard-game-board.hib1006.workers.dev/";
   var GAMES = {
-    2: { name: "반응 속도",  unit: "평균(ms)",  lower: true,
+    2: { key: "react",  name: "반응 속도",  unit: "평균(ms)",  lower: true,
          fmt: function (v) { return Math.round(v).toLocaleString("ko-KR") + "ms"; } },
-    3: { name: "짝 맞추기",  unit: "뒤집기(회)", lower: true,
+    3: { key: "memory", name: "짝 맞추기",  unit: "뒤집기(회)", lower: true,
          fmt: function (v) { return Math.round(v) + "회"; } },
-    4: { name: "30초 암산",  unit: "맞힘(문제)", lower: false,
+    4: { key: "math",   name: "30초 암산",  unit: "맞힘(문제)", lower: false,
          fmt: function (v) { return Math.round(v) + "문제"; } }
   };
-  var GST = { name: "", rec: { 2: [], 3: [], 4: [] }, plays: { 2: 0, 3: 0, 4: 0 } };
+  var GST = { name: "", dept: "", rec: { 2: [], 3: [], 4: [] }, plays: { 2: 0, 3: 0, 4: 0 } };
   var gCur = 2, gJustAdded = -1;
+  var GSHARED = { 2: null, 3: null, 4: null };   // 공용 등수표 (못 받아오면 null)
+  var gShareMsg = "";
 
   function gLoad() {
     try {
       var j = JSON.parse(localStorage.getItem(GKEY) || "null");
       if (j && typeof j === "object") {
         GST.name = String(j.name || "").slice(0, 12);
+        GST.dept = String(j.dept || "").slice(0, 10);
         [2, 3, 4].forEach(function (g) {
           GST.rec[g] = Array.isArray(j.rec && j.rec[g]) ? j.rec[g].slice(0, 20) : [];
           GST.plays[g] = Number(j.plays && j.plays[g]) || 0;
@@ -1247,30 +1262,107 @@
     gBoard();
     return idx;   // -1 이면 상위 10위 밖
   }
+  function gMe() { return (GST.name || "") + "|" + (GST.dept || ""); }
   function gBoard() {
-    var G = GAMES[gCur], list = GST.rec[gCur] || [];
-    $("gbTitle").textContent = G.name + " — 내 기록";
+    var G = GAMES[gCur];
+    var shared = GAME_API ? GSHARED[gCur] : null;
+    var list = shared || GST.rec[gCur] || [];
+    var isShared = !!shared;
+
+    $("gbTitle").textContent = G.name + " — " + (isShared ? "부서 등수표" : "내 기록");
     $("gbUnit").textContent = G.unit;
-    $("gbDesc").textContent = list.length
-      ? "최고 " + G.fmt(list[0].v) + " · 지금까지 " + GST.plays[gCur].toLocaleString("ko-KR") + "판"
-      : "한 판 해보시면 기록이 쌓입니다";
+    $("gbReload").hidden = !GAME_API;
+
+    if (!list.length) {
+      $("gbDesc").textContent = isShared ? "아직 아무도 기록을 올리지 않았습니다" : "한 판 해보시면 기록이 쌓입니다";
+    } else if (isShared) {
+      var meIdx = list.findIndex(function (r) { return (r.n + "|" + (r.t || "")) === gMe(); });
+      $("gbDesc").textContent = "총 " + list.length + "명"
+        + (meIdx >= 0 ? " · 내 순위 " + (meIdx + 1) + "등 (" + G.fmt(list[meIdx].v) + ")" : " · 아직 내 기록 없음");
+    } else {
+      $("gbDesc").textContent = "최고 " + G.fmt(list[0].v) + " · 지금까지 "
+        + GST.plays[gCur].toLocaleString("ko-KR") + "판";
+    }
+
     $("gbBody").innerHTML = list.length
       ? list.map(function (r, i) {
           var cls = i < 3 ? " m" + (i + 1) : "";
-          return "<tr" + (i === gJustAdded ? ' class="gnew"' : "") + '><td><span class="grank' + cls + '">'
-            + (i + 1) + "</span></td><td>" + esc(r.n) + '</td><td class="num">' + G.fmt(r.v)
-            + '</td><td class="num" style="color:var(--ink-3)">' + esc(r.d) + "</td></tr>";
+          var mine = isShared ? ((r.n + "|" + (r.t || "")) === gMe()) : (i === gJustAdded);
+          var who = esc(r.n) + (r.t ? ' <span style="color:var(--ink-3);font-size:11px">' + esc(r.t) + "</span>" : "");
+          return "<tr" + (mine ? ' class="gnew"' : "") + '><td><span class="grank' + cls + '">'
+            + (i + 1) + "</span></td><td>" + who + '</td><td class="num">' + G.fmt(r.v)
+            + '</td><td class="num" style="color:var(--ink-3)">' + esc(r.d || "") + "</td></tr>";
         }).join("")
       : '<tr><td colspan="4" style="text-align:center;color:var(--ink-3);padding:22px">기록 없음</td></tr>';
+
+    var note = !GAME_API
+      ? "기록은 이 브라우저에만 저장됩니다."
+      : (isShared ? "부서 전체가 함께 보는 등수표입니다. 사람마다 최고 기록 한 줄만 남습니다." : "");
+    if (GAME_API && gShareMsg) {
+      note = (note ? note + "<br>" : "")
+        + '<span style="color:var(--crit)">' + esc(gShareMsg)
+        + (isShared ? " (아래는 마지막으로 받아온 내용입니다)" : " 내 기록만 표시합니다.") + "</span>";
+    }
+    $("gbNote").innerHTML = note;
+  }
+
+  /* 공용 등수표 읽기 / 보내기 */
+  function gFetchBoard() {
+    if (!GAME_API) return Promise.resolve();
+    return fetch(GAME_API, { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
+        if (!j || !j.boards) throw new Error("형식 오류");
+        [2, 3, 4].forEach(function (n) { GSHARED[n] = j.boards[GAMES[n].key] || []; });
+        gShareMsg = ""; gBoard();
+      })
+      .catch(function () { gShareMsg = "등수표를 불러오지 못했습니다. 잠시 뒤 ↻ 를 눌러 주세요."; gBoard(); });
+  }
+  function gSend(g, v) {
+    if (!GAME_API) return Promise.resolve(null);
+    return fetch(GAME_API, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ g: GAMES[g].key, name: GST.name, dept: GST.dept, v: v })
+    }).then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (j && j.board) { GSHARED[g] = j.board; gShareMsg = ""; gBoard(); }
+        return j;
+      })
+      .catch(function () { gShareMsg = "등수표에 올리지 못했습니다 (연결 문제)."; gBoard(); return null; });
   }
   function gMsg(id, html) { var e = $(id); e.className = "gmsg"; e.innerHTML = html; }
   function gResult(g, v, extra) {
     var idx = gAdd(g, v);
     var G = GAMES[g];
-    gMsg("g" + g + "msg", (extra || "") + "<b>" + G.fmt(v) + "</b> — "
-      + (idx === 0 ? "내 최고 기록입니다 🎉"
-        : idx > 0 ? "내 기록 " + (idx + 1) + "등입니다"
-        : "상위 10위 안에는 못 들었습니다"));
+    var mine = (idx === 0 ? "내 최고 기록입니다 🎉"
+      : idx > 0 ? "내 기록 " + (idx + 1) + "등"
+      : "내 상위 10위 밖");
+    gMsg("g" + g + "msg", (extra || "") + "<b>" + G.fmt(v) + "</b> — " + mine
+      + (GAME_API ? ' · <span style="color:var(--ink-3)">등수표에 올리는 중…</span>' : ""));
+    if (!GAME_API) return;
+    gSend(g, v).then(function (j) {
+      var tail;
+      if (!j) tail = ' · <span style="color:var(--crit)">등수표에 올리지 못했습니다</span>';
+      else if (j.error) tail = ' · <span style="color:var(--crit)">' + esc(j.error) + "</span>";
+      else if (j.rank) tail = " · 부서 등수표 <b>" + j.rank + "등</b>"
+        + (j.updated ? "" : " (기존 기록이 더 좋습니다)");
+      else tail = "";
+      gMsg("g" + g + "msg", (extra || "") + "<b>" + G.fmt(v) + "</b> — " + mine + tail);
+    });
+  }
+  /* 이름이 없으면 시작 버튼을 잠근다 */
+  function gGate() {
+    var okName = !!(GST.name || "").trim();
+    [2, 3, 4].forEach(function (n) {
+      var b = $("g" + n + "start");
+      if (b) { b.disabled = !okName; b.title = okName ? "" : "먼저 이름을 넣어 주세요"; }
+    });
+    var lightOn = okName;
+    $("g2light").style.pointerEvents = lightOn ? "" : "none";
+    $("gIntro").innerHTML = okName
+      ? "한 판에 1분이 넘지 않습니다. 기록은 이름으로 남습니다."
+      : '한 판에 1분이 넘지 않습니다. <b style="color:var(--crit)">이름을 넣어야 시작할 수 있습니다.</b>';
+    return okName;
   }
   function stopGames() {
     clearTimeout(G2.timer); clearInterval(G3.timer); clearInterval(G4.timer);
@@ -1371,10 +1463,22 @@
   function gameInit() {
     gLoad();
     $("gName").value = GST.name;
-    $("gNameMsg").textContent = GST.name ? "" : "이름을 넣으면 기록에 함께 남습니다";
-    $("gName").addEventListener("input", function () {
-      GST.name = this.value.trim().slice(0, 12); gSave();
-      $("gNameMsg").textContent = GST.name ? "저장했습니다" : "이름을 넣으면 기록에 함께 남습니다";
+    $("gDept").value = GST.dept;
+    function gNameChanged() {
+      GST.name = $("gName").value.trim().slice(0, 12);
+      GST.dept = $("gDept").value.trim().slice(0, 10);
+      gSave();
+      $("gNameMsg").textContent = GST.name
+        ? "저장했습니다 — 다음에도 그대로 씁니다"
+        : "이름을 넣어 주세요";
+      gGate(); gBoard();
+    }
+    $("gName").addEventListener("input", gNameChanged);
+    $("gDept").addEventListener("input", gNameChanged);
+    $("gNameMsg").textContent = GST.name ? "" : "이름을 넣어 주세요";
+
+    $("gbReload").addEventListener("click", function () {
+      $("gbDesc").textContent = "등수표를 불러오는 중…"; gFetchBoard();
     });
 
     Array.prototype.forEach.call(document.querySelectorAll("#gTabs .gtab"), function (t) {
@@ -1389,7 +1493,7 @@
     });
 
     $("gbClear").addEventListener("click", function () {
-      if (!confirm(GAMES[gCur].name + " 기록을 지울까요? 되돌릴 수 없습니다.")) return;
+      if (!confirm(GAMES[gCur].name + " — 이 브라우저에 남은 내 기록을 지울까요?\n부서 등수표에 올라간 기록은 그대로 남습니다.")) return;
       GST.rec[gCur] = []; GST.plays[gCur] = 0; gJustAdded = -1; gSave(); gBoard();
     });
 
@@ -1410,6 +1514,7 @@
       setTimeout(g2Round, 650);
     });
     $("g2start").addEventListener("click", function () {
+      if (!gGate()) { $("gName").focus(); return; }
       stopGames(); gJustAdded = -1;
       G2.n = 0; G2.list = [];
       $("g2n").textContent = "0"; $("g2last").textContent = "—"; $("g2avg").textContent = "—";
@@ -1417,6 +1522,7 @@
     });
 
     $("g3start").addEventListener("click", function () {
+      if (!gGate()) { $("gName").focus(); return; }
       stopGames(); gJustAdded = -1; g3Build();
       G3.open = []; G3.pairs = 0; G3.flips = 0; G3.on = true; G3.lock = false; G3.t0 = Date.now();
       $("g3p").textContent = "0"; $("g3f").textContent = "0";
@@ -1428,6 +1534,7 @@
     g3Build();
 
     $("g4start").addEventListener("click", function () {
+      if (!gGate()) { $("gName").focus(); return; }
       stopGames(); gJustAdded = -1;
       G4.score = 0; G4.combo = 0; G4.on = true; G4.end = Date.now() + 30000;
       $("g4s").textContent = "0"; $("g4c").textContent = "0";
@@ -1445,7 +1552,9 @@
       }, 100);
     });
 
+    gGate();
     gBoard();
+    if (GAME_API) gFetchBoard();
   }
 
   function initialCat() {
