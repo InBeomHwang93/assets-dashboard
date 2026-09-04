@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-09-04T01:04:53.057Z",
+ "updatedAt": "2026-09-04T01:17:33.107Z",
  "updatedBy": "InBeomHwang93",
  "rows": [
   {
@@ -4782,7 +4782,7 @@
    "amount": 5174400,
    "supply": 4704000,
    "siteRaw": "인천",
-   "site": "인천",
+   "site": "인천 송도1공구 B2블록 주상복합 신축공사",
    "settled": false,
    "hidden": false
   },
