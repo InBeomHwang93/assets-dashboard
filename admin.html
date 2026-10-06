@@ -169,6 +169,7 @@
       <button type="button" class="segbtn" data-cat="assets" aria-pressed="true">집기비품</button>
       <button type="button" class="segbtn" data-cat="safety" aria-pressed="false">안전용품</button>
       <button type="button" class="segbtn" data-cat="telecom" aria-pressed="false">통신공사</button>
+      <button type="button" class="segbtn" data-cat="rental" aria-pressed="false">렌트카</button>
     </div>
     <div class="msg info" id="catMsg" style="display:block">현재 <b>집기비품</b> 자료를 다루고 있습니다. (data.json)</div>
   </section>
@@ -193,7 +194,53 @@
   </section>
 
   <!-- STEP 2 : 업로드 -->
-  <section class="card">
+  <!-- ══ 렌트카 : 현장별 계약서 관리 ══ -->
+  <section class="card hide" id="rentCard">
+    <h2>렌트카 계약서 관리</h2>
+    <p class="cdesc">현장을 만들고 계약서 파일을 올리면, 협업부서는 대시보드 <b>렌트카</b> 메뉴에서 현장을 눌러 바로 내려받습니다.
+      금액 집계는 하지 않습니다. 올린 계약서는 <b>주소만 알면 누구나</b> 받을 수 있으니 개인정보가 담긴 문서는 올리지 마세요.</p>
+
+    <div class="grid g4" style="align-items:end">
+      <div style="grid-column:span 2">
+        <label class="fl">현장명</label>
+        <input type="text" id="rSiteIn" list="rSiteList" placeholder="예: LH_인천영종 A-33BL" autocomplete="off">
+        <datalist id="rSiteList"></datalist>
+      </div>
+      <div><button class="btn sm" id="rAddSite" type="button" style="width:100%">현장 추가</button></div>
+      <div><button class="btn ghost sm" id="rPullSites" type="button" style="width:100%">다른 구분 현장명 불러오기</button></div>
+    </div>
+    <div class="msg" id="rSiteMsg"></div>
+
+    <div class="hide" id="rUpBox" style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border)">
+      <p class="cdesc" style="margin-bottom:9px">계약서 올릴 현장: <b id="rPickName">—</b></p>
+      <div class="grid g4" style="align-items:end">
+        <div style="grid-column:span 2"><label class="fl">계약 내용 (차량 등)</label>
+          <input type="text" id="rTitle" placeholder="예: 스타렉스 12인승 (12가3456)" autocomplete="off"></div>
+        <div><label class="fl">렌트 업체</label><input type="text" id="rVendor" placeholder="예: 롯데렌탈" autocomplete="off"></div>
+        <div><label class="fl">파일 (PDF·이미지)</label>
+          <input type="file" id="rFile" accept=".pdf,.jpg,.jpeg,.png,.webp,.heic,.hwp,.hwpx,.doc,.docx,.xlsx,.zip"></div>
+      </div>
+      <div class="grid g4" style="align-items:end;margin-top:10px">
+        <div><label class="fl">계약 시작일</label><input type="date" id="rFrom"></div>
+        <div><label class="fl">계약 종료일</label><input type="date" id="rTo"></div>
+        <div style="grid-column:span 2"><button class="btn" id="rUpload" type="button" style="width:100%">이 계약서 올리기</button></div>
+      </div>
+      <p class="note" style="margin-top:8px">기간은 계약서에 적힌 대로 넣으세요. 비워 두면 대시보드에 <b>기간 미기재</b> 로 보입니다. 파일 한 개는 20MB까지.</p>
+      <div class="msg" id="rUpMsg"></div>
+    </div>
+
+    <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border)">
+      <div class="row" style="margin-bottom:10px">
+        <b style="font-size:13px">올라간 계약서</b>
+        <span class="note" style="margin:0" id="rCount"></span>
+        <span style="flex:1"></span>
+        <button class="btn ghost sm" id="rReloadAdm" type="button">↻ 다시 읽기</button>
+      </div>
+      <div id="rManage"></div>
+    </div>
+  </section>
+
+  <section class="card" id="upCard">
     <h2><span class="step">2</span>홈택스 엑셀 업로드</h2>
     <p class="cdesc">전자세금계산서 목록, 신용카드 매입내역 등 .xlsx / .xls / .csv 모두 가능합니다. 여러 개 한꺼번에 올려도 됩니다.</p>
     <div class="drop" id="drop">
@@ -369,15 +416,17 @@
   var UNASSIGNED = "미지정";
   // 이 화면 파일의 판 번호. 저장 직전에 서버의 판 번호와 비교해서
   // 오래 열어둔 탭(예전 코드)이 데이터를 덮어쓰는 것을 막는다.
-  var BUILD = "2026-09-02c";
+  var BUILD = "2026-10-06a";
 
   /* ---------- 자료 구분 ---------- */
   var CATS = {
     assets: { label: "집기비품", data: "data.json",        sites: "sites.json" },
     safety:  { label: "안전용품", data: "data-safety.json",  sites: "sites-safety.json" },
-    telecom: { label: "통신공사", data: "data-telecom.json", sites: "sites-telecom.json" }
+    telecom: { label: "통신공사", data: "data-telecom.json", sites: "sites-telecom.json" },
+    // 렌트카는 엑셀이 아니라 계약서 파일을 다룹니다 (아래 '렌트카 계약서 관리' 참고)
+    rental:  { label: "렌트카",   data: "data-rental.json",  sites: null, docs: true }
   };
-  var CAT_ORDER = ["assets", "safety", "telecom"];
+  var CAT_ORDER = ["assets", "safety", "telecom"];   // 엑셀로 올리는 구분만
   var CAT = "assets";
   function F(kind) { return CATS[CAT][kind]; }   // 지금 구분의 파일 이름
 
@@ -1560,9 +1609,18 @@
     api("").then(function (j) {
       return getFile(F("data")).then(function (f) {
         if (f) { try { existing = JSON.parse(f.text); } catch (e) { existing = null; } }
+        var tail;
+        if (CAT === "rental") {
+          var ns = (existing && existing.sites) ? existing.sites.length : 0;
+          tail = ns ? " · 렌트카 현장 " + ns + "곳" : " · 아직 렌트카 자료 없음";
+        } else {
+          tail = (existing && existing.rows)
+            ? " · 기존 데이터 " + existing.rows.length.toLocaleString("ko-KR") + "행"
+            : " · 기존 " + F("data") + " 없음";
+        }
         show("cfgMsg", "ok", "연결 성공: <b>" + esc(j.full_name) + "</b>"
-          + (cfg.token ? " · 쓰기 토큰 확인" : " · 토큰 없음(읽기만)")
-          + (existing && existing.rows ? " · 기존 데이터 " + existing.rows.length.toLocaleString("ko-KR") + "행" : " · 기존 data.json 없음"));
+          + (cfg.token ? " · 쓰기 토큰 확인" : " · 토큰 없음(읽기만)") + tail);
+        if (CAT === "rental") { existing = null; rentLoad(true); }
       });
     }).catch(function (e) { show("cfgMsg", "err", "실패: " + esc(e.message)); });
   });
@@ -1678,6 +1736,305 @@
   $("importRules").addEventListener("click", importRules);
   $("loadBackups").addEventListener("click", loadBackups);
 
+  /* ══════════ 렌트카 — 현장별 계약서 관리 ══════════
+     data-rental.json 에 현장·계약서 정보가, contracts/<현장>/<파일이름> 에 원본이 들어갑니다.
+     파일 이름을 그대로 쓰기 때문에 받는 쪽에서도 같은 이름으로 저장됩니다. */
+  var RENT = null;          // { updatedAt, updatedBy, sites:[{name, docs:[...]}] }
+  var rentPick = "";        // 지금 계약서를 올릴 현장
+  var RENT_MAX = 20 * 1024 * 1024;
+
+  function rentSites() { return (RENT && Array.isArray(RENT.sites)) ? RENT.sites : []; }
+  function rentFind(name) {
+    var all = rentSites();
+    for (var i = 0; i < all.length; i++) if (all[i].name === name) return all[i];
+    return null;
+  }
+  /* 파일·폴더 이름에 쓸 수 없는 글자만 걷어낸다 (한글은 그대로 둔다) */
+  function rentSafe(s) {
+    return String(s == null ? "" : s)
+      .replace(/[\\/:*?"<>|#%\u0000-\u001f]/g, " ")
+      .replace(/\s+/g, " ").replace(/^\.+/, "").trim().slice(0, 90);
+  }
+  function rentBytesB64(bytes) {
+    var bin = "", CH = 0x8000;
+    for (var i = 0; i < bytes.length; i += CH) {
+      bin += String.fromCharCode.apply(null, bytes.subarray(i, i + CH));
+    }
+    return btoa(bin);
+  }
+  function rentSize(n) {
+    n = Number(n) || 0;
+    if (n >= 1048576) return (n / 1048576).toFixed(1).replace(/\.0$/, "") + "MB";
+    if (n >= 1024) return Math.round(n / 1024) + "KB";
+    return n + "B";
+  }
+  function rentHan(s) { return /^[가-힣ㄱ-ㅎㅏ-ㅣ]/.test(String(s || "")) ? 1 : 0; }
+
+  function rentLoad(quiet) {
+    $("rManage").innerHTML = '<p class="note">불러오는 중…</p>';
+    $("rSiteMsg").className = "msg"; $("rSiteMsg").innerHTML = "";
+    return readJsonFile("data-rental.json").then(function (r) {
+      if (!r || r.error) throw new Error((r && r.error) || "읽기 실패");
+      RENT = (r.json && Array.isArray(r.json.sites)) ? r.json : { sites: [] };
+      RENT.sites.forEach(function (s) { if (!Array.isArray(s.docs)) s.docs = []; });
+      rentRender();
+      var n = rentSites().reduce(function (a, s) { return a + s.docs.length; }, 0);
+      if (r.src === "raw") {
+        show("rSiteMsg", "info", "현장 " + rentSites().length + "곳 · 계약서 " + n + "건."
+          + " <b>저장소를 직접 읽었습니다</b> — 방금 올린 내용이 아직 안 보일 수 있으니 ↻ 다시 읽기를 한 번 눌러 주세요.");
+      } else if (!quiet) {
+        show("rSiteMsg", "info", "현장 " + rentSites().length + "곳 · 계약서 " + n + "건을 불러왔습니다.");
+      }
+    }).catch(function (e) {
+      RENT = null;
+      $("rManage").innerHTML = "";
+      show("rSiteMsg", "err", "계약서 목록을 읽지 못했습니다: " + (e.message || e)
+        + "<br>1번의 저장 위치·토큰을 먼저 확인해 주세요.");
+    });
+  }
+
+  function rentRender() {
+    var sites = rentSites().slice().sort(function (a, b) {
+      return (rentHan(a.name) - rentHan(b.name)) || String(a.name).localeCompare(String(b.name), "ko");
+    });
+    $("rSiteList").innerHTML = sites.map(function (s) { return '<option value="' + esc(s.name) + '"></option>'; }).join("");
+    var total = sites.reduce(function (a, s) { return a + (s.docs || []).length; }, 0);
+    $("rCount").textContent = sites.length ? "현장 " + sites.length + "곳 · 계약서 " + total + "건" : "";
+
+    if (!sites.length) {
+      $("rManage").innerHTML = '<p class="note">아직 현장이 없습니다. 위에서 현장명을 넣고 <b>현장 추가</b> 를 누르세요.</p>';
+      return;
+    }
+    $("rManage").innerHTML = sites.map(function (s) {
+      var docs = s.docs || [];
+      return '<div class="card" style="box-shadow:none;margin:0 0 10px;padding:12px 14px">'
+        + '<div class="row" style="margin-bottom:' + (docs.length ? "8px" : "0") + '">'
+        + '<b style="font-size:13px;flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'
+        + esc(s.name) + '</b>'
+        + '<span class="note" style="margin:0">' + docs.length + '건</span>'
+        + '<button class="btn ghost sm" type="button" data-rpick="' + esc(s.name) + '">계약서 올리기</button>'
+        + '<button class="btn ghost sm" type="button" data-rren="' + esc(s.name) + '">이름 수정</button>'
+        + '<button class="btn ghost sm" type="button" data-rdelsite="' + esc(s.name) + '">현장 삭제</button>'
+        + '</div>'
+        + (docs.length
+          ? '<table><thead><tr><th>계약 내용</th><th>업체</th><th>기간</th><th class="num">크기</th><th class="num">관리</th></tr></thead><tbody>'
+            + docs.map(function (d) {
+                return '<tr><td>' + esc(d.title || d.name || "계약서")
+                  + '<br><span style="color:var(--ink-3);font-size:11px">' + esc(d.name || "") + '</span></td>'
+                  + '<td>' + esc(d.vendor || "—") + '</td>'
+                  + '<td style="white-space:nowrap">' + esc((d.from || "—") + " ~ " + (d.to || "—")) + '</td>'
+                  + '<td class="num">' + rentSize(d.size) + '</td>'
+                  + '<td class="num" style="white-space:nowrap">'
+                  + '<button class="btn ghost sm" type="button" data-redit="' + esc(d.id) + '" data-rs="' + esc(s.name) + '">수정</button> '
+                  + '<button class="btn ghost sm" type="button" data-rdeldoc="' + esc(d.id) + '" data-rs="' + esc(s.name) + '">삭제</button>'
+                  + '</td></tr>';
+              }).join("")
+            + '</tbody></table>'
+          : '<p class="note" style="margin:6px 0 0">아직 계약서가 없습니다.</p>')
+        + '</div>';
+    }).join("");
+  }
+
+  /* data-rental.json 저장 — 파일 올리기/삭제와 함께 한 번씩만 부릅니다 */
+  function rentSave(msg) {
+    RENT.updatedAt = new Date().toISOString();
+    RENT.updatedBy = cfg.owner || "";
+    RENT.sites.forEach(function (s) { if (!Array.isArray(s.docs)) s.docs = []; });
+    var out = { updatedAt: RENT.updatedAt, updatedBy: RENT.updatedBy, sites: RENT.sites };
+    return putFile("data-rental.json", JSON.stringify(out, null, 1), msg || "렌트카 계약서 목록 업데이트");
+  }
+
+  function rentPickSite(name) {
+    rentPick = name;
+    $("rPickName").textContent = name;
+    $("rUpBox").classList.remove("hide");
+    $("rUpBox").scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  $("rAddSite").addEventListener("click", function () {
+    var nm = rentSafe($("rSiteIn").value);
+    if (!nm) { show("rSiteMsg", "err", "현장명을 넣어 주세요."); return; }
+    if (!RENT) { show("rSiteMsg", "err", "먼저 1번에서 저장 위치를 확인해 주세요."); return; }
+    if (rentFind(nm)) { show("rSiteMsg", "info", "이미 있는 현장입니다."); rentPickSite(nm); return; }
+    RENT.sites.push({ name: nm, docs: [] });
+    rentRender();
+    rentSave("렌트카 현장 추가: " + nm).then(function () {
+      show("rSiteMsg", "ok", "<b>" + esc(nm) + "</b> 현장을 만들었습니다. 이제 계약서를 올리세요.");
+      $("rSiteIn").value = ""; rentPickSite(nm);
+    }).catch(function (e) { show("rSiteMsg", "err", "저장하지 못했습니다: " + (e.message || e)); });
+  });
+
+  $("rPullSites").addEventListener("click", function () {
+    if (!RENT) { show("rSiteMsg", "err", "먼저 1번에서 저장 위치를 확인해 주세요."); return; }
+    show("rSiteMsg", "info", "다른 구분의 현장명을 불러오는 중…");
+    Promise.all(CAT_ORDER.map(function (c) {
+      return readJsonFile(CATS[c].sites).then(function (r) { return (r && r.json) || null; }).catch(function () { return null; });
+    })).then(function (list) {
+      var names = {};
+      list.forEach(function (j) {
+        ((j && j.sites) || []).forEach(function (s) { if (s && s.name) names[s.name] = 1; });
+      });
+      var add = Object.keys(names).filter(function (n) { return !rentFind(n); });
+      if (!add.length) { show("rSiteMsg", "info", "새로 가져올 현장명이 없습니다."); return; }
+      $("rSiteList").innerHTML = Object.keys(names).sort().map(function (n) {
+        return '<option value="' + esc(n) + '"></option>';
+      }).join("");
+      show("rSiteMsg", "ok", "현장명 <b>" + Object.keys(names).length + "개</b>를 위 칸의 추천 목록에 넣었습니다."
+        + " 칸을 클릭하면 목록이 나옵니다. 고른 뒤 <b>현장 추가</b> 를 누르면 그 현장이 만들어집니다."
+        + "<br><span style='color:var(--ink-3)'>렌트카를 쓰는 현장만 골라서 넣으세요.</span>");
+    });
+  });
+
+  $("rUpload").addEventListener("click", function () {
+    var f = $("rFile").files && $("rFile").files[0];
+    if (!rentPick || !rentFind(rentPick)) { show("rUpMsg", "err", "먼저 현장을 고르세요."); return; }
+    if (!f) { show("rUpMsg", "err", "올릴 계약서 파일을 고르세요."); return; }
+    if (f.size > RENT_MAX) {
+      show("rUpMsg", "err", "파일이 너무 큽니다 (" + rentSize(f.size) + "). 20MB 아래로 줄여서 올려 주세요.");
+      return;
+    }
+    var from = $("rFrom").value || "", to = $("rTo").value || "";
+    if (from && to && from > to) { show("rUpMsg", "err", "종료일이 시작일보다 빠릅니다."); return; }
+
+    var site = rentFind(rentPick);
+    var ext = (f.name.match(/\.[A-Za-z0-9]{1,6}$/) || [""])[0];
+    var base = rentSafe($("rTitle").value) || rentSafe(f.name.replace(/\.[^.]+$/, "")) || "계약서";
+    var nm = base + ext;
+    // 같은 현장에 같은 이름이 있으면 (2), (3) 을 붙인다
+    var n = 2;
+    while (site.docs.some(function (d) { return d.name === nm; })) { nm = base + " (" + (n++) + ")" + ext; }
+    var path = "contracts/" + rentSafe(site.name) + "/" + nm;
+
+    var btn = this, was = btn.textContent;
+    btn.disabled = true; btn.textContent = "올리는 중…";
+    show("rUpMsg", "info", "계약서를 올리는 중입니다… (" + rentSize(f.size) + ")");
+
+    f.arrayBuffer().then(function (buf) {
+      return api("/contents/" + path.split("/").map(encodeURIComponent).join("/"), {
+        method: "PUT",
+        body: { message: "렌트카 계약서 추가: " + site.name + " / " + nm,
+                content: rentBytesB64(new Uint8Array(buf)), branch: cfg.branch }
+      });
+    }).then(function () {
+      site.docs.push({
+        id: "r" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+        title: $("rTitle").value.trim() || nm.replace(/\.[^.]+$/, ""),
+        vendor: $("rVendor").value.trim(), from: from, to: to,
+        file: path, name: nm, size: f.size, at: new Date().toISOString()
+      });
+      return rentSave("렌트카 계약서 추가: " + site.name + " / " + nm);
+    }).then(function () {
+      rentRender();
+      show("rUpMsg", "ok", "<b>" + esc(site.name) + "</b> 에 <b>" + esc(nm) + "</b> 을(를) 올렸습니다."
+        + " 대시보드에는 1분쯤 뒤부터 보입니다.");
+      $("rFile").value = ""; $("rTitle").value = ""; $("rFrom").value = ""; $("rTo").value = "";
+    }).catch(function (e) {
+      show("rUpMsg", "err", "올리지 못했습니다: " + (e.message || e)
+        + "<br>토큰에 <code>Contents: Read and write</code> 권한이 있는지 확인해 주세요.");
+    }).then(function () { btn.disabled = false; btn.textContent = was; });
+  });
+
+  $("rReloadAdm").addEventListener("click", function () { rentLoad(); });
+
+  $("rManage").addEventListener("click", function (e) {
+    var t = e.target.closest("button"); if (!t) return;
+
+    if (t.hasAttribute("data-rpick")) { rentPickSite(t.getAttribute("data-rpick")); return; }
+
+    if (t.hasAttribute("data-rren")) {
+      var old = t.getAttribute("data-rren");
+      var nv = rentSafe(prompt("현장 이름을 바꿉니다.\n(계약서 파일은 그대로 있고 목록의 이름만 바뀝니다)", old) || "");
+      if (!nv || nv === old) return;
+      if (rentFind(nv)) { alert("같은 이름의 현장이 이미 있습니다."); return; }
+      rentFind(old).name = nv;
+      if (rentPick === old) rentPickSite(nv);
+      rentRender();
+      rentSave("렌트카 현장 이름 변경: " + old + " → " + nv)
+        .then(function () { show("rSiteMsg", "ok", "현장 이름을 바꿨습니다."); })
+        .catch(function (err) { show("rSiteMsg", "err", "저장하지 못했습니다: " + (err.message || err)); });
+      return;
+    }
+
+    if (t.hasAttribute("data-rdelsite")) {
+      var nm2 = t.getAttribute("data-rdelsite"), s2 = rentFind(nm2);
+      if (!s2) return;
+      if (!confirm(nm2 + " 현장을 목록에서 지웁니다.\n계약서 " + (s2.docs || []).length
+        + "건도 함께 지워집니다. 계속할까요?")) return;
+      var files = (s2.docs || []).map(function (d) { return d.file; });
+      RENT.sites = RENT.sites.filter(function (x) { return x.name !== nm2; });
+      rentRender();
+      rentSave("렌트카 현장 삭제: " + nm2)
+        .then(function () { return rentDeleteFiles(files); })
+        .then(function () { show("rSiteMsg", "ok", "<b>" + esc(nm2) + "</b> 현장을 지웠습니다."); })
+        .catch(function (err) { show("rSiteMsg", "err", "저장하지 못했습니다: " + (err.message || err)); });
+      return;
+    }
+
+    if (t.hasAttribute("data-rdeldoc")) {
+      var s3 = rentFind(t.getAttribute("data-rs")); if (!s3) return;
+      var id = t.getAttribute("data-rdeldoc");
+      var d3 = s3.docs.filter(function (x) { return x.id === id; })[0]; if (!d3) return;
+      if (!confirm("‘" + (d3.title || d3.name) + "’ 계약서를 지울까요?\n파일도 함께 지워집니다.")) return;
+      s3.docs = s3.docs.filter(function (x) { return x.id !== id; });
+      rentRender();
+      rentSave("렌트카 계약서 삭제: " + s3.name + " / " + d3.name)
+        .then(function () { return rentDeleteFiles([d3.file]); })
+        .then(function () { show("rSiteMsg", "ok", "계약서를 지웠습니다."); })
+        .catch(function (err) { show("rSiteMsg", "err", "저장하지 못했습니다: " + (err.message || err)); });
+      return;
+    }
+
+    if (t.hasAttribute("data-redit")) {
+      var s4 = rentFind(t.getAttribute("data-rs")); if (!s4) return;
+      var d4 = s4.docs.filter(function (x) { return x.id === t.getAttribute("data-redit"); })[0];
+      if (!d4) return;
+      var ti = prompt("계약 내용 (차량 등)", d4.title || ""); if (ti === null) return;
+      var ve = prompt("렌트 업체", d4.vendor || ""); if (ve === null) return;
+      var fr = prompt("계약 시작일 (2026-01-05 형식, 없으면 비워 두세요)", d4.from || ""); if (fr === null) return;
+      var to2 = prompt("계약 종료일 (2026-12-31 형식, 없으면 비워 두세요)", d4.to || ""); if (to2 === null) return;
+      var ok8 = function (v) { return !v || /^\d{4}-\d{2}-\d{2}$/.test(v.trim()); };
+      if (!ok8(fr) || !ok8(to2)) { alert("날짜는 2026-01-05 처럼 넣어 주세요."); return; }
+      d4.title = ti.trim(); d4.vendor = ve.trim();
+      d4.from = fr.trim(); d4.to = to2.trim();
+      rentRender();
+      rentSave("렌트카 계약서 정보 수정: " + s4.name + " / " + d4.name)
+        .then(function () { show("rSiteMsg", "ok", "계약서 정보를 고쳤습니다."); })
+        .catch(function (err) { show("rSiteMsg", "err", "저장하지 못했습니다: " + (err.message || err)); });
+    }
+  });
+
+  /* 계약서 원본 파일 지우기 — 목록에서 빠진 뒤에 조용히 정리합니다.
+     파일이 안 지워져도 목록에 없으면 대시보드에는 나오지 않습니다. */
+  function rentDeleteFiles(paths) {
+    var jobs = (paths || []).filter(Boolean).map(function (p) {
+      var ep = p.split("/").map(encodeURIComponent).join("/");
+      return getFile(ep).then(function (cur) {
+        if (!cur || !cur.sha) return null;
+        return api("/contents/" + ep, { method: "DELETE",
+          body: { message: "렌트카 계약서 파일 삭제: " + p, sha: cur.sha, branch: cfg.branch } });
+      }).catch(function () { return null; });
+    });
+    return Promise.all(jobs);
+  }
+
+  /* 렌트카를 고르면 엑셀 단계는 감추고 계약서 화면만 보여 준다 */
+  function applyCatMode() {
+    var isRent = CAT === "rental";
+    $("rentCard").classList.toggle("hide", !isRent);
+    $("upCard").classList.toggle("hide", isRent);
+    var rb = $("restoreBox") && $("restoreBox").parentNode;
+    if (rb && rb.classList) rb.classList.toggle("hide", isRent);
+    if (isRent) {
+      ["mapCard", "siteCard", "unCard", "pubCard"].forEach(function (id) { $(id).classList.add("hide"); });
+      $("rUpBox").classList.add("hide"); rentPick = "";
+      $("rManage").innerHTML = ""; $("rCount").textContent = "";
+      $("rUpMsg").className = "msg"; $("rUpMsg").innerHTML = "";
+      RENT = null;
+      if (cfg.owner && cfg.repo && cfg.token) rentLoad(true);
+      else show("rSiteMsg", "info", "먼저 1번에서 저장 위치와 토큰을 넣고 <b>연결 확인</b> 을 눌러 주세요.");
+    }
+  }
+
   /* 자료 구분 전환 — 고르면 작업 중이던 내용을 비우고 처음부터 시작한다 */
   Array.prototype.forEach.call(document.querySelectorAll("[data-cat]"), function (b) {
     b.addEventListener("click", function () {
@@ -1701,9 +2058,12 @@
       ["upMsg", "siteMsg", "pubMsg", "restoreMsg"].forEach(function (id) { $(id).className = "msg"; $(id).innerHTML = ""; });
       $("similarBox").innerHTML = ""; $("backupList").innerHTML = "";
       $("file").value = "";
-      show("catMsg", "info", "현재 <b>" + CATS[CAT].label + "</b> 자료를 다루고 있습니다. (" + F("data") + ")");
+      show("catMsg", "info", CAT === "rental"
+        ? "현재 <b>렌트카</b> 를 다루고 있습니다. 엑셀이 아니라 <b>현장별 계약서 파일</b>을 올리는 화면입니다. (data-rental.json)"
+        : "현재 <b>" + CATS[CAT].label + "</b> 자료를 다루고 있습니다. (" + F("data") + ")");
       document.title = "데이터 업데이트 (관리자) · " + CATS[CAT].label;
-      if (cfg.owner && cfg.repo) $("testCfg").click();
+      applyCatMode();
+      if (cfg.owner && cfg.repo && CAT !== "rental") $("testCfg").click();
     });
   });
   // 이미 열려 있는 화면에서 주소만 #safety 로 바뀌어도 따라간다
@@ -1797,7 +2157,8 @@
   });
 
   loadCfg();
-  if (cfg.owner && cfg.repo) $("testCfg").click();
+  applyCatMode();
+  if (cfg.owner && cfg.repo && CAT !== "rental") $("testCfg").click();
 })();
 </script>
 </body>
