@@ -88,7 +88,7 @@
   body[data-cat="game"] .wrap > section.card { display: none !important; }
   body:not([data-cat="game"]) #gameView { display: none; }
 
-  /* ── 렌트카 (계약서 받기) ── */
+  /* ── 렌터카 (계약서 받기) ── */
   body[data-cat="rental"] .filters,
   body[data-cat="rental"] #kpis,
   body[data-cat="rental"] #banner,
@@ -442,7 +442,7 @@
         <span>통신공사</span></button>
       <button class="navitem" type="button" data-cat="rental" aria-pressed="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13.5h18"/><path d="M5 13.5 6.6 8.4A2 2 0 0 1 8.5 7h7a2 2 0 0 1 1.9 1.4L19 13.5"/><path d="M4 13.5V18h2.5v-1.6h11V18H20v-4.5"/><circle cx="7.5" cy="16.2" r=".2"/><circle cx="16.5" cy="16.2" r=".2"/></svg>
-        <span>렌트카</span></button>
+        <span>렌터카 계약서</span></button>
       <button class="navitem" type="button" data-cat="all" aria-pressed="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 5H6l6 7-6 7h12"/></svg>
         <span>전체 합계</span></button>
@@ -515,7 +515,7 @@
 
   <div class="kpis" id="kpis"></div>
 
-  <!-- ══ 렌트카 — 현장별 계약서 받기 ══ -->
+  <!-- ══ 렌터카 — 현장별 계약서 받기 ══ -->
   <section id="rentalView">
     <div class="rkpis" id="rKpis"></div>
     <div class="rsearch">
@@ -720,7 +720,7 @@
     c = c || state.cat;
     if (c === "all") return "전체 합계";
     if (c === "game") return "잠깐 쉬어가기";
-    if (c === "rental") return "렌트카";
+    if (c === "rental") return "렌터카 계약서";
     return (CATS[c] && CATS[c].label) || c;
   }
 
@@ -837,7 +837,7 @@
   }
   function refresh(first, manual) {
     if (state.cat === "game") return Promise.resolve();   // 게임 화면에서는 자료를 읽지 않는다
-    if (state.cat === "rental") { rLoad(true); return Promise.resolve(); }   // 렌트카는 계약서 목록만 다시 읽는다
+    if (state.cat === "rental") { rLoad(true); return Promise.resolve(); }   // 렌터카는 계약서 목록만 다시 읽는다
     if (checking) {
       // 이전 확인이 어떤 이유로든 끝나지 않았으면 수동 클릭은 강제로 다시 시작한다
       if (!manual) return Promise.resolve();
@@ -1292,7 +1292,7 @@
     if (window.__DEMO__) { boot(); return; }
     refresh(true);
   }
-  /* ══════════ 렌트카 — 현장별 계약서 ══════════
+  /* ══════════ 렌터카 — 현장별 계약서 ══════════
      data-rental.json 한 파일에 현장 목록과 계약서 정보가 들어 있고,
      계약서 원본은 저장소 contracts/ 폴더에 있습니다. 금액 집계는 하지 않습니다. */
   var RENTAL_FILE = "data-rental.json";
@@ -1385,7 +1385,7 @@
                      .filter(function (x) { return x.docs.length; });
 
     if (!sites.length) {
-      $("rList").innerHTML = '<p class="rempty">아직 올라온 렌트카 계약서가 없습니다.<br>'
+      $("rList").innerHTML = '<p class="rempty">아직 올라온 렌터카 계약서가 없습니다.<br>'
         + '<a href="./admin.html#rental">관리자 화면</a>에서 현장을 만들고 계약서를 올리면 여기에 나옵니다.</p>';
     } else if (!shown.length) {
       $("rList").innerHTML = '<p class="rempty">‘' + esc(rQ) + '’ 과(와) 맞는 현장이나 계약서가 없습니다.</p>';
