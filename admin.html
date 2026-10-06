@@ -169,7 +169,7 @@
       <button type="button" class="segbtn" data-cat="assets" aria-pressed="true">집기비품</button>
       <button type="button" class="segbtn" data-cat="safety" aria-pressed="false">안전용품</button>
       <button type="button" class="segbtn" data-cat="telecom" aria-pressed="false">통신공사</button>
-      <button type="button" class="segbtn" data-cat="rental" aria-pressed="false">렌트카</button>
+      <button type="button" class="segbtn" data-cat="rental" aria-pressed="false">렌터카</button>
     </div>
     <div class="msg info" id="catMsg" style="display:block">현재 <b>집기비품</b> 자료를 다루고 있습니다. (data.json)</div>
   </section>
@@ -194,10 +194,10 @@
   </section>
 
   <!-- STEP 2 : 업로드 -->
-  <!-- ══ 렌트카 : 현장별 계약서 관리 ══ -->
+  <!-- ══ 렌터카 : 현장별 계약서 관리 ══ -->
   <section class="card hide" id="rentCard">
-    <h2>렌트카 계약서 관리</h2>
-    <p class="cdesc">현장을 만들고 계약서 파일을 올리면, 협업부서는 대시보드 <b>렌트카</b> 메뉴에서 현장을 눌러 바로 내려받습니다.
+    <h2>렌터카 계약서 관리</h2>
+    <p class="cdesc">현장을 만들고 계약서 파일을 올리면, 협업부서는 대시보드 <b>렌터카</b> 메뉴에서 현장을 눌러 바로 내려받습니다.
       금액 집계는 하지 않습니다. 올린 계약서는 <b>주소만 알면 누구나</b> 받을 수 있으니 개인정보가 담긴 문서는 올리지 마세요.</p>
 
     <div class="grid g4" style="align-items:end">
@@ -423,8 +423,8 @@
     assets: { label: "집기비품", data: "data.json",        sites: "sites.json" },
     safety:  { label: "안전용품", data: "data-safety.json",  sites: "sites-safety.json" },
     telecom: { label: "통신공사", data: "data-telecom.json", sites: "sites-telecom.json" },
-    // 렌트카는 엑셀이 아니라 계약서 파일을 다룹니다 (아래 '렌트카 계약서 관리' 참고)
-    rental:  { label: "렌트카",   data: "data-rental.json",  sites: null, docs: true }
+    // 렌터카는 엑셀이 아니라 계약서 파일을 다룹니다 (아래 '렌터카 계약서 관리' 참고)
+    rental:  { label: "렌터카",   data: "data-rental.json",  sites: null, docs: true }
   };
   var CAT_ORDER = ["assets", "safety", "telecom"];   // 엑셀로 올리는 구분만
   var CAT = "assets";
@@ -1612,7 +1612,7 @@
         var tail;
         if (CAT === "rental") {
           var ns = (existing && existing.sites) ? existing.sites.length : 0;
-          tail = ns ? " · 렌트카 현장 " + ns + "곳" : " · 아직 렌트카 자료 없음";
+          tail = ns ? " · 렌터카 현장 " + ns + "곳" : " · 아직 렌터카 자료 없음";
         } else {
           tail = (existing && existing.rows)
             ? " · 기존 데이터 " + existing.rows.length.toLocaleString("ko-KR") + "행"
@@ -1736,7 +1736,7 @@
   $("importRules").addEventListener("click", importRules);
   $("loadBackups").addEventListener("click", loadBackups);
 
-  /* ══════════ 렌트카 — 현장별 계약서 관리 ══════════
+  /* ══════════ 렌터카 — 현장별 계약서 관리 ══════════
      data-rental.json 에 현장·계약서 정보가, contracts/<현장>/<파일이름> 에 원본이 들어갑니다.
      파일 이름을 그대로 쓰기 때문에 받는 쪽에서도 같은 이름으로 저장됩니다. */
   var RENT = null;          // { updatedAt, updatedBy, sites:[{name, docs:[...]}] }
@@ -1841,7 +1841,7 @@
     RENT.updatedBy = cfg.owner || "";
     RENT.sites.forEach(function (s) { if (!Array.isArray(s.docs)) s.docs = []; });
     var out = { updatedAt: RENT.updatedAt, updatedBy: RENT.updatedBy, sites: RENT.sites };
-    return putFile("data-rental.json", JSON.stringify(out, null, 1), msg || "렌트카 계약서 목록 업데이트");
+    return putFile("data-rental.json", JSON.stringify(out, null, 1), msg || "렌터카 계약서 목록 업데이트");
   }
 
   function rentPickSite(name) {
@@ -1858,7 +1858,7 @@
     if (rentFind(nm)) { show("rSiteMsg", "info", "이미 있는 현장입니다."); rentPickSite(nm); return; }
     RENT.sites.push({ name: nm, docs: [] });
     rentRender();
-    rentSave("렌트카 현장 추가: " + nm).then(function () {
+    rentSave("렌터카 현장 추가: " + nm).then(function () {
       show("rSiteMsg", "ok", "<b>" + esc(nm) + "</b> 현장을 만들었습니다. 이제 계약서를 올리세요.");
       $("rSiteIn").value = ""; rentPickSite(nm);
     }).catch(function (e) { show("rSiteMsg", "err", "저장하지 못했습니다: " + (e.message || e)); });
@@ -1881,7 +1881,7 @@
       }).join("");
       show("rSiteMsg", "ok", "현장명 <b>" + Object.keys(names).length + "개</b>를 위 칸의 추천 목록에 넣었습니다."
         + " 칸을 클릭하면 목록이 나옵니다. 고른 뒤 <b>현장 추가</b> 를 누르면 그 현장이 만들어집니다."
-        + "<br><span style='color:var(--ink-3)'>렌트카를 쓰는 현장만 골라서 넣으세요.</span>");
+        + "<br><span style='color:var(--ink-3)'>렌터카를 쓰는 현장만 골라서 넣으세요.</span>");
     });
   });
 
@@ -1912,7 +1912,7 @@
     f.arrayBuffer().then(function (buf) {
       return api("/contents/" + path.split("/").map(encodeURIComponent).join("/"), {
         method: "PUT",
-        body: { message: "렌트카 계약서 추가: " + site.name + " / " + nm,
+        body: { message: "렌터카 계약서 추가: " + site.name + " / " + nm,
                 content: rentBytesB64(new Uint8Array(buf)), branch: cfg.branch }
       });
     }).then(function () {
@@ -1922,7 +1922,7 @@
         vendor: $("rVendor").value.trim(), from: from, to: to,
         file: path, name: nm, size: f.size, at: new Date().toISOString()
       });
-      return rentSave("렌트카 계약서 추가: " + site.name + " / " + nm);
+      return rentSave("렌터카 계약서 추가: " + site.name + " / " + nm);
     }).then(function () {
       rentRender();
       show("rUpMsg", "ok", "<b>" + esc(site.name) + "</b> 에 <b>" + esc(nm) + "</b> 을(를) 올렸습니다."
@@ -1949,7 +1949,7 @@
       rentFind(old).name = nv;
       if (rentPick === old) rentPickSite(nv);
       rentRender();
-      rentSave("렌트카 현장 이름 변경: " + old + " → " + nv)
+      rentSave("렌터카 현장 이름 변경: " + old + " → " + nv)
         .then(function () { show("rSiteMsg", "ok", "현장 이름을 바꿨습니다."); })
         .catch(function (err) { show("rSiteMsg", "err", "저장하지 못했습니다: " + (err.message || err)); });
       return;
@@ -1963,7 +1963,7 @@
       var files = (s2.docs || []).map(function (d) { return d.file; });
       RENT.sites = RENT.sites.filter(function (x) { return x.name !== nm2; });
       rentRender();
-      rentSave("렌트카 현장 삭제: " + nm2)
+      rentSave("렌터카 현장 삭제: " + nm2)
         .then(function () { return rentDeleteFiles(files); })
         .then(function () { show("rSiteMsg", "ok", "<b>" + esc(nm2) + "</b> 현장을 지웠습니다."); })
         .catch(function (err) { show("rSiteMsg", "err", "저장하지 못했습니다: " + (err.message || err)); });
@@ -1977,7 +1977,7 @@
       if (!confirm("‘" + (d3.title || d3.name) + "’ 계약서를 지울까요?\n파일도 함께 지워집니다.")) return;
       s3.docs = s3.docs.filter(function (x) { return x.id !== id; });
       rentRender();
-      rentSave("렌트카 계약서 삭제: " + s3.name + " / " + d3.name)
+      rentSave("렌터카 계약서 삭제: " + s3.name + " / " + d3.name)
         .then(function () { return rentDeleteFiles([d3.file]); })
         .then(function () { show("rSiteMsg", "ok", "계약서를 지웠습니다."); })
         .catch(function (err) { show("rSiteMsg", "err", "저장하지 못했습니다: " + (err.message || err)); });
@@ -1997,7 +1997,7 @@
       d4.title = ti.trim(); d4.vendor = ve.trim();
       d4.from = fr.trim(); d4.to = to2.trim();
       rentRender();
-      rentSave("렌트카 계약서 정보 수정: " + s4.name + " / " + d4.name)
+      rentSave("렌터카 계약서 정보 수정: " + s4.name + " / " + d4.name)
         .then(function () { show("rSiteMsg", "ok", "계약서 정보를 고쳤습니다."); })
         .catch(function (err) { show("rSiteMsg", "err", "저장하지 못했습니다: " + (err.message || err)); });
     }
@@ -2011,13 +2011,13 @@
       return getFile(ep).then(function (cur) {
         if (!cur || !cur.sha) return null;
         return api("/contents/" + ep, { method: "DELETE",
-          body: { message: "렌트카 계약서 파일 삭제: " + p, sha: cur.sha, branch: cfg.branch } });
+          body: { message: "렌터카 계약서 파일 삭제: " + p, sha: cur.sha, branch: cfg.branch } });
       }).catch(function () { return null; });
     });
     return Promise.all(jobs);
   }
 
-  /* 렌트카를 고르면 엑셀 단계는 감추고 계약서 화면만 보여 준다 */
+  /* 렌터카를 고르면 엑셀 단계는 감추고 계약서 화면만 보여 준다 */
   function applyCatMode() {
     var isRent = CAT === "rental";
     $("rentCard").classList.toggle("hide", !isRent);
@@ -2059,7 +2059,7 @@
       $("similarBox").innerHTML = ""; $("backupList").innerHTML = "";
       $("file").value = "";
       show("catMsg", "info", CAT === "rental"
-        ? "현재 <b>렌트카</b> 를 다루고 있습니다. 엑셀이 아니라 <b>현장별 계약서 파일</b>을 올리는 화면입니다. (data-rental.json)"
+        ? "현재 <b>렌터카</b> 를 다루고 있습니다. 엑셀이 아니라 <b>현장별 계약서 파일</b>을 올리는 화면입니다. (data-rental.json)"
         : "현재 <b>" + CATS[CAT].label + "</b> 자료를 다루고 있습니다. (" + F("data") + ")");
       document.title = "데이터 업데이트 (관리자) · " + CATS[CAT].label;
       applyCatMode();
