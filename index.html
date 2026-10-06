@@ -87,6 +87,65 @@
   body[data-cat="game"] #reloadBtn,
   body[data-cat="game"] .wrap > section.card { display: none !important; }
   body:not([data-cat="game"]) #gameView { display: none; }
+
+  /* ── 렌트카 (계약서 받기) ── */
+  body[data-cat="rental"] .filters,
+  body[data-cat="rental"] #kpis,
+  body[data-cat="rental"] #banner,
+  body[data-cat="rental"] .wrap > section.card { display: none !important; }
+  body:not([data-cat="rental"]) #rentalView { display: none; }
+  body[data-cat="rental"] .top .sub { display: none; }
+  #rentalView .btn { font-family: inherit; font-size: 13px; font-weight: 600; padding: 9px 16px;
+    border-radius: 9px; border: 1px solid var(--border); background: var(--surface-1);
+    color: var(--ink-1); cursor: pointer; }
+  #rentalView .btn:hover { background: color-mix(in srgb, var(--s1) 7%, var(--surface-1)); }
+  #rentalView .btn.sm { font-size: 12px; padding: 7px 12px; }
+  #rentalView .btn.primary { background: var(--s1); border-color: var(--s1); color: #fff; }
+  #rentalView .btn.primary:hover { filter: brightness(1.06); }
+  #rentalView .btn:disabled { opacity: .5; cursor: default; filter: none; }
+  .rkpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 11px; margin-bottom: 14px; }
+  .rkpi { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px;
+    padding: 13px 15px; box-shadow: var(--shadow); }
+  .rkpi .k { font-size: 11.5px; color: var(--ink-3); font-weight: 600; letter-spacing: -.2px; }
+  .rkpi .v { font-size: 23px; font-weight: 700; letter-spacing: -.8px; margin-top: 3px; }
+  .rkpi .v small { font-size: 13px; font-weight: 600; color: var(--ink-2); margin-left: 2px; }
+  .rsearch { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+  .rsearch input { font-family: inherit; font-size: 13.5px; padding: 9px 12px; border-radius: 9px;
+    border: 1px solid var(--border); background: var(--surface-1); color: var(--ink-1); min-width: 240px; flex: 1 1 240px; }
+  .rsite { border: 1px solid var(--border); border-radius: 12px; background: var(--surface-1);
+    box-shadow: var(--shadow); margin-bottom: 9px; overflow: hidden; }
+  .rhead { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left;
+    font-family: inherit; border: 0; background: transparent; cursor: pointer; padding: 14px 16px; color: inherit; }
+  .rhead:hover { background: color-mix(in srgb, var(--s1) 5%, transparent); }
+  .rhead .nm { font-size: 14.5px; font-weight: 700; letter-spacing: -.3px; flex: 1 1 auto; min-width: 0;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .rhead .ct { font-size: 12.5px; color: var(--ink-2); flex: 0 0 auto; }
+  .rhead .caret { flex: 0 0 auto; transition: transform .15s; color: var(--ink-3); }
+  .rsite.open .rhead .caret { transform: rotate(90deg); }
+  .rbody { border-top: 1px solid var(--border); padding: 4px 16px 12px; }
+  .rsite:not(.open) .rbody { display: none; }
+  #rentalView table { width: 100%; border-collapse: collapse; font-size: 12.5px; table-layout: fixed; }
+  /* 현장마다 표가 따로라서 폭을 고정해야 열이 서로 어긋나지 않는다 */
+  #rentalView col.c1 { width: auto; }
+  #rentalView col.c2 { width: 19%; }
+  #rentalView col.c3 { width: 23%; }
+  #rentalView col.c4 { width: 11%; }
+  #rentalView col.c5 { width: 15%; }
+  #rentalView td:first-child { overflow: hidden; text-overflow: ellipsis; }
+  @media (max-width: 760px) {
+    #rentalView col.c2, #rentalView col.c3 { width: 24%; }
+    #rentalView col.c4 { width: 15%; }
+  }
+  #rentalView th, #rentalView td { padding: 9px 8px; border-bottom: 1px solid var(--border);
+    text-align: left; vertical-align: middle; }
+  #rentalView tr:last-child td { border-bottom: 0; }
+  #rentalView th { color: var(--ink-3); font-weight: 600; font-size: 11.5px; white-space: nowrap; }
+  .rtag { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px;
+    white-space: nowrap; }
+  .rtag.on { background: color-mix(in srgb, var(--good) 15%, transparent); color: var(--good-ink); }
+  .rtag.soon { background: color-mix(in srgb, var(--warn) 20%, transparent); color: var(--warn-ink); }
+  .rtag.off { background: color-mix(in srgb, var(--ink-3) 15%, transparent); color: var(--ink-2); }
+  .rempty { text-align: center; color: var(--ink-3); padding: 40px 16px; font-size: 13.5px; }
   .gstage { display: grid; grid-template-columns: minmax(0,1fr) 262px; gap: 14px; align-items: start; }
   @media (max-width: 940px) { .gstage { grid-template-columns: 1fr; } }
   .gtabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
@@ -381,6 +440,9 @@
       <button class="navitem" type="button" data-cat="telecom" aria-pressed="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V9"/><path d="M7.5 20 12 4l4.5 16"/><path d="M9 14h6"/><path d="M5 20h14"/></svg>
         <span>통신공사</span></button>
+      <button class="navitem" type="button" data-cat="rental" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13.5h18"/><path d="M5 13.5 6.6 8.4A2 2 0 0 1 8.5 7h7a2 2 0 0 1 1.9 1.4L19 13.5"/><path d="M4 13.5V18h2.5v-1.6h11V18H20v-4.5"/><circle cx="7.5" cy="16.2" r=".2"/><circle cx="16.5" cy="16.2" r=".2"/></svg>
+        <span>렌트카</span></button>
       <button class="navitem" type="button" data-cat="all" aria-pressed="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 5H6l6 7-6 7h12"/></svg>
         <span>전체 합계</span></button>
@@ -452,6 +514,18 @@
   </div>
 
   <div class="kpis" id="kpis"></div>
+
+  <!-- ══ 렌트카 — 현장별 계약서 받기 ══ -->
+  <section id="rentalView">
+    <div class="rkpis" id="rKpis"></div>
+    <div class="rsearch">
+      <input type="search" id="rQuery" placeholder="현장명 · 차량 · 업체로 찾기" autocomplete="off">
+      <button class="btn sm" id="rOpenAll" type="button">모두 펼치기</button>
+      <button class="btn sm" id="rReload" type="button">↻ 새로고침</button>
+    </div>
+    <div id="rList"></div>
+    <p class="note" id="rNote" style="font-size:11.5px;color:var(--ink-3);margin:12px 2px 0"></p>
+  </section>
 
   <!-- ══ 잠깐 쉬어가기 ══ -->
   <section id="gameView">
@@ -646,6 +720,7 @@
     c = c || state.cat;
     if (c === "all") return "전체 합계";
     if (c === "game") return "잠깐 쉬어가기";
+    if (c === "rental") return "렌트카";
     return (CATS[c] && CATS[c].label) || c;
   }
 
@@ -762,6 +837,7 @@
   }
   function refresh(first, manual) {
     if (state.cat === "game") return Promise.resolve();   // 게임 화면에서는 자료를 읽지 않는다
+    if (state.cat === "rental") { rLoad(true); return Promise.resolve(); }   // 렌트카는 계약서 목록만 다시 읽는다
     if (checking) {
       // 이전 확인이 어떤 이유로든 끝나지 않았으면 수동 클릭은 강제로 다시 시작한다
       if (!manual) return Promise.resolve();
@@ -1197,13 +1273,14 @@
     });
   }
   function switchCat(cat, skipHash) {
-    if (cat !== "all" && cat !== "game" && !CATS[cat]) cat = "assets";
+    if (cat !== "all" && cat !== "game" && cat !== "rental" && !CATS[cat]) cat = "assets";
     state.cat = cat;
     // 게임 화면은 '지난번에 보던 구분' 으로 기억하지 않는다 (다시 열면 자료 화면으로)
     if (cat !== "game") { try { localStorage.setItem("dash-cat", cat); } catch (e) {} }
     if (!skipHash && location.hash.slice(1) !== cat) location.hash = cat;
     applyCatUI();
     if (cat === "game") { stopGames(); gGate(); gBoard(); if (GAME_API) gFetchBoard(); return; }
+    if (cat === "rental") { rLoad(); return; }
     // 구분이 바뀌면 화면 상태를 처음으로 되돌린다
     lastStamp = null; booted = false;
     DATA = { rows: [] }; SITES = { sites: [] };
@@ -1215,6 +1292,197 @@
     if (window.__DEMO__) { boot(); return; }
     refresh(true);
   }
+  /* ══════════ 렌트카 — 현장별 계약서 ══════════
+     data-rental.json 한 파일에 현장 목록과 계약서 정보가 들어 있고,
+     계약서 원본은 저장소 contracts/ 폴더에 있습니다. 금액 집계는 하지 않습니다. */
+  var RENTAL_FILE = "data-rental.json";
+  var RDATA = null;          // 읽어온 내용 (null = 아직 못 읽음)
+  var rOpen = {};            // 펼쳐 둔 현장
+  var rQ = "";
+  var rLoading = false, rLoadedOnce = false;
+
+  function rDocs(s) { return (s && Array.isArray(s.docs)) ? s.docs : []; }
+  function rSites() { return (RDATA && Array.isArray(RDATA.sites)) ? RDATA.sites : []; }
+  function rDate(s) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(s || ""));
+    return m ? (+m[2]) + "." + (+m[3]) : "";
+  }
+  function rPeriod(d) {
+    var a = d.from ? String(d.from).slice(0, 10) : "", b = d.to ? String(d.to).slice(0, 10) : "";
+    if (!a && !b) return "—";
+    var ay = a ? a.slice(0, 4) : "", by = b ? b.slice(0, 4) : "";
+    if (a && b) return ay === by ? ay + ". " + rDate(a) + " ~ " + rDate(b)
+                                 : a.replace(/-/g, ". ") + " ~ " + b.replace(/-/g, ". ");
+    return a ? a.replace(/-/g, ". ") + " ~" : "~ " + b.replace(/-/g, ". ");
+  }
+  /* 오늘 기준 상태: 진행 중 / 30일 안에 끝남 / 종료 / 예정 */
+  function rStatus(d) {
+    var today = ymd(new Date());
+    var a = d.from ? String(d.from).slice(0, 10) : "", b = d.to ? String(d.to).slice(0, 10) : "";
+    if (b && b < today) return { k: "off", t: "종료" };
+    if (a && a > today) return { k: "soon", t: "예정" };
+    if (b) {
+      var left = Math.round((Date.parse(b + "T00:00:00") - Date.parse(today + "T00:00:00")) / 86400000);
+      if (left <= 30) return { k: "soon", t: "D-" + Math.max(left, 0) };
+    }
+    if (!a && !b) return { k: "off", t: "기간 미기재" };
+    return { k: "on", t: "진행 중" };
+  }
+  function rSize(n) {
+    n = Number(n) || 0;
+    if (n >= 1048576) return (n / 1048576).toFixed(1).replace(/\.0$/, "") + "MB";
+    if (n >= 1024) return Math.round(n / 1024) + "KB";
+    return n ? n + "B" : "";
+  }
+
+  function rLoad(quiet) {
+    if (rLoading) return;
+    rLoading = true;
+    if (!rLoadedOnce) $("rList").innerHTML = '<p class="rempty">계약서 목록을 불러오는 중입니다…</p>';
+    setSync("checking");
+    fetchLatest(RENTAL_FILE).then(function (j) {
+      RDATA = (j && Array.isArray(j.sites)) ? j : { sites: [] };
+      rLoadedOnce = true; setSync("ok"); rRender();
+    }).catch(function () {
+      setSync(rLoadedOnce ? "ok" : "fail");
+      if (!rLoadedOnce) { RDATA = { sites: [] }; rRender(); }
+      else if (!quiet) toast("계약서 목록을 다시 읽지 못했습니다");
+    }).then(function () { rLoading = false; });
+  }
+
+  function rMatch(site) {
+    if (!rQ) return rDocs(site);
+    var q = rQ.toLowerCase();
+    if (String(site.name || "").toLowerCase().indexOf(q) >= 0) return rDocs(site);
+    return rDocs(site).filter(function (d) {
+      return [d.title, d.vendor, d.name, d.from, d.to].join(" ").toLowerCase().indexOf(q) >= 0;
+    });
+  }
+
+  /* 현장 정렬: 숫자·영문 먼저, 그 다음 한글 (엑셀에서 정렬한 것과 같은 순서) */
+  function rHan(s) { return /^[가-힣ㄱ-ㅎㅏ-ㅣ]/.test(String(s || "")) ? 1 : 0; }
+  function rRender() {
+    var sites = rSites().slice().sort(function (a, b) {
+      return (rHan(a.name) - rHan(b.name))
+        || String(a.name || "").localeCompare(String(b.name || ""), "ko");
+    });
+    var allDocs = 0, onNow = 0, endSoon = 0;
+    sites.forEach(function (s) {
+      rDocs(s).forEach(function (d) {
+        allDocs++;
+        var st = rStatus(d);
+        if (st.k === "on") onNow++;
+        else if (st.k === "soon" && st.t.indexOf("D-") === 0) { onNow++; endSoon++; }
+      });
+    });
+    $("rKpis").innerHTML =
+      '<div class="rkpi"><div class="k">현장 수</div><div class="v">' + sites.length + '<small>곳</small></div></div>' +
+      '<div class="rkpi"><div class="k">계약서</div><div class="v">' + allDocs + '<small>건</small></div></div>' +
+      '<div class="rkpi"><div class="k">진행 중</div><div class="v">' + onNow + '<small>건</small></div></div>' +
+      '<div class="rkpi"><div class="k">30일 내 종료</div><div class="v">' + endSoon + '<small>건</small></div></div>';
+
+    var shown = sites.map(function (s) { return { s: s, docs: rMatch(s) }; })
+                     .filter(function (x) { return x.docs.length; });
+
+    if (!sites.length) {
+      $("rList").innerHTML = '<p class="rempty">아직 올라온 렌트카 계약서가 없습니다.<br>'
+        + '<a href="./admin.html#rental">관리자 화면</a>에서 현장을 만들고 계약서를 올리면 여기에 나옵니다.</p>';
+    } else if (!shown.length) {
+      $("rList").innerHTML = '<p class="rempty">‘' + esc(rQ) + '’ 과(와) 맞는 현장이나 계약서가 없습니다.</p>';
+    } else {
+      $("rList").innerHTML = shown.map(function (x) {
+        var key = x.s.name, open = rQ ? true : !!rOpen[key];
+        var live = x.docs.filter(function (d) { return rStatus(d).k !== "off"; }).length;
+        return '<div class="rsite' + (open ? " open" : "") + '" data-site="' + esc(key) + '">'
+          + '<button class="rhead" type="button" data-rsite="' + esc(key) + '">'
+          + '<svg class="caret" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>'
+          + '<span class="nm">' + esc(key) + '</span>'
+          + '<span class="ct">계약서 ' + x.docs.length + '건'
+          + (live ? ' · <span style="color:var(--good-ink);font-weight:600">진행 중 ' + live + '</span>' : '')
+          + '</span></button>'
+          + '<div class="rbody"><table>'
+          + '<colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"><col class="c5"></colgroup>'
+          + '<thead><tr>'
+          + '<th>계약 내용</th><th>업체</th><th>기간</th><th>상태</th><th style="text-align:right">계약서</th>'
+          + '</tr></thead><tbody>'
+          + x.docs.map(function (d) {
+              var st = rStatus(d);
+              return '<tr><td><b>' + esc(d.title || d.name || "계약서") + '</b></td>'
+                + '<td style="color:var(--ink-2)">' + esc(d.vendor || "—") + '</td>'
+                + '<td style="color:var(--ink-2);white-space:nowrap">' + esc(rPeriod(d)) + '</td>'
+                + '<td><span class="rtag ' + st.k + '">' + esc(st.t) + '</span></td>'
+                + '<td style="text-align:right;white-space:nowrap">'
+                + '<button class="btn sm" type="button" data-rdl="' + esc(d.file || "") + '" data-rnm="'
+                + esc(d.name || "계약서.pdf") + '">받기</button>'
+                + (d.size ? ' <span style="color:var(--ink-3);font-size:11px">' + rSize(d.size) + '</span>' : '')
+                + '</td></tr>';
+            }).join("")
+          + '</tbody></table></div></div>';
+      }).join("");
+    }
+    $("rNote").innerHTML = RDATA && RDATA.updatedAt
+      ? "최종 업데이트 " + esc(new Date(RDATA.updatedAt).toLocaleString("ko-KR"))
+        + (RDATA.updatedBy ? " · " + esc(RDATA.updatedBy) : "")
+        + " · 방금 올린 계약서는 1분쯤 뒤부터 받을 수 있습니다."
+      : "";
+  }
+
+  /* 계약서 받기
+     파일은 저장소에 '보이는 이름 그대로' 들어 있습니다. 주소 끝이 곧 파일 이름이라
+     브라우저가 한글 이름을 그대로 살려서 저장합니다.
+     방금 올린 계약서는 Pages 쪽이 아직 없을 수 있어 저장소 직접 주소로 한 번 더 시도합니다. */
+  function rUrl(path, raw) {
+    var enc = String(path).split("/").map(encodeURIComponent).join("/");
+    if (!raw) return "./" + enc;
+    if (!SRC.owner || !SRC.repo) return null;
+    return "https://raw.githubusercontent.com/" + SRC.owner + "/" + SRC.repo + "/" + SRC.branch + "/" + enc;
+  }
+  function rSave(url, nm) {
+    var a = document.createElement("a");
+    a.href = url; a.download = nm || ""; a.rel = "noopener";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  }
+  function rDownload(btn) {
+    var path = btn.getAttribute("data-rdl"), nm = btn.getAttribute("data-rnm") || "";
+    if (!path) return;
+    var mine = rUrl(path, false), raw = rUrl(path, true);
+    var was = btn.textContent;
+    btn.disabled = true; btn.textContent = "받는 중…";
+    function done() { btn.disabled = false; btn.textContent = was; }
+    fetch(mine, { method: "HEAD", cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); rSave(mine, nm); done(); })
+      .catch(function () {
+        if (!raw) { done(); toast("계약서를 받지 못했습니다. 잠시 뒤 다시 눌러 주세요."); return; }
+        fetch(raw, { method: "HEAD", cache: "no-store" })
+          .then(function (r) { if (!r.ok) throw new Error(r.status); rSave(raw, nm); done(); })
+          .catch(function () { done(); toast("계약서를 받지 못했습니다. 잠시 뒤 다시 눌러 주세요."); });
+      });
+  }
+
+  function rentalInit() {
+    $("rQuery").addEventListener("input", function () {
+      rQ = this.value.trim(); rRender();
+    });
+    $("rReload").addEventListener("click", function () { rLoadedOnce = false; rLoad(); });
+    $("rOpenAll").addEventListener("click", function () {
+      var names = rSites().map(function (s) { return s.name; });
+      var allOpen = names.length && names.every(function (n) { return rOpen[n]; });
+      rOpen = {};
+      if (!allOpen) names.forEach(function (n) { rOpen[n] = true; });
+      this.textContent = allOpen ? "모두 펼치기" : "모두 접기";
+      rRender();
+    });
+    $("rList").addEventListener("click", function (e) {
+      var dl = e.target.closest("[data-rdl]");
+      if (dl) { rDownload(dl); return; }
+      var h = e.target.closest("[data-rsite]");
+      if (!h) return;
+      var k = h.getAttribute("data-rsite");
+      rOpen[k] = !rOpen[k];
+      h.parentNode.classList.toggle("open", !!rOpen[k]);
+    });
+  }
+
   /* ══════════ 잠깐 쉬어가기 ══════════
      기록은 이 브라우저에만 저장됩니다. 대시보드 자료(data*.json)와는 무관합니다. */
   var GKEY = "dash-game-v1";
@@ -1563,8 +1831,8 @@
 
   function initialCat() {
     var h = (location.hash || "").slice(1);
-    if (h === "all" || h === "game" || CATS[h]) return h;
-    try { var v = localStorage.getItem("dash-cat"); if (v === "all" || CATS[v]) return v; } catch (e) {}
+    if (h === "all" || h === "game" || h === "rental" || CATS[h]) return h;
+    try { var v = localStorage.getItem("dash-cat"); if (v === "all" || v === "rental" || CATS[v]) return v; } catch (e) {}
     return "assets";
   }
 
@@ -1574,7 +1842,7 @@
     });
     window.addEventListener("hashchange", function () {
       var h = (location.hash || "").slice(1);
-      if ((h === "all" || CATS[h]) && h !== state.cat) switchCat(h, true);
+      if ((h === "all" || h === "game" || h === "rental" || CATS[h]) && h !== state.cat) switchCat(h, true);
     });
     $("homeBtn").addEventListener("click", function () {
       resetAll();
@@ -1628,9 +1896,12 @@
 
   wire();
   gameInit();
+  rentalInit();
   state.cat = initialCat();
   applyCatUI();
-  if (state.cat === "game") gBoard(); else load();
+  if (state.cat === "game") gBoard();
+  else if (state.cat === "rental") rLoad();
+  else load();
   if (!window.__DEMO__) { startPolling(); setInterval(tickSync, 10000); }
 })();
 </script>
